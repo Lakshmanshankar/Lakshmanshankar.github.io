@@ -6,6 +6,7 @@
 html{
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    
 }
 nav{
     z-index: 99;
@@ -51,9 +52,12 @@ nav{
 }
 .sliding{
     z-index: 0;
-    animation: updownleft 2s linear infinite alternate;
+    animation: updownleft 4s linear infinite alternate;
 }
-
+.slow{
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+    -webkit-transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
 .fast-move{
     animation: updownleft 0.5s linear alternate-reverse infinite;
 
@@ -95,8 +99,8 @@ html::-webkit-scrollbar-track {
 
 .listOps:hover{
     transition: 0.5s;
-    filter: invert(100);
-  
+    color:invert(30%);
+    font-weight:900; 
 }
 .background-change{
    color: var(--bg-three);
@@ -164,12 +168,19 @@ html::-webkit-scrollbar-track {
     color: rgb(255, 255, 255);
     background: var(--bg-three);
   }
-
+.border{
+    border: 3px solid red;
+}
   .imageDiv{
-    
+    width: 100%;
     width: 400px;
-    height:400px;
+    height: 400px;
     background: url("../public/images/profile.jpeg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     border: 10px solid var(--bg-two);
   }
@@ -188,3 +199,16 @@ html::-webkit-scrollbar-track {
     border-radius: 0.5px;
     transform: rotate(-45deg);
 }  */
+
+
+@media screen and (max-width: 768px) {
+    .imageDiv{
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: url("../public/images/profile.jpeg");
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+      }
+}

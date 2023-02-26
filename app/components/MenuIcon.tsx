@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 
 function MenuIcon(props: any) {
     const [toggle, setToggle] = useState(props.visible)
-    console.log(props);
     useEffect(() => {
         let dom = document.querySelector('#line-one-bne')
         let dom2 = document.querySelector('#line-two-bne')

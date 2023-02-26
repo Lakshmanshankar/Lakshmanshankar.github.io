@@ -4,10 +4,9 @@ import React, { useEffect } from 'react'
 import { raleway } from '@/fonts/exports'
 import MenuIcon from './MenuIcon'
 
-function Navbar(props: any) {
+function Navbar() {
     const [toggle, setToggle] = React.useState(false)
     const [theme, setTheme] = React.useState(false)
-    console.log(props)
     useEffect(() => {
         if (window.innerWidth > 768) return () => { console.log(window.innerWidth); }
         else {
@@ -23,8 +22,8 @@ function Navbar(props: any) {
         }
     }, [toggle])
     return (
-        <header className=' w-full flex justify-center z-50'>
-            <nav className=' w-full sm:w-11/12 py-3 flex justify-between items-center sm:px-9 fixed blurrish sm:rounded-xl' >
+        <header className=' w-full flex justify-center fixed z-50'>
+            <nav className=' w-full sm:w-11/12 py-3 flex justify-between items-center sm:px-9  blurrish sm:rounded-xl' >
                 <h2 className=' font-poppins '>ManPage</h2>
 
                 <ul className=' sm:flex sm:w-4/12 sm:h-auto sm:justify-between sm:flex-row  w-full absolute sm:relative flex top-10 sm:top-0 flex-col h-screen justify-center items-baseline sm:bg-transparent bg5 rounded-xl mt-2 text1' id='mailul'>

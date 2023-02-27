@@ -69,11 +69,12 @@ function setColors(state: boolean) {
         root.style.setProperty('--bg-three', '#ff002b') // red rose
         root.style.setProperty('--bg-four', '#FF57B9FF') // light rose
         root.style.setProperty('--bg-five', '#FF2965FF') // red rose
-        root.style.setProperty('--bg-six', '#FAFAFAFF') // light rose
+        root.style.setProperty('--bg-six', '#6EFFAAFF') // light rose
 
 
         root.style.setProperty('--text-one', '#fff')  // text color are light
-        root.style.setProperty('--text-two', '#fff')
+        root.style.setProperty('--text-two', '#fff');
+        root.style.setProperty('--text-three', '#7AFFFBFF');
 
         if (dom) {
             dom.innerHTML = `light`
@@ -86,10 +87,11 @@ function setColors(state: boolean) {
         root.style.setProperty('--bg-three', '#ff9900') // orange
         root.style.setProperty('--bg-four', '#FFB700FF') // light orange
         root.style.setProperty('--bg-five', '#FFE208FF') // red rose
-        root.style.setProperty('--bg-six', '#FF57B9FF') // light rose
-        root.style.setProperty('--text-one', '#000')
+        root.style.setProperty('--bg-six', '#FF45CDFF') // light rose
 
+        root.style.setProperty('--text-one', '#000')
         root.style.setProperty('--text-two', '#24051CFF')
+        root.style.setProperty('--text-three', '#370080FF');
 
 
         if (dom) {

@@ -4,7 +4,7 @@ import { raleway } from '@/fonts/exports'
 
 function Main() {
     return (
-        <div className=' w-full h-5/6 py-14 bg1 sm:flex sm:flex-row flex flex-col'>
+        <div className=' w-full h-screen py-14 bg1 sm:flex sm:flex-row flex flex-col'>
 
             <div className="sm:w-5/12 sm:h-5/6 sm:p-10 h-1/3 sm:flex sm:justify-center mt-10 bg1 sm:mb-16 flex justify-center items-center">
                 <span className='sm:w-full sm:h-full w-min h-min flex items-center justify-center rounded-full bg1 pt-24 sm:py-0'>
@@ -17,7 +17,7 @@ function Main() {
                     <br />
                     <span className={`${raleway.className} sm:text-4xl text2 text-lg`}> <span className=''>Student</span> | Javascript developer | Linux user</span>
                     <div className="readmore sm:text-8xl text-2xl mt-10 animate-pulse sm:mt-40 fast-move flex justify-center  ">
-                        <a href="#skills"> 👇 </a>
+                        <a href="#about"> 👇 </a>
                     </div>
                 </h1>
             </div>

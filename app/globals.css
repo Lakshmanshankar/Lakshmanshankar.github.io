@@ -19,7 +19,10 @@ nav{
     --bg-three: #ff9900;
     --bg-four: #FF57B9FF;
     --bg-five: #FF2965FF;
+    --bg-six:red;
     --text-one:#000;
+    --text-two:white;
+    --text-three:#F9FF80FF;
 }
 
 .bg1{
@@ -34,6 +37,9 @@ nav{
 .bg5{
     background: var(--bg-five);
 }
+.bg6{
+    background: var(--bg-six);
+}
 
 .text1{
     color: var(--text-one);
@@ -44,6 +50,7 @@ nav{
 .text3{
     color: var(--bg-five);
 }
+
 
 .decon{
     width: 100%;
@@ -60,7 +67,6 @@ nav{
 }
 .fast-move{
     animation: updownleft 0.5s linear alternate-reverse infinite;
-
 }
 @keyframes updownleft {
     from {
@@ -188,17 +194,19 @@ html::-webkit-scrollbar-track {
 .revolve{
     animation: makebubble 2s linear infinite alternate-reverse;
 }
+.textasbg{
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.gradientcolor{
+    background: linear-gradient(120deg,var(--bg-three),var(--bg-one));
+    -webkit-text-stroke: var(--text-one);
+    -webkit-text-stroke-width: 5px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
 
-/* .menu-i-line-btwo{
-    position: absolute;
-    height: 1px;
-    top: 0;
-    margin-left: 7px;
-    transform-origin: 35%;
-    background-color: antiquewhite;
-    border-radius: 0.5px;
-    transform: rotate(-45deg);
-}  */
+
 
 
 @media screen and (max-width: 768px) {
@@ -211,4 +219,13 @@ html::-webkit-scrollbar-track {
         background-size: cover;
         border-radius: 50%;
       }
+
+      .gradientcolor{
+        background: linear-gradient(120deg,var(--text-three),var(--bg-five));
+        -webkit-text-stroke: var(--text-one);
+        font-weight: 900;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+    
 }

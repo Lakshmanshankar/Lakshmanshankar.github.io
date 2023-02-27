@@ -62,8 +62,7 @@ nav{
     animation: updownleft 4s linear infinite alternate;
 }
 .slow{
-    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-    -webkit-transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: 0.5s;
 }
 .fast-move{
     animation: updownleft 0.5s linear alternate-reverse infinite;
@@ -199,7 +198,7 @@ html::-webkit-scrollbar-track {
     -webkit-background-clip: text;
 }
 .gradientcolor{
-    background: linear-gradient(120deg,var(--bg-three),var(--bg-one));
+    background: var(--bg-three);
     -webkit-text-stroke: var(--text-one);
     -webkit-text-stroke-width: 5px;
     -webkit-text-fill-color: transparent;

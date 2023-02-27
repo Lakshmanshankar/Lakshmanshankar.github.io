@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { raleway } from '@/fonts/exports'
 import MenuIcon from './MenuIcon'
 
+
 function Navbar() {
     const [toggle, setToggle] = React.useState(false)
     const [theme, setTheme] = React.useState(false)
@@ -14,27 +15,29 @@ function Navbar() {
             if (toggle) {
                 dom?.classList.add('slide-out')
                 dom?.classList.remove('slide-in')
+                setToggle(toggle)
             }
             else {
                 dom?.classList.add('slide-in')
                 dom?.classList.remove('slide-out')
+                setToggle(toggle)
             }
         }
     }, [toggle])
     return (
         <header className=' w-full flex justify-center fixed z-50'>
             <nav className=' w-full sm:w-11/12 py-3 flex justify-between items-center sm:px-9  blurrish sm:rounded-xl' >
-                <h2 className=' font-poppins '>ManPage</h2>
+                <h2 className=' font-poppins text1  '>ManPage</h2>
 
-                <ul className=' sm:flex sm:w-4/12 sm:h-auto sm:justify-between sm:flex-row  w-full absolute sm:relative flex top-10 sm:top-0 flex-col h-screen justify-center items-baseline sm:bg-transparent bg5 rounded-xl mt-2 text1' id='mailul'>
-                    <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><Link href={""}>Home</Link></li>
-                    <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><Link href={"/"}>About</Link></li>
+                <ul className=' sm:flex sm:w-4/12 sm:h-auto sm:justify-between sm:flex-row  w-full absolute sm:relative flex top-10 sm:top-0 flex-col h-screen justify-center items-baseline sm:bg-transparent bg5 rounded-xl mt-2 text1' id='mailul' onClick={() => { setToggle(!toggle) }}>
+                    <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => { setToggle(!toggle) }}><a href={"#main"}>Home</a></li>
+                    <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><a href={"#about"}>About</a></li>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><Link href={"/"}>Contact</Link></li>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><Link href={"/"}>Skills</Link></li>
                 </ul>
 
                 <div className="div3 flex w-1/12 flex-row justify-between">
-                    <button className=' relative right-24 sm:relative sm:right-0  sm:p-2 sm:rounded-lg sm:hover:transition-all'
+                    <button className=' relative right-24 sm:relative sm:right-0  sm:p-2 sm:rounded-lg sm:hover:transition-all text1'
                         onClick={() => {
                             setTheme(!theme)
                             setColors(theme)
@@ -43,7 +46,7 @@ function Navbar() {
                     >
                         dark
                     </button>
-                    <button className=' absolute sm:hidden right-2 top-1 ' onClick={() => setToggle(!toggle)}><MenuIcon /></button>
+                    <button className=' absolute sm:hidden right-2 top-1 ' onClick={() => setToggle(!toggle)}><MenuIcon props={toggle} /></button>
                 </div>
             </nav>
         </header >
@@ -74,7 +77,7 @@ function setColors(state: boolean) {
 
         root.style.setProperty('--text-one', '#fff')  // text color are light
         root.style.setProperty('--text-two', '#fff');
-        root.style.setProperty('--text-three', '#7AFFFBFF');
+        root.style.setProperty('--text-three', '#09FF00FF');
 
         if (dom) {
             dom.innerHTML = `light`

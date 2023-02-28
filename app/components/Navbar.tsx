@@ -6,8 +6,8 @@ import MenuIcon from './MenuIcon'
 
 
 function Navbar() {
-    const [toggle, setToggle] = React.useState(false)
-    const [theme, setTheme] = React.useState(false)
+    const [toggle, setToggle] = React.useState(true)
+    const [theme, setTheme] = React.useState(true)
     useEffect(() => {
         if (window.innerWidth > 768) return () => { console.log(window.innerWidth); }
         else {
@@ -27,24 +27,25 @@ function Navbar() {
     return (
         <header className=' w-full flex justify-center fixed z-50'>
             <nav className=' w-full sm:w-11/12 py-3 flex justify-between items-center sm:px-9  blurrish sm:rounded-xl' >
-                <h2 className=' font-poppins text1  '>ManPage</h2>
-
+                <h2 className=' font-poppins text1 px-2 '>Portfolio</h2>
                 <ul className=' sm:flex sm:w-4/12 sm:h-auto sm:justify-between sm:flex-row  w-full absolute sm:relative flex top-10 sm:top-0 flex-col h-screen justify-center items-baseline sm:bg-transparent bg5 rounded-xl mt-2 text1' id='mailul' onClick={() => { setToggle(!toggle) }}>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => { setToggle(!toggle) }}><a href={"#main"}>Home</a></li>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><a href={"#about"}>About</a></li>
-                    <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><Link href={"/"}>Contact</Link></li>
+                    <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><a href={"#projects"}>Projects</a></li>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><Link href={"/"}>Skills</Link></li>
                 </ul>
 
                 <div className="div3 flex w-1/12 flex-row justify-between">
-                    <button className=' relative right-24 sm:relative sm:right-0  sm:p-2 sm:rounded-lg sm:hover:transition-all text1'
+                    <button className=' relative right-24 sm:relative sm:right-0  sm:p-2 sm:rounded-lg sm:hover:transition-all text1 sm:text-3xl font-extrabold'
                         onClick={() => {
                             setTheme(!theme)
                             setColors(theme)
                         }}
                         id='themebtn'
                     >
-                        dark
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-sun" viewBox="0 0 16 16">
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+                        </svg>
                     </button>
                     <button className=' absolute sm:hidden right-2 top-1 ' onClick={() => setToggle(!toggle)}><MenuIcon props={toggle} /></button>
                 </div>
@@ -73,15 +74,11 @@ function setColors(state: boolean) {
         root.style.setProperty('--bg-four', '#FF57B9FF') // light rose
         root.style.setProperty('--bg-five', '#FF2965FF') // red rose
         root.style.setProperty('--bg-six', '#6EFFAAFF') // light rose
-
-
         root.style.setProperty('--text-one', '#fff')  // text color are light
         root.style.setProperty('--text-two', '#fff');
-        root.style.setProperty('--text-three', '#09FF00FF');
+        root.style.setProperty('--text-three', '#0DFF00FF');
+        root.style.setProperty('--text-four', 'hsl(227, 100%, 50%)');
 
-        if (dom) {
-            dom.innerHTML = `light`
-        }
 
     }
     else { // light colors
@@ -94,11 +91,7 @@ function setColors(state: boolean) {
 
         root.style.setProperty('--text-one', '#000')
         root.style.setProperty('--text-two', '#24051CFF')
-        root.style.setProperty('--text-three', '#370080FF');
-
-
-        if (dom) {
-            dom.innerHTML = `dark`
-        }
+        root.style.setProperty('--text-three', '#FF1E00FF');
+        root.style.setProperty('--text-four', 'hsl(315, 100%, 72%)');
     }
 }

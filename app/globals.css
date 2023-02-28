@@ -14,15 +14,16 @@ nav{
 }
 
 :root{
- --bg-one: #1e1e1e;
-    --bg-two: rgba(0, 0, 0, 0.5);
+ --bg-one: #D6EFFFFF;
+    --bg-two: rgba(255, 255, 255, 0.5);
     --bg-three: #ff9900;
-    --bg-four: #FF57B9FF;
-    --bg-five: #FF2965FF;
-    --bg-six:red;
+    --bg-four: #FFB700FF;
+    --bg-five: #FFE208FF;
+    --bg-six:#FF45CDFF;
     --text-one:#000;
-    --text-two:white;
-    --text-three:#F9FF80FF;
+    --text-two:#24051CFF;
+    --text-three:#FF26B3FF;
+    --text-four:hsl(189, 100%, 50%);
 }
 
 .bg1{
@@ -48,7 +49,10 @@ nav{
     color: var(--text-two);
 }
 .text3{
-    color: var(--bg-five);
+    color: var(--text-three);
+}
+.text4{
+    color: var(--text-four);
 }
 
 
@@ -88,24 +92,24 @@ html::-webkit-scrollbar {
 html::-webkit-scrollbar-track {
     background: var(--light-back-one);
 }
-
-
 .blurrish{
     background: var(--bg-two);
     backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
 }
-
 .listOps{
     padding: 5px;
     border-radius: 5px;
     font-size: large;
     font-family: 'Raleway',sans-serif;
 }
-
+.scale1{
+    transition: 0.3s;
+    transform: scale(1.2);
+}
 .listOps:hover{
     transition: 0.5s;
-    color:invert(30%);
-    font-weight:900; 
+    color:invert(30%);  
+    transform: scale(1.2);
 }
 .background-change{
    color: var(--bg-three);
@@ -204,9 +208,9 @@ html::-webkit-scrollbar-track {
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
 }
-
-
-
+.shadowme{
+    box-shadow: inset 0px 0px 10px rgb(233, 255, 133) invert(50%);
+}
 
 @media screen and (max-width: 768px) {
     .imageDiv{
@@ -217,6 +221,9 @@ html::-webkit-scrollbar-track {
         background-position: center;
         background-size: cover;
         border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .gradientcolor{

@@ -1,8 +1,8 @@
 import './globals.css'
 import Navbar from './components/Navbar'
 export const metadata = {
-  title: `Lakshman's LinkTree`,
-  description: 'Online Portfolio of Lakshman',
+  title: `Lakshman's portfolio`,
+  description: 'Portfolio of Lakshmanshankar ',
 }
 
 export default function RootLayout({
@@ -12,8 +12,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
-    
       <body>
         <Navbar />
         {children}</body>

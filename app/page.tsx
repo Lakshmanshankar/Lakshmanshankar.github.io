@@ -1,22 +1,15 @@
 import Main from './components/Main'
 import React from 'react'
 import About from './components/About'
+import Projects from './components/Projects'
 function page() {
   return (
-    <div>
-      <div className="decon" id='navbar'>
-        <Main />
-        
-      </div>
+    <>
 
-
-
-
-
-      <div className="decon" id='bottom'>
-        <About />
-      </div>
-    </div>
+      <Main />
+      <Projects />
+      <About />
+    </>
   )
 }
 

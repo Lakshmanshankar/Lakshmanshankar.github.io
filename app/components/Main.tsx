@@ -4,10 +4,9 @@ import { raleway } from '@/fonts/exports'
 
 function Main() {
     return (
-        <div className=' w-full h-screen py-14 bg1 sm:flex sm:flex-row flex flex-col slow' id='main'>
-
-            <div className="sm:w-5/12 sm:h-5/6 sm:p-10 h-1/3 sm:flex sm:justify-center mt-10 bg1 sm:mb-16 flex justify-center slow items-center">
-                <span className='sm:w-full sm:h-full w-min h-min flex items-center justify-center rounded-full slow bg1 pt-24 sm:py-0'>
+        <main className=' w-full h-screen py-14 bg1 sm:flex sm:flex-row flex flex-col slow' id='main'>
+            <div className="sm:w-5/12 sm:h-5/6 sm:p-10 h-1/3 sm:flex sm:justify-center mt-10 bg1 sm:mb-16 bg-1 flex justify-center slow items-center">
+                <span className='sm:w-full sm:h-full w-min h-min flex items-center justify-center rounded-full slow pt-24 sm:py-0'>
                     <div className="imageDiv absolute sm:relative"></div>
                 </span>
             </div>
@@ -21,7 +20,7 @@ function Main() {
                     </div>
                 </h1>
             </div>
-        </div>
+        </main>
     )
 }
 

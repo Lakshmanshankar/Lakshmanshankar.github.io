@@ -28,7 +28,7 @@ function Navbar() {
         <header className=' w-full flex justify-center fixed z-50'>
             <nav className=' w-full sm:w-11/12 py-3 flex justify-between items-center sm:px-9  blurrish sm:rounded-xl' >
                 <h2 className=' font-poppins text1 px-2 '>Portfolio</h2>
-                <ul className=' sm:flex sm:w-4/12 sm:h-auto sm:justify-between sm:flex-row  w-full absolute sm:relative flex top-10 sm:top-0 flex-col h-screen justify-center items-baseline sm:bg-transparent bg5 rounded-xl mt-2 text1' id='mailul' onClick={() => { setToggle(!toggle) }}>
+                <ul className=' sm:flex sm:w-4/12 sm:h-auto sm:justify-between sm:flex-row w-full pblur absolute sm:relative flex top-10 sm:top-0 flex-col h-screen justify-center items-baseline sm:bg-transparent bg3 rounded-xl mt-2 text1' id='mailul' onClick={() => { setToggle(!toggle) }}>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => { setToggle(!toggle) }}><a href={"#main"}>Home</a></li>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><a href={"#about"}>About</a></li>
                     <li className={`${raleway.className}  listOps ml-20 my-2 sm:text-2xl sm:my-0`} onClick={() => setToggle(!toggle)}><a href={"#projects"}>Projects</a></li>
@@ -71,27 +71,24 @@ function setColors(state: boolean) {
         root.style.setProperty('--bg-one', '#000')  // black
         root.style.setProperty('--bg-two', 'rgba(0, 0, 0, 0.5)') // black
         root.style.setProperty('--bg-three', '#ff002b') // red rose
-        root.style.setProperty('--bg-four', '#FF57B9FF') // light rose
+        root.style.setProperty('--bg-four', 'rgba(255, 224, 224, 0.18)') // light rose
         root.style.setProperty('--bg-five', '#FF2965FF') // red rose
         root.style.setProperty('--bg-six', '#6EFFAAFF') // light rose
         root.style.setProperty('--text-one', '#fff')  // text color are light
         root.style.setProperty('--text-two', '#fff');
         root.style.setProperty('--text-three', '#0DFF00FF');
-        root.style.setProperty('--text-four', 'hsl(227, 100%, 50%)');
-
-
+        root.style.setProperty('--text-four', '#00FFF7FF');
     }
     else { // light colors
         root.style.setProperty('--bg-one', '#D6EFFFFF') // black
         root.style.setProperty('--bg-two', 'rgba(255, 240, 240, 0.5)') // white
         root.style.setProperty('--bg-three', '#ff9900') // orange
-        root.style.setProperty('--bg-four', '#FFB700FF') // light orange
+        root.style.setProperty('--bg-four', 'rgba(245, 222, 222, 0.3)') // light orange
         root.style.setProperty('--bg-five', '#FFE208FF') // red rose
         root.style.setProperty('--bg-six', '#FF45CDFF') // light rose
-
         root.style.setProperty('--text-one', '#000')
         root.style.setProperty('--text-two', '#24051CFF')
         root.style.setProperty('--text-three', '#FF1E00FF');
-        root.style.setProperty('--text-four', 'hsl(315, 100%, 72%)');
+        root.style.setProperty('--text-four', '#FF007BFF');
     }
 }

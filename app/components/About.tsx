@@ -5,7 +5,7 @@ function About() {
 
     return (
 
-        <section className=' w-full h-max slow sm:py-64 bg1 mt-0.5 py-10' id='about' >
+        <section className=' w-full h-max slow sm:py-32 bg1 mt-0.5 py-10' id='about' >
             <h1 className={`${ubuntu.className} text1 background-change slow sm:text-9xl text-5xl sm:p-10`}>About Me</h1>
             <p className={`${raleway.className} text-lg sm:text-3xl text2 p-5 sm:p10 sm:flex sm:full justify-center sm:items-center sm:px-40  sm:h-full`}>
                 I am a Javascript developer (👨‍🎓)  working on the NextJS fullstack applications and Docker products.

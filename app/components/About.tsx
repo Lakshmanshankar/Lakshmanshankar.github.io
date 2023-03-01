@@ -1,6 +1,8 @@
 "use client";
 import React, { ReactHTMLElement, useEffect } from "react";
 import { raleway, ubuntu } from "@/fonts/exports";
+import Contacts from "./Contacts";
+
 function About() {
   return (
     <section
@@ -43,10 +45,12 @@ function About() {
         questions or would like to discuss potential projects, please feel free
         to contact me.
       </p>
+
+      <Contacts />
       <div
-        className={`${raleway.className} text-lg bg5 text1 flex sm:text-3xl justify-center `}
+        className={`${raleway.className} text-lg bg2 text1 flex sm:text-3xl justify-center `}
       >
-        created by lakshman with 💪
+        Fix me on  <a href="http://github.com/Lakshmanshankar/Lakshmanshankar.github.io" className=" font-extrabold text3 "> github </a>
       </div>
     </section>
   );

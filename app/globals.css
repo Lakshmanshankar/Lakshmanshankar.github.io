@@ -286,7 +286,7 @@ html::-webkit-scrollbar-track {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.25rem;
     border-radius: 10px;
     backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
     box-shadow: 0px 0px 10px var(--bg-two);
@@ -294,6 +294,15 @@ html::-webkit-scrollbar-track {
     margin: 0.5rem;
   }
 
+
+  .makeit{
+    padding: 0.25rem;
+    border-radius: 10px;
+    backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
+    box-shadow: 0px 0px 10px var(--bg-two);
+    transition: 0.5s;
+    margin: 0.5rem;
+  }
   .backed {
     backdrop-filter: blur(20px) saturate(160%) contrast(45%) brightness(140%);
   }

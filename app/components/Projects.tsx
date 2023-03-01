@@ -5,7 +5,7 @@ function Projects() {
         <section className=' bg1 mt-0.5 h-max sm:h-screen w-full' id='projects'>
             <h1 className={`${ubuntu.className} text3 slow sm:text-9xl text-5xl sm:p-10 text-clip py-5`}>Projects</h1>
             <div className=' w-full h-max sm:py-24 py-12 rounded-xl flex flex-col justify-center sm:flex-row items-center sm:px-14 p-3.5'>
-                <div className="div sm:w-1/2 sm:h-full sm:py-5 bg4 sm:mx-5 rounded-xl shadow-xl p-10 ">
+                <div className="div sm:w-1/2 sm:h-full sm:py-5 bg4 sm:mx-5 rounded-xl shadow-xl p-5 ">
                     <h1 className={`${ubuntu.className} text-3xl background-change text3 sm:py-5 sm:px-12 sm:text-6xl p-2`}>Code Share</h1>
                     <p className={`${raleway.className}  sm:4xl text1 sm:py-6 sm:px-14 p-3  text-lg`}>
                         Code share is a web application built using React and Let the users to create beautiful images of their code in various themes and download them as PNG Formats
@@ -16,8 +16,8 @@ function Projects() {
                     </div>
                 </div>
 
-                <div className="div sm:w-1/2 sm:h-full sm:py-5 bg4 sm:mx-5 rounded-xl shadow-xl p-10 mt-5">
-                    <h1 className={`${ubuntu.className} text-3xl background-change text3 sm:py-5 sm:px-12 sm:text-6xl p-2`}>Student Performance Tracking</h1>
+                <div className="div sm:w-1/2 sm:h-full sm:py-5 bg4 sm:mx-5 rounded-xl shadow-xl p-5 mt-5">
+                    <h1 className={`${ubuntu.className} text-3xl background-change text3 sm:py-5 sm:px-12 sm:text-6xl p-2`}>SPTS</h1>
                     <p className={`${raleway.className}  sm:4xl text1 sm:py-6 sm:px-14 p-3  text-lg`}>
                         Student Performance Tracking is a web application build Using NEXT js and MySQL backend with Typescript. Which Helps the Student to keep track of their academic progress. This application allow the users to generate reports based on their role.
                     </p>

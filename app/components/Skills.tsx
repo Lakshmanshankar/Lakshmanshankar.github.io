@@ -15,7 +15,7 @@ function Skills() {
       <div className="grid-layout sm:p-5 shadowme">
         <div className="three gitems sm:row-span-4 bg2 shadowme">
           <div
-            className={`${raleway.className} sm:text-2xl texl-lg sm:px-14 text1 p-7`}
+            className={`${raleway.className} sm:text-2xl texl-lg sm:px-14 sm:py-4 text1 p-7`}
           >
             As a Computer Science student with a passion for building useful
             applications, I am eager to learn new technologies and tools to
@@ -65,7 +65,7 @@ function Skills() {
 
 export default Skills;
 
-function SkillsIcons({
+export function SkillsIcons({
   name,
   size,
   total,
@@ -85,12 +85,13 @@ function SkillsIcons({
   }, []);
 
   return (
-    <img
+    <Image
       src={`/assets/${name}.svg`}
       width={newsize}
       height={newsize}
       alt="No Image"
-      className=" p-1 sm:p-2 rounded-md inershad sm:w-32 backed bg-zinc-50 sm:h-32 w-16 h-16 scale1  shadow-lg"
-    ></img>
+      className=" p-1 sm:p-2 rounded-md inershad sm:w-32 backed bg-zinc-50 sm:h-32 w-16 h-16 sm:scale1 shadow-lg"
+      priority={true}
+    ></Image>
   );
 }

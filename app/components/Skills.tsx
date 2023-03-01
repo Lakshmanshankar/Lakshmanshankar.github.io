@@ -22,8 +22,8 @@ function Skills() {
             bring my ideas to life. Specifically, I am interested in developing
             full-stack web applications using Next.js, TypeScript, and MySQL. I
             am also working on other NoSQL databases like Azure CosmosDB and
-            MongoDB. working with various frameworks helps me choose which
-            framework to use to complete the tasks efficiently
+            MongoDB. Working with various frameworks helps me choose which
+            framework to use to complete the tasks efficiently.
           </div>
         </div>
         <div className="three gitems grid sm:row-span-2 bg2 sm:col-span-2 shadowme">
@@ -50,8 +50,8 @@ function Skills() {
             As a Computer Science student with a keen interest in DevOps and
             full-stack applications, I have been exploring Docker, Azure, and
             Linux to expand my knowledge and skills. I am Using Docker to
-            containerize the applicationsc, create CI workflows for storing them
-            in diffrent container registries and use azure cloud to deploy them.
+            containerize the applications, Create CI workflows for storing them
+            in different container registries and use Azure cloud to deploy them.
             I am Mainly using Azure cosmosDB, Container Instances and Azure
             functions. I am also proficient in using Azure CLI to create Azure
             resources. This is the Technologies I am currently using to create

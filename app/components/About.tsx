@@ -17,8 +17,8 @@ function About() {
       <p
         className={`${raleway.className} text-lg sm:text-3xl text2 p-5 sm:p10 sm:flex sm:full justify-center sm:items-center sm:px-40  sm:h-full`}
       >
-        I am a Javascript developer (👨‍🎓) working on the NextJS fullstack
-        applications and Docker products.
+        I am a Javascript developer working on the NextJS fullstack
+        applications and Docker.
         <br className="sm:none sm:hidden" /> <br />
         As a computer science student, I have spent the last few years learning
         and developing my skills in various areas of computer science, such as

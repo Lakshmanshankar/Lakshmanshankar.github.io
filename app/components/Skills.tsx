@@ -15,7 +15,7 @@ function Skills() {
       <div className="grid-layout sm:p-5 shadowme">
         <div className="three gitems sm:row-span-4 bg2 shadowme">
           <div
-            className={`${raleway.className} sm:text-2xl texl-lg sm:px-14 sm:py-4 text1 p-7`}
+            className={`${raleway.className} sm:text-xl texl-lg sm:px-14 sm:py-14 text1 p-7`}
           >
             As a Computer Science student with a passion for building useful
             applications, I am eager to learn new technologies and tools to
@@ -26,7 +26,7 @@ function Skills() {
             framework to use to complete the tasks efficiently.
           </div>
         </div>
-        <div className="three gitems grid sm:row-span-2 bg2 sm:col-span-2 shadowme">
+        <div className="three gitems grid sm:row-span-2 bg2 sm:col-span-1 shadowme">
           <div className="flex justify-evenly w-full ">
             <SkillsIcons total={5} name={"typescript"} size={120} />
             <SkillsIcons total={5} name={"nextjs"} size={120} />
@@ -34,7 +34,7 @@ function Skills() {
             <SkillsIcons total={5} name={"python"} size={120} />
           </div>
         </div>
-        <div className="three gitems sm:row-span-2 bg2 sm:col-span-2 h-full p-10 grid layout2">
+        <div className="three gitems sm:row-span-2 bg2 sm:col-span-1 p-10 grid layout2">
           <div className="devOps flex justify-evenly w-full ">
             <SkillsIcons total={5} name={"ansible"} size={120} />
             <SkillsIcons total={5} name={"docker"} size={90} />
@@ -43,9 +43,9 @@ function Skills() {
           </div>
         </div>
 
-        <div className="three gitems sm:row-span-2 bg2 justify-evenly sm:col-span-3 mt-2">
+        <div className="three gitems sm:row-span-2 bg2 justify-evenly sm:col-span-2 mt-2">
           <div
-            className={`${raleway.className} sm:text-2xl texl-lg sm:px-14 text1 p-5`}
+            className={`${raleway.className} sm:text-xl sm:p-5 texl-lg sm:px-14 text1 p-5`}
           >
             As a Computer Science student with a keen interest in DevOps and
             full-stack applications, I have been exploring Docker, Azure, and
@@ -75,14 +75,6 @@ export function SkillsIcons({
   total: number;
 }): JSX.Element {
   const [newsize, setNewsize] = useState(0);
-  useEffect(() => {
-    const element = document.getElementById(`${name}`);
-    // if (window) {
-    //     setNewsize(120)
-    // } else {
-    //     setNewsize(size)
-    // }
-  }, []);
 
   return (
     <Image
@@ -90,7 +82,7 @@ export function SkillsIcons({
       width={newsize}
       height={newsize}
       alt="No Image"
-      className=" p-1 sm:p-2 rounded-md inershad sm:w-32 backed bg-zinc-50 sm:h-32 w-16 h-16 sm:scale1 shadow-lg"
+      className=" p-1 sm:p-2 rounded-md inershad sm:w-28 backed bg-zinc-50 sm:h-32 w-14 h-14 sm:scale1 shadow-lg"
       priority={true}
     ></Image>
   );

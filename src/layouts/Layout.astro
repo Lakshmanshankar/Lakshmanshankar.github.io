@@ -1,0 +1,21 @@
+---
+import Head from "@/components/scripts.astro";
+import Header from "@/components/Header.astro";
+import "../styles/global.css";
+import "../styles/typography.css";
+import Navbar from "@/components/ui/Navbar.astro";
+---
+
+<!doctype html>
+<html lang="en" transition:animate="fade">
+    <head>
+        <Head />
+        <Header />
+    </head>
+    <body>
+        <main class="mx-auto max-w-screen-sm px-5 py-5">
+            <Navbar />
+            <slot />
+        </main>
+    </body>
+</html>

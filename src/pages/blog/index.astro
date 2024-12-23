@@ -1,0 +1,150 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+
+const posts = await getCollection("blog");
+type GroupedPosts = {
+    [key: string]: CollectionEntry<"blog">[];
+};
+
+const groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
+    const date = new Date(post.data.date).getFullYear().toString();
+    if (!acc[date]) {
+        acc[date] = [];
+    }
+    acc[date].push(post);
+    return acc;
+}, {} as GroupedPosts);
+---
+
+<Layout>
+    <p class="mt-4 mb-1">
+        Welcome to the blog! I wrote mostly about web technologies, command line tools and open
+        source applications here some tags that you can use to filter the results
+    </p>
+    <div class="">
+        <div class="list-none pl-0">
+            <div id="filter-container" class="mb-4">
+                <h4 class="mb-1">Filter by tag</h4>
+                <button
+                    data-filter-tag="all"
+                    class="tag-btn p-0.5 px-2 text-sm mr-1 rounded-md bg-stone-300 dark:bg-neutral-900 border border-stone-400 dark:border-neutral-800"
+                    >All</button
+                >
+                {
+                    Array.from(
+                        new Set(
+                            Object.values(groupedPosts).flatMap((posts) =>
+                                posts.flatMap((post) => post.data.tags),
+                            ),
+                        ),
+                    ).map((tag) => (
+                        <button
+                            data-filter-tag={tag}
+                            class="tag-btn p-0.5 text-sm mr-2 rounded-md bg-stone-300 dark:bg-neutral-900 border border-stone-400 dark:border-neutral-800"
+                        >
+                            {tag}
+                        </button>
+                    ))
+                }
+            </div>
+            <div id="posts-container">
+                {
+                    Object.keys(groupedPosts).map((year) => (
+                        <ul class="mt-4 list-none p-0 flex flex-col gap-2">
+                            {groupedPosts[year]?.length >= 1 ? year : null}
+                            {groupedPosts[year].map((item) => (
+                                <a
+                                    href={`/blog/${item.id}`}
+                                    class="post-item block p-3 py-2 no-underline rounded-lg hover:transition-all hover:dark:bg-neutral-800 relative group border border-stone-400 dark:border-neutral-800"
+                                    data-filter-tags={item.data.tags && item.data.tags.join(",")}
+                                    data-year={year}
+                                >
+                                    <div>
+                                        <div class="flex gap-2 items-center">
+                                            {" "}
+                                            <h4 class="my-0">{item.data.title}</h4>
+                                            <span class="text-sm">
+                                                {item.data.tags &&
+                                                    item.data.tags.length > 0 &&
+                                                    `(${item.data.tags.join(", ")})`}
+                                            </span>
+                                        </div>
+                                        <p class="text-sm my-1">
+                                            {item.data.description}
+                                            <FormattedDate date={new Date(item.data.date)} />
+                                        </p>
+                                    </div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
+                                    >
+                                        <line
+                                            x1="5"
+                                            y1="12"
+                                            x2="19"
+                                            y2="12"
+                                            class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+                                        />
+                                        <polyline
+                                            points="12 5 19 12 12 19"
+                                            class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                                        />
+                                    </svg>
+                                </a>
+                            ))}
+                        </ul>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    const filterFn = () => {
+        const filterContainer = document.getElementById("filter-container");
+        const postsContainer = document.getElementById("posts-container");
+        if (!filterContainer || !postsContainer) return;
+
+        const filterButtons = filterContainer.querySelectorAll("button");
+        Array.from(filterButtons).forEach((tagBtn) => {
+            tagBtn.addEventListener("click", (event) => {
+                const selectedButton = event.target as HTMLButtonElement;
+                filterButtons.forEach((button) => {
+                    button.classList.remove("active");
+                    button.setAttribute("data-tag-current", "false");
+                });
+                selectedButton.classList.add("active");
+                selectedButton.setAttribute("data-tag-current", "true");
+                if (!selectedButton) return;
+                const selectedTag = selectedButton.getAttribute("data-filter-tag");
+
+                if (selectedTag === "all") {
+                    postsContainer.querySelectorAll("a").forEach((post) => {
+                        post.classList.remove("hidden");
+                    });
+                    return;
+                }
+
+                postsContainer.querySelectorAll("a").forEach((post) => {
+                    const postTags = post.getAttribute("data-filter-tags");
+                    if (!postTags) return;
+                    const postTagsArray = postTags.split(",");
+                    const isSelected = postTagsArray.includes(selectedTag ?? "");
+                    if (isSelected) {
+                        post.classList.remove("hidden");
+                    } else {
+                        post.classList.add("hidden");
+                    }
+                });
+            });
+        });
+    };
+    document.addEventListener("DOMContentLoaded", filterFn);
+    document.addEventListener("astro:after-swap", filterFn);
+    filterFn();
+</script>

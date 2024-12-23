@@ -1,0 +1,85 @@
+strong {
+    @apply font-medium;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-medium;
+}
+h1 {
+    @apply text-4xl mb-1;
+}
+h2 {
+    @apply text-3xl mb-1 mt-7;
+}
+h3 {
+    @apply text-xl mb-1 mt-3;
+}
+
+.copy-code-button {
+    @apply bg-stone-200 dark:bg-neutral-700;
+}
+button .code-normal {
+    @apply text-stone-600 dark:text-stone-100;
+}
+button .code-copied {
+    @apply text-stone-200 dark:text-stone-600;
+}
+
+hr {
+    @apply border-stone-400;
+}
+
+/* ::selection { */
+/* background: var();
+    color: var(--darker); */
+/* @apply bg-slate-300 dark:bg-neutral-600; */
+/* } */
+
+::selection {
+    background-color: #404040; /* Mild tone */
+    color: #ffffff; /* High contrast text */
+}
+
+/* TOC  */
+
+.hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.toc-active {
+    @apply dark:text-white text-black;
+}
+.toc-container {
+    text-decoration: none;
+    list-style: none;
+}
+.toc-link {
+    list-style: none;
+    text-decoration: none !important;
+}
+
+/* ANIMATE */
+.animate {
+    @apply opacity-0 translate-y-3;
+    @apply transition-all duration-700 ease-out;
+}
+
+.animate.show {
+    @apply opacity-100 translate-y-0;
+}
+
+.tag-btn.active{
+    @apply underline underline-offset-2;
+}
+
+

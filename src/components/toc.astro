@@ -1,0 +1,68 @@
+---
+// src/components/TableOfContents.astro
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+    headings: MarkdownHeading[];
+    activeIndex?: number;
+}
+
+const { headings } = Astro.props;
+const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
+---
+
+<nav
+    aria-labelledby="table-of-contents"
+    class="hidden xl:block fixed right-24 top-10 max-w-[300px] px-10 max-h-[86vh] line-clamp-1 overflow-x-visible overflow-y-scroll hide-scrollbar"
+>
+    {
+        filteredHeadings.length > 1 && (
+            <h2
+                id="table-of-contents"
+                class="animate dark:text-white text-black text-lg font-semibold "
+            >
+                Table of Contents
+            </h2>
+        )
+    }
+    <ul class="toc-container flex flex-col gap-1 mt-5 overflow-visible px-3">
+        {
+            filteredHeadings.map((heading) => (
+                <li class="leading-normal underline-none my-1">
+                    <a
+                        href={`#${heading.slug}`}
+                        class="toc-link animate line-clamp-1 hover:scale-110 dark:text-neutral-500 hover:dark:text-white text-stone-500 hover:text-black leading-normal underline-none"
+                        data-scroll-target
+                    >
+                        {heading.text}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>
+
+<script>
+    import type { HTMLTag } from "astro/types";
+
+    function smoothScroll() {
+        const scrollTargets = document.querySelectorAll("[data-scroll-target]");
+
+        scrollTargets.forEach((target) => {
+            target.addEventListener("click", (e) => {
+                e.preventDefault();
+                const targetId = target.getAttribute("href") as unknown as HTMLTag;
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                }
+            });
+        });
+    }
+
+    document.addEventListener("astro:page-load", smoothScroll);
+</script>

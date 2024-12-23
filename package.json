@@ -1,0 +1,28 @@
+{
+    "name": "Lakshmanshankar",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev --port 3000",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "format": "prettier --write ."
+    },
+    "dependencies": {
+        "@tailwindcss/typography": "^0.5.15",
+        "astro": "^5.0.9",
+        "clsx": "^2.1.1",
+        "tailwind-merge": "^2.5.5"
+    },
+    "devDependencies": {
+        "@astrojs/check": "^0.5.10",
+        "@astrojs/mdx": "^4.0.2",
+        "@astrojs/rss": "^4.0.10",
+        "@astrojs/sitemap": "^3.2.1",
+        "@astrojs/tailwind": "^5.1.3",
+        "prettier": "^3.4.2",
+        "prettier-plugin-astro": "^0.14.1",
+        "tailwindcss": "^3.4.17"
+    }
+}

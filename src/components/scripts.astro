@@ -1,0 +1,155 @@
+---
+import { ClientRouter } from "astro:transitions";
+---
+
+<ClientRouter />
+
+<script is:inline>
+    function initTheme() {
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById("system-theme-button");
+
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+        });
+
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+        });
+
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+        });
+
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
+            if (localStorage.theme === "system") {
+                toggleTheme(event.matches);
+            }
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+        css.appendChild(
+            document.createTextNode(
+                `* {
+          -webkit-transition: none !important;
+          -moz-transition: none !important;
+          -o-transition: none !important;
+          -ms-transition: none !important;
+          transition: none !important;
+        }`,
+            ),
+        );
+        document.head.appendChild(css);
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 150);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollAnimations() {
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        function scrollToTop(event) {
+            event.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        }
+    }
+    function init() {
+        initTheme();
+        preloadTheme();
+        animate();
+        scrollAnimations();
+
+        document.addEventListener("scroll", onScroll);
+    }
+    // Preload theme
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script>
+
+<script>
+    function copyToClipboard(text: string, button: HTMLButtonElement) {
+        navigator.clipboard
+            .writeText(text)
+            .then(() => {
+                // Change the text of the specific button that was clicked
+                button.textContent = "Copied!";
+                button.classList.remove("code-normal");
+                button.classList.add("code-copied");
+
+                setTimeout(() => {
+                    button.textContent = "Copy";
+                    button.classList.remove("code-copied");
+                    button.classList.add("code-normal");
+                }, 2000);
+            })
+            .catch((err) => {
+                console.error("Failed to copy text: ", err);
+            });
+    }
+
+    document.addEventListener("astro:page-load", () => {
+        document.querySelectorAll("pre").forEach((pre) => {
+            // Create a wrapper for positioning
+            const wrapper = document.createElement("div");
+            wrapper.className = "relative";
+            pre.parentNode?.insertBefore(wrapper, pre);
+            wrapper.appendChild(pre);
+
+            const codeText = pre.textContent || "";
+            const copyButton = document.createElement("button");
+            copyButton.textContent = "Copy";
+            copyButton.className =
+                "copy-code-button absolute top-2 right-2 p-2 rounded text-xs transition-colors";
+            copyButton.setAttribute("data-copy-text", codeText);
+
+            copyButton.addEventListener("click", (event) => {
+                // Pass the specific button that was clicked
+                copyToClipboard(codeText, event.target as HTMLButtonElement);
+            });
+
+            wrapper.appendChild(copyButton);
+        });
+    });
+</script>

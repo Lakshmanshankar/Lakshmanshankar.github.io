@@ -1,0 +1,97 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { render } from "astro:content";
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import TOC from "@/components/toc.astro";
+import Toc from "@/components/toc.astro";
+import BackToTop from "@/components/ui/BackToTop.astro";
+import BackToPrev from "@/components/ui/BackToPrev.astro";
+import { readingTime } from "@/lib/utils";
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post: { id: any }) => ({
+        params: { slug: post.id },
+        props: { post },
+    }));
+}
+interface Props {
+    post: CollectionEntry<"blog">;
+}
+const { post } = Astro.props;
+const entry = await getEntry("blog", post.id);
+
+if (!entry) {
+    return new Response("Not Found", {
+        status: 404,
+        statusText: "Not Found",
+    });
+}
+const { Content, headings } = await render(entry);
+---
+
+<Layout>
+    <BackToPrev href="/blog">Back to Blog</BackToPrev>
+    <div class="my-2 mt-10">
+        <span>{entry.data.date}</span>
+        <span class="text-black dark:text-amber-500">•</span>
+        <span>{entry.body && readingTime(entry.body)}</span>
+    </div>
+    <article class="animate">
+        <Content />
+        <BackToTop />
+    </article>
+    <Toc headings={headings} />
+</Layout>
+
+<!-- Highlight current heading -->
+<script>
+    const fn = () => {
+        const headings = document.querySelectorAll("h2, h3, h4, h5, h6");
+        const observerOptions = {
+            root: null,
+            rootMargin: "-4% 0px -75% 0px",
+            threshold: 0,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    const correspondingLink = document.querySelector(`.toc-link[href="#${id}"]`);
+
+                    if (correspondingLink) {
+                        const links = Array.from(document.querySelectorAll(".toc-link"));
+
+                        // Remove `data-item` attribute from all links
+                        links.forEach((link) => {
+                            link.removeAttribute("data-item");
+                            link.classList.remove("toc-active");
+                        });
+
+                        // Highlight the active link
+                        correspondingLink.setAttribute("data-item", "active");
+                        correspondingLink.classList.add("toc-active");
+
+                        // Dispatch the custom event for interactivity
+                        const activeIndex = links.indexOf(correspondingLink);
+                        const event = new CustomEvent("active-toc-index-change", {
+                            detail: { activeIndex },
+                        });
+                        document.dispatchEvent(event);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        headings.forEach((heading, index) => {
+            if (!heading.id) {
+                heading.id = `heading-${index}`;
+            }
+            observer.observe(heading);
+        });
+    };
+
+    document.addEventListener("astro:after-swap", fn);
+    document.addEventListener("DOMContentLoaded", fn);
+    fn();
+</script>

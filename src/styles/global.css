@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --main-bg: #e7e5e4;
+    --primary-font: "Inter", serif;
+}
+
+.dark {
+    --main-bg: #0a0a0a;
+}
+
+html,
+body {
+    @apply bg-stone-200 dark:bg-neutral-950 text-stone-800;
+}
+
+html {
+    font-family: var(--primary-font);
+    background: var(--main-bg);
+}
+
+main {
+    @apply prose dark:prose-invert;
+}
+
+a {
+    @apply text-base;
+}
+
+li,
+p,
+span,
+button {
+    @apply text-base text-stone-600 text-justify dark:text-[#8d8c8c];
+}
+
+p {
+    @apply mt-5;
+}
+
+/* SHIKI STYLES */
+.dark .astro-code,
+.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+.gradient-red {
+    background: -webkit-linear-gradient(0deg, #ff8922 20%, #ff279c 50%, #d9113f 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}

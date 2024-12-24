@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
 import { SITE } from "@/consts";
-const posts = await getCollection("project");
+const posts = await getCollection("work");
 let countProjects = 0;
 const newPosts = posts.filter((post) => {
     if (!post.data.draft) {
@@ -16,24 +16,29 @@ type Props = {
 };
 const { obeyCount = false } = Astro.props;
 const renderProjects = obeyCount ? newPosts : posts;
+console.log(renderProjects.length);
 ---
 
 <div class="">
-    <h4>Projects</h4>
+    <h4>Work</h4>
     {
         renderProjects.map((post) => (
             <a
-                href={`/projects/${post.id}`}
+                href={`/work/${post.id}`}
                 class="post-item block p-1 my-2 px-3 no-underline rounded-lg hover:transition-all hover:dark:bg-neutral-800 relative group border border-stone-400 dark:border-neutral-800"
             >
                 <div>
-                    <div class="flex gap-2 items-center">
+                    <div class="flex gap-2 items-center my-2">
                         {" "}
-                        <h4 class="my-0 mt-2">{post.data.title}</h4>
+                        <h4 class="my-0">{post.data.company}</h4>
+                        <p class="my-0 text-sm mt-1">
+                            <FormattedDate date={new Date(post.data.dateStart)} includeYear /> to{" "}
+                            <FormattedDate date={new Date(post.data.dateEnd)} includeYear />
+                        </p>
                     </div>
                     <p class="text-sm my-1">
-                        {post.data.description}
-                        <FormattedDate date={new Date(post.data.date)} />
+                        {post.data.role}
+                        {/* <FormattedDate date={new Date(post.data.date)} /> */}
                     </p>
                 </div>
                 <svg

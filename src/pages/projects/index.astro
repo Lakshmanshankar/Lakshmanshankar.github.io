@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+import { PROJECTS } from "@/consts";
+import ProjectShowcase from "@/components/project-showcase.astro";
+const posts = await getCollection("project");
+---
+
+<Layout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+    <p class="mt-4 mb-1">This is my project section and its fine</p>
+    <div class="">
+        <ProjectShowcase />
+    </div>
+</Layout>

@@ -2,11 +2,11 @@
 import Layout from "@/layouts/Layout.astro";
 import { render } from "astro:content";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
-import TOC from "@/components/toc.astro";
 import Toc from "@/components/toc.astro";
 import BackToTop from "@/components/ui/BackToTop.astro";
 import BackToPrev from "@/components/ui/BackToPrev.astro";
 import { readingTime } from "@/lib/utils";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
     return posts.map((post: { id: any }) => ({
@@ -32,7 +32,7 @@ const { Content, headings } = await render(entry);
 <Layout>
     <BackToPrev href="/blog">Back to Blog</BackToPrev>
     <div class="my-2 mt-10">
-        <span>{entry.data.date}</span>
+        <FormattedDate date={entry.data.date} includeYear />
         <span class="text-black dark:text-amber-500">•</span>
         <span>{entry.body && readingTime(entry.body)}</span>
     </div>

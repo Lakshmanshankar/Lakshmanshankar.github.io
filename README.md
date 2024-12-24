@@ -1,5 +1,7 @@
 ![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
+This is my customized version of [astro nano](https://astro-nano.vercel.app) check it out.
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:

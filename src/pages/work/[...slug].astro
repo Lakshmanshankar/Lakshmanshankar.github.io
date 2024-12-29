@@ -4,6 +4,7 @@ import { getCollection, getEntry, render, type CollectionEntry } from "astro:con
 
 export async function getStaticPaths() {
     const posts = await getCollection("work");
+    console.log(posts)
     return posts.map((post: { id: any }) => ({
         params: { slug: post.id },
         props: { post },
@@ -13,7 +14,7 @@ interface Props {
     post: CollectionEntry<"work">;
 }
 const { post } = Astro.props;
-const entry = await getEntry("project", post.id);
+const entry = await getEntry("work", post.id);
 
 if (!entry) {
     return new Response("Not Found", {
@@ -27,3 +28,6 @@ const { Content, headings } = await render(entry);
 <Layout title="somehting" description="something">
     <Content />
 </Layout>
+<!-- <Layout title="somehting" description="something">
+    work
+</Layout>  -->

@@ -34,7 +34,7 @@ li,
 p,
 span,
 button {
-    @apply text-base text-stone-600 text-justify dark:text-[#8d8c8c];
+    @apply text-base text-stone-600 text-justify dark:text-[#8d8c8c] tracking-tight;
 }
 
 p {

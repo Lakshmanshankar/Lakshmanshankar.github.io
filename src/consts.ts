@@ -14,6 +14,12 @@ export const HOME: Metadata = {
         "I am fullstack software developer, have experience in building complex webapplication",
 };
 
+export const ABOUT: Metadata = {
+    TITLE: "About",
+    DESCRIPTION:
+        "About Lakshmanshankar, Journey, Experience, Education, Skills and Interests",
+};
+
 export const BLOG: Metadata = {
     TITLE: "Blog",
     DESCRIPTION: "I wrote about react, Linux and software design",

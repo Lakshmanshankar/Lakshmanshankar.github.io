@@ -6,6 +6,7 @@ import "../styles/typography.css";
 import Navbar from "@/components/ui/Navbar.astro";
 
 import { SITE } from "@/consts";
+import Footer from "@/components/ui/Footer.astro";
 const { title, description } = Astro.props;
 ---
 
@@ -19,6 +20,7 @@ const { title, description } = Astro.props;
         <main class="mx-auto max-w-screen-sm px-7 py-5">
             <Navbar />
             <slot />
+            <Footer />
         </main>
     </body>
 </html>

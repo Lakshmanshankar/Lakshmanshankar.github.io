@@ -37,6 +37,10 @@ button {
     @apply text-base text-stone-600 text-justify dark:text-[#8d8c8c] tracking-tight;
 }
 
+
+li {
+  @apply tracking-tight;
+}
 p {
     @apply mt-5;
 }

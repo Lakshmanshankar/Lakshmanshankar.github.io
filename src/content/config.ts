@@ -24,6 +24,8 @@ const workSchema = z.object({
     company: z.string(),
     role: z.string(),
     dateStart: z.string(),
+    tech: z.string(),
+    description: z.string(),
     dateEnd: z.string(),
     draft: z.boolean().optional(),
 });

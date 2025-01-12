@@ -4,7 +4,7 @@ import { getCollection, getEntry, render, type CollectionEntry } from "astro:con
 
 export async function getStaticPaths() {
     const posts = await getCollection("work");
-    console.log(posts)
+    console.log(posts);
     return posts.map((post: { id: any }) => ({
         params: { slug: post.id },
         props: { post },
@@ -25,7 +25,35 @@ if (!entry) {
 const { Content, headings } = await render(entry);
 ---
 
-<Layout title="somehting" description="something">
+<Layout title={entry.data.company} description={`My ${entry.data.role} at ${entry.data.company}`}>
+    <div class="flex justify-between items-center">
+        <div>
+            <h2>{entry.data.company}</h2>
+            <h3>{entry.data.role}</h3>
+        </div>
+
+        <div>
+            <h4>{entry.data.dateStart}</h4>
+            <h4>{entry.data.dateEnd}</h4>
+        </div>
+    </div>
+    <p class="mt-2">{entry.data.description}</p>
+    <span>
+        Tech Stack:
+        <div class="flex gap-2">
+            {
+                entry.data.tech
+                    ?.split(",")
+                    ?.map((tech) => (
+                        <span
+                         class="tag-btn p-1 text-sm mt-2 rounded-md bg-stone-300 dark:bg-neutral-900 border border-stone-400 dark:border-neutral-800"
+                         >{tech}</span>
+                    ))
+            }
+        </div>
+    </span>
+    <br />
+    
     <Content />
 </Layout>
 <!-- <Layout title="somehting" description="something">

@@ -141,7 +141,7 @@ import { ClientRouter } from "astro:transitions";
             const copyButton = document.createElement("button");
             copyButton.textContent = "Copy";
             copyButton.className =
-                "copy-code-button absolute top-2 right-2 p-2 rounded text-xs transition-colors";
+                "copy-code-button absolute -top-8 right-1 p-2 rounded text-xs transition-colors";
             copyButton.setAttribute("data-copy-text", codeText);
 
             copyButton.addEventListener("click", (event) => {

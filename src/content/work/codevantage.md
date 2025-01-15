@@ -9,7 +9,7 @@ dateEnd: "01/01/2025"
 
 
 ### Bullet
-Bullet is a big project and much more than just a CRUD application—it’s a Notion-based website generator with several complex components. My work involved:
+Bullet is a platform that help users to create beautiful websites while keeping the contents in notion. My contributions included:
 
 1. Designed and implemented core features for a Notion-based website generator.
 2. Added key functionality, including support for membership and dynamic content.

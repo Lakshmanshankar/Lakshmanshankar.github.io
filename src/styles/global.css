@@ -37,6 +37,18 @@ button {
     @apply text-base text-stone-600 text-justify dark:text-[#8d8c8c] tracking-tight;
 }
 
+pre {
+    position: relative;
+    overflow-x: auto; 
+    white-space: pre; 
+    word-wrap: normal; 
+}
+
+pre > code {
+    display: block;
+    white-space: pre; 
+}
+
 
 li {
   @apply tracking-tight;

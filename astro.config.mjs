@@ -17,9 +17,7 @@ export default defineConfig({
             themes: {
                 light: "vitesse-light",
                 dark: "vitesse-dark",
-                // dark: "vesper",
             },
-            wrap: true,
         },
     },
 });

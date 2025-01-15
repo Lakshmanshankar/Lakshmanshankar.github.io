@@ -29,7 +29,6 @@ Zero to Aha is a gamified onboarding checklist that’s still in development. My
 2. Developed a widget to monitor events using a mutation observer.
 This experience helped me better understand state management in complex applications and how to handle intricate user interactions effectively.
 
-
 ## Reflections
 Working on these projects gave me a profound appreciation for tools like Notion and Excalidraw, which have now become part of my daily workflow. While I was familiar with them before joining, working on real-world applications allowed me to dive deeper into their complexities.
 

@@ -40,7 +40,7 @@ const { Content, headings } = await render(entry);
     <p class="mt-2">{entry.data.description}</p>
     <span>
         Tech Stack:
-        <div class="flex gap-2">
+        <div class="flex gap-2 flex-wrap">
             {
                 entry.data.tech
                     ?.split(",")

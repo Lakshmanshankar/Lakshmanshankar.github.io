@@ -23,7 +23,7 @@ html {
 }
 
 main {
-    @apply prose dark:prose-invert;
+    @apply prose dark:prose-invert leading-normal;
 }
 
 a {
@@ -57,6 +57,9 @@ p {
     @apply mt-5;
 }
 
+.astro-code span{
+  font-size: 14px;
+}
 /* SHIKI STYLES */
 .dark .astro-code,
 .dark .astro-code span {

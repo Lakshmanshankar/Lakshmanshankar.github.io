@@ -29,7 +29,15 @@ main {
 a {
     @apply text-base;
 }
+a > span:hover{
+    color: black;
+    transition: color 0.3s ease-in-out;
+}
 
+.dark a > span:hover{
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
 li,
 p,
 span,
@@ -75,3 +83,25 @@ p {
     -webkit-background-clip: text;
     background-clip: text;
 }
+
+
+.image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--main-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .large-image {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  

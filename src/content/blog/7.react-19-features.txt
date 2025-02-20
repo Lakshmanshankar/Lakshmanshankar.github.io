@@ -2,7 +2,7 @@
 title: "React 19 features and problems"
 description: "RC-19 was released a month and this time we got new things with actions and finally there are improvements to handle states in forms"
 date: "Jan 22 2025"
-draft: true
+draft: false
 tags: ["Web",]
 slug: "react-19-features-and-problems"
 ---

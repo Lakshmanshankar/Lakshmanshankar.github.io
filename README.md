@@ -1,10 +1,19 @@
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+
+## README
 
 This is my customized version of [astro nano](https://astro-nano.vercel.app) check it out.
 
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
+
+## Features
+
+1. Blog pages with tags
+2. Project and work section
+3. sitemap and robots.txt
+4. Static and good seo performance
+5. Light mode and dark mode
 
 ```text
 src/
@@ -23,7 +32,6 @@ src/
 └── types.ts
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
 ## 🧞 Commands
 

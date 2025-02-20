@@ -4,6 +4,7 @@ import Header from "@/components/Header.astro";
 import "../styles/global.css";
 import "../styles/typography.css";
 import Navbar from "@/components/ui/Navbar.astro";
+import GoogleAnalytics from "@/components/GoogleAnalytics.astro";
 
 import { SITE } from "@/consts";
 import Footer from "@/components/ui/Footer.astro";
@@ -14,6 +15,7 @@ const { title, description } = Astro.props;
 <html lang="en" transition:animate="fade">
     <head>
         <Head />
+        <GoogleAnalytics />
         <Header title={`${title} | ${SITE.NAME}`} description={description} />
     </head>
     <body>
@@ -22,6 +24,5 @@ const { title, description } = Astro.props;
             <slot />
             <Footer />
         </main>
-        <script src="./zoom.js"></script>
     </body>
 </html>

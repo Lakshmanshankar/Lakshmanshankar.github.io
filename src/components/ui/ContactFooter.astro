@@ -27,8 +27,9 @@ type IconName = keyof typeof ICON_MAP;
                     target="_blank"
                     rel="noopener noreferrer"
                     class="no-underline"
+                    aria-label={social.NAME}
                 >
-                    {IconComponent && <IconComponent class="w-6 h-6" width={100} height={100} />}
+                    {IconComponent && <IconComponent class="w-6 h-6" width={100} height={100}  aria-hidden="true"/>}
                 </a>
             );
         })

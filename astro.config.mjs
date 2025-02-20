@@ -7,7 +7,9 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
     site:'https://lakshmanshankar.github.io',
-    integrations: [mdx(), sitemap(), tailwind()],
+    integrations: [mdx(), sitemap({
+        entryLimit:10000,
+    }), tailwind()],
     experimental: {
         responsiveImages: true,
         svg: true,

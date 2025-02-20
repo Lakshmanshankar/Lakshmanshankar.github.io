@@ -3,9 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("work");
-    console.log(posts);
-    return posts.map((post: { id: any }) => ({
+    const workPosts = await getCollection("work");
+    return workPosts.map((post: { id: any }) => ({
         params: { slug: post.id },
         props: { post },
     }));
@@ -22,7 +21,7 @@ if (!entry) {
         statusText: "Not Found",
     });
 }
-const { Content, headings } = await render(entry);
+const { Content } = await render(entry);
 ---
 
 <Layout title={entry.data.company} description={`My ${entry.data.role} at ${entry.data.company}`}>
@@ -32,9 +31,10 @@ const { Content, headings } = await render(entry);
             <h3>{entry.data.role}</h3>
         </div>
 
-        <div>
-            <h4>{entry.data.dateStart}</h4>
-            <h4>{entry.data.dateEnd}</h4>
+        <div class="flex h-fit gap-2">
+            <h4 class="m-0 h-fit">{entry.data.dateStart}</h4>
+            <h4 class="m-0 h-fit"> - </h4>
+            <h4 class="m-0 h-fit">{entry.data.dateEnd}</h4>
         </div>
     </div>
     <p class="mt-2">{entry.data.description}</p>
@@ -53,6 +53,5 @@ const { Content, headings } = await render(entry);
         </div>
     </span>
     <br />
-    
     <Content />
 </Layout>

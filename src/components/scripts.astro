@@ -2,8 +2,25 @@
 import { ClientRouter } from "astro:transitions";
 ---
 
-<ClientRouter />
+<style>
+    @keyframes slide {
+        from {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    .slide {
+        animation: slide 0.5s ease-in-out;
+    }
+</style>
 
+<div class="slide">
+    <ClientRouter  />
+</div>
 <script is:inline>
     function initTheme() {
         const lightThemeButton = document.getElementById("light-theme-button");
@@ -94,11 +111,34 @@ import { ClientRouter } from "astro:transitions";
             });
         }
     }
+
+    function previewImages() {
+        const images = document.querySelectorAll("img");
+
+        images.forEach((img) => {
+            img.addEventListener("click", () => {
+                const overlay = document.createElement("div");
+                overlay.className = "image-overlay";
+
+                const largeImg = document.createElement("img");
+                largeImg.src = img.src;
+                largeImg.className = "large-image";
+
+                overlay.appendChild(largeImg);
+                document.body.appendChild(overlay);
+
+                overlay.addEventListener("click", () => {
+                    document.body.removeChild(overlay);
+                });
+            });
+        });
+    }
     function init() {
         initTheme();
         preloadTheme();
         animate();
         scrollAnimations();
+        previewImages();
 
         document.addEventListener("scroll", onScroll);
     }

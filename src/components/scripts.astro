@@ -133,13 +133,21 @@ import { ClientRouter } from "astro:transitions";
             });
         });
     }
+
+    function addAnalytics(){
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', 'G-ST603H52HF');
+    }
+
     function init() {
         initTheme();
         preloadTheme();
         animate();
         scrollAnimations();
         previewImages();
-
+        addAnalytics();
         document.addEventListener("scroll", onScroll);
     }
     // Preload theme
@@ -168,7 +176,6 @@ import { ClientRouter } from "astro:transitions";
                 console.error("Failed to copy text: ", err);
             });
     }
-
     document.addEventListener("astro:page-load", () => {
         document.querySelectorAll("pre").forEach((pre) => {
             // Create a wrapper for positioning

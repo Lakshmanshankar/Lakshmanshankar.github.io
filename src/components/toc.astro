@@ -18,7 +18,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
     {
         filteredHeadings.length > 1 && (
             <h2
-                id="table-of-contents"
+                // id="table-of-contents"
                 class="animate dark:text-white text-black text-lg font-semibold "
             >
                 Table of Contents
@@ -33,6 +33,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
                         href={`#${heading.slug}`}
                         class="toc-link animate hover:scale-110 dark:text-neutral-500 hover:dark:text-white text-stone-500 hover:text-black tracking-tighter underline-none"
                         data-scroll-target
+                        data-target-id={heading.slug}
                     >
                         {heading.text}
                     </a>

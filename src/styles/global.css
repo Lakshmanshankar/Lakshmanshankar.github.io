@@ -16,7 +16,7 @@
 
 html,
 body {
-    @apply bg-stone-200 dark:bg-neutral-950 text-stone-800;
+    @apply bg-stone-100 dark:bg-neutral-950 text-neutral-900;
 }
 
 html {
@@ -44,7 +44,7 @@ li,
 p,
 span,
 button {
-    @apply text-base text-stone-600 text-justify dark:text-[#8d8c8c] tracking-tight;
+    @apply text-base text-stone-700 text-justify dark:text-[#8d8c8c] tracking-tight;
 }
 
 pre {

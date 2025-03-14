@@ -45,53 +45,65 @@ const { Content, headings } = await render(entry);
 
 <!-- Highlight current heading -->
 <script>
-    const fn = () => {
-        const headings = document.querySelectorAll("h2, h3, h4, h5, h6");
-        const observerOptions = {
-            root: null,
-            rootMargin: "-4% 0px -75% 0px",
-            threshold: 0,
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    const correspondingLink = document.querySelector(`.toc-link[href="#${id}"]`);
-
-                    if (correspondingLink) {
-                        const links = Array.from(document.querySelectorAll(".toc-link"));
-
-                        // Remove `data-item` attribute from all links
-                        links.forEach((link) => {
-                            link.removeAttribute("data-item");
-                            link.classList.remove("toc-active");
-                        });
-
-                        // Highlight the active link
-                        correspondingLink.setAttribute("data-item", "active");
-                        correspondingLink.classList.add("toc-active");
-
-                        // Dispatch the custom event for interactivity
-                        const activeIndex = links.indexOf(correspondingLink);
-                        const event = new CustomEvent("active-toc-index-change", {
-                            detail: { activeIndex },
-                        });
-                        document.dispatchEvent(event);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        headings.forEach((heading, index) => {
-            if (!heading.id) {
-                heading.id = `heading-${index}`;
+    function throttle<T extends (...args: any[]) => void>(func: T, limit: number): (...args: Parameters<T>) => void {
+      let lastFunc: ReturnType<typeof setTimeout> | undefined;
+      let lastRan: number | undefined;
+    
+      return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+        const context = this;
+        if (!lastRan) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        } else {
+          clearTimeout(lastFunc);
+          lastFunc = setTimeout(() => {
+            if (Date.now() - (lastRan ?? 0) >= limit) {
+              func.apply(context, args);
+              lastRan = Date.now();
             }
-            observer.observe(heading);
-        });
-    };
-
-    document.addEventListener("astro:after-swap", fn);
-    document.addEventListener("DOMContentLoaded", fn);
-    fn();
-</script>
+          }, limit - (Date.now() - (lastRan ?? 0)));
+        }
+      };
+    }
+    
+    function highlightTocActiveItem(): void {
+      const headers = document.querySelectorAll("h1, h2, h3");
+      const tocBannerElements = document.querySelectorAll(".toc-link");
+    
+      let firstMatch: string | null = null;
+    
+      headers.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top <= 200 && !firstMatch) {
+          firstMatch = item.id;
+        }
+      });
+    
+      tocBannerElements.forEach((tocItem) => {
+        if (!firstMatch || firstMatch === "table-of-contents") return;
+        
+        tocItem.classList.remove("toc-active");
+        tocItem.setAttribute("data-toc-status", "");
+    
+        if (tocItem instanceof HTMLAnchorElement && tocItem.dataset.targetId === firstMatch) {
+          tocItem.classList.add("toc-active");
+          tocItem.setAttribute("data-toc-status", "active");
+          tocItem.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }
+      });
+    }
+    
+    const throttledTocActiveItem = throttle(highlightTocActiveItem, 200);
+    
+    function setupTocScroll() {
+      window.removeEventListener('scroll', throttledTocActiveItem);
+      window.addEventListener('scroll', throttledTocActiveItem);
+      highlightTocActiveItem();
+    }
+    
+    document.addEventListener("astro:after-swap", setupTocScroll);
+    document.addEventListener("DOMContentLoaded", setupTocScroll);
+    </script>

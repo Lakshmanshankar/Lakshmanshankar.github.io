@@ -22,7 +22,7 @@ const groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
 <Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
     <p class="mt-4 mb-1">
         Welcome to the blog! I wrote mostly about web technologies, command line tools and open
-        source applications here some tags that you can use to filter the results
+        source applications.
     </p>
     <div class="">
         <div class="list-none pl-0">
@@ -69,11 +69,38 @@ const groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
                                         <div>
                                             <div class="flex gap-2 items-center">
                                                 {" "}
-                                                <h4 class="my-0">{item.data.title}</h4>
-                                                <span class="text-sm">
+                                                <h4 class="my-0 flex gap-2">{item.data.title}</h4>
+                                                <span class="text-sm flex items-center">
                                                     {item.data.tags &&
-                                                        item.data.tags.length > 0 &&
-                                                        `(${item.data.tags.join(", ")})`}
+                                                        item.data.tags.length > 0 && (
+                                                            <div class="flex flex-wrap gap-2 mt-2">
+                                                                {item.data.tags.map(
+                                                                    (tag: string) => (
+                                                                        <span class="dark:bg-neutral-800 bg-stone-200 dark:text-neutral-200 text-stone-950 text-xs font-medium px-2 py-1 rounded-md">
+                                                                            {tag}
+                                                                        </span>
+                                                                    ),
+                                                                )}
+                                                            </div>
+                                                        )}
+
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class=" size-5 dark:text-white text-black stroke-2 mt-2 fill-none stroke-current"
+                                                    >
+                                                        <line
+                                                            x1="5"
+                                                            y1="12"
+                                                            x2="19"
+                                                            y2="12"
+                                                            class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+                                                        />
+                                                        <polyline
+                                                            points="12 5 19 12 12 19"
+                                                            class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                                                        />
+                                                    </svg>
                                                 </span>
                                             </div>
                                             <p class="text-sm my-1">
@@ -81,23 +108,6 @@ const groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
                                                 <FormattedDate date={new Date(item.data.date)} />
                                             </p>
                                         </div>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
-                                        >
-                                            <line
-                                                x1="5"
-                                                y1="12"
-                                                x2="19"
-                                                y2="12"
-                                                class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
-                                            />
-                                            <polyline
-                                                points="12 5 19 12 12 19"
-                                                class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
-                                            />
-                                        </svg>
                                     </a>
                                 ))}
                             </ul>

@@ -7,7 +7,6 @@ dateStart: "12/18/2023"
 dateEnd: "01/01/2025"
 ---
 
-
 ### Bullet
 Bullet is a platform that help users to create beautiful websites while keeping the contents in notion. My contributions included:
 

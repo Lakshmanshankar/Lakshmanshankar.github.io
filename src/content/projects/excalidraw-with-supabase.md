@@ -13,6 +13,11 @@ repoURL: "https://github.com/Lakshmanshankar/excalidraw"
 
 I recently built a custom backend for Excalidraw using Supabase. In this post I'll explain how I built it.
 
+
+### Disclaimer:
+I have great respect for Excalidraw and its creators for building such an amazing open source tool. This project is not meant to compete with Excalidraw in any way. Incase you're looking for a hosted version of Excalidraw, check out [Excalidraw Plus](https://plus.excalidraw.com/).
+
+
 ## Motivation:
 
 As software developers, we love whiteboards for sketching ideas—whether it's for algorithms, architecture designs, or just for fun. Excalidraw is an excellent tool for this purpose. Its keyboard-centric design makes it intuitive and arguably the best option for quick sketches. Moreover, Excalidraw is open source and features some impressive React code.
@@ -20,6 +25,7 @@ As software developers, we love whiteboards for sketching ideas—whether it's f
 However, I missed the ability to access files via cloud storage. While Excalidraw+ offers some solutions, I thought it would be a fun and interesting project to work on. So I decided to build this project for <u>myself</u>.
 
 This wasn’t a very time-consuming project to build. The total lines of code were around 2.5K LOC, and I was able to complete it in two weeks of my free time.
+
 
 ## Features I added:
 
@@ -88,13 +94,8 @@ File tree json
 },
 ```
 
-We built a simple Express backend with Auth.js for authentication, using presigned URLs instead of direct uploads via Express. Initially, the frontend was built using a simple React context, but we noticed unnecessary API calls. Switching to React Query optimized the process effectively.
+I built a simple Express backend with Auth.js for authentication, using presigned URLs instead of direct uploads via Express. Initially, the frontend was built using a simple React context, Noticed some unnecessary API calls. Switching to React Query optimized the process effectively.
 
 ## What I Learned:
 
 Although I had worked with the Excalidraw codebase before, building this project on my own required new design decisions. It was challenging but rewarding.
-
-
-### Disclaimer:
-
-This project is for my personal use only. I have great respect for Excalidraw and its creators for building such an amazing open source tool.

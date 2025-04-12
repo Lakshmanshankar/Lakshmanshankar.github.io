@@ -11,14 +11,21 @@ const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="fade">
+<html lang="en">
     <head>
         <Head />
         <Header title={`${title} | ${SITE.NAME}`} description={description} />
+        <style is:global>
+          html {
+            overflow-y: scroll;
+          }
+        </style>
     </head>
     <body>
-        <main class="mx-auto max-w-[700px] px-7 py-5 ">
+        <main class="mx-auto max-w-[700px] px-7 py-5">
             <Navbar />
+            <!-- SPACER -->
+            <div class="h-4"></div>
             <slot />
             <Footer />
         </main>

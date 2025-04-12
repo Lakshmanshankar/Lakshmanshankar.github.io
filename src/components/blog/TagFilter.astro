@@ -1,0 +1,27 @@
+---
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div id="filter-container" class="mb-4">
+  <h4 class="mb-1">Filter by tag</h4>
+  <button
+    data-filter-tag="all"
+    class="tag-btn p-0.5 px-2 text-sm mr-1 rounded-md bg-stone-300 dark:bg-neutral-900 border border-stone-400 dark:border-neutral-800"
+  >
+    All
+  </button>
+  {
+    tags.map((tag) => (
+      <button
+        data-filter-tag={tag}
+        class="tag-btn p-0.5 text-sm mt-2 mr-2 rounded-md bg-stone-300 dark:bg-neutral-900 border border-stone-400 dark:border-neutral-800"
+      >
+        {tag}
+      </button>
+    ))
+  }
+</div> 

@@ -1,5 +1,5 @@
 ---
-import { ClientRouter } from "astro:transitions";
+// import { ClientRouter } from "astro:transitions";
 ---
 
 <style>
@@ -19,7 +19,7 @@ import { ClientRouter } from "astro:transitions";
 </style>
 
 <div class="slide">
-    <ClientRouter  />
+    <!-- <ClientRouter  /> -->
 </div>
 <script is:inline>
     function initTheme() {
@@ -194,9 +194,30 @@ import { ClientRouter } from "astro:transitions";
     });
 </script>
 
-<!-- Cloudflare Web Analytics -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
 <script>
   document.addEventListener('astro:page-load', () => {
+    console.log('Page loaded, checking styles...');
+    const styles = document.querySelectorAll('link[rel="stylesheet"]');
+    styles.forEach(style => {
+        // @ts-ignore
+      console.log('Style sheet:', style.href, 'loaded:', style.sheet ? 'yes' : 'no');
+    });
+  });
+</script>
+
+
+
+<!-- Cloudflare Web Analytics with Partytown -->
+
+
+<script type="text/partytown" data-astro-reload>
+  document.addEventListener('astro:page-load', () => {
+    // Check if analytics is already loaded to prevent duplicate requests
+    if (window._cfBeaconLoadAttempted) return;
+    window._cfBeaconLoadAttempted = true;
+    
     const existingScript = document.querySelector('script[data-cf-beacon]');
     if (existingScript) {
       existingScript.remove();
@@ -209,16 +230,15 @@ import { ClientRouter } from "astro:transitions";
     document.head.appendChild(script);
   });
 </script>
-<!-- End Cloudflare Web Analytics -->
 
-<!-- Initial load script -->
 <script is:inline>
-  // Load Cloudflare analytics on initial page load
-  (function() {
+  // Only load on initial page load and set flag
+  if (!window._cfBeaconLoadAttempted) {
+    window._cfBeaconLoadAttempted = true;
     const script = document.createElement('script');
     script.defer = true;
     script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
     script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
     document.head.appendChild(script);
-  })();
+  }
 </script>

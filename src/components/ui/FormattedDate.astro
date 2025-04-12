@@ -2,12 +2,13 @@
 interface Props {
     date: Date;
     includeYear?: boolean;
+    class?:string,
 }
 
-const { date, includeYear = false } = Astro.props;
+const { date, class: className = "" ,includeYear = false } = Astro.props;
 ---
 
-<time datetime={date.toISOString()}>
+<time datetime={date.toISOString()} class={`${className}`}>
     {
         date.toLocaleDateString("en-us", {
             month: "short",

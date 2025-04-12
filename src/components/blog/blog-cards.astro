@@ -1,0 +1,97 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import TagFilter from "@/components/blog/TagFilter.astro";
+import YearGroup from "@/components/blog/YearGroup.astro";
+
+const posts = await getCollection("blog");
+type GroupedPosts = {
+    [key: string]: CollectionEntry<"blog">[];
+};
+
+const groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
+    const date = new Date(post.data.date).getFullYear().toString();
+    if (!acc[date]) {
+        acc[date] = [];
+    }
+    acc[date].push(post);
+    return acc;
+}, {} as GroupedPosts);
+
+// Get all unique tags
+const allTags = Array.from(
+    new Set(
+        Object.values(groupedPosts).flatMap((posts) =>
+            posts.flatMap((post) => post.data.tags),
+        ),
+    ),
+);
+---
+
+<div class="">
+    <p class="mb-1">
+        Welcome to the blog! I wrote mostly about web technologies, command line tools and open
+        source applications.
+    </p>
+    <div class="">
+        <div class="list-none pl-0">
+            <TagFilter tags={allTags as string[]} />
+            <div id="posts-container">
+                {
+                    Object.keys(groupedPosts)
+                        .sort((a, b) => Number(b) - Number(a))
+                        .map((year) => (
+                            <YearGroup year={year} posts={groupedPosts[year]} />
+                        ))
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const filterFn = () => {
+        const filterContainer = document.getElementById("filter-container");
+        const postsContainer = document.getElementById("posts-container");
+        if (!filterContainer || !postsContainer) return;
+
+        const filterButtons = filterContainer.querySelectorAll("button");
+        Array.from(filterButtons).forEach((tagBtn) => {
+            tagBtn.addEventListener("click", (event) => {
+                const selectedButton = event.target as HTMLButtonElement;
+                filterButtons.forEach((button) => {
+                    button.classList.remove("active");
+                    button.setAttribute("data-tag-current", "false");
+                });
+                selectedButton.classList.add("active");
+                selectedButton.setAttribute("data-tag-current", "true");
+                if (!selectedButton) return;
+                const selectedTag = selectedButton.getAttribute("data-filter-tag");
+
+                if (selectedTag === "all") {
+                    postsContainer.querySelectorAll("a").forEach((post) => {
+                        post.classList.remove("hidden");
+                    });
+                    return;
+                }
+
+                postsContainer.querySelectorAll("a").forEach((post) => {
+                    const postTags = post.getAttribute("data-filter-tags");
+                    if (!postTags) return;
+                    const postTagsArray = postTags.split(",");
+                    const isSelected = postTagsArray.includes(selectedTag ?? "");
+                    if (isSelected) {
+                        post.classList.remove("hidden");
+                    } else {
+                        post.classList.add("hidden");
+                    }
+                });
+            });
+        });
+    };
+    document.addEventListener("DOMContentLoaded", filterFn);
+    document.addEventListener("astro:after-swap", filterFn);
+    filterFn();
+</script>

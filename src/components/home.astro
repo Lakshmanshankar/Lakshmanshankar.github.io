@@ -1,8 +1,7 @@
 ---
-import ProjectShowcase from "./project-showcase.astro";
+import ProjectItems from "./project/project-cards.astro";
 import ContactFooter from "./ui/ContactFooter.astro";
-import Footer from "./ui/Footer.astro";
-import WorkExp from "./work-exp.astro";
+import WorkItems from "./work/work-cards.astro"
 ---
 
 <div id="container">
@@ -21,13 +20,15 @@ import WorkExp from "./work-exp.astro";
         </ul>
     </article>
 
-    <section>
-        <ProjectShowcase obeyCount={true} />
+    <section class="my-6">
+        <ProjectItems obeyCount={true} />
     </section>
-    <section>
-        <WorkExp obeyCount={true} />
+
+    <section class="my-6">
+        <WorkItems obeyCount={true} />
     </section>
-    <section>
+
+    <section class="my-6">
         <h3>Contact</h3>
         <p>
             You can contact me directly @<a href="mailto:lakshmanshankarc@gmail.com"

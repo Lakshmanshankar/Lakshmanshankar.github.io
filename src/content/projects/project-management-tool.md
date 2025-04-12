@@ -81,8 +81,28 @@ After reading this blog about notion's [data model](https://www.notion.com/blog/
 
 3. Single-Source API Design – Reduces redundancy and improves maintainability.
 
+
+## Frontend
+![Architecture](https://invk935vtx.ufs.sh/f/WLuidxolfrXg5AbxypwkIRaWonOCAzXKVSxjcJ0qdZ82YQET)
+
+> Refer: collection hook for more information
+For the frontend, we used Next.js 15 and React Query. 
+
+The unified action handler is responsible for handling all block, property, and value mutations and instead of refetching we just update the cache with new values. 
+
+
+## Demo Images
+![Demo Image 1](https://invk935vtx.ufs.sh/f/WLuidxolfrXg989ULCW8VZdUGT6pFDsiI5avqCrlB0xYmMh7)
+
+![Demo Image 2](https://invk935vtx.ufs.sh/f/WLuidxolfrXgZoPM8GwSgUehtsYWLBvOk2dpJFAGDV4acbMQ)
+
+<video controls width="640" preload="none">
+  <source src="https://invk935vtx.ufs.sh/f/WLuidxolfrXgqvzCxtsmYEXgrSbCKtc0A1pe93QDHhOsPRI4" type="video/webm" />
+  Your browser does not support the video tag.
+</video>
+
 ## Tech Stack
-- Frontend: Next.js 15, React Query, ShadCN
+- Frontend: Next.js 15, React Query, shadcn
 - Backend: Next.js API Routes, Drizzle ORM, PostgreSQL
 - Auth: BetterAuth
 - Hosting: Vercel,Neon(PG)

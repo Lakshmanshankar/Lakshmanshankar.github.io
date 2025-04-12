@@ -193,3 +193,32 @@ import { ClientRouter } from "astro:transitions";
         });
     });
 </script>
+
+<!-- Cloudflare Web Analytics -->
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const existingScript = document.querySelector('script[data-cf-beacon]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
+    document.head.appendChild(script);
+  });
+</script>
+<!-- End Cloudflare Web Analytics -->
+
+<!-- Initial load script -->
+<script is:inline>
+  // Load Cloudflare analytics on initial page load
+  (function() {
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
+    document.head.appendChild(script);
+  })();
+</script>

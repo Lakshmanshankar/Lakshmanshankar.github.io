@@ -1,7 +1,7 @@
 ---
 company: "Codevantage"
 role: "Full stack developer"
-description: "I spent most of my time working on Bullet, our prime product, while also contributing to MindMap and Zero to Aha. Here's a detailed look at what I worked on and learned:"
+description: "I spent most of my time working on Bullet, our main product, while also contributing to MindMap and Zero to Aha. Here's a detailed look at what I worked on and learned:"
 tech: "React, Typescript, Node, GraphQL, PostgreSQL, Notion, Excalidraw"
 dateStart: "12/18/2023"
 dateEnd: "01/01/2025"
@@ -10,12 +10,11 @@ dateEnd: "01/01/2025"
 ### Bullet
 Bullet is a platform that help users to create beautiful websites while keeping the contents in notion. My contributions included:
 
-1. Designed and implemented core features for a Notion-based website generator.
-2. Added key functionality, including support for membership and dynamic content.
-3. Integrated notion forms to enhance user interactions and streamline workflows.
-4. Developed a path custom editor handling some complex conflicting problems.
-5. Worked on performance improvements, focusing on optimization and caching.
-6. Modularized complex components for better scalability and maintainability.
+1. Built and maintained the frontend configuration system, enabling users to save custom settings (including membership controls and a CSS editor) to Firestore, with a focus on performance and code optimization.
+
+2. Contributed to the site generation system that transforms Notion data into static websites; added support for newly introduced Notion features and resolved rendering-related bugs.
+
+3. Developed reusable templates and worked on multiple client projects, ensuring reliable delivery and seamless platform integration.
 
 
 ### MindMap

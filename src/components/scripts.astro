@@ -169,9 +169,10 @@
             });
     }
 
-    document.addEventListener("astro:page-load", () => {
+    document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll("pre").forEach((pre) => {
             // Create a wrapper for positioning
+            console.log(pre);
             const wrapper = document.createElement("div");
             wrapper.className = "relative";
             pre.parentNode?.insertBefore(wrapper, pre);
@@ -185,7 +186,6 @@
             copyButton.setAttribute("data-copy-text", codeText);
 
             copyButton.addEventListener("click", (event) => {
-                // Pass the specific button that was clicked
                 copyToClipboard(codeText, event.target as HTMLButtonElement);
             });
 
@@ -196,7 +196,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-<script>
+<!-- <script>
   document.addEventListener('astro:page-load', () => {
     console.log('Page loaded, checking styles...');
     const styles = document.querySelectorAll('link[rel="stylesheet"]');
@@ -205,7 +205,7 @@
       console.log('Style sheet:', style.href, 'loaded:', style.sheet ? 'yes' : 'no');
     });
   });
-</script>
+</script> -->
 
 
 

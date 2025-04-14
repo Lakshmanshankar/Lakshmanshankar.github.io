@@ -21,7 +21,6 @@ const { post, year } = Astro.props;
         <div class="flex justify-between">
             <div class="flex md:gap-2 md:items-center">
                 <h4 class="my-0 gap-2">{post.data.title}</h4>
-                <FormattedDate date={new Date(post.data.date)} class="text-sm mt-1 border px-1 rounded-md border-neutral-700" />
             </div>
             <ArrowIcon class="mt-2 hidden md:block" />
         </div>
@@ -29,7 +28,7 @@ const { post, year } = Astro.props;
             {post.data.description}
         </p>
 
-        <span class="text-sm flex items-center">
+        <span class="text-sm flex items-center gap-2">
             {
                 post.data.tags && post.data.tags.length > 0 && (
                     <div class="flex gap-1.5 items-center">
@@ -43,6 +42,7 @@ const { post, year } = Astro.props;
                     </div>
                 )
             }
+            <FormattedDate date={new Date(post.data.date)} class="text-sm border px-1 mt-2 rounded-md border-neutral-700" />
         </span>
     </div>
 </a>

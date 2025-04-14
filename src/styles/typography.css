@@ -21,7 +21,7 @@ h3 {
 }
 
 .copy-code-button {
-    @apply bg-stone-200 dark:bg-neutral-700;
+    @apply bg-stone-400 dark:bg-neutral-950 text-white dark:text-white opacity-100 top-1;
 }
 button .code-normal {
     @apply text-stone-600 dark:text-stone-100;

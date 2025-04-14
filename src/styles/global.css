@@ -121,3 +121,89 @@ p {
     cursor: pointer;
   }
   
+
+  /* TOGGLE CODE BLOCK */
+  details {
+    @apply my-4 border border-stone-200 dark:border-neutral-800 rounded-md overflow-hidden;
+  }
+  
+  details summary {
+    @apply cursor-pointer px-4 py-2 bg-stone-100 dark:bg-neutral-900 flex items-center font-mono text-sm text-stone-700 dark:text-neutral-300;
+    list-style: none;
+  }
+  
+  details summary {
+    color: inherit; /* Make sure summary text color is set */
+  }
+  
+  details summary::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/%3E%3Cpath d='M14 2v4a2 2 0 0 0 2 2h4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .dark details summary::before {
+    filter: invert(1);
+  }
+  
+  
+  details summary::after {
+    content: "▼";
+    @apply text-stone-500 dark:text-neutral-500 text-sm transition-transform duration-200 ml-auto;
+  }
+  
+  details[open] summary::after {
+    transform: rotate(180deg);
+  }
+  
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  details > div,
+  details > pre {
+    @apply p-4 bg-stone-50 dark:bg-neutral-950;
+  }
+  
+  details pre {
+    @apply m-0 rounded-t-none;
+  }
+  
+  details code {
+    @apply text-sm;
+  }
+
+  table {
+    @apply max-w-[700px] w-full block overflow-y-hidden overflow-scroll table-auto border-collapse;
+  }
+  
+  thead th,
+  tbody td {
+    @apply px-4 py-2 text-left whitespace-nowrap min-w-[160px];
+  }
+  
+
+  /* Scrollbar container */
+::-webkit-scrollbar {
+  @apply h-2 w-2;
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  @apply rounded bg-neutral-300 dark:bg-neutral-700;
+}
+
+/* Scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-400 dark:bg-neutral-600;
+}

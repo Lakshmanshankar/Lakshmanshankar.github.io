@@ -16,18 +16,20 @@ const { title, description } = Astro.props;
         <Head />
         <Header title={`${title} | ${SITE.NAME}`} description={description} />
         <style is:global>
-          html {
-            overflow-y: scroll;
-          }
+            html {
+                overflow-y: scroll;
+            }
         </style>
     </head>
     <body>
-        <main class="mx-auto max-w-[700px] px-7 py-5">
+        <section class="w-full h-[100svh] main-gradient">
             <Navbar />
-            <!-- SPACER -->
-            <div class="h-4"></div>
-            <slot />
-            <Footer />
-        </main>
+            <main class="mx-auto max-w-[700px] px-10 py-5">
+                <!-- SPACER -->
+                <div class="h-4 mt-10"></div>
+                <slot />
+                <Footer />
+            </main>
+        </section>
     </body>
 </html>

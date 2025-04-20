@@ -23,15 +23,15 @@ const {
 
 <a
   href={url}
-  class="post-item block p-2 my-2  no-underline rounded-lg hover:transition-all hover:dark:bg-neutral-800 relative group border border-stone-400 dark:border-neutral-800 px-5"
+  class="post-item block my-0 py-5  no-underline hover:transition-all hover:dark:bg-neutral-900 relative group px-10  w-hundred"
   data-filter-tags={tags.join(",")}
 >
   <div>
-    <div class="flex gap-2 items-center justify-between 3">
+    <div class="flex gap-2 items-center justify-between">
       <h4 class="my-0 mt-2">{title}</h4>
       {showArrow && <ArrowIcon class="mt-2 hidden md:block" />}
     </div>
-    <p class="text-[16px] my-1">
+    <p class="text-[16px] my-1 mt-4 mb-3">
       {description}
       <!-- <FormattedDate date={date} /> -->
     </p>

@@ -62,11 +62,11 @@ nav{
 
 hr,
 .full-width {
-  @apply -mx-10  w-[unset] relative;
+  @apply -mx-4 md:-mx-10  w-[unset] relative;
 }
 
 .w-hundred{
-  @apply -mx-10 w-[unset] relative;
+  @apply -mx-4 md:-mx-10 w-[unset] relative;
 }
 a {
   @apply text-base;
@@ -86,7 +86,7 @@ li,
 p,
 span,
 button {
-  @apply text-base text-[#2a2521] text-justify dark:text-[#8d8c8c] tracking-tight;
+  @apply text-base text-[#2a2521] text-pretty md:text-justify dark:text-[#8d8c8c] tracking-tight;
 }
 
 pre {
@@ -116,7 +116,7 @@ pre>code {
 }
 
 .horizontal-line{
-  @apply -mx-10 my-0;
+  @apply -mx-4 md:-mx-10 my-0;
 }
 
 li {

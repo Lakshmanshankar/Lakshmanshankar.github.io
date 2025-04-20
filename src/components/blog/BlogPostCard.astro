@@ -14,7 +14,7 @@ const { post, year } = Astro.props;
 <>
     <a
         href={`/blog/${post.id}`}
-        class="post-item block p-4 py-5 no-underline hover:transition-all hover:dark:bg-neutral-900 relative group bg-opacity-80 px-10 w-hundred"
+        class="post-item block p-4 py-5 no-underline hover:transition-all hover:dark:bg-neutral-900 relative group bg-opacity-80 px-4 md:px-10 w-hundred"
         data-filter-tags={post.data.tags && post.data.tags.join(",")}
         data-year={year}
     >

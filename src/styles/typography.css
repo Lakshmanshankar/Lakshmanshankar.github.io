@@ -8,7 +8,7 @@ h3,
 h4,
 h5,
 h6 {
-    @apply font-medium;
+    @apply font-semibold;
 }
 h1 {
     @apply text-4xl mb-1;

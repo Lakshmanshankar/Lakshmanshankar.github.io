@@ -17,9 +17,15 @@ importers:
       astro:
         specifier: ^5.0.9
         version: 5.0.9(jiti@1.21.7)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
+      astro-seo-schema:
+        specifier: ^5.0.0
+        version: 5.0.0(astro@5.0.9(jiti@1.21.7)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))(schema-dts@1.1.5)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      schema-dts:
+        specifier: ^1.1.5
+        version: 1.1.5
       tailwind-merge:
         specifier: ^2.5.5
         version: 2.5.5
@@ -844,6 +850,12 @@ packages:
   astring@1.9.0:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
+
+  astro-seo-schema@5.0.0:
+    resolution: {integrity: sha512-rbP9BUxvqH4tdgG5VEYDcoAxUhVKv93TdHRQ5zbYUxee1TKAWsNcAG3nqavX83QTTGqU5anvikMcJZXWhGN9wg==}
+    peerDependencies:
+      astro: ^5.0.0
+      schema-dts: ^1.1.0
 
   astro@5.0.9:
     resolution: {integrity: sha512-6jRMPSB+V82y/l8XOylPYJz78ux268nNNV2SLRvUaT4faf18rvIFAR33Y25wTM0Oeukcv1951xFuFsmAkQc+jg==}
@@ -1882,6 +1894,9 @@ packages:
 
   sax@1.4.1:
     resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
+
+  schema-dts@1.1.5:
+    resolution: {integrity: sha512-RJr9EaCmsLzBX2NDiO5Z3ux2BVosNZN5jo0gWgsyKvxKIUL5R3swNvoorulAeL9kLB0iTSX7V6aokhla2m7xbg==}
 
   semver@7.6.3:
     resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
@@ -3049,6 +3064,11 @@ snapshots:
   array-iterate@2.0.1: {}
 
   astring@1.9.0: {}
+
+  astro-seo-schema@5.0.0(astro@5.0.9(jiti@1.21.7)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))(schema-dts@1.1.5):
+    dependencies:
+      astro: 5.0.9(jiti@1.21.7)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
+      schema-dts: 1.1.5
 
   astro@5.0.9(jiti@1.21.7)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1):
     dependencies:
@@ -4588,6 +4608,8 @@ snapshots:
       suf-log: 2.5.3
 
   sax@1.4.1: {}
+
+  schema-dts@1.1.5: {}
 
   semver@7.6.3: {}
 

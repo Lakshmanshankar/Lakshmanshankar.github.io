@@ -7,6 +7,8 @@ import BackToTop from "@/components/ui/BackToTop.astro";
 import BackToPrev from "@/components/ui/BackToPrev.astro";
 import { readingTime } from "@/lib/utils";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
+import { Schema } from 'astro-seo-schema'
+import { SITE } from "@/consts";
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
     return posts.map((post: { id: any }) => ({
@@ -27,9 +29,33 @@ if (!entry) {
     });
 }
 const { Content, headings } = await render(entry);
+const url = SITE + Astro.url.pathname;
+
 ---
 
+
 <Layout title={entry.data.title} description={entry.data.description}>
+  <head>
+    <Schema
+        item={{
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `${import.meta.env.SITE}/blog/${post.id}`,
+            },
+            headline: entry.data.title,
+            description: entry.data.description,
+            datePublished: entry.data.date.toISOString(),
+            dateModified: entry.data.date.toISOString(),
+            author: {
+                "@type": "Person",
+                name: "Lakshmanshankar",
+            },
+            url: url,
+        }}
+    />
+</head>
     <BackToPrev href="/blog">Back to Blog</BackToPrev>
     <div class="my-2 mt-10">
         <FormattedDate date={entry.data.date} includeYear />

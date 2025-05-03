@@ -11,7 +11,7 @@
 }
 
 :root {
-  --main-bg: #f9f2e8;
+  --main-bg: #fafafa;
   --primary-font: "Geist", serif;
   --border-color:#d3c8b7;
 }
@@ -23,7 +23,7 @@
 
 html,
 body {
-  @apply bg-[#f9f2e8] dark:bg-neutral-950 text-stone-900 dark:text-neutral-900;
+  @apply bg-neutral-50 dark:bg-neutral-950 text-stone-900 dark:text-neutral-900;
 }
 
 
@@ -44,17 +44,24 @@ hr {
 
 /* NAVBAR */
 nav,
-nav > div,
 .nav-items > a,
 .borders {
-  @apply md:border border-stone-400 dark:border-neutral-800 mt-0 bg-[#f9f2e8] dark:bg-neutral-950;
+  @apply md:border border-stone-400 dark:border-neutral-800 mt-0 bg-[var(--main-bg)];
 }
 
-nav{
-  @apply border-b border-stone-400 dark:border-neutral-800;
+nav > div{
+  @apply md:border-x border-stone-400 dark:border-neutral-800 mt-0 bg-[var(--main-bg)];
 }
+
 .nav-items a{
-  @apply sm:border-none md:border-x border-stone-400 dark:border-neutral-800  flex items-center justify-center h-14 md:h-10 mt-0 px-1.5 md:px-3 dark:hover:bg-neutral-900 transition-colors;
+  @apply border-none flex items-center justify-center h-14 md:h-10 mt-0 px-1.5 md:px-3 subtle-hover;
+}
+
+.subtle-hover{
+  @apply transition-all;
+}
+.subtle-hover:hover{
+  @apply bg-stone-200 dark:hover:bg-neutral-900 transition-all;
 }
 .nav-items{
   margin-top: 0px !important;
@@ -86,7 +93,7 @@ li,
 p,
 span,
 button {
-  @apply text-base text-[#2a2521] text-pretty md:text-justify dark:text-[#8d8c8c] tracking-tight;
+  @apply md:text-base text-zinc-800 text-pretty md:text-justify dark:text-neutral-400 tracking-tight;
 }
 
 pre {

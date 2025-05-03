@@ -1,8 +1,39 @@
 ---
 import ProjectItems from "./project/project-cards.astro";
 import ContactFooter from "./ui/ContactFooter.astro";
-import WorkItems from "./work/work-cards.astro"
+import WorkItems from "./work/work-cards.astro";
+
+import { Schema } from "astro-seo-schema";
+import { SOCIALS } from "../consts";
+const sameAsLinks = SOCIALS.map((s) => s.HREF);
 ---
+
+<head>
+    <Schema
+        item={{
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Lakshmanshankar",
+            alternateName: "Lakshman Shankar",
+            description:
+                "I am a Full Stack Developer with over 1.4 years of experience. I am currently working at Bullet.so, a website builder that uses Notion as a CMS.",
+            alumniOf: [
+                {
+                    "@type": "CollegeOrUniversity",
+                    name: "Bharathiar University",
+                    sameAs: "https://www.b-u.ac.in/",
+                },
+                {
+                    "@type": "CollegeOrUniversity",
+                    name: "KPR College of Arts and Science",
+                    sameAs: "https://www.kprcas.ac.in/",
+                },
+            ],
+            knowsAbout: ["Full Stack Development", "Computer Science", "Cloud Computing"],
+            sameAs: sameAsLinks,
+        }}
+    />
+</head>
 
 <div id="container">
     <article class="animate show">
@@ -10,17 +41,35 @@ import WorkItems from "./work/work-cards.astro"
         <h2 class="gradient-red font-extrabold text-transparent">Lakshmanshankar</h2>
         <h4 class="mb-0 mt-3">Full Stack Developer</h4>
         <p>
-            I am a Full Stack Developer with over 1.4 years of experience. I am currently working at Bullet.so, a website builder that uses Notion as a CMS.
+            I am a Full Stack Developer with over 1.4 years of experience. I am currently working at
+            Bullet.so, a website builder that uses Notion as a CMS.
         </p>
         <ul>
-            <li>I am passionate about web technologies, database systems, and computer science in general.</li>
-            <li>Currently, I am learning about serverless computing, edge computing, and advanced database systems. I recently published a blog about database connection management in serverless environments—you can read it <a href="/blog/database-connection-for-serverless">here</a>.</li>
-            <li>I am a Software Developer from Coimbatore and open to exploring opportunities in the future.</li>
-            <li>If you are working on something interesting that involves Go and TypeScript, please feel free to reach out!</li>
+            <li>
+                I am passionate about web technologies, database systems, and computer science in
+                general.
+            </li>
+            <li>
+                Currently, I am learning about serverless computing, edge computing, and advanced
+                database systems. I recently published a blog about database connection management
+                in serverless environments—you can read it <a
+                    href="/blog/database-connection-for-serverless">here</a
+                >.
+            </li>
+            <li>
+                I am a Software Developer from Coimbatore and open to exploring opportunities in the
+                future.
+            </li>
+            <li>
+                If you are working on something interesting that involves Go and TypeScript, please
+                feel free to reach out!
+            </li>
         </ul>
     </article>
- 
-    <section class="pt-5  border-y transition-all border-stone-400 dark:border-neutral-800 px-4 md:px-10 full-width pb-10">
+
+    <section
+        class="pt-5 border-y transition-all border-stone-400 dark:border-neutral-800 px-4 md:px-10 full-width pb-10"
+    >
         <ProjectItems obeyCount={true} />
     </section>
 
@@ -28,7 +77,9 @@ import WorkItems from "./work/work-cards.astro"
         <WorkItems obeyCount={true} />
     </section>
 
-    <section class="pt-5 border-t border-stone-400 dark:border-neutral-800 px-4 md:px-10 full-width pb-10">
+    <section
+        class="pt-5 border-t border-stone-400 dark:border-neutral-800 px-4 md:px-10 full-width pb-10"
+    >
         <h3>Contact</h3>
         <p>
             You can contact me directly @<a href="mailto:lakshmanshankarc@gmail.com"

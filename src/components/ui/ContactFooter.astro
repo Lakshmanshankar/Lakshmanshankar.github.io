@@ -17,7 +17,7 @@ const ICON_MAP = {
 type IconName = keyof typeof ICON_MAP;
 ---
 
-<div class="flex gap-3 justify-start mt-5">
+<div class="flex gap-3 justify-start mt-5 ">
     {
         SOCIALS.map((social) => {
             const IconComponent = ICON_MAP[social.NAME.toLowerCase() as IconName];

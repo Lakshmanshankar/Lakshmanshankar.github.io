@@ -9,7 +9,7 @@ type GroupedPosts = {
     [key: string]: CollectionEntry<"blog">[];
 };
 
-const groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
+let groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
     const date = new Date(post.data.date).getFullYear().toString();
     if (!acc[date]) {
         acc[date] = [];
@@ -18,17 +18,19 @@ const groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
     return acc;
 }, {} as GroupedPosts);
 
+for (let [key, value] of Object.entries(groupedPosts)) {
+    groupedPosts[key] = value.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+}
+
 // Get all unique tags
 const allTags = Array.from(
     new Set(
-        Object.values(groupedPosts).flatMap((posts) =>
-            posts.flatMap((post) => post.data.tags),
-        ),
+        Object.values(groupedPosts).flatMap((posts) => posts.flatMap((post) => post.data.tags)),
     ),
 );
 ---
 
-<div class="" >
+<div class="">
     <p class="mb-1">
         Welcome to the blog! I wrote mostly about web technologies, command line tools and open
         source applications.
@@ -40,16 +42,12 @@ const allTags = Array.from(
                 {
                     Object.keys(groupedPosts)
                         .sort((a, b) => Number(b) - Number(a))
-                        .map((year) => (
-                            <YearGroup year={year} posts={groupedPosts[year]} />
-                        ))
+                        .map((year) => <YearGroup year={year} posts={groupedPosts[year]} />)
                 }
             </div>
         </div>
     </div>
 </div>
-
-
 
 <script>
     const filterFn = () => {
@@ -74,6 +72,9 @@ const allTags = Array.from(
                     postsContainer.querySelectorAll("a").forEach((post) => {
                         post.classList.remove("hidden");
                     });
+                    postsContainer.querySelectorAll("ul").forEach((yearGroup) => {
+                        yearGroup.classList.remove("hidden");
+                    });
                     return;
                 }
 
@@ -86,6 +87,15 @@ const allTags = Array.from(
                         post.classList.remove("hidden");
                     } else {
                         post.classList.add("hidden");
+                    }
+                });
+                
+                postsContainer.querySelectorAll("ul").forEach((yearGroup) => {
+                    const visiblePosts = yearGroup.querySelectorAll("a:not(.hidden)");
+                    if (visiblePosts.length === 0) {
+                        yearGroup.classList.add("hidden");
+                    } else {
+                        yearGroup.classList.remove("hidden");
                     }
                 });
             });

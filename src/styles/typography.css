@@ -82,7 +82,7 @@ hr {
 }
 
 .tag-btn.active{
-    @apply underline underline-offset-2;
+    @apply text-black dark:text-white border-neutral-600 dark:border-neutral-500;
 }
 
 

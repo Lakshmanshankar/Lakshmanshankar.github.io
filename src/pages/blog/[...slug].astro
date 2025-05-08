@@ -56,11 +56,13 @@ const url = SITE + Astro.url.pathname;
         }}
     />
 </head>
+    <div class="flex gap-2 items-center">
     <BackToPrev href="/blog">Back to Blog</BackToPrev>
-    <div class="my-2 mt-10">
+    <div class="my-2">
         <FormattedDate date={entry.data.date} includeYear />
         <span class="text-black dark:text-amber-500">•</span>
         <span>{entry.body && readingTime(entry.body)}</span>
+    </div>
     </div>
     <article class="animate">
         <Content />

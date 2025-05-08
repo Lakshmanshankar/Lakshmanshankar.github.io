@@ -24,10 +24,15 @@ const { title, description } = Astro.props;
     <body>
         <section class="w-full h-[100svh]">
             <Navbar />
-            <main class="mx-auto max-w-[700px] text-base leading-7 px-4 md:px-10 py-5 border-b border-stone-400 dark:border-neutral-800">
+            <main
+                class="mx-auto max-w-[700px] text-base leading-7 px-4 md:px-10 py-5 border-colors min-h-screen flex flex-col"
+            >
                 <!-- SPACER -->
                 <div class="h-4 mt-10"></div>
-                <slot />
+
+                <div class="flex-1">
+                    <slot />
+                </div>
                 <Footer />
             </main>
         </section>

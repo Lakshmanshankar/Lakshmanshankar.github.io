@@ -26,29 +26,25 @@ const { Content } = await render(entry);
 
 <Layout title={entry.data.company} description={`My ${entry.data.role} at ${entry.data.company}`}>
     <div class="flex justify-between items-start md:items-center py-4">
-        <div >
+        <div>
             <h2 class="mt-0 md:mt-2">{entry.data.company}</h2>
             <h3 class="mt-0 md:mt-2">{entry.data.role}</h3>
         </div>
 
         <div class="flex flex-col md:flex-row h-fit gap-2">
             <h4 class="m-0 h-fit">{entry.data.dateStart}</h4>
-            <h4 class="m-0 h-fit hidden md:block"> - </h4>
+            <h4 class="m-0 h-fit hidden md:block">-</h4>
             <h4 class="m-0 h-fit">{entry.data.dateEnd}</h4>
         </div>
     </div>
     <p class="mt-2">{entry.data.description}</p>
     <span>
         Tech Stack:
-        <div class="flex gap-2 flex-wrap">
+        <div class="flex flex-wrap">
             {
                 entry.data.tech
                     ?.split(",")
-                    ?.map((tech) => (
-                        <span
-                         class="tag-btn p-1 text-sm mt-2 rounded-md bg-stone-300 dark:bg-neutral-900 border border-stone-400 dark:border-neutral-800"
-                         >{tech}</span>
-                    ))
+                    ?.map((tech) => <span class="tag-btn muted-background">{tech}</span>)
             }
         </div>
     </span>

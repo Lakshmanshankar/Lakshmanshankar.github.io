@@ -4,7 +4,7 @@ role: "Full stack developer"
 description: "I spent most of my time working on Bullet, our main product, while also contributing to MindMap and Zero to Aha. Here's a detailed look at what I worked on and learned:"
 tech: "React, Typescript, Node, GraphQL, PostgreSQL, Notion, Excalidraw"
 dateStart: "12/18/2023"
-dateEnd: "01/01/2025"
+dateEnd: "Present"
 ---
 
 ### Bullet

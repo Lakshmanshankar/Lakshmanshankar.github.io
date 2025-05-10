@@ -8,6 +8,7 @@ const blogSchema = z.object({
     date: z.coerce.date(),
     draft: z.boolean().optional(),
     tags: z.string().array().optional(),
+    image: z.string().optional(),
 });
 
 const projectSchema = z.object({

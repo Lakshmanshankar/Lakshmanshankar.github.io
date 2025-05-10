@@ -19,7 +19,7 @@ const { obeyCount = false } = Astro.props;
 const renderProjects = obeyCount ? newPosts : posts;
 ---
 
-<div class="projects-container">
+<div class="projects-container" id="projects-container">
     <h3 class="mb-4">Projects</h3>
     {
         renderProjects.map((post) => (

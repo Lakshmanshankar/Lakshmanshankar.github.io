@@ -7,7 +7,8 @@ import BackToTop from "@/components/ui/BackToTop.astro";
 import BackToPrev from "@/components/ui/BackToPrev.astro";
 import { readingTime } from "@/lib/utils";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
-import { Schema } from 'astro-seo-schema'
+import { Schema } from "astro-seo-schema";
+
 import { SITE } from "@/consts";
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -30,41 +31,43 @@ if (!entry) {
 }
 const { Content, headings } = await render(entry);
 const url = SITE + Astro.url.pathname;
-
 ---
 
-
 <Layout title={entry.data.title} description={entry.data.description}>
-  <head>
-    <Schema
-        item={{
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            mainEntityOfPage: {
-                "@type": "WebPage",
-                "@id": `${import.meta.env.SITE}/blog/${post.id}`,
-            },
-            headline: entry.data.title,
-            description: entry.data.description,
-            datePublished: entry.data.date.toISOString(),
-            dateModified: entry.data.date.toISOString(),
-            author: {
-                "@type": "Person",
-                name: "Lakshmanshankar",
-            },
-            url: url,
-        }}
-    />
-</head>
+    <head>
+        <Schema
+            item={{
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                mainEntityOfPage: {
+                    "@type": "WebPage",
+                    "@id": `${import.meta.env.SITE}/blog/${post.id}`,
+                },
+                headline: entry.data.title,
+                description: entry.data.description,
+                datePublished: entry.data.date.toISOString(),
+                dateModified: entry.data.date.toISOString(),
+                author: {
+                    "@type": "Person",
+                    name: "Lakshmanshankar",
+                },
+                url: url,
+            }}
+        />
+    </head>
     <div class="flex gap-2 items-center">
-    <BackToPrev href="/blog">Back to Blog</BackToPrev>
-    <div class="my-2">
-        <FormattedDate date={entry.data.date} includeYear />
-        <span class="text-black dark:text-amber-500">•</span>
-        <span>{entry.body && readingTime(entry.body)}</span>
-    </div>
+        <BackToPrev href="/blog">Back to Blog</BackToPrev>
+        <div class="my-2">
+            <FormattedDate date={entry.data.date} includeYear />
+            <span class="text-black dark:text-amber-500">•</span>
+            <span>{entry.body && readingTime(entry.body)}</span>
+        </div>
     </div>
     <article class="animate">
+        <h1 class="mt-10">{entry.data.title}</h1>
+        {entry.data.image && (
+            <img src={entry.data.image} alt={entry.data.title} class="w-full h-auto rounded-md" />
+        )}
         <Content />
         <BackToTop />
     </article>
@@ -73,65 +76,71 @@ const url = SITE + Astro.url.pathname;
 
 <!-- Highlight current heading -->
 <script>
-    function throttle<T extends (...args: any[]) => void>(func: T, limit: number): (...args: Parameters<T>) => void {
-      let lastFunc: ReturnType<typeof setTimeout> | undefined;
-      let lastRan: number | undefined;
-    
-      return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
-        const context = this;
-        if (!lastRan) {
-          func.apply(context, args);
-          lastRan = Date.now();
-        } else {
-          clearTimeout(lastFunc);
-          lastFunc = setTimeout(() => {
-            if (Date.now() - (lastRan ?? 0) >= limit) {
-              func.apply(context, args);
-              lastRan = Date.now();
+    function throttle<T extends (...args: any[]) => void>(
+        func: T,
+        limit: number,
+    ): (...args: Parameters<T>) => void {
+        let lastFunc: ReturnType<typeof setTimeout> | undefined;
+        let lastRan: number | undefined;
+
+        return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+            const context = this;
+            if (!lastRan) {
+                func.apply(context, args);
+                lastRan = Date.now();
+            } else {
+                clearTimeout(lastFunc);
+                lastFunc = setTimeout(
+                    () => {
+                        if (Date.now() - (lastRan ?? 0) >= limit) {
+                            func.apply(context, args);
+                            lastRan = Date.now();
+                        }
+                    },
+                    limit - (Date.now() - (lastRan ?? 0)),
+                );
             }
-          }, limit - (Date.now() - (lastRan ?? 0)));
-        }
-      };
+        };
     }
-    
+
     function highlightTocActiveItem(): void {
-      const headers = document.querySelectorAll("h1, h2, h3");
-      const tocBannerElements = document.querySelectorAll(".toc-link");
-    
-      let firstMatch: string | null = null;
-    
-      headers.forEach((item) => {
-        const rect = item.getBoundingClientRect();
-        if (rect.top >= 0 && rect.top <= 200 && !firstMatch) {
-          firstMatch = item.id;
-        }
-      });
-    
-      tocBannerElements.forEach((tocItem) => {
-        if (!firstMatch || firstMatch === "table-of-contents") return;
-        
-        tocItem.classList.remove("toc-active");
-        tocItem.setAttribute("data-toc-status", "");
-    
-        if (tocItem instanceof HTMLAnchorElement && tocItem.dataset.targetId === firstMatch) {
-          tocItem.classList.add("toc-active");
-          tocItem.setAttribute("data-toc-status", "active");
-          tocItem.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-          });
-        }
-      });
+        const headers = document.querySelectorAll("h1, h2, h3");
+        const tocBannerElements = document.querySelectorAll(".toc-link");
+
+        let firstMatch: string | null = null;
+
+        headers.forEach((item) => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top >= 0 && rect.top <= 200 && !firstMatch) {
+                firstMatch = item.id;
+            }
+        });
+
+        tocBannerElements.forEach((tocItem) => {
+            if (!firstMatch || firstMatch === "table-of-contents") return;
+
+            tocItem.classList.remove("toc-active");
+            tocItem.setAttribute("data-toc-status", "");
+
+            if (tocItem instanceof HTMLAnchorElement && tocItem.dataset.targetId === firstMatch) {
+                tocItem.classList.add("toc-active");
+                tocItem.setAttribute("data-toc-status", "active");
+                tocItem.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                });
+            }
+        });
     }
-    
+
     const throttledTocActiveItem = throttle(highlightTocActiveItem, 200);
-    
+
     function setupTocScroll() {
-      window.removeEventListener('scroll', throttledTocActiveItem);
-      window.addEventListener('scroll', throttledTocActiveItem);
-      highlightTocActiveItem();
+        window.removeEventListener("scroll", throttledTocActiveItem);
+        window.addEventListener("scroll", throttledTocActiveItem);
+        highlightTocActiveItem();
     }
-    
+
     document.addEventListener("astro:after-swap", setupTocScroll);
     document.addEventListener("DOMContentLoaded", setupTocScroll);
-    </script>
+</script>

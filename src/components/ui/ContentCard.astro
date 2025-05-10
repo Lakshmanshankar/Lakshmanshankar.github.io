@@ -32,8 +32,8 @@ const {
       {showArrow && <ArrowIcon class="mt-2 hidden md:block" />}
     </div>
     <p class="text-[16px] my-1 mt-4 mb-3">
-      {description}
-      <!-- <FormattedDate date={date} /> -->
+      {description} 
+      <FormattedDate date={date} includeYear />
     </p>
     {tags.length > 0 && (
       <div class="flex flex-wrap gap-2 mt-1 mb-2">

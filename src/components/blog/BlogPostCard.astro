@@ -29,13 +29,13 @@ const { post, year } = Astro.props;
                 {post.data.description}
             </p>
 
-            <span class="text-sm flex items-center gap-2">
+            <span class="text-sm flex items-center">
                 {
                     post.data.tags && post.data.tags.length > 0 && (
                         <div class="flex gap-1.5 items-center">
-                            <div class="flex flex-wrap gap-2 mt-2">
+                            <div class="flex flex-wrap mt-2">
                                 {post.data.tags.map((tag: string) => (
-                                    <span class="dark:bg-neutral-800 bg-stone-200 dark:text-neutral-200 text-stone-950 text-xs font-medium px-2 py-1 rounded-md ">
+                                    <span class="border borders dark:text-neutral-200 text-stone-950 text-xs font-medium px-2 py-1">
                                         {tag}
                                     </span>
                                 ))}
@@ -45,7 +45,7 @@ const { post, year } = Astro.props;
                 }
                 <FormattedDate
                     date={new Date(post.data.date)}
-                    class="text-sm border px-1 mt-2 rounded-md border-neutral-700"
+                    class="text-sm border px-1 mt-2 border-black/50 dark:border-white/60"
                 />
             </span>
         </div>

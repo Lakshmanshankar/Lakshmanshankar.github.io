@@ -55,92 +55,90 @@ const url = SITE + Astro.url.pathname;
             }}
         />
     </head>
-    <div class="flex gap-2 items-center">
+    <div class="flex gap-2 flex-col text-sm">
         <BackToPrev href="/blog">Back to Blog</BackToPrev>
-        <div class="my-2">
+        <div class="my-2 text-sm">
             <FormattedDate date={entry.data.date} includeYear />
             <span class="text-black dark:text-amber-500">•</span>
             <span>{entry.body && readingTime(entry.body)}</span>
         </div>
     </div>
+    <Toc headings={headings} />
     <article class="animate">
         <h1 class="mt-10">{entry.data.title}</h1>
-        {entry.data.image && (
-            <img src={entry.data.image} alt={entry.data.title} class="w-full h-auto rounded-md" />
-        )}
+        {
+            entry.data.image && (
+                <img
+                    src={entry.data.image}
+                    alt={entry.data.title}
+                    class="w-full h-auto rounded-md"
+                />
+            )
+        }
         <Content />
         <BackToTop />
     </article>
-    <Toc headings={headings} />
 </Layout>
 
-<!-- Highlight current heading -->
 <script>
-    function throttle<T extends (...args: any[]) => void>(
-        func: T,
-        limit: number,
-    ): (...args: Parameters<T>) => void {
-        let lastFunc: ReturnType<typeof setTimeout> | undefined;
-        let lastRan: number | undefined;
+    function throttle(func: () => void, delay: number) {
+        let timeoutId: any;
+        let lastExecTime = 0;
 
-        return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
-            const context = this;
-            if (!lastRan) {
-                func.apply(context, args);
-                lastRan = Date.now();
+        return () => {
+            const now = Date.now();
+
+            if (now - lastExecTime > delay) {
+                func();
+                lastExecTime = now;
             } else {
-                clearTimeout(lastFunc);
-                lastFunc = setTimeout(
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(
                     () => {
-                        if (Date.now() - (lastRan ?? 0) >= limit) {
-                            func.apply(context, args);
-                            lastRan = Date.now();
-                        }
+                        func();
+                        lastExecTime = Date.now();
                     },
-                    limit - (Date.now() - (lastRan ?? 0)),
+                    delay - (now - lastExecTime),
                 );
             }
         };
     }
 
-    function highlightTocActiveItem(): void {
+    function highlightTocActiveItem() {
         const headers = document.querySelectorAll("h1, h2, h3");
-        const tocBannerElements = document.querySelectorAll(".toc-link");
+        const tocLinks = document.querySelectorAll(".toc-link");
 
-        let firstMatch: string | null = null;
-
-        headers.forEach((item) => {
-            const rect = item.getBoundingClientRect();
-            if (rect.top >= 0 && rect.top <= 200 && !firstMatch) {
-                firstMatch = item.id;
-            }
+        // Find first visible header
+        const activeHeader = Array.from(headers).find((header) => {
+            const rect = header.getBoundingClientRect();
+            return rect.top >= 0 && rect.top <= 200;
         });
 
-        tocBannerElements.forEach((tocItem) => {
-            if (!firstMatch || firstMatch === "table-of-contents") return;
+        if (!activeHeader || activeHeader.id === "table-of-contents") return;
 
-            tocItem.classList.remove("toc-active");
-            tocItem.setAttribute("data-toc-status", "");
+        tocLinks.forEach((link) => {
+            const isActive =
+                link instanceof HTMLAnchorElement && link.dataset.targetId === activeHeader.id;
 
-            if (tocItem instanceof HTMLAnchorElement && tocItem.dataset.targetId === firstMatch) {
-                tocItem.classList.add("toc-active");
-                tocItem.setAttribute("data-toc-status", "active");
-                tocItem.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                });
+            link.classList.toggle("toc-active", isActive);
+            link.setAttribute("data-toc-status", isActive ? "active" : "");
+
+            if (isActive && window.innerWidth > 768) {
+                link.scrollIntoView({ behavior: "smooth", block: "nearest" });
             }
         });
     }
 
-    const throttledTocActiveItem = throttle(highlightTocActiveItem, 200);
+    const throttledHighlight = throttle(highlightTocActiveItem, 200);
 
     function setupTocScroll() {
-        window.removeEventListener("scroll", throttledTocActiveItem);
-        window.addEventListener("scroll", throttledTocActiveItem);
+        window.removeEventListener("scroll", throttledHighlight);
+        window.addEventListener("scroll", throttledHighlight);
         highlightTocActiveItem();
     }
 
+    // Initialize
     document.addEventListener("astro:after-swap", setupTocScroll);
     document.addEventListener("DOMContentLoaded", setupTocScroll);
+    setupTocScroll();
 </script>

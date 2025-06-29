@@ -19,7 +19,7 @@ import { ClientRouter } from "astro:transitions";
 </style>
 
 <div class="slide">
-    <ClientRouter  />
+    <ClientRouter />
 </div>
 <script is:inline>
     function initTheme() {
@@ -153,7 +153,6 @@ import { ClientRouter } from "astro:transitions";
         navigator.clipboard
             .writeText(text)
             .then(() => {
-                // Change the text of the specific button that was clicked
                 button.textContent = "Copied!";
                 button.classList.remove("code-normal");
                 button.classList.add("code-copied");
@@ -169,10 +168,9 @@ import { ClientRouter } from "astro:transitions";
             });
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    const addCopyBtn = () => {
         document.querySelectorAll("pre").forEach((pre) => {
             // Create a wrapper for positioning
-            console.log(pre);
             const wrapper = document.createElement("div");
             wrapper.className = "relative";
             pre.parentNode?.insertBefore(wrapper, pre);
@@ -191,11 +189,15 @@ import { ClientRouter } from "astro:transitions";
 
             wrapper.appendChild(copyButton);
         });
-    });
+    };
+
+    document.addEventListener("DOMContentLoaded", addCopyBtn);
+    document.addEventListener("astro:after-swap", () => addCopyBtn());
+    addCopyBtn();
 </script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <!-- <script>
   document.addEventListener('astro:page-load', () => {
     console.log('Page loaded, checking styles...');
@@ -207,38 +209,35 @@ import { ClientRouter } from "astro:transitions";
   });
 </script> -->
 
-
-
 <!-- Cloudflare Web Analytics with Partytown -->
 
-
 <script type="text/partytown" data-astro-reload>
-  document.addEventListener('astro:page-load', () => {
-    // Check if analytics is already loaded to prevent duplicate requests
-    if (window._cfBeaconLoadAttempted) return;
-    window._cfBeaconLoadAttempted = true;
-    
-    const existingScript = document.querySelector('script[data-cf-beacon]');
-    if (existingScript) {
-      existingScript.remove();
-    }
-    
-    const script = document.createElement('script');
-    script.defer = true;
-    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-    script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
-    document.head.appendChild(script);
-  });
+    document.addEventListener("astro:page-load", () => {
+        // Check if analytics is already loaded to prevent duplicate requests
+        if (window._cfBeaconLoadAttempted) return;
+        window._cfBeaconLoadAttempted = true;
+
+        const existingScript = document.querySelector("script[data-cf-beacon]");
+        if (existingScript) {
+            existingScript.remove();
+        }
+
+        const script = document.createElement("script");
+        script.defer = true;
+        script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+        script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
+        document.head.appendChild(script);
+    });
 </script>
 
 <script is:inline>
-  // Only load on initial page load and set flag
-  if (!window._cfBeaconLoadAttempted) {
-    window._cfBeaconLoadAttempted = true;
-    const script = document.createElement('script');
-    script.defer = true;
-    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-    script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
-    document.head.appendChild(script);
-  }
+    // Only load on initial page load and set flag
+    if (!window._cfBeaconLoadAttempted) {
+        window._cfBeaconLoadAttempted = true;
+        const script = document.createElement("script");
+        script.defer = true;
+        script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+        script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
+        document.head.appendChild(script);
+    }
 </script>

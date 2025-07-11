@@ -12,6 +12,7 @@ export default defineConfig({
         mdx(),
         sitemap({
             entryLimit: 10000,
+            changefreq: "monthly",
         }),
         tailwind(),
         partytown({

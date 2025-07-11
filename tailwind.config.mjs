@@ -4,9 +4,7 @@ export default {
     content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
     theme: {
         extend: {
-            animation: {
-                fade: "fadeIn 0.5s ease-out forwards",
-            },
+            
             keyframes: {
                 fadeIn: {
                     "0%": { opacity: 0 },

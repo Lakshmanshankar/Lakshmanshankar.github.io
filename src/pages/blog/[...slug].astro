@@ -108,14 +108,12 @@ const url = SITE + Astro.url.pathname;
         const headers = document.querySelectorAll("h1, h2, h3");
         const tocLinks = document.querySelectorAll(".toc-link");
 
-        // Find first visible header
         const activeHeader = Array.from(headers).find((header) => {
             const rect = header.getBoundingClientRect();
-            return rect.top >= 0 && rect.top <= 200;
+            return rect.top >= 0 && rect.top <= 400;
         });
 
-        if (!activeHeader || activeHeader.id === "table-of-contents") return;
-
+        if (!activeHeader) return;
         tocLinks.forEach((link) => {
             const isActive =
                 link instanceof HTMLAnchorElement && link.dataset.targetId === activeHeader.id;
@@ -130,7 +128,7 @@ const url = SITE + Astro.url.pathname;
     }
 
     const throttledHighlight = throttle(highlightTocActiveItem, 200);
-
+    let isInitialRender = false;
     function setupTocScroll() {
         window.removeEventListener("scroll", throttledHighlight);
         window.addEventListener("scroll", throttledHighlight);

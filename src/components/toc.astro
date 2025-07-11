@@ -13,16 +13,16 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 
 <nav
     aria-labelledby="table-of-contents"
-    class="xl:block md:fixed right-24 top-10 max-w-[300px] md:px-10 max-h-[86vh] line-clamp-1 overflow-x-visible overflow-y-scroll hide-scrollbar border-none"
+    class="xl:block md:fixed right-12 top-10 max-w-[400px] max-h-[86vh] line-clamp-1 overflow-x-visible overflow-y-scroll hide-scrollbar border-none"
 >
     {
         filteredHeadings.length > 1 && (
-            <h2
+            <p
                 id="table-of-contents"
-                class="animate dark:text-white text-black text-lg font-semibold "
+                class="animate mb-0 dark:text-white text-black text-lg font-semibold "
             >
                 Table of Contents
-            </h2>
+            </p>
         )
     }
     <ul class="toc-container flex flex-col gap-1 mt-5 overflow-visible px-3">

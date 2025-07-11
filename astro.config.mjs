@@ -7,7 +7,8 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://lakshmanshankar.github.io",
+    // site: "https://lakshmanshankar.github.io",
+    site:"https://lakshmanshankar-github-io.vercel.app",
     integrations: [
         mdx(),
         sitemap({

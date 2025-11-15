@@ -18,8 +18,8 @@ import { ClientRouter } from "astro:transitions";
     }
 </style>
 
-<div >
-    <ClientRouter transition:animate="none"/>
+<div>
+    <ClientRouter transition:animate="none" />
 </div>
 <script is:inline>
     function initTheme() {
@@ -136,7 +136,7 @@ import { ClientRouter } from "astro:transitions";
     function init() {
         initTheme();
         preloadTheme();
-        animate();
+        // animate();
         scrollAnimations();
         previewImages();
 

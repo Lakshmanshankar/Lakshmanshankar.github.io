@@ -7,8 +7,9 @@ tags: ["React", "Next.js", "Systems"]
 slug: "react-19-server-actions-and-use-hook"
 image: "https://invk935vtx.ufs.sh/f/WLuidxolfrXguv3UaVSHL6nSY7Q1XMFsKTAV2j8y5Jc4vWwO"
 ---
+import ReferenceTable from "@/components/ui/reference.astro";
 
-<br>
+<br />
 
 # What's New in React 19
 
@@ -404,7 +405,7 @@ export async function createPostAction(
 
 </details>
 
-<br>
+<br/>
 
 ### Problems with server actions
 
@@ -435,78 +436,83 @@ In this example we see how we can use `use` hook to resolve promises in a client
 
 ```tsx
 const simulateDelay = (ms: number, data: string, returnError: boolean) =>
-  new Promise((resolve, reject) =>
-    setTimeout(() => {
-      if (returnError) {
-        reject("Error");
-      } else {
-        resolve(data);
-      }
-    }, ms)
-  )
+    new Promise((resolve, reject) =>
+        setTimeout(() => {
+            if (returnError) {
+                reject("Error");
+            } else {
+                resolve(data);
+            }
+        }, ms),
+    );
 
 export default async function Page() {
-  const data = await simulateDelay(1000, new Date().getSeconds().toString(),false) as string;
-  return (
-    <div>
-      Page
-      {data}
-    </div>
-  );
+    const data = (await simulateDelay(1000, new Date().getSeconds().toString(), false)) as string;
+    return (
+        <div>
+            Page
+            {data}
+        </div>
+    );
 }
 ```
 
 This will load the initial page and then after 1 second it will show the data. We can improve this by using `use` hook to resolve the promise.
 
 ```tsx
-
-
 export default async function Page() {
-  const data = simulateDelay(
-    1000,
-    new Date().getSeconds().toString(),
-    true
-  ) as unknown as Promise<string>;
-  return (
-    <div>
-      Page
-      <ErrorBoundary fallback={<div>Error</div>}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ClientComponent prom={data} />
-        </Suspense>
-      </ErrorBoundary>
-    </div>
-  );
+    const data = simulateDelay(
+        1000,
+        new Date().getSeconds().toString(),
+        true,
+    ) as unknown as Promise<string>;
+    return (
+        <div>
+            Page
+            <ErrorBoundary fallback={<div>Error</div>}>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <ClientComponent prom={data} />
+                </Suspense>
+            </ErrorBoundary>
+        </div>
+    );
 }
 
 // ClientComponent.tsx
-"use client";
+("use client");
 
 import { use } from "react";
 
 export default function ClientComponent({ p: p }: { p: Promise<string> }) {
-  const data = use(p) as string;
-  return (
-    <>
-      <div>Client Component {data}</div>;
-    </>
-  );
+    const data = use(p) as string;
+    return (
+        <>
+            <div>Client Component {data}</div>;
+        </>
+    );
 }
-
 ```
-This will allow rendering the other parts of the page and show a fallback while the promise is resolved.
 
+This will allow rendering the other parts of the page and show a fallback while the promise is resolved.
 
 ### Conclusion
 
 React 19 introduces powerful primitives for handling forms, async data, and server actions more naturally. While it's a big step forward, form libraries still offer value for complex needs like validation and schemas.
+### References
+
+| Title                   | Link |
+|------------------------|------|
+| React 19 Blog          | [react.dev](https://react.dev/blog/2024/12/05/react-19#server-actions) |
+| React Server Functions | [react.dev](https://react.dev/reference/rsc/server-functions) |
+| React `use` Hook       | [react.dev](https://react.dev/reference/react/use#streaming-data-from-server-to-client) |
+| Next.js Server Actions | [nextjs.org](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) |
 
 
-### References:
-[React 19 blog](https://react.dev/blog/2024/12/05/react-19#server-actions)
-
-[React server functions](https://react.dev/reference/rsc/server-functions)
-
-[React use hook](https://react.dev/reference/react/use#streaming-data-from-server-to-client)
-
-[Next.js server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+<ReferenceTable
+    references={[
+    { title: "React 19 Blog", url: "https://react.dev/blog/2024/12/05/react-19#server-actions" },
+    { title: "React Server Functions", url: "https://react.dev/reference/rsc/server-functions" },
+    { title: "React use Hook", url: "https://react.dev/reference/react/use#streaming-data-from-server-to-client" },
+    { title: "Next.js Server Actions", url: "https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations" },
+    ]}
+/>

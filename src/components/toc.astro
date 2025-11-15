@@ -13,25 +13,25 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 
 <nav
     aria-labelledby="table-of-contents"
-    class="xl:block md:fixed right-12 top-10 max-w-[400px] max-h-[86vh] line-clamp-1 overflow-x-visible overflow-y-scroll hide-scrollbar border-none"
+    class="xl:block xl:fixed right-16 top-10 max-w-[400px] max-h-[86vh] line-clamp-1 overflow-x-visible overflow-y-scroll hide-scrollbar border-none"
 >
     {
         filteredHeadings.length > 1 && (
             <p
                 id="table-of-contents"
-                class="animate mb-0 dark:text-white text-black text-lg font-semibold "
+                class="animate show mb-0 dark:text-white text-black text-lg font-semibold "
             >
                 Table of Contents
             </p>
         )
     }
-    <ul class="toc-container flex flex-col gap-1 mt-5 overflow-visible px-3">
+    <ul class="toc-container animate show flex flex-col mt-5 overflow-visible px-0">
         {
             filteredHeadings.map((heading) => (
-                <li class="text-left underline-none my-1">
+                <li class="text-left underline-none my-0.5">
                     <a
                         href={`#${heading.slug}`}
-                        class={`toc-link animate hover:scale-110 dark:text-neutral-500 hover:dark:text-white text-stone-500 hover:text-black tracking-tighter  font-normal text-left underline-none`}
+                        class={`toc-link hover:scale-110 dark:text-neutral-500 hover:dark:text-white text-stone-500 hover:text-black tracking-tight font-normal text-left underline-none`}
                         data-scroll-target
                         data-target-id={heading.slug}
                     >

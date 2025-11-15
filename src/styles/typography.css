@@ -18,42 +18,44 @@ h3 {
 
 code::before,
 code::after {
-    display: none
+    display: none;
 }
 
 code {
     @apply p-1 bg-zinc-200/80 font-mono rounded-md dark:bg-neutral-800;
 }
-
+main :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)){
+    @apply font-medium;
+}
 a {
     @apply text-sm md:text-base tracking-tight md:tracking-normal;
 }
 .astro-code {
-  overflow-x: auto;
+    overflow-x: auto;
 }
 
 .astro-code > code {
-  width: 100%;
-  background: none;
-  background-color: transparent;
-  display: block;
-  min-width: max-content;
+    width: 100%;
+    background: none;
+    background-color: transparent;
+    display: block;
+    min-width: max-content;
 }
 
 .astro-code > code > span {
-  display: inline-block;
-  width: 100%;
-  min-width: max-content;
+    display: inline-block;
+    width: 100%;
+    min-width: max-content;
 }
 strong {
-    @apply font-medium;
+    @apply font-semibold;
 }
 
 li,
 p,
 span,
 button {
-    @apply text-sm md:text-base text-zinc-700/95 text-pretty md:text-justify dark:text-neutral-400 tracking-tight font-normal leading-snug md:leading-normal;
+    @apply text-sm md:text-base text-zinc-800 text-pretty md:text-justify dark:text-neutral-400 tracking-tight font-normal leading-snug md:leading-normal;
 }
 
 .copy-code-button {
@@ -65,7 +67,6 @@ button .code-normal {
 button .code-copied {
     @apply text-stone-200 dark:text-stone-600;
 }
-
 
 ::selection {
     background-color: rgb(197, 196, 196);

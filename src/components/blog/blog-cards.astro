@@ -19,7 +19,9 @@ let groupedPosts: GroupedPosts = posts.reduce((acc, post) => {
 }, {} as GroupedPosts);
 
 for (let [key, value] of Object.entries(groupedPosts)) {
-    groupedPosts[key] = value.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+    groupedPosts[key] = value.sort(
+        (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+    );
 }
 
 // Get all unique tags
@@ -89,7 +91,7 @@ const allTags = Array.from(
                         post.classList.add("hidden");
                     }
                 });
-                
+
                 postsContainer.querySelectorAll("ul").forEach((yearGroup) => {
                     const visiblePosts = yearGroup.querySelectorAll("a:not(.hidden)");
                     if (visiblePosts.length === 0) {

@@ -1,4 +1,3 @@
-
 ## README
 
 This is my customized version of [astro nano](https://astro-nano.vercel.app) check it out.
@@ -31,7 +30,6 @@ src/
 ├── consts.ts
 └── types.ts
 ```
-
 
 ## 🧞 Commands
 

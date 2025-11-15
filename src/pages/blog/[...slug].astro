@@ -55,17 +55,18 @@ const url = SITE + Astro.url.pathname;
             }}
         />
     </head>
-    <div class="flex gap-2 flex-col text-sm">
-        <BackToPrev href="/blog">Back to Blog</BackToPrev>
-        <div class="my-2 text-sm">
-            <FormattedDate date={entry.data.date} includeYear />
-            <span class="text-black dark:text-amber-500">•</span>
-            <span>{entry.body && readingTime(entry.body)}</span>
-        </div>
-    </div>
+
     <Toc headings={headings} />
-    <article class="animate">
-        <h1 class="mt-10">{entry.data.title}</h1>
+    <article>
+        <h1 class="mt-10 text-center">{entry.data.title}</h1>
+        <div class="flex gap-2 text-sm justify-center items-center">
+            <!-- <BackToPrev href="/blog">Back to Blog</BackToPrev> -->
+            <div class="my-2 text-sm">
+                <FormattedDate date={entry.data.date} includeYear />
+                <span class="text-black dark:text-amber-500">•</span>
+                <span>{entry.body && readingTime(entry.body)}</span>
+            </div>
+        </div>
         {
             entry.data.image && (
                 <img
@@ -75,6 +76,7 @@ const url = SITE + Astro.url.pathname;
                 />
             )
         }
+        
         <Content />
         <BackToTop />
     </article>
@@ -121,7 +123,7 @@ const url = SITE + Astro.url.pathname;
             link.classList.toggle("toc-active", isActive);
             link.setAttribute("data-toc-status", isActive ? "active" : "");
 
-            if (isActive && window.innerWidth > 768) {
+            if (isActive && window.innerWidth > 1200) {
                 link.scrollIntoView({ behavior: "smooth", block: "nearest" });
             }
         });
@@ -139,4 +141,92 @@ const url = SITE + Astro.url.pathname;
     document.addEventListener("astro:after-swap", setupTocScroll);
     document.addEventListener("DOMContentLoaded", setupTocScroll);
     setupTocScroll();
+</script>
+
+<script>
+    function addCopyLinkToHeadings() {
+        const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]') as NodeListOf<HTMLHeadingElement>;
+        
+        headings.forEach((heading) => {
+            if (heading.querySelector('.heading-link-icon')) return;
+            
+            const headingId = heading.getAttribute('id');
+            if (!headingId) return;
+            
+            heading.style.position = 'relative';
+            heading.style.cursor = 'pointer';
+            
+            // Create link icon
+            const linkIcon = document.createElement('span');
+            linkIcon.className = 'heading-link-icon';
+            linkIcon.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+            `;
+            linkIcon.style.cssText = `
+                display: inline-block;
+                opacity: 0;
+                margin-left: 0.5rem;
+                transition: opacity 0.2s ease;
+                vertical-align: middle;
+                color: currentColor;
+            `;
+            
+            // Show/hide on hover
+            heading.addEventListener('mouseenter', () => {
+                linkIcon.style.opacity = '0.6';
+            });
+            
+            heading.addEventListener('mouseleave', () => {
+                linkIcon.style.opacity = '0';
+            });
+            
+            linkIcon.addEventListener('mouseenter', () => {
+                linkIcon.style.opacity = '1';
+            });
+            
+            // Copy link on click
+            const copyLink = () => {
+                const url = `${window.location.origin}${window.location.pathname}#${headingId}`;
+                navigator.clipboard.writeText(url).then(() => {
+                    // Scroll to heading with offset
+                    const elementPosition = heading.getBoundingClientRect().top;
+                    const offsetPosition = window.pageYOffset + elementPosition - 30;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Show copied feedback
+                    const originalHTML = linkIcon.innerHTML;
+                    linkIcon.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    `;
+                    linkIcon.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                        linkIcon.innerHTML = originalHTML;
+                        linkIcon.style.opacity = '0.6';
+                    }, 1500);
+                });
+            };
+            
+            heading.addEventListener('click', copyLink);
+            linkIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                copyLink();
+            });
+            
+            heading.appendChild(linkIcon);
+        });
+    }
+    
+    document.addEventListener('astro:page-load', addCopyLinkToHeadings);
+    document.addEventListener('DOMContentLoaded', addCopyLinkToHeadings);
+    addCopyLinkToHeadings();
 </script>

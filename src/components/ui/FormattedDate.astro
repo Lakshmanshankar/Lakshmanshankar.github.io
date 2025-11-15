@@ -2,10 +2,10 @@
 interface Props {
     date: Date;
     includeYear?: boolean;
-    class?:string,
+    class?: string;
 }
 
-const { date, class: className = "" ,includeYear = false } = Astro.props;
+const { date, class: className = "", includeYear = false } = Astro.props;
 ---
 
 <time datetime={date.toISOString()} class={`${className}`}>

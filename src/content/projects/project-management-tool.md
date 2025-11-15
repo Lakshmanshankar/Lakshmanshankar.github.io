@@ -12,12 +12,12 @@ repoURL: "https://github.com/lakshmanshankar/project-2"
 
 ```sh
 STATUS = BUILDING
-``` 
+```
 
 A flexible, multi-user project management tool inspired by Notion’s dynamic collections. Manage tasks and GitHub PRs with a block-based structure, custom properties, and optimized client-side caching.
 
-
 ## 🚀 Features
+
 Tasks & PR Management – Organize and track work efficiently.
 
 Custom Properties – Define dynamic fields per task or PR.
@@ -30,7 +30,7 @@ Multi-User Workspaces – Collaborative and scalable.
 
 ## 🔧 Architecture
 
-## Data Model 
+## Data Model
 
 ![Backend Arch](https://invk935vtx.ufs.sh/f/WLuidxolfrXg9cGQZ73W8VZdUGT6pFDsiI5avqCrlB0xYmMh)
 
@@ -41,7 +41,6 @@ The current data model uses three main PostgreSQL tables: `BLOCK`, `PROPERTY`, a
 2. Properties are much like the columns of a table, but they are dynamic, allowing you to change their type.
 
 3. Property values are the value entries for a block and a property.
-
 
 ### Why Not NoSQL?
 
@@ -73,7 +72,7 @@ As a software developer, I’ve always been amazed by how Notion implements its 
 
 After reading this blog about notion's [data model](https://www.notion.com/blog/data-model-behind-notion) and addtionaly, this [post](https://www.notion.com/blog/how-we-sped-up-notion-in-the-browser-with-wasm-sqlite) led me to explore Notion's SQLite file structure, which played a crucial role in shaping my current block-based model.
 
-## Backend 
+## Backend
 
 1. Built on a unified action-based architecture, keeping the backend, frontend, and cache updates in sync.
 
@@ -81,17 +80,17 @@ After reading this blog about notion's [data model](https://www.notion.com/blog/
 
 3. Single-Source API Design – Reduces redundancy and improves maintainability.
 
-
 ## Frontend
+
 ![Architecture](https://invk935vtx.ufs.sh/f/WLuidxolfrXg5AbxypwkIRaWonOCAzXKVSxjcJ0qdZ82YQET)
 
 > Refer: collection hook for more information
-For the frontend, we used Next.js 15 and React Query. 
+> For the frontend, we used Next.js 15 and React Query.
 
-The unified action handler is responsible for handling all block, property, and value mutations and instead of refetching we just update the cache with new values. 
-
+The unified action handler is responsible for handling all block, property, and value mutations and instead of refetching we just update the cache with new values.
 
 ## Demo Images
+
 ![Demo Image 1](https://invk935vtx.ufs.sh/f/WLuidxolfrXg989ULCW8VZdUGT6pFDsiI5avqCrlB0xYmMh7)
 
 ![Demo Image 2](https://invk935vtx.ufs.sh/f/WLuidxolfrXgZoPM8GwSgUehtsYWLBvOk2dpJFAGDV4acbMQ)
@@ -102,12 +101,14 @@ The unified action handler is responsible for handling all block, property, and 
 </video>
 
 ## Tech Stack
+
 - Frontend: Next.js 15, React Query, shadcn
 - Backend: Next.js API Routes, Drizzle ORM, PostgreSQL
 - Auth: BetterAuth
 - Hosting: Vercel,Neon(PG)
 
 ## 📦 Installation
+
 ```sh
 # Clone the repository
 git clone https://github.com/lakshmanshankar/project-2.git && cd project-2
@@ -118,9 +119,7 @@ pnpm install
 # Start development server
 pnpm dev
 ```
+
 ## 📜 License
 
 MIT License. Check out the repo 👉 [GitHub](https://github.com/lakshmanshankar/project-2).
-
-
-

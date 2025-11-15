@@ -17,8 +17,7 @@ export const HOME: Metadata = {
 
 export const ABOUT: Metadata = {
     TITLE: "About",
-    DESCRIPTION:
-        "About Lakshmanshankar, Journey, Experience, Education, Skills and Interests",
+    DESCRIPTION: "About Lakshmanshankar, Journey, Experience, Education, Skills and Interests",
 };
 
 export const BLOG: Metadata = {

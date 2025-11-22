@@ -4,7 +4,9 @@ import type { CollectionEntry } from "astro:content";
 import TagFilter from "@/components/blog/TagFilter.astro";
 import YearGroup from "@/components/blog/YearGroup.astro";
 
-const posts = await getCollection("blog");
+const allPosts = await getCollection("blog")
+const posts = allPosts.filter((item)=> item.data?.draft !== true);
+
 type GroupedPosts = {
     [key: string]: CollectionEntry<"blog">[];
 };
@@ -33,9 +35,8 @@ const allTags = Array.from(
 ---
 
 <div class="">
-    <p class="mb-1">
-        Welcome to the blog! I wrote mostly about web technologies, command line tools and open
-        source applications.
+  <p class="mb-1">
+  Most of these posts were written on nights I couldn’t sleep until I understood the problem. I’m leaving them here so future me can look back and smile.
     </p>
     <div class="">
         <div class="list-none pl-0">

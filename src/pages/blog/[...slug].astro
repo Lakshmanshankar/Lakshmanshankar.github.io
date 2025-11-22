@@ -11,7 +11,8 @@ import { Schema } from "astro-seo-schema";
 
 import { SITE } from "@/consts";
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
+    const allPosts = await getCollection("blog")
+    const posts = allPosts.filter((item)=> item.data?.draft !== true);
     return posts.map((post: { id: any }) => ({
         params: { slug: post.id },
         props: { post },

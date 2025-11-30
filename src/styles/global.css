@@ -10,11 +10,13 @@
     font-display: swap;
 }
 
+
 :root {
     --main-bg: #fafafa;
     --primary-font: "Geist", serif;
     --border-color: #d3c8b7;
 }
+
 
 .dark {
     --main-bg: #0a0a0a;

@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "Geist Mono";
+    src: url("/geist-mono-regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.code-font {
+    font-family: "Geist Mono", monospace;
+}
 h1,
 h2,
 h3,
@@ -22,9 +33,9 @@ code::after {
 }
 
 code {
-    @apply p-1 bg-zinc-200/80 font-mono rounded-md dark:bg-neutral-800;
+    @apply p-1 bg-zinc-200/80 code-font rounded-md dark:bg-neutral-800;
 }
-main :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)){
+main :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply font-medium;
 }
 a {
@@ -55,7 +66,7 @@ li,
 p,
 span,
 button {
-    @apply text-sm md:text-base text-zinc-800 text-pretty md:text-justify dark:text-neutral-400 tracking-tight font-normal leading-snug md:leading-normal;
+    @apply text-sm md:text-base text-zinc-800 text-pretty  dark:text-neutral-200  font-normal leading-snug md:leading-normal;
 }
 
 .copy-code-button {

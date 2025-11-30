@@ -1,0 +1,109 @@
+---
+title: "Typescript monorepo with Tailwind v4 and shadcn"
+description: "Common challenges when working with Tailwind v4 and shadcn in a monorepo, plus some tips that make the experience smoother"
+date: "Nov 26 2025"
+tags: ["Systems"]
+slug: "ts-monorepo-tailwind-shadcn"
+image: ""
+draft: false
+---
+import Callout from './../../components/ui/callout.astro';
+
+
+When we start a new project, one of the important things we consider is the scalability of the codebase.
+A well-configured monorepo makes development clean, organized, and a lot easier and fun to work with.
+
+In this post, we’ll look at how to structure a monorepo with Tailwind v4 + shadcn, and see what are
+the common challenges in creating it.
+
+<Callout type="info" title="Note"> 
+    This article is not a step-by-step guide, I'll focus on the common pitfalls while creating a
+    monorepo with tailwind and shadcn.  All the code for this article is available in [Github](https://github.com/Lakshmanshankar/tailwind-v4-shadcn-monorepo-starter).
+</Callout>
+
+```jsx
+.
+├── app
+│   └── web
+├── biome.json
+├── lefthook.yaml
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── README.md
+├── shared
+│   ├── ts-config
+│   └── ui
+└── turbo.json
+```
+
+### Features
+![Final output](https://invk935vtx.ufs.sh/f/WLuidxolfrXgZNqIoiwSgUehtsYWLBvOk2dpJFAGDV4acbMQ)
+
+Our monorepo have the following features:
+1. Tailwind v4 + shadcn
+2. Turborepo + pnpm workspaces
+3. Biome for lint + formatting
+4. Lefthook for pre-commit checks
+5. TypeScript path aliases (internal packages work just like npm imports).
+
+
+### Problem with Tailwind Source
+
+In a normal single-app setup, Tailwind just works. especially with Tailwind v4 + Vite it’s even easier — all your files live inside src/, Tailwind scans them and generates CSS without any extra setup.
+
+```sh
+react-app/src/**/*.tsx → tailwind scans → css generated
+```
+
+But in a monorepo, Now our UI is split into multiple packages, and Tailwind won’t know where to look unless we tell it. If it doesn't see the components, it won’t generate styles for them.
+
+Example structure:
+```sh
+.
+├── app
+│   └── web
+├── shared
+│   ├── editor
+│   ├── editor_compiled
+│   ├── ts-config
+│   └── ui
+└── turbo.json
+```
+
+So, if we keep components inside shared or packages, we must point Tailwind to those folders manually using the new [@Source](https://tailwindcss.com/docs/detecting-classes-in-source-files#explicitly-registering-sources) directive:
+```css
+@import "@acme/ui/globals.css";
+
+@source './../../../shared/**/src/**/*.{ts,tsx}';
+@source './../../../packages/**/src/**/*.{ts,tsx}';
+```
+
+### Problem with compiled packages
+
+In TypeScript monorepos, there are two main ways to build packages:
+
+1. JIT packages → export `.ts` file, compile where used (Eg. `app/web`)
+2. Compiled packages → build once, import the compiled `.js` elsewhere
+
+The second approach causes issues with Tailwind:
+- Needs a separate build step (`tsc` / `tsup`)
+- Each package must install its own dependencies(Eg. React).
+- Tailwind won’t see classnames unless you run PostCSS/Tailwind cli. 
+- Dynamic classnames props(commonly used in shadcn) is impossible to compile.
+
+### Problem with TS path aliases
+
+Path aliases make the developer experience smooth. But working with path aliases in a monorepo can get complicated. There are two things to consider about path aliases based on where you import components:
+
+1. Within the package - This follows the path aliases you defined in `tsconfig.json`
+2. With other packages - This follows the path in **exports** defined in `package.json`
+
+![Image](https://invk935vtx.ufs.sh/f/WLuidxolfrXgnDNkW9y1k34TvwgaDOuRLpxBbfecZh1rA58P)
+
+
+Here you can see that the import statement in `app/web` is based on exports, where folders like hook and lib are not in `shared/ui`.
+
+If you use the same name for path aliases and package names, searching by package name becomes difficult since two sources use the same name.
+
+

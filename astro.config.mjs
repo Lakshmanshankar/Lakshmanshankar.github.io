@@ -3,29 +3,36 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 import partytown from "@astrojs/partytown";
+import AutoImport from "astro-auto-import";
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://lakshmanshankar.github.io",
-    integrations: [
-        mdx(),
-        tailwind(),
-        partytown({
-            // config:{
-            //     forward: ['cf-beacon'],
-            // }
-        }),
-    ],
-    experimental: {
-        responsiveImages: true,
-        svg: true,
+  site: "https://lakshmanshankar.github.io",
+  integrations: [
+    AutoImport({
+      imports: [
+        "./src/components/mdx/Chip.astro",
+        "./src/components/mdx/Image.astro",
+      ]
+    }),
+    mdx(),
+    tailwind(),
+    partytown({
+      // config:{
+      //     forward: ['cf-beacon'],
+      // }
+    }),
+  ],
+  experimental: {
+    responsiveImages: true,
+    svg: true,
+  },
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "vitesse-light",
+        dark: "vitesse-dark",
+      },
     },
-    markdown: {
-        shikiConfig: {
-            themes: {
-                light: "vitesse-light",
-                dark: "vitesse-dark",
-            },
-        },
-    },
+  },
 });

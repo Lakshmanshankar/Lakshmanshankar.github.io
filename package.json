@@ -13,6 +13,7 @@
         "@astrojs/partytown": "^2.1.4",
         "@tailwindcss/typography": "^0.5.15",
         "astro": "^5.0.9",
+        "astro-auto-import": "^0.5.1",
         "astro-seo-schema": "^5.0.0",
         "clsx": "^2.1.1",
         "schema-dts": "^1.1.5",

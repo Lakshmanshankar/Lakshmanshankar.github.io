@@ -2,7 +2,7 @@
 title: "Project Management Tool(Orca)"
 description: "Tool to track your task and Pr's "
 date: "Apr 5 2024"
-draft: false
+draft: true
 slug: "orca-project-management-tool"
 demoURL: "https://project-2-beta-eight.vercel.app/"
 repoURL: "https://github.com/lakshmanshankar/project-2"

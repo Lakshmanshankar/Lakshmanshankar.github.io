@@ -1,0 +1,51 @@
+---
+title: "Pagewrite - CMS + static site builder built on Lexical"
+description: "PageWrite is a CMS + static site builder built on Lexical, designed around structured editing with deterministic output."
+date: "Apr 30 2026"
+draft: false
+slug: "page-write-website-builder"
+demoURL: "https://inferno-demo-site.vercel.app"
+repoURL: "https://github.com/Lakshmanshankar/inferno"
+---
+
+## PageWrite
+PageWrite is a structured CMS + publishing platform built on [Lexical](https://lexical.dev) with MDX as the canonical content layer.
+
+### Platform
+
+- Designed a bidirectional AST serializer (Lexical JSON ⇄ MDX)
+- Ensures lossless round-trip editing and deterministic output
+- Separates editing layer (Lexical) from storage + rendering (MDX)
+- Implemented custom nodes: callouts, code block, theme-aware images
+
+<Image altText="" caption="" height="3102" maxWidth="1024" src="https://firebasestorage.googleapis.com/v0/b/sanity-freeform.firebasestorage.app/o/sBgEdGvoBLfCXtZnSyYwM7rtSgf1%2Fimages%2F8a22c06e-8854-4abc-914a-413117f292ab.png?alt=media&amp;token=2e8fe0ad-1263-460d-840f-fd7238738121" darkModeSrc="https://firebasestorage.googleapis.com/v0/b/sanity-freeform.firebasestorage.app/o/sBgEdGvoBLfCXtZnSyYwM7rtSgf1%2Fimages%2F183f9857-c281-422d-89d6-c35d1969d4d6.png?alt=media&amp;token=b6c0676b-9358-4f74-9dfc-82c86bfb2426" width="2656" alignment="center"></Image>
+
+### Publishing Pipeline
+
+- Authoring → `MDX` → static site generation using Astro
+- Deployed via Cloudflare Pages
+- Produces fast, SEO-friendly documentation/blog sites
+
+### Features
+
+- Rich text editing with Lexical
+- Image with light/dark mode support
+- Custom nodes: callouts, code blocks, etc.
+- Publish to web using Astro
+- Custom components with Astro
+
+### Tech Stack:
+
+<Chip tag="Lexical" href="https://lexical.dev/" />
+<Chip tag="MDX" href="https://mdxjs.com/" />
+<Chip tag="Astro" href="https://astro.build/" />
+<Chip tag="Shiki" href="https://shiki.matsu.io/" />
+<Chip tag="Firebase" href="https://firebase.google.com/" />
+<Chip tag="Cloudflare Pages" href="https://pages.cloudflare.com/" />
+
+
+### Demo:
+
+![Demo](https://invk935vtx.ufs.sh/f/WLuidxolfrXgA3wQc3uLwigBqx0NIXEyn7FstKbv3uzo8ZlJ)
+![Dark mode demo](https://invk935vtx.ufs.sh/f/WLuidxolfrXgjIEeAgfLnrFRwbYL3qJAGu2f9gzZ8yWhk1ex)
+

@@ -2,10 +2,9 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
-import partytown from "@astrojs/partytown";
+// import partytown from "@astrojs/partytown";
 import AutoImport from "astro-auto-import";
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://lakshmanshankar.github.io",
   integrations: [
@@ -19,11 +18,11 @@ export default defineConfig({
     }),
     mdx(),
     tailwind(),
-    partytown({
-      // config:{
-      //     forward: ['cf-beacon'],
-      // }
-    }),
+    // partytown({
+    // config:{
+    //     forward: ['cf-beacon'],
+    // }
+    // }),
   ],
   experimental: {
     responsiveImages: true,

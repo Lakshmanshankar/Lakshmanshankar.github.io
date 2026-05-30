@@ -57,7 +57,7 @@ hr {
 }
 
 .tag-btn {
-    @apply p-1 px-2 border-colors border m-0;
+    @apply p-1 px-2 border-colors border m-0 text-sm;
 }
 .tag-btn:hover,
 .tag-btn.active {

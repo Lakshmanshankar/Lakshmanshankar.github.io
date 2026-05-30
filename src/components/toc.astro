@@ -11,44 +11,136 @@ const { headings } = Astro.props;
 const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 ---
 
-<nav
-    aria-labelledby="table-of-contents"
-    class="xl:block xl:fixed right-16 top-10 max-w-[400px] max-h-[86vh] line-clamp-1 overflow-x-visible overflow-y-scroll hide-scrollbar border-none"
->
-    {
-        filteredHeadings.length > 1 && (
-            <p
-                id="table-of-contents"
-                class="animate show mb-0 dark:text-white text-black text-lg font-semibold "
-            >
+{
+    filteredHeadings.length > 1 && (
+        <nav
+            aria-labelledby="table-of-contents"
+            class="toc-rail group hidden xl:fixed xl:right-12 xl:top-1/2 xl:z-20 xl:block xl:w-80 xl:-translate-y-1/2"
+        >
+            <p id="table-of-contents" class="sr-only">
                 Table of Contents
             </p>
-        )
-    }
-    <ul class="toc-container animate show flex flex-col mt-5 overflow-visible px-0">
-        {
-            filteredHeadings.map((heading) => (
-                <li class="text-left underline-none my-0.5">
-                    <a
-                        href={`#${heading.slug}`}
-                        class={`toc-link hover:scale-110 dark:text-neutral-500 hover:dark:text-white text-stone-500 hover:text-black tracking-tight font-normal text-left underline-none`}
-                        data-scroll-target
+
+            <div
+                class="toc-trigger ml-auto flex w-40 flex-col items-end gap-1.5 transition-opacity duration-200 group-hover:opacity-0 group-focus-within:opacity-0"
+                aria-hidden="true"
+            >
+                {filteredHeadings.map((heading) => (
+                    <span
+                        class="toc-marker h-6 rounded-full text-right text-sm leading-6 text-stone-500 dark:text-neutral-400"
+                        data-depth={heading.depth}
                         data-target-id={heading.slug}
-                    >
-                        {heading.text}
-                    </a>
-                </li>
-            ))
-        }
-    </ul>
-</nav>
+                        data-active-label={heading.text}
+                    />
+                ))}
+            </div>
+
+            <div class="toc-panel pointer-events-none absolute right-0 top-1/2 max-h-[70vh] w-80 -translate-y-1/2 translate-x-2 overflow-y-auto rounded-md border border-colors bg-[var(--main-bg)] p-3 opacity-0 shadow-sm transition-all duration-200 ease-out group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-x-0 group-focus-within:opacity-100">
+                <ul class="toc-container animate show m-0 flex list-none flex-col gap-0.5 overflow-visible p-0">
+                    {filteredHeadings.map((heading) => (
+                        <li class="m-0 p-0">
+                            <a
+                                href={`#${heading.slug}`}
+                                class="toc-link block rounded px-2 py-1 text-base leading-snug text-stone-600 no-underline underline-offset-4 transition-colors duration-150 hover:text-stone-950 hover:underline focus-visible:text-stone-950 focus-visible:underline focus-visible:outline-none dark:text-neutral-400 dark:hover:text-neutral-100 dark:focus-visible:text-neutral-100"
+                                data-depth={heading.depth}
+                                data-scroll-target
+                                data-target-id={heading.slug}
+                            >
+                                {heading.text}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </nav>
+    )
+}
+
+<style>
+    .toc-marker {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
+
+    .toc-marker::after {
+        content: "";
+        height: 0.125rem;
+        border-radius: 9999px;
+        background: rgb(168 162 158);
+        transition:
+            width 150ms ease,
+            background-color 150ms ease;
+    }
+
+    :global(.dark) .toc-marker::after {
+        background: rgb(82 82 82);
+    }
+
+    .toc-marker[data-depth="1"]::after {
+        width: 3.5rem;
+    }
+
+    .toc-marker[data-depth="2"]::after {
+        width: 2.5rem;
+    }
+
+    .toc-marker[data-depth="3"]::after {
+        width: 1.5rem;
+    }
+
+    .toc-marker.toc-active {
+        max-width: 13rem;
+        overflow: hidden;
+        color: rgb(28 25 23);
+        font-size: 0.9375rem;
+        font-weight: 500;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .toc-marker.toc-active::before {
+        content: attr(data-active-label);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .toc-marker.toc-active::after {
+        width: 0;
+    }
+
+    :global(.dark) .toc-marker.toc-active {
+        color: rgb(245 245 245);
+    }
+
+    .toc-link[data-depth="2"] {
+        padding-left: 1.25rem;
+    }
+
+    .toc-link[data-depth="3"] {
+        padding-left: 2rem;
+        font-size: 0.9375rem;
+    }
+
+    .toc-link.toc-active {
+        color: rgb(28 25 23);
+        font-weight: 500;
+        text-decoration-line: underline;
+        text-underline-offset: 0.25rem;
+    }
+
+    :global(.dark) .toc-link.toc-active {
+        color: rgb(245 245 245);
+    }
+</style>
 
 <script>
     import type { HTMLTag } from "astro/types";
 
     function smoothScroll() {
         const scrollTargets = document.querySelectorAll("[data-scroll-target]");
-        const offset = 100; // Adjust this value based on your header height or desired spacing
+        const offset = 100;
 
         scrollTargets.forEach((target) => {
             target.addEventListener("click", (e) => {

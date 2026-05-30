@@ -12,6 +12,8 @@ export default defineConfig({
     AutoImport({
       imports: [
         "./src/components/mdx/Chip.astro",
+        "./src/components/mdx/Code.astro",
+        "./src/components/mdx/Spacer.astro",
         "./src/components/mdx/Image.astro",
       ]
     }),

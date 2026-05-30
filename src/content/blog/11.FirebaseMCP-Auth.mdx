@@ -1,0 +1,97 @@
+---
+title: "Firebase Auth for MCP"
+description: "Learn how to authenticate users with Firebase Auth and MCP"
+date: "May 1 2026"
+tags: ["MCP","AI"]
+slug: "firebase-auth-for-mcp"
+image: ""
+draft: true
+---
+
+### The mental model first
+
+Firebase ID tokens are RS256 JWTs issued by Google's infrastructure. They're great for verifying "who is this user" inside your own Firebase Functions — but the MCP spec expects OAuth 2.1 bearer tokens with custom scopes, short expiry, and a refresh grant. These are different things. You build a thin layer that bridges them.
+
+
+
+### Q1 — Firebase ID tokens vs MCP bearer tokens
+
+Firebase ID tokens expire in **1 hour** and are issued by Google's servers, not yours. The MCP resource server can't just accept them directly because:
+
+- They carry no custom scopes (`read:calendar`, `write:tasks`, etc.)
+- Their `iss` claim is `https://securetoken.google.com/<project>` — not your server
+- You can't control their expiry or embed your own claims
+
+Your `/authorize` function uses the Admin SDK to verify the incoming Firebase ID token, then issues its own short-lived JWT signed with a secret you control:
+
+js
+
+<Code lang="javascript" value={"// Cloud Function: /authorize\nconst admin = require('firebase-admin');\n\nexport const authorize = functions.https.onRequest(async (req, res) => {\n  const firebaseIdToken = req.headers.authorization?.split('Bearer ')[1];\n  \n  // Verify Firebase ID token using Admin SDK\n  const decoded = await admin.auth().verifyIdToken(firebaseIdToken);\n  // decoded.uid is now your verified user identity\n  \n  // Show consent screen, then issue an auth code\n  const authCode = crypto.randomUUID();\n  await db.collection('auth_codes').doc(authCode).set({\n    uid: decoded.uid,\n    scopes: requestedScopes,   // what the MCP client asked for\n    expiresAt: Date.now() + 60_000,  // 60s — codes are very short-lived\n    codeChallenge: req.query.code_challenge,\n  });\n  \n  res.redirect(`${redirectUri}?code=${authCode}`);\n});"} />
+
+
+
+### Q2 — Do you need the Admin SDK?
+
+Yes, absolutely. The Admin SDK is what lets you call `admin.auth().verifyIdToken(idToken)` server-side. You cannot validate a Firebase ID token without it — client-side Firebase SDK has no verification capability.
+
+You also use the Admin SDK for one more thing: if you ever want to set custom claims on a user (e.g., mark them as having an `mcp:premium` role that gates certain scopes), you do that with `admin.auth().setCustomUserClaims(uid, { mcpTier: 'premium' })`. This is optional but powerful.
+
+
+
+### Q3 — Scoped short-lived access token + refresh token
+
+Your `/token` function does the PKCE verification, then mints two custom JWTs — one short-lived access token and one long-lived refresh token — and saves the refresh token hash to Firestore:
+
+js
+
+<Code lang="javascript" value={"// Cloud Function: /token\nimport * as jwt from 'jsonwebtoken';\n\nexport const token = functions.https.onRequest(async (req, res) => {\n  const { code, code_verifier, grant_type } = req.body;\n\n  if (grant_type === 'authorization_code') {\n    // 1. Load auth code from Firestore\n    const codeDoc = await db.collection('auth_codes').doc(code).get();\n    if (!codeDoc.exists || codeDoc.data().expiresAt < Date.now()) {\n      return res.status(400).json({ error: 'invalid_grant' });\n    }\n    \n    // 2. Verify PKCE — S256: SHA256(code_verifier) must equal stored code_challenge\n    const challenge = base64url(crypto.createHash('sha256').update(code_verifier).digest());\n    if (challenge !== codeDoc.data().codeChallenge) {\n      return res.status(400).json({ error: 'invalid_grant' });\n    }\n\n    const { uid, scopes } = codeDoc.data();\n    await db.collection('auth_codes').doc(code).delete(); // single-use\n\n    // 3. Mint access token — short-lived, scopes embedded as claim\n    const accessToken = jwt.sign(\n      { sub: uid, scope: scopes.join(' '), type: 'access' },\n      process.env.JWT_SECRET,\n      { expiresIn: '15m' }   // 15 minutes — short on purpose\n    );\n\n    // 4. Mint refresh token — long-lived opaque token\n    const refreshToken = crypto.randomUUID();\n    await db.collection('refresh_tokens').doc(refreshToken).set({\n      uid,\n      scopes,\n      createdAt: Date.now(),\n      expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,  // 30 days\n    });\n\n    return res.json({\n      access_token: accessToken,\n      token_type: 'Bearer',\n      expires_in: 900,          // 15 minutes in seconds\n      refresh_token: refreshToken,\n      scope: scopes.join(' '),\n    });\n  }\n});"} />
+
+Your MCP resource functions then validate incoming calls with:
+
+js
+
+<Code lang="javascript" value={"const decoded = jwt.verify(req.headers.authorization.split('Bearer ')[1], process.env.JWT_SECRET);\nconst grantedScopes = decoded.scope.split(' ');\n\nif (!grantedScopes.includes('write:tasks')) {\n  return res.status(403).json({ error: 'insufficient_scope' });\n}"} />
+
+
+
+### Q4 — Token refresh for the LLM — do you need a separate function?
+
+Yes, it should be a separate HTTP callable function (or a separate route in your `/token` function that branches on `grant_type`). The MCP client posts `grant_type=refresh_token` to the same `/token` endpoint — that's the OAuth 2.1 convention. Here's the refresh branch:
+
+js
+
+<Code lang="javascript" value={"// Inside the same /token Cloud Function, second branch:\n  if (grant_type === 'refresh_token') {\n    const { refresh_token } = req.body;\n    \n    // 1. Look up refresh token in Firestore\n    const rtDoc = await db.collection('refresh_tokens').doc(refresh_token).get();\n    if (!rtDoc.exists || rtDoc.data().expiresAt < Date.now()) {\n      return res.status(400).json({ error: 'invalid_grant' });\n    }\n\n    const { uid, scopes } = rtDoc.data();\n\n    // 2. Optional: verify user still exists and isn't disabled in Firebase Auth\n    await admin.auth().getUser(uid);  // throws if user deleted/disabled\n\n    // 3. Rotate: delete old refresh token, issue new one (rotation prevents replay)\n    await db.collection('refresh_tokens').doc(refresh_token).delete();\n    const newRefreshToken = crypto.randomUUID();\n    await db.collection('refresh_tokens').doc(newRefreshToken).set({\n      uid, scopes, createdAt: Date.now(),\n      expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,\n    });\n\n    // 4. Issue new access token\n    const newAccessToken = jwt.sign(\n      { sub: uid, scope: scopes.join(' '), type: 'access' },\n      process.env.JWT_SECRET,\n      { expiresIn: '15m' }\n    );\n\n    return res.json({\n      access_token: newAccessToken,\n      token_type: 'Bearer',\n      expires_in: 900,\n      refresh_token: newRefreshToken,  // always return new refresh token on rotation\n      scope: scopes.join(' '),\n    });\n  }"} />
+
+The LLM/MCP client calls this automatically when it gets a `401` with `WWW-Authenticate: Bearer error="invalid_token"` from your resource functions — no user interaction required. That's the entire silent refresh loop.
+
+
+
+### Summary of the four functions you need
+
+FunctionRouteWhat it does
+
+Discovery
+
+`GET /.well-known/oauth-authorization-server`
+
+Returns PRM JSON — `token_endpoint`, `scopes_supported`, etc.
+
+Authorize
+
+`GET /authorize`
+
+Verifies Firebase ID token via Admin SDK, shows consent, issues auth code to Firestore
+
+Token
+
+`POST /token`
+
+`authorization_code` branch: PKCE check → mint JWT + refresh token. `refresh_token` branch: rotate and re-mint.
+
+Resource fns
+
+Any MCP tool function
+
+Validates JWT with `jwt.verify`, checks `scope` claim, returns 403 on insufficient scope
+
+The key point is that `/.well-known`, `/authorize`, and `/token` are your OAuth layer — they live in Cloud Functions, they use the Admin SDK to trust Firebase identities, and they issue their own scoped JWTs that the rest of your MCP tool functions then validate independently.

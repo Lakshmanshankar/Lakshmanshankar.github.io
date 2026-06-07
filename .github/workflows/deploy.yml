@@ -25,7 +25,7 @@ jobs:
               with:
                   path: . # The root location of your Astro project inside the repository. (optional)
                   node-version: 22.19 # pnpm requires Node.js 22.13 or newer.
-                  package-manager: pnpm@10.15.9 # Pin pnpm 9 to match the lockfile and avoid pnpm 10 build-script approvals.
+                  package-manager: pnpm@10.34.1
 
     deploy:
         needs: build

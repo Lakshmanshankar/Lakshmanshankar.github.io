@@ -27,7 +27,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
             >
                 {filteredHeadings.map((heading) => (
                     <span
-                        class="toc-marker h-6 rounded-full text-right text-sm leading-6 text-stone-500 dark:text-neutral-400"
+                        class="toc-marker h-2 rounded-full text-right text-sm leading-6 text-stone-500 dark:text-neutral-400"
                         data-depth={heading.depth}
                         data-target-id={heading.slug}
                         data-active-label={heading.text}
@@ -66,8 +66,8 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 
     .toc-marker::after {
         content: "";
-        height: 0.125rem;
-        border-radius: 9999px;
+        height: 0.15rem;
+        border-radius: 0.25rem;
         background: rgb(168 162 158);
         transition:
             width 150ms ease,
@@ -90,28 +90,24 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
         width: 1.5rem;
     }
 
-    .toc-marker.toc-active {
-        max-width: 13rem;
-        overflow: hidden;
-        color: rgb(28 25 23);
-        font-size: 0.9375rem;
-        font-weight: 500;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    .toc-marker.toc-active::before {
-        content: attr(data-active-label);
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
     .toc-marker.toc-active::after {
-        width: 0;
+        background: rgb(28 25 23);
     }
 
-    :global(.dark) .toc-marker.toc-active {
-        color: rgb(245 245 245);
+    :global(.dark) .toc-marker.toc-active::after {
+        background: rgb(245 245 245);
+    }
+
+    .toc-marker.toc-active[data-depth="1"]::after {
+        width: 4rem;
+    }
+
+    .toc-marker.toc-active[data-depth="2"]::after {
+        width: 3rem;
+    }
+
+    .toc-marker.toc-active[data-depth="3"]::after {
+        width: 2rem;
     }
 
     .toc-link[data-depth="2"] {

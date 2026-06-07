@@ -23,14 +23,14 @@ const { title, description } = Astro.props;
     </head>
     <body>
         <section class="w-full h-[100svh]">
-            <Navbar />
             <main
-                class="mx-auto max-w-2xl text-base leading-7 px-4 md:px-0 py-5 min-h-screen flex flex-col border-none"
-            >
-                <!-- SPACER -->
+                class="mx-auto max-w-2xl text-base leading-7 px-4 md:px-0 py-5 pt-0 min-h-screen flex flex-col border-none"
+      >
+
+            <Navbar />
                 <div class="h-4 mt-10"></div>
 
-                <div class="flex-1">
+                <div class="flex-1 pt-5">
                     <slot />
                 </div>
                 <Footer />

@@ -79,6 +79,10 @@ if (height) imageStyle.height = typeof height === "number" ? `${height}px` : hei
     max-width: 100%;
   }
 
+  .image-container > img{
+    margin: 0;
+  }
+
   .theme-image {
     display: block;
     height: auto;
@@ -102,10 +106,10 @@ if (height) imageStyle.height = typeof height === "number" ? `${height}px` : hei
 
   .image-caption {
     margin-top: 0.5rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     text-align: center;
     color: var(--main-text);
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   /* If darkModeSrc is not present, always show light image even in dark mode */

@@ -24,7 +24,7 @@ h2 {
     @apply text-3xl mb-1 mt-7;
 }
 h3 {
-    @apply text-xl mb-1 mt-3;
+    @apply text-2xl mb-1 mt-3;
 }
 
 code::before,
@@ -66,9 +66,12 @@ li,
 p,
 span,
 button {
-    @apply text-sm md:text-base text-zinc-800 text-pretty  dark:text-neutral-200  font-normal leading-snug md:leading-normal;
+    @apply text-sm md:text-base text-black text-pretty  dark:text-white  font-normal leading-snug md:leading-7;
 }
 
+p {
+    @apply my-7;
+}
 .copy-code-button {
     @apply bg-stone-400 dark:bg-neutral-950 text-white dark:text-white opacity-100 top-1;
 }

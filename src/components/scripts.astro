@@ -26,27 +26,72 @@ import { ClientRouter } from "astro:transitions";
         const lightThemeButton = document.getElementById("light-theme-button");
         const darkThemeButton = document.getElementById("dark-theme-button");
         const systemThemeButton = document.getElementById("system-theme-button");
+        const themeCycleButton = document.getElementById("theme-cycle-button");
+        const themeModes = ["light", "dark", "system"];
 
         lightThemeButton?.addEventListener("click", () => {
-            localStorage.setItem("theme", "light");
-            toggleTheme(false);
+            setTheme("light");
         });
 
         darkThemeButton?.addEventListener("click", () => {
-            localStorage.setItem("theme", "dark");
-            toggleTheme(true);
+            setTheme("dark");
         });
 
         systemThemeButton?.addEventListener("click", () => {
-            localStorage.setItem("theme", "system");
-            toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+            setTheme("system");
+        });
+
+        themeCycleButton?.addEventListener("click", () => {
+            const currentTheme = getStoredTheme();
+            const nextTheme = themeModes[(themeModes.indexOf(currentTheme) + 1) % themeModes.length];
+            setTheme(nextTheme);
         });
 
         window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
-            if (localStorage.theme === "system") {
+            if (getStoredTheme() === "system") {
                 toggleTheme(event.matches);
             }
         });
+
+        updateThemeCycleButton(getStoredTheme());
+    }
+
+    function getStoredTheme() {
+        return ["light", "dark", "system"].includes(localStorage.theme) ? localStorage.theme : "system";
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem("theme", theme);
+        applyTheme(theme);
+    }
+
+    function applyTheme(theme) {
+        const activeTheme = theme === "light" || theme === "dark" || theme === "system" ? theme : "system";
+        const useDark =
+            activeTheme === "dark" ||
+            (activeTheme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+        toggleTheme(useDark);
+        updateThemeCycleButton(activeTheme);
+    }
+
+    function updateThemeCycleButton(theme) {
+        const themeCycleButton = document.getElementById("theme-cycle-button");
+        const activeTheme = theme === "light" || theme === "dark" || theme === "system" ? theme : "system";
+        const nextTheme = {
+            light: "dark",
+            dark: "system",
+            system: "light",
+        }[activeTheme];
+
+        themeCycleButton?.querySelectorAll("[data-theme-icon]").forEach((icon) => {
+            icon.classList.toggle("hidden", icon.getAttribute("data-theme-icon") !== activeTheme);
+        });
+        themeCycleButton?.setAttribute(
+            "aria-label",
+            "Switch theme from " + activeTheme + " to " + nextTheme,
+        );
+        themeCycleButton?.setAttribute("title", "Switch to " + nextTheme + " theme");
     }
 
     function toggleTheme(dark) {
@@ -73,12 +118,7 @@ import { ClientRouter } from "astro:transitions";
     }
 
     function preloadTheme() {
-        const userTheme = localStorage.theme;
-        if (userTheme === "light" || userTheme === "dark") {
-            toggleTheme(userTheme === "dark");
-        } else {
-            toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-        }
+        applyTheme(getStoredTheme());
     }
 
     function animate() {

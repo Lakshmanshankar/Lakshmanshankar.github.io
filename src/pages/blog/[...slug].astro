@@ -55,7 +55,7 @@ const relatedPosts = otherPosts
 ---
 
 <Layout title={entry.data.title} description={entry.data.description}>
-    <head>
+    <Fragment slot="head">
         <Schema
             item={{
                 "@context": "https://schema.org",
@@ -75,7 +75,7 @@ const relatedPosts = otherPosts
                 url: url,
             }}
         />
-    </head>
+    </Fragment>
 
     <Toc headings={headings} />
     <article>

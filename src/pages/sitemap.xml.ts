@@ -14,7 +14,11 @@ const STATIC_URLS = [
 ];
 
 type Posts = CollectionEntry<"blog">[];
-export async function GET() {
+const XML_HEADERS = {
+    "Content-Type": "application/xml; charset=utf-8",
+};
+
+async function generateSitemap() {
     const siteUrl = import.meta.env.SITE?.replace(/\/$/, "") || "https://lakshmanshankar.com";
     const posts = (await getCollection("blog")) as Posts;
     const publishedPosts = posts.filter((post) => !post.data.draft);
@@ -53,8 +57,16 @@ export async function GET() {
     `;
 
     return new Response(result, {
-        headers: {
-            "Content-Type": "application/xml; charset=utf-8",
-        },
+        headers: XML_HEADERS,
+    });
+}
+
+export async function GET() {
+    return generateSitemap();
+}
+
+export function HEAD() {
+    return new Response(null, {
+        headers: XML_HEADERS,
     });
 }

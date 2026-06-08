@@ -2,39 +2,7 @@
 import ProjectItems from "./project/project-cards.astro";
 import ContactFooter from "./ui/ContactFooter.astro";
 import WorkItems from "./work/work-cards.astro";
-
-import { Schema } from "astro-seo-schema";
-import { SOCIALS } from "../consts";
-
-const sameAsLinks = SOCIALS.map((s) => s.HREF);
 ---
-
-<head>
-    <Schema
-        item={{
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Lakshmanshankar",
-            alternateName: "Lakshman Shankar",
-            description:
-                "I am a Full Stack Developer with over 1.4 years of experience. I am currently working at Bullet.so, a website builder that uses Notion as a CMS.",
-            alumniOf: [
-                {
-                    "@type": "CollegeOrUniversity",
-                    name: "Bharathiar University",
-                    sameAs: "https://www.b-u.ac.in/",
-                },
-                {
-                    "@type": "CollegeOrUniversity",
-                    name: "KPR College of Arts and Science",
-                    sameAs: "https://www.kprcas.ac.in/",
-                },
-            ],
-            knowsAbout: ["Full Stack Development", "Computer Science", "Cloud Computing"],
-            sameAs: sameAsLinks,
-        }}
-    />
-</head>
 
 <div id="container">
     <article class="animate show">
@@ -139,13 +107,13 @@ const sameAsLinks = SOCIALS.map((s) => s.HREF);
             <ContactFooter />
         </div>
     </section>
-        <h3>Colopon</h3>
-        <p>
-            This Site is generated using astro(v5) with <a href="https://astro-nano.vercel.app"
-                >Astro-nano</a
-            >, and tailwindcss, All the code for this website is availble <a
-                href="https://github.com/Lakshmanshankar/lakshmanshankar.github.io">here</a
-            > under <strong>`MIT License`</strong> and all the content is under creative commons license.
-        </p>
-        <hr />
+    <h3>Colopon</h3>
+    <p>
+        This Site is generated using astro(v5) with <a href="https://astro-nano.vercel.app"
+            >Astro-nano</a
+        >, and tailwindcss, All the code for this website is availble <a
+            href="https://github.com/Lakshmanshankar/lakshmanshankar.github.io">here</a
+        > under <strong>`MIT License`</strong> and all the content is under creative commons license.
+    </p>
+    <hr />
 </div>

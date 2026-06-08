@@ -1,7 +1,7 @@
 ## README
 
 This is my customized version of [astro nano](https://astro-nano.vercel.app) check it out.
-
+ 
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:

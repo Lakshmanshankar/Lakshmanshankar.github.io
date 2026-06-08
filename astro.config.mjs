@@ -6,7 +6,7 @@ import tailwind from "@astrojs/tailwind";
 import AutoImport from "astro-auto-import";
 
 export default defineConfig({
-  site: "https://lakshmanshankar.github.io",
+  site: "https://lakshmanshankar.com",
   integrations: [
     AutoImport({
       imports: [

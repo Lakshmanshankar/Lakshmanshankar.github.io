@@ -15,7 +15,7 @@ const STATIC_URLS = [
 
 type Posts = CollectionEntry<"blog">[];
 export async function GET() {
-    const siteUrl = import.meta.env.SITE?.replace(/\/$/, "") || "https://lakshmanshankar.github.io";
+    const siteUrl = import.meta.env.SITE?.replace(/\/$/, "") || "https://lakshmanshankar.com";
     const posts = (await getCollection("blog")) as Posts;
     const publishedPosts = posts.filter((post) => !post.data.draft);
 

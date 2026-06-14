@@ -24,7 +24,7 @@ const { title, description, date, url, tags = [], showArrow = true } = Astro.pro
             <h4 class="my-0 mt-2">{title}</h4>
             {showArrow && <ArrowIcon class="mt-2 hidden md:block" />}
         </div>
-        <p class="text-[16px] my-1 mt-4 mb-3">
+        <p class="my-1 mt-4 mb-3">
             {description}
             <FormattedDate date={date} includeYear />
         </p>

@@ -41,19 +41,23 @@ export const SOCIALS: Socials = [
         HREF: "https://github.com/Lakshmanshankar",
     },
     {
-        NAME: "twitter",
-        HREF: "https://twitter.com/10Lakshman",
-    },
-    {
         NAME: "linkedin",
         HREF: "https://linkedin.com/in/Lakshmanshankar",
     },
     {
         NAME: "Medium",
-        HREF: "https://medium.com/@lakshmanashankrc",
+        HREF: "https://medium.com/@lakshmanshankar.c",
     },
     {
         NAME: "Leetcode",
         HREF: "https://leetcode.com/lakshmanashankrc",
+    },
+    {
+        NAME: "BlueSky",
+        HREF: "https://bsky.app/profile/lakshmanshankar.bsky.social",
+    },
+    {
+        NAME: "twitter",
+        HREF: "https://x.com/lakshmanshr",
     },
 ];

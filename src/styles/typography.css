@@ -45,6 +45,10 @@ a {
     overflow-x: auto;
 }
 
+blockquote {
+    @apply text-base;
+}
+
 .astro-code > code {
     width: 100%;
     background: none;

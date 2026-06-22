@@ -1,14 +1,20 @@
 ---
 interface Props {
-  tag: string;
-  href?: string;
+    tag: string;
+    href?: string;
 }
 
 const { tag, href } = Astro.props;
 ---
 
-{href ? (
-  <a href={href} class="tag-btn capitalize muted-background no-underline">{tag}</a>
-) : (
-  <button data-filter-tag={tag} class="tag-btn capitalize muted-background">{tag}</button>
-)}
+{
+    href ? (
+        <a href={href} class="tag-btn capitalize muted-background no-underline">
+            {tag}
+        </a>
+    ) : (
+        <button data-filter-tag={tag} class="tag-btn capitalize muted-background">
+            {tag}
+        </button>
+    )
+}

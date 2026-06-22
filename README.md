@@ -1,7 +1,7 @@
 ## README
 
 This is my customized version of [astro nano](https://astro-nano.vercel.app) check it out.
- 
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
@@ -47,5 +47,3 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-

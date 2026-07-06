@@ -5,8 +5,11 @@ import tailwind from "@astrojs/tailwind";
 // import partytown from "@astrojs/partytown";
 import AutoImport from "astro-auto-import";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
     site: "https://lakshmanshankar.com",
+
     integrations: [
         AutoImport({
             imports: [
@@ -24,10 +27,12 @@ export default defineConfig({
         // }
         // }),
     ],
+
     experimental: {
         responsiveImages: true,
         svg: true,
     },
+
     markdown: {
         shikiConfig: {
             themes: {
@@ -36,4 +41,6 @@ export default defineConfig({
             },
         },
     },
+
+    adapter: cloudflare()
 });

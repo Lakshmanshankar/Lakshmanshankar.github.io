@@ -1,32 +1,36 @@
 {
-    "name": "lakshmanshankar-portfolio",
-    "type": "module",
-    "version": "0.0.1",
-    "scripts": {
-        "dev": "astro dev --port 3000",
-        "build": "astro build",
-        "preview": "astro preview",
-        "astro": "astro",
-        "format": "prettier --write ."
-    },
-    "dependencies": {
-        "@astrojs/partytown": "^2.1.4",
-        "@tailwindcss/typography": "^0.5.15",
-        "astro": "^5.0.9",
-        "astro-auto-import": "^0.5.1",
-        "astro-seo-schema": "^5.0.0",
-        "clsx": "^2.1.1",
-        "schema-dts": "^1.1.5",
-        "tailwind-merge": "^2.5.5"
-    },
-    "devDependencies": {
-        "@astrojs/check": "^0.5.10",
-        "@astrojs/mdx": "^4.0.2",
-        "@astrojs/rss": "^4.0.10",
-        "@astrojs/sitemap": "^3.2.1",
-        "@astrojs/tailwind": "^5.1.4",
-        "prettier": "^3.4.2",
-        "prettier-plugin-astro": "^0.14.1",
-        "tailwindcss": "^3.4.17"
-    }
+  "name": "lakshmanshankar-portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --port 3000",
+    "build": "astro build",
+    "preview": "pnpm run build && wrangler dev",
+    "astro": "astro",
+    "format": "prettier --write .",
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "12",
+    "@astrojs/partytown": "^2.1.4",
+    "@tailwindcss/typography": "^0.5.15",
+    "astro": "^5.0.9",
+    "astro-auto-import": "^0.5.1",
+    "astro-seo-schema": "^5.0.0",
+    "clsx": "^2.1.1",
+    "schema-dts": "^1.1.5",
+    "tailwind-merge": "^2.5.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/mdx": "^4.0.2",
+    "@astrojs/rss": "^4.0.10",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.4",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^3.4.17",
+    "wrangler": "^4.107.0"
+  }
 }

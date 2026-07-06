@@ -2,12 +2,15 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 import AutoImport from "astro-auto-import";
+
+import cloudflare from "@astrojs/cloudflare";
 import mermaid from 'astro-mermaid';
 import rehypeSlug from 'rehype-slug';
 
 export default defineConfig({
   compressHTML: false,
   site: "https://lakshmanshankar.com",
+
   integrations: [
     mermaid({ autoTheme: true }),
     {
@@ -32,10 +35,14 @@ export default defineConfig({
     mdx(),
     tailwind(),
   ],
+
+
   markdown: {
     rehypePlugins: [rehypeSlug],
     shikiConfig: {
       themes: { light: "github-light", dark: "github-dark" },
     },
   },
+
+    adapter: cloudflare()
 });

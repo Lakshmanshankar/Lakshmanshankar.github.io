@@ -1,36 +1,30 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
 
 interface Props {
     post: CollectionEntry<"blog">;
-    year: string;
 }
-const { post, year } = Astro.props;
+const { post } = Astro.props;
 const tags = post.data.tags ?? [];
-const tagsLabel = tags.join(" · ");
+
+const postDate = new Date(post.data.date);
+const day = postDate.toLocaleDateString("en-US", { day: "2-digit" });
+const month = postDate.toLocaleDateString("en-US", { month: "short" });
+const yearStr = postDate.toLocaleDateString("en-US", { year: "numeric" });
+const formattedDateString = `${month} ${day}, ${yearStr}`;
 ---
 
-<li data-post-item data-filter-tags={tags.join(",")} data-year={year}>
-    <a href={`/blog/${post.id}`} class="post-item group block py-2 no-underline">
-        <div class="flex items-baseline justify-between gap-4">
+<li data-post-item data-filter-tags={tags.join(",")}>
+    <a href={`/blog/${post.id}`} class="post-item group block no-underline">
+        <div class="flex items-baseline justify-start gap-4">
+            <time datetime={postDate.toISOString()} class="code-font text-xs w-24 shrink-0 text-blue-600 dark:text-blue-400">
+                {formattedDateString}
+            </time>
             <h4
                 class="my-0 text-base font-medium leading-snug text-stone-950 underline-offset-4 group-hover:underline group-focus-visible:underline dark:text-neutral-100"
             >
                 {post.data.title}
             </h4>
-            <FormattedDate
-                date={new Date(post.data.date)}
-                class="code-font text-xs shrink-0 text-stone-500 dark:text-neutral-400"
-            />
         </div>
-
-        {
-            tagsLabel && (
-                <div class="mt-1 truncate code-font text-xs text-stone-500 dark:text-neutral-400">
-                    {tagsLabel}
-                </div>
-            )
-        }
     </a>
 </li>

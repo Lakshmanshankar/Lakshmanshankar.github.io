@@ -7,28 +7,24 @@ const allPosts = await getCollection("blog");
 const posts = allPosts.filter((item) => item.data?.draft !== true);
 
 const sortedPosts = posts.sort(
-    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
 // Get all unique tags
-const allTags = Array.from(
-    new Set(sortedPosts.flatMap((post) => post.data.tags ?? []))
-);
+const allTags = Array.from(new Set(sortedPosts.flatMap((post) => post.data.tags ?? [])));
 ---
 
-<div class="">
+<div class="min-h-[81vh]">
     <p class="mb-2 text-stone-700 dark:text-neutral-300">
-        I write blogs about the interesting things I've stumbled upon. The domain is changing because my work is evolving. It started as frontend and React, but now I am working with semantic data layers. My blog reflects this evolution.
+        I write blogs about the interesting things I've stumbled upon. The domain is changing
+        because my work is evolving. It started as frontend and React, but now I am working with
+        semantic data layers. My blog reflects this evolution.
     </p>
     <div class="">
         <div class="list-none pl-0">
             <TagFilter tags={allTags as string[]} />
             <ul id="posts-container" class="list-none m-0 p-0 flex flex-col gap-0 mt-6">
-                {
-                    sortedPosts.map((post) => (
-                        <BlogPostCard post={post} />
-                    ))
-                }
+                {sortedPosts.map((post) => <BlogPostCard post={post} />)}
             </ul>
         </div>
     </div>

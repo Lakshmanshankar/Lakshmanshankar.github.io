@@ -9,6 +9,10 @@ import { readingTime } from "@/lib/utils";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
 import { Schema } from "astro-seo-schema";
 import ContentCard from "@/components/ui/ContentCard.astro";
+import Code from "@/components/mdx/Code.astro";
+import Chip from "@/components/mdx/Chip.astro";
+import Spacer from "@/components/mdx/Spacer.astro";
+import Image from "@/components/mdx/Image.astro";
 
 import { SITE } from "@/consts";
 export async function getStaticPaths() {
@@ -98,7 +102,7 @@ const relatedPosts = otherPosts
             )
         }
 
-        <Content />
+        <Content components={{ Code, Chip, Spacer, Image }} />
 
         {
             relatedPosts.length > 0 && (

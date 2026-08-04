@@ -3,29 +3,30 @@ import { getCollection, type CollectionEntry } from "astro:content";
 const BLOG_PATH = "/blog";
 const PROJECT_PATH = "/projects";
 const STATIC_URLS = [
-    "/",
-    "/about",
-    "/work",
-    "/work/codevantage",
-    PROJECT_PATH,
-    `${PROJECT_PATH}/excalidraw-with-custom-backend`,
-    `${PROJECT_PATH}/orca-project-management-tool`,
-    BLOG_PATH,
+  "/",
+  "/about",
+  "/work",
+  "/work/codevantage",
+  PROJECT_PATH,
+  `${PROJECT_PATH}/excalidraw-with-custom-backend`,
+  `${PROJECT_PATH}/orca-project-management-tool`,
+  BLOG_PATH,
 ];
 
 type Posts = CollectionEntry<"blog">[];
 const XML_HEADERS = {
-    "Content-Type": "application/xml; charset=utf-8",
+  "Content-Type": "application/xml; charset=utf-8",
 };
 
 async function generateSitemap() {
-    const siteUrl = import.meta.env.SITE?.replace(/\/$/, "") || "https://lakshmanshankar.com";
-    const posts = (await getCollection("blog")) as Posts;
-    const publishedPosts = posts.filter((post) => !post.data.draft);
+  const siteUrl =
+    import.meta.env.SITE?.replace(/\/$/, "") || "https://lakshmanshankar.com";
+  const posts = (await getCollection("blog")) as Posts;
+  const publishedPosts = posts.filter((post) => !post.data.draft);
 
-    const staticUrls = STATIC_URLS.map((url) => {
-        const fullUrl = `${siteUrl}${url}`;
-        return `
+  const staticUrls = STATIC_URLS.map((url) => {
+    const fullUrl = `${siteUrl}${url}`;
+    return `
             <url>
                 <loc>${fullUrl}</loc>
                 <lastmod>${new Date().toISOString()}</lastmod>
@@ -33,40 +34,40 @@ async function generateSitemap() {
                 <priority>0.8</priority>
             </url>
         `;
-    }).join("\n");
+  }).join("\n");
 
-    const postUrls = publishedPosts
-        .map((post) => {
-            const lastMod = (post.data.updatedDate ?? post.data.date).toISOString();
-            const fullUrl = `${siteUrl}${BLOG_PATH}/${post.data.slug}/`;
-            return ` 
+  const postUrls = publishedPosts
+    .map((post) => {
+      const lastMod = (post.data.updatedDate ?? post.data.date).toISOString();
+      const fullUrl = `${siteUrl}${BLOG_PATH}/${post.id}/`;
+      return ` 
                 <url>
                     <loc>${fullUrl}</loc>
                     <lastmod>${lastMod}</lastmod>
                     <changefreq>monthly</changefreq>
                     <priority>0.6</priority>
                 </url>`;
-        })
-        .join("\n");
+    })
+    .join("\n");
 
-    const result = `
+  const result = `
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
             ${staticUrls}
             ${postUrls}
         </urlset>
     `;
 
-    return new Response(result, {
-        headers: XML_HEADERS,
-    });
+  return new Response(result, {
+    headers: XML_HEADERS,
+  });
 }
 
 export async function GET() {
-    return generateSitemap();
+  return generateSitemap();
 }
 
 export function HEAD() {
-    return new Response(null, {
-        headers: XML_HEADERS,
-    });
+  return new Response(null, {
+    headers: XML_HEADERS,
+  });
 }

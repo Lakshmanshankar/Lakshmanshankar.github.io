@@ -17,7 +17,10 @@ const formattedDateString = `${month} ${day}, ${yearStr}`;
 <li data-post-item data-filter-tags={tags.join(",")}>
     <a href={`/blog/${post.id}`} class="post-item group block no-underline">
         <div class="flex items-baseline justify-start gap-4">
-            <time datetime={postDate.toISOString()} class="code-font text-xs w-24 shrink-0 text-blue-600 dark:text-blue-400">
+            <time
+                datetime={postDate.toISOString()}
+                class="code-font text-xs w-24 shrink-0 text-blue-600 dark:text-blue-400"
+            >
                 {formattedDateString}
             </time>
             <h4

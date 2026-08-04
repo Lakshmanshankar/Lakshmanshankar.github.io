@@ -1,6 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
+import Code from "@/components/mdx/Code.astro";
+import Chip from "@/components/mdx/Chip.astro";
+import Spacer from "@/components/mdx/Spacer.astro";
+import Image from "@/components/mdx/Image.astro";
 
 export async function getStaticPaths() {
     const posts = await getCollection("project");
@@ -35,5 +39,5 @@ const { Content } = await render(entry);
             </a>
         )
     }
-    <Content />
+    <Content components={{ Code, Chip, Spacer, Image }} />
 </Layout>

@@ -1,10 +1,10 @@
 import { glob } from "astro/loaders";
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 
 const blogSchema = z.object({
     title: z.string(),
     description: z.string(),
-    slug: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
     tags: z.string().array().optional(),
@@ -14,7 +14,6 @@ const blogSchema = z.object({
 const projectSchema = z.object({
     title: z.string(),
     description: z.string(),
-    slug: z.string(),
     date: z.coerce.date(),
     demoURL: z.string().optional(),
     repoURL: z.string().optional(),
@@ -33,14 +32,14 @@ const workSchema = z.object({
 
 const blog = defineCollection({
     loader: glob({
-        pattern: ["**/*.md", "**/*.mdx"],
+        pattern: "**/*.{md,mdx}",
         base: "src/content/blog",
     }),
     schema: blogSchema,
 });
 const project = defineCollection({
     loader: glob({
-        pattern: ["**/*.md", "**/*.mdx"],
+        pattern: "**/*.{md,mdx}",
         base: "src/content/projects",
     }),
     schema: projectSchema,
@@ -48,7 +47,7 @@ const project = defineCollection({
 
 const work = defineCollection({
     loader: glob({
-        pattern: ["**/*.md", "**/*.mdx"],
+        pattern: "**/*.{md,mdx}",
         base: "src/content/work",
     }),
     schema: workSchema,

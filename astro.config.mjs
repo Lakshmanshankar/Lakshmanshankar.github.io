@@ -4,8 +4,10 @@ import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
 // import partytown from "@astrojs/partytown";
 import AutoImport from "astro-auto-import";
+import { unified } from '@astrojs/markdown-remark'
 
 export default defineConfig({
+  compressHTML: false,
   site: "https://lakshmanshankar.com",
   integrations: [
     AutoImport({
@@ -24,11 +26,8 @@ export default defineConfig({
     // }
     // }),
   ],
-  experimental: {
-    responsiveImages: true,
-    svg: true,
-  },
   markdown: {
+    processor: unified(),
     shikiConfig: {
       themes: {
         light: "github-light",

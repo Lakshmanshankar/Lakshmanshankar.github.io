@@ -37,6 +37,7 @@ const blog = defineCollection({
     }),
     schema: blogSchema,
 });
+
 const project = defineCollection({
     loader: glob({
         pattern: "**/*.{md,mdx}",

@@ -20,11 +20,6 @@ export default defineConfig({
     }),
     mdx(),
     tailwind(),
-    // partytown({
-    // config:{
-    //     forward: ['cf-beacon'],
-    // }
-    // }),
   ],
   markdown: {
     processor: unified(),

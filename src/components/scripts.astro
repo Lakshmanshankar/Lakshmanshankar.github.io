@@ -121,8 +121,10 @@ import { ClientRouter } from "astro:transitions";
         document.head.appendChild(css);
         if (dark) {
             document.documentElement.classList.add("dark");
+            document.documentElement.setAttribute("data-theme", "dark");
         } else {
             document.documentElement.classList.remove("dark");
+            document.documentElement.setAttribute("data-theme", "light");
         }
         window.getComputedStyle(css).opacity;
         document.head.removeChild(css);

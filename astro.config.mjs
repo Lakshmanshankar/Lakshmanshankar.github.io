@@ -5,11 +5,15 @@ import tailwind from "@astrojs/tailwind";
 // import partytown from "@astrojs/partytown";
 import AutoImport from "astro-auto-import";
 import { unified } from '@astrojs/markdown-remark'
+import mermaid from 'astro-mermaid';
 
 export default defineConfig({
   compressHTML: false,
   site: "https://lakshmanshankar.com",
   integrations: [
+    mermaid({
+      autoTheme: true,
+    }),
     AutoImport({
       imports: [
         "./src/components/mdx/Chip.astro",

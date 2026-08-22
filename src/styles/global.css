@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @font-face {
     font-family: "Geist";
@@ -90,6 +90,10 @@ hr {
 }
 a {
     @apply text-base;
+}
+
+.prose a {
+    @apply decoration-rose-500 dark:decoration-rose-400 underline decoration-dashed underline-offset-4 decoration-2;
 }
 
 a > span:hover {
@@ -258,12 +262,32 @@ details code {
 }
 
 table {
-    @apply max-w-[700px] w-full block overflow-y-hidden overflow-scroll table-auto border-collapse;
+    @apply w-max max-w-full block overflow-x-auto border-collapse border border-stone-200 dark:border-neutral-800 rounded-md my-6;
 }
 
-thead th,
+thead th {
+    @apply px-3 py-2 text-left whitespace-nowrap min-w-[120px] bg-stone-200 dark:bg-neutral-800 border-b border-stone-200 dark:border-neutral-800 font-semibold;
+}
+
 tbody td {
-    @apply px-4 py-2 text-left whitespace-nowrap min-w-[160px];
+    @apply px-3 py-2 text-left whitespace-nowrap min-w-[120px] border-b border-stone-200 dark:border-neutral-800 bg-[var(--main-bg)];
+}
+
+tbody tr:last-child td {
+    @apply border-b-0;
+}
+
+tbody tr:nth-child(even) td {
+    @apply bg-stone-100 dark:bg-neutral-900;
+}
+
+tbody tr:hover td {
+    @apply bg-stone-200 dark:bg-neutral-800 transition-colors;
+}
+
+thead th:first-child,
+tbody td:first-child {
+    @apply border-r border-stone-200 dark:border-neutral-800;
 }
 
 .toc-link.toc-active {

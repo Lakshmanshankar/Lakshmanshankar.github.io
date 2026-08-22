@@ -61,7 +61,8 @@ strong {
 li,
 p,
 span,
-button {
+button,
+td {
     @apply text-base text-black text-pretty  dark:text-white  font-normal leading-snug md:leading-7;
 }
 

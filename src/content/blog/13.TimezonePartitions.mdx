@@ -1,0 +1,237 @@
+---
+title: "The Hidden Complexity of Time Zone Partitioning in Cube"
+description: ""
+date: "Aug 22 2026"
+tags: ["OLAP Platforms","Systems"]
+slug: "timezone-partitions-in-cube"
+image: "https://images.unsplash.com/photo-1738959869838-13760941f301?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+draft: false
+---
+
+Modern analytics platforms are rarely built directly on top of raw PostgreSQL tables. Instead, they typically use an OLAP database, a semantic layer, or pre-aggregated data to make analytical queries faster and more scalable.
+
+However, once you start materializing data into pre-aggregations, **time zones introduce an important challenge**. This becomes particularly important when designing partitions for pre-aggregated data.
+
+In this blog, I’ll explain how timezone boundaries can cause unexpected results when building time-based partitions, and the common approaches you can use to avoid these problems.
+
+I’ll use **Cube pre-aggregations** throughout the examples, but the concepts apply more broadly to partitions created on materialized views and other pre-aggregated datasets.
+
+<Callout icon="💡" variant="note">
+All the code for this blog is in this repository.
+</Callout>
+
+### Time boundaries
+
+Before looking at the problem, let’s understand **time boundaries**.
+
+A calendar day is defined relative to a timezone, but databases often store and process timestamps in UTC. This means that the same calendar date can correspond to a different UTC time range depending on the timezone.
+
+The table below shows the UTC boundaries for January 1 across a few different time zones:
+
+| **Timezone** | **UTC start** | **UTC end** |
+| --- | --- | --- |
+| **UTC** | Jan 1, 00:00 UTC | Jan 1, 23:59:59 UTC |
+| **Asia/Kolkata (IST)** | Dec 31, **18:30 UTC** | Jan 1, **18:29:59 UTC** |
+| **Australia/Darwin** | Dec 31, **14:30 UTC** | Jan 1, **14:29:59 UTC** |
+
+This difference in boundaries is easy to overlook, but it becomes significant when those boundaries are used to **partition or pre-aggregate data**.
+
+### The sample data
+
+To demonstrate the problem, I created two tables: `Users` and `Orders`.
+
+The `Orders` table contains a set of orders for `user_id = 3`, intentionally placed around timezone boundaries. This allows us to see how the **same orders can belong to different calendar days depending on the timezone used by the query**.
+
+```sql
+| Order ID | OrderedAt UTC           | OrderedAt Asia/Kolkata | OrderedAt Australia/Darwin | Amount  |
+|----------|-------------------------|------------------------|----------------------------|---------|
+| 197      | 2025-12-31 19:00:00+00  | 2026-01-01 00:30:00    | 2026-01-01 04:30:00        | 150.00  |
+| 199      | 2025-12-31 23:45:00+00  | 2026-01-01 05:15:00    | 2026-01-01 09:15:00        | 99.99   |
+| 198      | 2025-12-31 20:15:00+00  | 2026-01-01 01:45:00    | 2026-01-01 05:45:00        | 200.50  |
+| 206      | 2025-12-31 17:30:00+00  | 2025-12-31 23:00:00    | 2026-01-01 03:00:00        | 4165.79 |
+| 207      | 2025-12-31 16:30:00+00  | 2025-12-31 22:00:00    | 2026-01-01 02:00:00        | 1065.79 |
+| 200      | 2026-01-01 01:30:00+00  | 2026-01-01 07:00:00    | 2026-01-01 11:00:00        | 310.25  |
+| 201      | 2026-01-01 02:45:00+00  | 2026-01-01 08:15:00    | 2026-01-01 12:15:00        | 45.00   |
+| 202      | 2026-01-01 03:20:00+00  | 2026-01-01 08:50:00    | 2026-01-01 12:50:00        | 120.75  |
+| 203      | 2026-01-01 04:55:00+00  | 2026-01-01 10:25:00    | 2026-01-01 14:25:00        | 500.00  |
+```
+
+We can see that when querying for different timezones we get different results. Now let's query the same using cube.
+
+```sql
+SELECT
+    COUNT(*) FILTER (
+        WHERE ordered_at >= '2026-01-01 00:00:00'::timestamptz
+          AND ordered_at <  '2026-01-02 00:00:00'::timestamptz
+    ) AS "UTC",
+
+    COUNT(*) FILTER (
+        WHERE ordered_at >= '2026-01-01 00:00:00 Asia/Kolkata'::timestamptz
+          AND ordered_at <  '2026-01-02 00:00:00 Asia/Kolkata'::timestamptz
+    ) AS "Asia/Kolkata",
+
+    COUNT(*) FILTER (
+        WHERE ordered_at >= '2026-01-01 00:00:00 Australia/Darwin'::timestamptz
+          AND ordered_at <  '2026-01-02 00:00:00 Australia/Darwin'::timestamptz
+    ) AS "Australia/Darwin"
+FROM orders
+WHERE user_id = 3;
+
+ UTC | Asia/Kolkata | Australia/Darwin
+-----+--------------+------------------
+   4 |            7 |                9
+```
+
+### When Queries that don't match a pre-aggregation
+
+When a query doesn't match any pre-aggregation, Cube serves it directly from the underlying data source. In this case, Cube handles the timezone conversion at query time based on the timezone specified by the query.
+
+If no timezone is specified, Cube uses its [default timezone](https://docs.cube.dev/reference/configuration/environment-variables#cubejs_default_timezone "CUBEJS_DEFAULT_TIMEZONE"), configured through `CUBEJS_DEFAULT_TIMEZONE`.
+
+Since the data is queried directly from the source, the timezone boundaries are calculated dynamically for each query. This means that different timezones can be handled without requiring separate partitions or pre-aggregations for each timezone.
+
+```sql
+SELECT
+  "orders".id "orders__id",
+  (
+    "orders".ordered_at::timestamptz
+      AT TIME ZONE 'Asia/Kolkata'
+  ) "orders__ordered_at",
+  "orders".amount "orders__amount"
+FROM
+  orders AS "orders"
+WHERE
+  (
+    "orders".ordered_at >= '2026-01-01 00:00:00+05:30'::timestamptz
+    AND "orders".ordered_at < '2026-01-02 00:00:00+05:30'::timestamptz
+  )
+  AND ("orders".user_id = 3)
+GROUP BY
+  1,
+  2,
+  3
+ORDER BY
+  1 ASC
+LIMIT
+  10000;
+```
+
+The query above fetches orders created on **January 1, 2026 in IST**. Cube converts the IST time boundary to its corresponding UTC value, `2025-12-31 18:30:00 UTC`, before querying the underlying data source.
+
+This ensures that the query returns all orders that fall within the **January 1 IST** calendar day, even though that day begins on **December 31 in UTC**.
+
+### The pre-aggregation problem
+
+This is where it gets interesting. When building pre-aggregations, we want to partition the data into months so that all queries related to that month can be served from the corresponding monthly partition.
+
+As calendar days are relative to the timezone, we cannot have a single monthly partition that can correctly serve two different timezones.
+
+Even if we set the granularity to hourly, it only tells Cube at which interval to aggregate the data; it doesn't magically handle the boundaries outside the partition.
+
+Cube's docs say that each query must match the pre-aggregation dimensions. To serve a multi-tenant application, we would have to build partitions for various timezones. If we instead serve all queries using a base timezone, we can end up with data mismatches.
+
+```bash
+pre_aggregations:
+  - name: orders_by_user
+    measures:
+      - count
+      - total_amount
+    dimensions:
+      - user_id
+      - users.name
+    time_dimension: ordered_at
+    granularity: hour
+    partition_granularity: month
+    refresh_key:
+      every: 1 hour
+      timezone: Europe/London 
+```
+
+The above Cube configuration will create a pre-aggregation using the `Europe/London` timezone. During January, `Europe/London` is aligned with UTC.
+
+If this is the only pre-aggregation, a query for January 1 in the `Europe/London` timezone will return 4 records. Queries for January 1 in `Asia/Kolkata` or `Australia/Darwin` cannot be correctly served from this pre-aggregation.
+
+---
+
+### How to build timezone partitions
+
+In Cube, there are multiple ways to configure the refresh timezones. You can set the environment variable, configure it in the `~/cube.js` file, or specify the timezone when scheduling a pre-aggregation job. [Learn more](https://docs.cube.dev/reference/core-data-apis/rest-api/reference#triggering-jobs).
+
+```javascript
+// ~/cube.js
+// Cube configuration options: https://cube.dev/docs/config
+/** @type{ import('@cubejs-backend/server-core').CreateOptions } */
+module.exports = {
+  scheduledRefreshTimeZones: [
+    'Australia/Darwin',
+    'Asia/Kolkata',
+    'Europe/London',
+  ],
+};
+```
+
+In the following CURL request, I have configured the pre-aggregations for the `Asia/Kolkata`, `Australia/Darwin`, and `Europe/London` timezones. As you can see, this creates three monthly partitions for every month.
+
+```bash
+curl -X POST \
+      http://localhost:4000/cubejs-api/v1/pre-aggregations/jobs \
+      -H "Authorization: {TOKEN}" \
+      -H "Content-Type: application/json" \
+      -d '{
+      "action": "post",
+      "selector": {
+        "contexts": [{ "securityContext": {} }],
+        "timezones": ["Europe/London","Asia/Kolkata","Australia/Darwin"],
+        "preAggregations": ["orders.orders_by_user"]
+      }
+    }' | jq | wl-copy
+```
+
+To check the status of the jobs associated with the tokens above, simply paste the tokens into the `tokens` field of the `curl` request below.
+
+```bash
+curl -X POST \
+      http://localhost:4000/cubejs-api/v1/pre-aggregations/jobs \
+      -H "Authorization: {TOKEN}" \
+      -H "Content-Type: application/json" \
+      -d '{
+      "action":"get",
+      "tokens":[ ... tokens ]
+      }' | jq '.[] | "\(.table) -> \(.selector.timezones[0])"'
+```
+
+As you can see, Cube creates a separate monthly partition for each timezone, resulting in three partitions per month.
+
+```javascript
+"dev_pre_aggregations.orders_orders_by_user20251201_njine102_rbdw3v1r_1l84tc8 -> Europe/London"
+"dev_pre_aggregations.orders_orders_by_user20260101_fpiljwud_plrojfn0_1l84tc8 -> Europe/London"
+"dev_pre_aggregations.orders_orders_by_user20260201_releikzj_havppkgv_1l84tc8 -> Europe/London"
+"dev_pre_aggregations.orders_orders_by_user20260301_y1ebyqpl_a3hlsqgx_1l84tc8 -> Europe/London"
+"dev_pre_aggregations.orders_orders_by_user20260401_qxz5n43o_kyudcrwp_1l84tc8 -> Europe/London"
+"dev_pre_aggregations.orders_orders_by_user20260101_xhsbbsd4_tml0wiqp_1l84tc8 -> Asia/Kolkata"
+"dev_pre_aggregations.orders_orders_by_user20260201_dm2f1rpe_5lhuso0v_1l84tc8 -> Asia/Kolkata"
+"dev_pre_aggregations.orders_orders_by_user20260301_sfufgalc_5mcv1dmw_1l84tc8 -> Asia/Kolkata"
+"dev_pre_aggregations.orders_orders_by_user20260401_ymymik4c_r30jtqpm_1l84tc8 -> Asia/Kolkata"
+"dev_pre_aggregations.orders_orders_by_user20260101_av2s4ehk_si3uywps_1l84tc8 -> Australia/Darwin"
+"dev_pre_aggregations.orders_orders_by_user20260201_in1yrq2q_uiliedfq_1l84tc8 -> Australia/Darwin"
+"dev_pre_aggregations.orders_orders_by_user20260301_kw4e0lz0_imuiopum_1l84tc8 -> Australia/Darwin"
+"dev_pre_aggregations.orders_orders_by_user20260401_qf1zdbah_gkipyxzy_1l84tc8 -> Australia/Darwin"
+```
+
+However, creating separate partitions for each timezone can lead to the **same underlying data being computed and stored multiple times**, increasing both storage and computation costs.
+
+---
+
+### Naive timezone conversion
+
+If you don't want to build separate partitions for each timezone, you might consider translating the query timezone to match the pre-aggregation's timezone. However, this approach can be problematic.
+
+- Even when using an hourly granularity, the boundaries of the query timezone can cut across the buckets created using the pre-aggregation timezone.
+- If the pre-aggregation timezone observes Daylight Saving Time while the query timezone does not, the timezone boundaries may shift over time, making it difficult to correctly map and combine the results.
+- Non-additive measures, such as `countDistinct` and `avg`, introduce additional complexity. Combining partially aggregated results across incorrect timezone boundaries can produce incorrect results. Cube can handle pre-computation for measures such as averages and distinct counts, but these calculations become more difficult when the underlying timezone buckets do not align. [Cube's guide to non-additive measures](https://docs.cube.dev/recipes/pre-aggregations/non-additivity?utm_source=chatgpt.com)
+
+---
+
+<Spacer />
+
+<Spacer />

@@ -1,37 +1,41 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
-// import partytown from "@astrojs/partytown";
 import AutoImport from "astro-auto-import";
-import { unified } from '@astrojs/markdown-remark'
 import mermaid from 'astro-mermaid';
+import rehypeSlug from 'rehype-slug';
 
 export default defineConfig({
   compressHTML: false,
   site: "https://lakshmanshankar.com",
   integrations: [
-    mermaid({
-      autoTheme: true,
-    }),
+    mermaid({ autoTheme: true }),
+    {
+      name: 'fix-auto-import',
+      hooks: {
+        'astro:config:setup': ({ config }) => {
+          if (config.markdown?.processor) {
+            Object.defineProperty(config.markdown.processor, 'name', { value: 'unified' });
+          }
+        }
+      }
+    },
     AutoImport({
       imports: [
         "./src/components/mdx/Chip.astro",
         "./src/components/mdx/Code.astro",
         "./src/components/mdx/Spacer.astro",
         "./src/components/mdx/Image.astro",
+        "./src/components/mdx/Callout.astro",
       ],
     }),
     mdx(),
     tailwind(),
   ],
   markdown: {
-    processor: unified(),
+    rehypePlugins: [rehypeSlug],
     shikiConfig: {
-      themes: {
-        light: "github-light",
-        dark: "github-dark-high-contrast",
-      },
+      themes: { light: "github-light", dark: "github-dark" },
     },
   },
 });

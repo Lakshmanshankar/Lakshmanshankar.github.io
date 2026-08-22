@@ -250,35 +250,50 @@ const relatedPosts = otherPosts
             });
 
             // Copy link on click
-            const copyLink = () => {
+            const copyLink = async () => {
                 const url = `${window.location.origin}${window.location.pathname}#${headingId}`;
-                navigator.clipboard.writeText(url).then(() => {
-                    // Scroll to heading with offset
-                    const elementPosition = heading.getBoundingClientRect().top;
-                    const offsetPosition = window.pageYOffset + elementPosition - 30;
+                
+                try {
+                    // Update URL hash without jumping (since we do smooth scrolling)
+                    window.history.pushState(null, "", `#${headingId}`);
+                    
+                    if (navigator.clipboard) {
+                        await navigator.clipboard.writeText(url);
+                    }
+                } catch (err) {
+                    console.error("Failed to copy link", err);
+                }
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth",
-                    });
+                // Scroll to heading with offset
+                const elementPosition = heading.getBoundingClientRect().top;
+                const offsetPosition = window.scrollY + elementPosition - 30;
 
-                    // Show copied feedback
-                    const originalHTML = linkIcon.innerHTML;
-                    linkIcon.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    `;
-                    linkIcon.style.opacity = "1";
-
-                    setTimeout(() => {
-                        linkIcon.innerHTML = originalHTML;
-                        linkIcon.style.opacity = "0.6";
-                    }, 1500);
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
                 });
+
+                // Show copied feedback
+                const originalHTML = linkIcon.innerHTML;
+                linkIcon.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                `;
+                linkIcon.style.opacity = "1";
+
+                setTimeout(() => {
+                    linkIcon.innerHTML = originalHTML;
+                    linkIcon.style.opacity = "0.6";
+                }, 1500);
             };
 
-            heading.addEventListener("click", copyLink);
+            heading.addEventListener("click", (e) => {
+                // Don't copy if the user is selecting text
+                if (window.getSelection()?.toString()) return;
+                copyLink();
+            });
+            
             linkIcon.addEventListener("click", (e) => {
                 e.stopPropagation();
                 copyLink();

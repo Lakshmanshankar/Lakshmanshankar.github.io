@@ -4,7 +4,7 @@ interface Props {
 }
 
 let { tags } = Astro.props;
-tags.push("all");
+tags.unshift("all");
 ---
 
 <div id="filter-container" class="mb-4">

@@ -18,12 +18,14 @@
     --primary-font: "Inter", Arial, sans-serif;
     --border-color: #d3c8b7;
     --code-border: #f5f2f2;
+    --brand-pink: #f43f5e;
 }
 
 .dark {
     --main-bg: #0a0a0a;
     --border-color: #2a2a2a;
     --code-border: #22202070;
+    --brand-pink: #fb7185;
 }
 
 html,
@@ -93,7 +95,12 @@ a {
 }
 
 .prose a {
-    @apply decoration-rose-500 dark:decoration-rose-400 underline decoration-dashed underline-offset-4 decoration-2;
+    @apply decoration-rose-500 dark:decoration-rose-400 underline decoration-wavy underline-offset-4 decoration-2;
+    text-decoration-skip-ink: none;
+}
+
+.prose li::marker {
+    @apply text-rose-500 dark:text-rose-400;
 }
 
 a > span:hover {
@@ -141,6 +148,10 @@ li {
 
 p {
     @apply mt-5;
+}
+
+.prose p {
+    line-height: calc(1.75em + 2px);
 }
 
 .astro-code span {

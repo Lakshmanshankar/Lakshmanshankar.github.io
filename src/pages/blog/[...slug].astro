@@ -86,9 +86,9 @@ const relatedPosts = otherPosts
         <h1 class="mt-10 text-center">{entry.data.title}</h1>
         <div class="flex gap-2 text-sm justify-center items-center">
             <!-- <BackToPrev href="/blog">Back to Blog</BackToPrev> -->
-            <div class="my-2 text-sm">
-                <FormattedDate date={entry.data.date} includeYear />
-                <span class="text-black dark:text-amber-500">•</span>
+            <div class="my-2 text-sm text-stone-500 dark:text-neutral-400">
+                <FormattedDate date={entry.data.date} includeYear class="text-[var(--brand-pink)]" />
+                <span class="text-[var(--brand-pink)] mx-1">•</span>
                 <span>{entry.body && readingTime(entry.body)}</span>
             </div>
         </div>

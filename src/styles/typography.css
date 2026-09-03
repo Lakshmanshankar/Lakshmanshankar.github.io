@@ -31,7 +31,7 @@ main :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply font-medium;
 }
 a {
-    @apply text-sm md:text-base tracking-tight md:tracking-normal;
+    @apply text-sm md:text-base md:tracking-normal;
 }
 .astro-code {
     overflow-x: auto;
@@ -63,11 +63,15 @@ p,
 span,
 button,
 td {
-    @apply text-base text-black text-pretty  dark:text-white  font-normal leading-snug md:leading-7;
+    @apply text-base text-black text-pretty  dark:text-white  font-normal leading-snug;
+    line-height: 1.7;
 }
 
+li {
+    @apply my-2;
+}
 p {
-    @apply my-7;
+    @apply mt-7;
 }
 .copy-code-button {
     @apply bg-stone-400 dark:bg-neutral-950 text-white dark:text-white opacity-100 top-1;
@@ -117,4 +121,9 @@ button .code-copied {
 
 .animate.show {
     @apply opacity-100 translate-y-0;
+}
+
+/* Katex - MathHTML  */
+.katex-html {
+    display: none;
 }

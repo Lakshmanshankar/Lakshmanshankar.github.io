@@ -7,6 +7,9 @@ import cloudflare from "@astrojs/cloudflare";
 import mermaid from 'astro-mermaid';
 import rehypeSlug from 'rehype-slug';
 
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+
 export default defineConfig({
   compressHTML: false,
   site: "https://lakshmanshankar.com",
@@ -38,11 +41,11 @@ export default defineConfig({
 
 
   markdown: {
-    rehypePlugins: [rehypeSlug],
+    rehypePlugins: [rehypeSlug, rehypeKatex],
+    remarkPlugins: [remarkMath],
     shikiConfig: {
       themes: { light: "github-light", dark: "github-dark" },
     },
   },
-
-    adapter: cloudflare()
+  adapter: cloudflare()
 });

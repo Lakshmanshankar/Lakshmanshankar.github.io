@@ -1,0 +1,3082 @@
+---
+title: "The Hidden Complexity of Time Zone Partitioning in Cube"
+description: ""
+date: "Aug 22 2026"
+tags: ["OLAP","Systems"]
+slug: "hll-in-cube"
+image: "https://images.unsplash.com/photo-1738959869838-13760941f301?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+draft: false
+---
+
+
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+
+
+---
+
+$$
+\displaystyle \alpha _{m}\approx {\begin{cases}0.673,&{\text{for }}m=16;\\0.697,&{\text{for }}m=32;\\0.709,&{\text{for }}m=64;\\{\frac {0.7213}{1+1.079/m}},&{\text{for }}m\geq 128.\end{cases}}
+$$
+
+--- 
+
+$$
+\displaystyle Z={\Bigg (}\sum _{j=1}^{m}{2^{-M[j]}}{\Bigg )}^{-1}
+$$
+
+$$
+\displaystyle \alpha _{m}=\left(m\int _{0}^{\infty }\left(\log _{2}\left({\frac {2+u}{1+u}}\right)\right)^{m}\,du\right)^{-1}
+$$
+
+---
+
+$$
+\frac{a}{b}
+
+\sum_{i=1}^{n}
+
+\int_a^b f(x)\,dx
+
+\sqrt{x}
+
+\binom{n}{k}
+
+\lim_{x \to \infty}
+
+\mathbb{R}
+
+\mathbf{x}
+
+\begin{matrix}
+a & b \\
+c & d
+\end{matrix}
+$$
+
+$$
+E = \alpha_m m^2
+\left(
+\sum_{j=1}^{m} 2^{-M[j]}
+\right)^{-1}
+$$
+
+
+$$
+P(X = k)
+=
+\binom{n}{k}
+p^k(1-p)^{n-k}
+$$
+
+## hello
+
+
+<h1 class="text-center indent-0">Finnish Language Learning BOOK REVIEW List – Oppikirjat</h1>
+
+This article is an extensive Finnish language learning book revierew list. I’m focusing on Finnish coursebooks and textbooks. You can find out more about [reference grammars here](https://uusikielemme.fi/finnish-grammar/finnish-reference-grammar-books/).
+
+Thank you, Steve Tucker, for proof-reading this whole article! There certainly were many typos to fix, inconsistencies to set right and section numberings to update. I’m so glad for the support I get from you!
+
+Table of Contents
+
+1. **Information about my approach**
+   1. These are my opinions
+   2. This list includes older books
+   3. The difficulty level is based on CEFR
+   4. The layout of this page
+   5. Finnish in Finnish vs. Finnish in English
+   6. Suitable for self-study?
+2. [**Single Finnish Language Study Books**](https://uusikielemme.fi/language-levels/textbooks/finnish-language-learning-book-review-list-oppikirjat#two)
+3. [**Finnish Textbook Series**](https://uusikielemme.fi/language-levels/textbooks/finnish-language-learning-book-review-list-oppikirjat#three)
+4. [**Writing and Reading Comprehension Books**](https://uusikielemme.fi/language-levels/textbooks/finnish-language-learning-book-review-list-oppikirjat#four)
+5. [**B1 – High School and Beyond Textbooks**](https://uusikielemme.fi/language-levels/textbooks/finnish-language-learning-book-review-list-oppikirjat#five)
+
+## **1. Information about my approach**
+
+### **1.1. These are my opinions**
+
+Please note that my **opinions** of these books are my own. You might have a completely different feeling about these books. It’s common for students to get really attached to the first book they’ve used, and this can spark some surprisingly strong emotions when someone is less positive about the book in question.
+
+I’m basing my opinions both on my own experiences learning Finnish and on my experiences with them as a teacher.
+
+### **1.2. This list includes older books**
+
+I’m including both books that are **out of print** and books that are **currently for sale**. This has been a hard choice to make. My final decision is due to the availability of many of these books in Finnish libraries. A large portion (about 50-60%) of the traffic I get on my website is from within Finland. This means many people will have access to a Finnish library. Of course, I’ve included mention of the availability of each book in these reviews.
+
+For books that are still available for sale, make sure to pay attention to the edition and publishing year of the book! Many of these books have been renewed many times over the years. You benefit most from buying the newest version, if possible! The links I’ve provided always lead you to the newest version.
+
+### **1.3. The difficulty level is based on CEFR**
+
+CEFR, the Common European Framework of Reference for Languages, is a tool used to assess language skills. It’s commonly used within Finland. You can find an English description of the levels [here](https://www.coe.int/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale). There is also a table for self-assessment for Finnish [here](https://rm.coe.int/CoERMPublicCommonSearchServices/DisplayDCTMContent?documentId=090000168045bb56). The idea is that you move from A1 (beginner), to A2 (intermediate), to B1/B2 (independent), to C1/C2 (proficient). The C levels are the ones where your Finnish is very near to that of a Finn.
+
+In these reviews, I’m giving you an idea of how difficult a book is using these levels. I’m also mentioning for many books that they contain “[typical A1 topics](https://uusikielemme.fi/language-levels/beginner-finnish-topics-level-a1-a1-1-to-a1-3/)“. There are always examples of such topics within the text describing each book. I will make articles concerning what is generally considered an A1, A2 or B1 level topic soon.
+
+### **1.4. The layout of this page**
+
+It’s been impossible to organize this page so that it’s a) useful, b) easy to understand, c) easy to find the information and d) not too overwhelming. This version you’re currently looking at is the compromise I’ve made to meet those goals. I’m aware it requires a lot of clicking around.
+
+While I would have liked to list the course books, so they’re organized by level, I didn’t end up doing so. The issue is that many of these books are series, which gradually increase in difficulty. Dividing those series up and putting them in different CEFR sections just didn’t seem practical.
+
+### **1.5. Finnish in Finnish vs. Finnish in English**
+
+There are a lot of books on the market which teach Finnish in Finnish. This is likely due to the nature of integration courses for immigrants in Finland, which are almost always taught exclusively in Finnish. This causes extra obstacles for learners who are not in such a course. Studying a whole new language without using another language to explain e.g. the grammar can be tricky if you’ve never had to deal with this approach.
+
+This means that some of you might find my opinion on how suitable these books are for self-study incorrect. My approach is this: beginner books that are exclusively in Finnish have generally been described as less suitable for self-study. However, for intermediate and advanced books I haven’t let the language of the book influence the self-study aspect as strongly. My reasoning is that – once you have some basic knowledge – the language barrier should start to matter less and less.
+
+### **1.6. Suitable for Self-Study?**
+
+Self-study works best for diligent, motivated students who (generally) have previous experiences with studying languages. It’s not for everyone! Looking for a course to join or a private teacher might be a better way for some students.
+
+I’m aware that – as a fluent speaker of Finnish – I might not be the best person to assess whether a book is suitable for self-study. I’m assuming there are many beginners looking for a book, who immediately write off any course book that’s written in Finnish only as unsuitable for self-study. I do agree that it is harder to learn Finnish in Finnish on your own, but that doesn’t mean every Finnish-only book is completely unsuitable for beginners.
+
+There are so many online resources these days (dictionaries, *Uusi kielemme*, other English resources) which can be used in combination with a Finnish-only book. In fact, it’s probably best not to rely on one single book. By combining multiple books, you get more input and potentially more exercises of each topic.
+
+<p class="text-right indent-0">Back to top</p>
+
+<h2 class="text-center indent-0">**Finnish Language Study Books**</h2>
+
+## **2. Single Finnish Language Study Books**
+
+Single Finnish Language Study Books
+
+1. From Start to Finnish – A Short Course in Finnish (zero to A2)
+2. Kato hei – Puhekielen alkeet (zero to A2.2)
+3. Sun suomi – Finnish for beginners (zero to A2)
+4. Suomi selväksi – Soome keele õpik (zero to A2.2)
+5. Supisuomea (zero to A2.2)
+6. Helppoa suomea (zero to A2.1)
+7. Hoidetaan suomeksi (zero to A2.2)
+8. Teach Yourself Complete Finnish (zero to B1.1)
+9. Colloquial Finnish (zero to A2)
+10. Suomea paremmin (A2.1 to B1.1)
+11. Sainpas sanottua (A2 to B1)
+12. Finnish Tutor – Grammar and Vocabulary Workbook (A2.2 to B2)
+13. Tarinoita Suomesta (B1 to B2)
+14. Learn Finnish without Studying (no specific level)
+15. Sisunautti valtameressä (A2 to B1)
+16. Ykäänkö vai ykiinkö – Highway to hill (A2 to B1)
+17. YKIä kohti (A2 to B2)
+18. Gimara suomi – Taitotasolta 0 taitotasolle A1.3
+19. Eteenpäin! – Suomen kielen harjoituksia ylemmille taitotasoille
+
+### **2.1. From Start to Finnish – A Short Course in Finnish**
+
+| **Name of the book** | From Start to Finnish – A Short Course in Finnish |
+| --- | --- |
+| **Author(s)** | Leila White |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2017 |
+| **Type of book** | beginner self-study book |
+| **Aesthetics of the book** | fairly clear, not too overwhelming |
+| **Language(s) used** | English, Finnish |
+| **Level range** | zero to A2 |
+| **Advances** | at a fairly reasonable pace |
+| **Types of texts** | dialogues introducing the chapter’s grammar topic |
+| **Topics discussed** | basic vocabulary (nothing in depth) |
+| **Grammar topics** | typical A1-A2 grammar (see below) |
+| **Spoken language** | one chapter on Helsinki spoken language |
+| **Exercise types** | mainly translation exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Finn Lectura](https://otava.kauppakv.fi/sivu/tuote/9789511387824) – [Adlibris](https://www.adlibris.com/fi/kirja/from-start-to-finnish-9789511387824?gclid=Cj0KCQjwzbv7BRDIARIsAM-A6-1XWAV_tKHmBRyylraCoJ3eYfZ7rehTZ4ne59VVGzBneqQT1aRyMXEaAuykEALw_wcB) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/from-start-to-finnish-3) |
+| **Additional materials** | – Audio: [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511432753)\\\\ – [Teacher’s guide (extra exercises)](https://otava.kauppakv.fi/sivu/tuote/9789511433200) |
+
+Additional information: From start to Finnish - A short course in Finnish
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.2. Kato hei – Puhekielen alkeet**
+
+| **Name of the book** | Kato hei – Puhekielen alkeet |
+| --- | --- |
+| **Author(s)** | Maarit Berg, Leena Silfverberg |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2019 |
+| **Type of book** | Finnish beginner spoken language course book |
+| **Aesthetics of the book** | clear, not overwhelming |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2.2 (start at level A1.3 for self-study) |
+| **Advances** | gradually, but doesn’t include much repetition |
+| **Types of texts** | spoken language dialogues of gradually increasing length |
+| **Topics discussed** | everyday life A1-A2 tidbits (see below) |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | the main focus of the book |
+| **Exercise types** | traditional, pretty limited |
+| **Solutions to the exercises** | at the back of the book |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | Seems to be unavailable at the moment |
+| **Additional materials** | – Audio: CD or mp3 – Can be [bought](https://otava.kauppakv.fi/sivu/tuote/9789511435761), or leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511435778) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511435785) |
+
+Additional information: Kato hei - Puhekielen alkeet
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.3. Sun suomi – Finnish for beginners**
+
+| **Name of the book** | Sun suomi – Finnish for beginners |
+| --- | --- |
+| **Author(s)** | Kristiina Kuparinen, Terhi Tapaninen, Karoliina Kuisma |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2020 |
+| **Type of book** | Finnish beginner course book |
+| **Aesthetics of the book** | a little bit too busy, nice blue and orange pictures |
+| **Language(s) used** | Finnish and English |
+| **Level range** | zero to A2.2 |
+| **Advances** | gradually, every chapter also includes some revision exercises |
+| **Types of texts** | dialogues, monologues as well as more functional (see below) |
+| **Topics discussed** | typical A1-A2 topics (see below) |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | present from the beginning, limited to very common elements |
+| **Exercise types** | many types, traditional and functional |
+| **Solutions to the exercises** | available if you buy the teacher’s guide |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | [Finn Lectura](https://otava.kauppakv.fi/sivu/tuote/9789511384649) – [Booky](https://www.booky.fi/tuote/kristiina_kuparinen/sun_suomi_cd_finnish_for_beginners/9789511261513) |
+| **Additional materials** | – Audio CD included if you buy the book from Adlibris or Booky\\\\ – Audio: CD or mp3 complete – Can be [bought](https://otava.kauppakv.fi/sivu/tuote/9789511340645), or leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511441670) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511441694)\\\\ – [Teacher’s guide](https://otava.kauppakv.fi/sivu/tuote/9789511273691) (includes the solutions to the exercises) |
+
+Additional information: Sun suomi - Finnish for beginners
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.4. Suomi selväksi – Soome keele õpik**
+
+| **Name of book** | Suomi selväksi – Soome keele õpik |
+| --- | --- |
+| **Author(s)** | Margrit Kuusk |
+| **Publisher** | Eesti Keele Sihtasutus |
+| **Most recent edition** | 2013 |
+| **Type of book** | Finnish course book in Estonian |
+| **Aesthetics of the book** | clear, inviting, black and white pictures |
+| **Language(s) used** | Estonian and Finnish |
+| **Level range** | zero (if you’re Estonian) to A2.2 |
+| **Advances** | quickly |
+| **Types of texts** | dialogues and narratives |
+| **Topics discussed** | typical A1-A2 topics |
+| **Grammar topics** | most Finnish cases and verb forms |
+| **Spoken language** | no |
+| **Exercise types** | fill-in-the-gaps and other traditional types |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Booky](https://www.booky.fi/tuote/kuusk_margit/suomi_selvaksi/9789985790946) – [Apollo](https://www.apollo.ee/suomi-selvaksi-soome-keele-opik.html) |
+| **Workbooks** | [Suomi selväksi – Töövihik I osa](https://ruslania.com/fi/kirjat/106155-suomi-selvaksi-toovihik-i-osa/)\\\\ [Suomi selväksi – Töövihik II osa](https://www.apollo.ee/suomi-selvaksi-toovihik-ii-osa.html) |
+
+Additional information: Suomi selväksi - Soome keele õpik
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.5. Supisuomea**
+
+| **Name of the book** | Supisuomea |
+| --- | --- |
+| **Author(s)** | Leena Silfverberg, Leila White |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2006 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | colorful |
+| **Language(s) used** | Finnish only |
+| **Level range** | A1-A2.2 |
+| **Advances** | evenly, but doesn’t allow for much repetition |
+| **Types of texts** | lots of dialogues of different lengths |
+| **Topics discussed** | typical A1-A2 topics (see below) |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | use of *mä, mun, me tultiin* starting halfway through the book |
+| **Exercise types** | one or two per chapter, grammar exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 1/5 (because not sold anymore, but the videos 5/5) |
+| **Buy the book** | no longer getting printed |
+| **Additional materials** | – [Videos (with explanations)](https://yle.fi/aihe/artikkeli/2015/12/15/supisuomea)\\\\ – [Plain videos](https://areena.yle.fi/1-4163476) |
+
+Additional information: Supisuomea
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.6. Helppoa suomea**<br /></h3>
+
+| **Name of the book** | Helppoa suomea |
+| --- | --- |
+| **Author(s)** | Anni Piikki, Mirja Välkesalmi |
+| **Publisher** | Opetushallitus |
+| **Most recent edition** | 2016 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | colorful, spaced out nicely, clear sections |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2.1 |
+| **Advances** | fairly quickly |
+| **Types of texts** | dialogues, narratives, ads (see below) |
+| **Topics discussed** | typical A1 level topics (see below) |
+| **Grammar topics** | very few included, typical A1 topics (see below) |
+| **Spoken language** | not included |
+| **Exercise types** | classroom conversation prompts |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Opetushallitus](https://verkkokauppa.oph.fi/sivu/tuote/helppoa-suomea/2251302) – [Booky](https://www.booky.fi/tuote/anni_piikki/helppoa_suomea/9789521359125) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/helppoa-suomea) |
+| **Additional materials** | [Audio: streamed for free](https://www.oph.fi/fi/oppimateriaali/helppoa-suomea/aanitteet) |
+
+Additional information: Helppoa suomea
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/sentence-types/necessity-sentences-taytyy-pitaa-on-pakko/)
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### 2.7. Hoidetaan suomeksi
+
+| **Name of the book** | Hoidetaan suomeksi |
+| --- | --- |
+| **Author(s)** | Anu Mustonen, Heidi Sippola, Nuppu Tuononen |
+| **Publisher** | Sanoma Pro |
+| **Most recent edition** | 2014 |
+| **Type of book** | beginner textbook with focus on health care |
+| **Aesthetics of the book** | black and white, spacious, pleasant |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2.2 (vocabulary B1) |
+| **Advances** | quickly and abruptly, giant leaps |
+| **Types of texts** | dialogues, narratives, informational texts |
+| **Topics discussed** | typical A1-A2 topics (see below) + medical vocabulary |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | simple, short exercises included in most of book |
+| **Exercise types** | vocabulary and grammar exercises, listening exercises |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | [Sanoma Pro](https://tuotteet.sanomapro.fi/bu527275-hoidetaan-suomeksi.html) – [Adlibris](https://www.adlibris.com/fi/kirja/hoidetaan-suomeksi-9789526322636) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/hoidetaan-suomeksi) |
+| **Additional materials** | *–* The book mentions online exercises, but where?\\\\ – The book mentions online listening exercises, but where? |
+
+Additional information: Hoidetaan suomeksi
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.8. Teach Yourself Complete Finnish**
+
+| **Name of the book** | Teach Yourself Complete Finnish |
+| --- | --- |
+| **Author(s)** | Terttu Leney |
+| **Publisher** | Teach Yourself |
+| **Most recent edition** | 2017 |
+| **Type of book** | beginner to intermediate self-study book |
+| **Aesthetics of the book** | unclear structure, hard to find things |
+| **Language(s) used** | English and Finnish |
+| **Level range** | zero to B1.1 |
+| **Advances** | fairly even, builds on earlier knowledge |
+| **Types of texts** | mainly dialogues |
+| **Topics discussed** | Finnish life and culture, covers real communication needs |
+| **Grammar topics** | typical A1-A2 topics |
+| **Spoken language** | lightly touches upon in one chapter, not in the dialogues |
+| **Exercise types** | listening, translation, reaction exercises (see below) |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | – Adlibris: [Complete Finnish Beginner to Intermediate Course](https://www.adlibris.com/fi/kirja/complete-finnish-beginner-to-intermediate-course-9781444195224?gclid=Cj0KCQjw0rr4BRCtARIsAB0_48On3_OSrN7MabN4ueKWb-Vgv3uc-7DibAmYjwbC759MLpc8eHFLRYoaAgOHEALw_wcB)\\\\ – Amazon: [Teach Yourself Finnish Complete Course 1st Edition](https://www.amazon.com/Teach-Yourself-Finnish-Complete-Course/dp/0071420088) |
+| **Additional materials** | – Comes with a CD – Find it in your library with the book!\\\\ – [Audio available for free on the Teach Yourself website](https://library.teachyourself.com/id004325131/Complete-Finnish) |
+
+Additional information: Teach Yourself Complete Finnish
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.9. Colloquial Finnish**<br /></h3>
+
+| **Name of the book** | Colloquial Finnish – The Complete Course for Beginners |
+| --- | --- |
+| **Author(s)** | Daniel Abondolo\\\\ |
+| **Publisher** | Routledge |
+| **Most recent edition** | 2015 |
+| **Type of book** | beginner to intermediate self-study book |
+| **Aesthetics of the book** | black and white, nice highlights and tables, unclear structure\\\\ |
+| **Language(s) used** | Finnish and English |
+| **Level range** | zero to A2.2 (hard to pinpoint the goal, see below)\\\\ |
+| **Advances** | extremely irregularly, large gaps, sudden jumps in level |
+| **Types of texts** | dialogues mainly in spoken language\\\\ |
+| **Topics discussed** | going about your business in the city (some fairly useful dialogues) |
+| **Grammar topics** | topics of many levels (see below) |
+| **Spoken language** | present in the dialogues and explanations |
+| **Exercise types** | writing dialogues, replying to recordings, translating |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 1/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | *–* Paperback: [Adlibris](https://www.adlibris.com/fi/kirja/colloquial-finnish-9781138958302) – [Amazon](https://www.amazon.com/Colloquial-Finnish-Complete-Course-Beginners/dp/1138958301/ref=sr_1_1?dchild=1&keywords=Colloquial+Finnish&qid=1599981646&s=books&sr=1-1)\\\\ – Ebook: [Adlibris](https://www.adlibris.com/fi/e-kirja/colloquial-finnish-9781317305446) – [Kindle](https://www.amazon.com/Colloquial-Finnish-Complete-Course-Beginners-ebook/dp/B014KS6BO6/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=1599981646&sr=1-1) |
+| **Additional materials** | – Audio: [available for free online](https://www.routledgetextbooks.com/textbooks/colloquial/language/finnish.php) |
+
+Additional information: Teach Yourself Complete Finnish
+
+[](https://uusikielemme.fi/spoken-language/spoken-language-grammar/ne-menee-ne-tulee-ne-kattoo-spoken-language/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.10. Suomea paremmin**
+
+| **Name of the book** | Suomea paremmin |
+| --- | --- |
+| **Author(s)** | Susanna Hart |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2009 |
+| **Type of book** | Finnish intermediate course book |
+| **Aesthetics of the book** | clear structure, not overwhelming |
+| **Language(s) used** | vocabulary translated to English, everything else plain Finnish |
+| **Level range** | A2.1-B1.1 |
+| **Advances** | gets more difficult towards the end |
+| **Types of texts** | dialogues, news articles, advertisements, authentic sources |
+| **Topics discussed** | easier A2 and harder B1 topics (see below) |
+| **Grammar topics** | typical A2.1-A2.2 topics (see below) |
+| **Spoken language** | present in almost all the dialogues |
+| **Exercise types** | pretty limited (see below) |
+| **Solutions to the exercises** | at the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 1/5 (because no longer in print, otherwise 4/5) |
+| **Buy the book** | no longer in print – get it from the library |
+| **Additional materials** | Audio on a CD |
+
+Additional information: Suomea paremmin
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/expressing-necessity-with-a-participle-on-mentava-on-odotettava/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.11. Sainpas sanottua**<br /></h3>
+
+| **Name of the book** | Sainpas sanottua – Suomen kielen keskusteluoppikirja |
+| --- | --- |
+| **Author(s)** | Sirpa Häggblom, Hanna Paloneva |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2019 |
+| **Type of book** | spoken conversation skill training |
+| **Aesthetics of the book** | colorful, nice pictures, very inviting |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-B1.1 |
+| **Advances** | fairly uniform, a little bit more difficult near the end |
+| **Types of texts** | none |
+| **Topics discussed** | typical A2.1-A2.2 topics, functional language use (see below) |
+| **Grammar topics** | none |
+| **Spoken language** | different features of spoken language showcased throughout the book |
+| **Exercise types** | interesting, engaging, mostly meant to do with a partner or in a group |
+| **Solutions to the exercises** | in the teacher’s guide available for purchase separately\\\\ |
+| **Suitable for self-study** | 3/5 (not meant for self-study, but lots of useful content) |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Finn Lectura](https://otava.kauppakv.fi/sivu/tuote/9789511334071) – [Adlibris](https://www.adlibris.com/fi/kirja/sainpas-sanottua-9789511334071) – [Booky](https://www.booky.fi/search.php?search=SAINPAS+SANOTTUA#!product_id=9789511334071) |
+| **Additional materials** | – Teacher’s guide: [digital PDF](https://otava.kauppakv.fi/sivu/tuote/9789511334125) or [physical book](https://otava.kauppakv.fi/sivu/tuote/9789511334101)\\\\ – Audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789511334286), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511334095), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511440130) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511440147) |
+
+Additional information: Sainpas sanottua
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.12. Finnish Tutor – Grammar and Vocabulary Workbook**
+
+| **Name of the book** | Finnish Tutor – Grammar and Vocabulary Workbook |
+| --- | --- |
+| **Author(s)** | Riitta-Liisa Valijärvi |
+| **Publisher** | Teach Yourself |
+| **Most recent edition** | 2017 |
+| **Type of book** | intermediate to advanced self-study book |
+| **Aesthetics of the book** | nice font, space to write, no pictures |
+| **Language(s) used** | English, Finnish |
+| **Level range** | A2.2-B2 |
+| **Advances** | fairly quickly |
+| **Types of texts** | varied types (see below) |
+| **Topics discussed** | vocabulary topic in each chapter, but not in depth |
+| **Grammar topics** | A2-B2 grammar (see below) |
+| **Spoken language** | none |
+| **Exercise types** | few grammar/vocabulary exercises, reading and writing exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Amazon](https://www.amazon.com/Finnish-Tutor-Vocabulary-Workbook-intermediate/dp/147361743X) – [Adlibris](https://www.adlibris.com/fi/kirja/finnish-tutor-grammar-and-vocabulary-workbook-learn-finnish-with-teach-yourself-9781473617438) – [Booky](https://www.booky.fi/tuote/valijarvi_riitta/finnish_tutor_grammar_and_vocabulary_workbook/9781473617438) |
+| **Additional materials** | none |
+
+Additional information: Finnish Tutor
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **2.13. Tarinoita Suomesta**
+
+| **Name of the book** | Tarinoita Suomesta |
+| --- | --- |
+| **Author(s)** | Susanna Hart |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2009 |
+| **Type of book** | intermediate course book |
+| **Aesthetics of the book** | engaging, some use of color, clear construction |
+| **Language(s) used** | Finnish (but word lists with English translations) |
+| **Level range** | B1-B2 |
+| **Advances** | fairly even, not a strong curve |
+| **Types of texts** | news articles and interviews |
+| **Topics discussed** | random reading texts, sometimes sensitive topics |
+| **Grammar topics** | advanced grammar topics (see below) |
+| **Spoken language** | most of the listening assignments include some spoken language |
+| **Exercise types** | pair work, small writing exercises (see below) |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 1/5 (because it’s not available for purchase anymore) |
+| **Buy the book** | no longer being printed |
+| **Additional materials** | – Teacher’s guide – No longer available\\\\ – Comes with a CD – Find it in your library with the book! |
+
+Additional information: Tarinoita Suomesta
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.14. Learn Finnish without Studying**<br /></h3>
+
+| **Name of the book** | Learn Finnish without Studying |
+| --- | --- |
+| **Author(s)** | Sami Nyyssölä |
+| **Publisher** | Pokuto |
+| **Most recent edition** | 2018 |
+| **Type of book** | comic book with Finnish language and culture tidbits |
+| **Aesthetics of the book** | black and white comics |
+| **Language(s) used** | English and Finnish |
+| **Level range** | not specified, probably useful to some extent to anyone |
+| **Advances** | same type of language in the whole book |
+| **Types of texts** | comic book, cultural info in boxes |
+| **Topics discussed** | Finnish culture and everyday life, typical quirks |
+| **Grammar topics** | small number of grammar explanations and info about compound words |
+| **Spoken language** | mentioned briefly |
+| **Exercise types** | none |
+| **Solutions to the exercises** | none |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Turun sarjakuvakauppa](https://www.sarjakuvakauppa.fi/sarjakuvat/learn-finnish-without-studying.html) – [Booky](https://www.booky.fi/tuote/learn_finnish_without_studying/9789526910901) |
+| **Additional materials** | none |
+
+Additional information: Learn Finnish without Studying
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.15. Sisunautti valtameressä**<br /></h3>
+
+| **Name of the book** | Sisunautti valtameressä\\\\ |
+| --- | --- |
+| **Author(s)** | Gimara Oy |
+| **Publisher** | Gimara Oy |
+| **Most recent edition** | 2022 |
+| **Type of book** | exercises to practice speaking and writing |
+| **Aesthetics of the book** | a little confusing until you realize how it is organized |
+| **Language(s) used** | Finnish only |
+| **Level range** | not specified, but meant to practice for YKI, so levels A2-B2 |
+| **Advances** | approximately same level throughout, organized by theme |
+| **Types of texts** | no reading texts |
+| **Topics discussed** | the seven themes usually present in YKI-testi |
+| **Grammar topics** | no grammar |
+| **Spoken language** | all the dialogues are spoken in easy spoken Finnish |
+| **Exercise types** | speaking exercises and writing exercises |
+| **Solutions to the exercises** | none |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Printed book](https://www.gimaraworld.com/fi/tuote/sisunautti-valtameressa-suomea-keskitasolle-painettu-kirja/) or [PDF](https://www.gimaraworld.com/fi/tuote/sisunautti-valtameressa-suomea-keskitasolle-e-kirja-pdf/) (both for the same price) |
+| **Additional materials** | [Soundcloud](https://soundcloud.com/gi-mara/sets), sets marked with the word *sisunautti* |
+
+Additional information: Sisunautti valtameressä
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.16. Ykäänkö vai ykiinkö – Highway to hill**<br /></h3>
+
+| **Name of the book** | Ykäänkö vai ykiinkö – Highway to hill |
+| --- | --- |
+| **Author(s)** | Gimara Oy |
+| **Publisher** | Gimara Oy |
+| **Most recent edition** | 2021 |
+| **Type of book** | mainly exercises to practice speaking and writing for YKI-testi |
+| **Aesthetics of the book** | colorful, clear composition once you realize how it works |
+| **Language(s) used** | Finnish only |
+| **Level range** | not specified, but meant to practice for YKI, so levels (A2-B2) |
+| **Advances** | approximately same level throughout, organized by theme |
+| **Types of texts** | no reading texts |
+| **Topics discussed** | the seven themes usually present in YKI-testi |
+| **Grammar topics** | no grammar |
+| **Spoken language** | common spoken language elements (e.g. *sä* rather than *sinä*) |
+| **Exercise types** | speaking exercises and writing exercises |
+| **Solutions to the exercises** | none |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Gimara World](https://www.gimaraworld.com/fi/tuote/ykaanko-vai-ykiinko-hign-way-to-hill/) |
+| **Additional materials** | [Soundcloud](https://soundcloud.com/gi-mara) (hard to find the right ones) |
+
+Additional information: Ykäänkö vai ykiinkö
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.17. YKIä kohti**<br /></h3>
+
+| **Name of the book** | YKIä kohti |
+| --- | --- |
+| **Author(s)** | Larisa Heikkinen, Mari Nikonen, Maiju Ollilainen, Jepa Viinanen |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2024 |
+| **Type of book** | Exercise book to prepare for YKI-testi |
+| **Aesthetics of the book** | inviting, not especially colorful but well-structured |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2 to B2 |
+| **Advances** | no clear level progression |
+| **Types of texts** | intermediate level texts with questions typical for YKI-testi |
+| **Topics discussed** | the seven themes usually present in YKI-testi |
+| **Grammar topics** | no grammar section |
+| **Spoken language** | rarely used in written tasks, listening exercises not released yet |
+| **Exercise types** | reading, writing, listening and speaking exercises |
+| **Solutions to the exercises** | included in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Finn Lectura](https://otava.kauppakv.fi/sivu/tuote/9789511376507) |
+| **Additional materials** | – Audio as [mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511490166)\\\\ perhaps this is an error, perhaps they’re forever gone)\\\\ Note: the audio is also available for free if you use the [Otso app](https://oppimisenpalvelut.otava.fi/otso/)\\\\ – [Solutions to the exercises](https://otava.kauppakv.fi/sivu/tuote/9789511503682) (PDF) |
+
+Additional information: YKIä kohti
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**2.18. Gimara suomi – Taitotasolta 0 taitotasolle A1.3**<br /></h3>
+
+| **Name of the book** | Gimara suomi – Taitotasolta 0 taitotasolle A1.3 |
+| --- | --- |
+| **Author(s)** | Gimara suomi |
+| **Publisher** | Gimara Oy |
+| **Most recent edition** | 2022 |
+| **Type of book** | Text book for learning beginner Finnish |
+| **Aesthetics of the book** | Not very inviting, messy, lots of QR codes |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A1.3 |
+| **Advances** | no clear level progression |
+| **Types of texts** | mostly single sentences |
+| **Topics discussed** | the seven typical themes you will need to talk about life |
+| **Grammar topics** | no plain grammar topics |
+| **Spoken language** | no |
+| **Exercise types** | reading, writing and listening exercises, links to website |
+| **Solutions to the exercises** | reading and listening exercises online with right answers |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | [Printed book](https://www.gimaraworld.com/fi/tuote/gimara-suomi-taitotasolta-0-taitotasolle-a1-3-painettu/), or [PDF](https://www.gimaraworld.com/fi/tuote/gimara-suomi-taitotasolta-0-taitotasolle-a1-3-painettu/) |
+| **Additional materials** | – The [YouTube channel](https://www.youtube.com/@GimaraOy) of Gimara\\\\ – Free learning materials on the Gimara [website](https://gimara.fi/) |
+
+Additional information: Gimara suomi - Taitotasolta 0 taitotasolle A1.3
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[Back to top](https://uusikielemme.fi/language-levels/textbooks/finnish-language-learning-book-review-list-oppikirjat#top)
+
+### **2.18. Eteenpäin! – Suomen kielen harjoituksia ylemmille taitotasoille**
+
+| **Name of the book** | Eteenpäin – Suomen kielen harjoituksia ylemmille taitotasoille |
+| --- | --- |
+| **Author(s)** | Marja-Liisa Saunela |
+| **Publisher** | Art House Oy |
+| **Most recent edition** | 2025 |
+| **Type of book** | Text book for upper intermediate learners |
+| **Aesthetics of the book** | clear, not too crowded, black and white |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1-B2 |
+| **Advances** | no clear level progression |
+| **Types of texts** | informative texts as well as related opinion pieces |
+| **Topics discussed** | more advanced topics (e.g. society, consumption, environment) |
+| **Grammar topics** | starting from B2-level (e.g. participles) |
+| **Spoken language** | no |
+| **Exercise types** | reading text (without questions) and grammar exercises |
+| **Solutions to the exercises** | yes |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Art House](https://arthouse.fi/sivu/tuote/eteenpain-/5223634) – [AdLibris](https://www.adlibris.com/fi/kirja/eteenpain-9789524140133) |
+| **Additional materials** | none |
+
+Additional information: Eteenpäin! - Suomen kielen harjoituksia ylemmille taitotasoille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+## **3. Finnish Textbook Series**
+
+Finnish Textbook Series
+
+1. **Ahaa!** series
+   1. Ahaa! 1 – Suomen kielen oppikirja aikuisille (zero to A1.3)
+   2. Ahaa! 2 – Suomen kielen oppikirja aikuisille (A2.1 to A2.2)
+2. **Alku** series
+   1. Alku 1 – Suomea aikuisten maahanmuuttajien perusopetukseen
+   2. Alku 2 – coming in June of 2025
+3. **Avain suomeen** series
+   1. Avain suomeen 1 – Arkipäivän suomea aikuisille (zero to A2.1)
+   2. Avain suomeen 2 – Arkipäivän suomea aikuisille (A2.1-A2.2)
+4. **No niin!** series
+   1. No niin! 1 – Suomea aikuisille (zero to A2)
+   2. No niin! 2 (A2 to B2)
+5. **Oma suomi** series
+   1. Oma suomi 1 – Suomea aikuisille (zero to A2)
+   2. Oma suomi 2 – Suomea aikuisille (B1.1 to B1.2)
+6. **Suomen mestari** series
+   1. Suomen mestari 1 (zero to A1.3)
+   2. Suomen mestari 2 (A1.3 to A2.1)
+   3. Suomen mestari 3 (A2.2 to B1.1)
+   4. Suomen mestari 4 (B1.1 to B2)
+7. **Suomi sujuvaksi** series
+   1. Suomi sujuvaksi 1 (zero to A2.1)
+   2. Suomi sujuvaksi 2 (A2.2 to B1.1)
+8. **Suomea suomeksi** series
+   1. Suomea suomeksi 1 (zero to A2.1)
+   2. Suomen harjoituksia 1 (zero to A2.1)
+   3. Suomea suomeksi 2 (A2.1 to B1.1)
+   4. Suomen harjoituksia 2 (A2.1 to B1.1)
+9. **Suomen kielen oppikirja** series
+   1. Suomen kielen alkeisoppikirja (zero to A2)
+   2. Harjoituskirja suomen kielen perusopetusta varten (zero to A2)
+   3. Suomen kielen jatko-oppikirja (A2 to B1)
+   4. Harjoituskirja suomen kielen jatko-opetusta varten (A2 to B1)
+10. **Suomen kielen tikapuut** series
+11. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Alkeistaso 1 (zero to A2.2)
+12. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Alkeistaso 2 (A2.2 to B1.1)
+13. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Jatkotaso 1 (B1.1 to B1.2)
+14. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Jatkotaso 2 (B1 to C1)
+15. **Finnish for Foreigners** series
+16. Finnish for Foreigners 1 (zero to B1.1)
+17. Finnish for Foreigners 1 Exercises (zero to B1.1)
+18. Finnish for Foreigners 2 (B1.2 to C1)
+19. Finnish for Foreigners 2 Exercises (B1.2 to C1)
+20. **Kuulostaa hyvältä** series
+21. Kuulostaa hyvältä – Sounds good (zero to B1.1)
+22. Sounds good – Kuulostaa hyvältä (zero to B1.1)
+23. **Tilanteesta toiseen** series
+24. Tilanteesta toiseen – A Finnish Course (A2.1 to A2.2)
+25. Tilanteesta toiseen – Harjoituksia Exercises (A2.1 to A2.2)
+26. **Päivää!** series
+27. Päivää! – Suomea aikuisille (A2.1 to A2.2)
+28. Palataan! – Suomea aikuisille (A2.2 to B1.1)
+29. **Työelämän suomea** series
+30. Työelämän suomea 1 – Suomeksi ammattiin (A2.1 to A2.2)
+31. Työelämän suomea 2 -Suomeksi työhön (A2.2 to B1.2)
+32. **Harjoitus tekee mestarin** series
+33. Harjoitus tekee mestarin 1 (A2.2 to B1.1)
+34. Harjoitus tekee mestarin 2 (B1.1 to B2)
+35. Harjoitus tekee mestarin 3 (B1.1 to B2)
+36. Harjoitus tekee mestarin 4 ( B1.1 to B2)
+37. **Suomen kieli kuntoon** series
+38. Suomen kieli kuntoon 1 (A2.2 to B1.2)
+39. Suomen kieli kuntoon 2 (B1.1 to C1.1)
+40. **Middle school** student book series
+41. Juttuja ja tuttuja – Suomea toisena kielenä seitsemäsluokkalaisille (B1.1 to B2.2)
+42. Juttuja ja tuttuja – Harjoituskirja seitsemäsluokkalaisille (B1.1 to B2.2)
+43. Yhteistä ja omaa – Suomea toisena kielenä kahdeksasluokkalaisille (B1.1 to B1.2)\
+Yhteistä ja omaa – Harjoituksia kahdeksasluokkalaisille (?)
+44. Täällä ja toisaalla – Suomea toisena kielenä yhdeksäsluokkalaisille (B1.2 to B2.1)\
+Täällä ja toisaalla – Harjoituksia yhdeksäsluokkalaisille (?)
+
+### **3.1.** ***Ahaa!*** **series**
+
+This series is meant to be used as a course book, which is clear from the frequent exercises that are meant to be done in a group setting. Compared to other coursebooks, this one advances more gradually and slowly, making is great for immigrant courses that advance at a slower pace.
+
+### **3.1.1. Ahaa! 1 – Suomen kielen oppikirja aikuisille**
+
+| **Name of the book** | Ahaa! 1 – Suomen kielen oppikirja aikuisille |
+| --- | --- |
+| **Author(s)** | Laura Tikkanen, Noora Tähtinen |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2019 |
+| **Type of book** | slow-paced beginner course book |
+| **Aesthetics of the book** | colorful, engaging, a little chaotic |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A1.3 |
+| **Advances** | fairly slowly |
+| **Types of texts** | dialogues and narratives |
+| **Topics discussed** | typical topics up to level A1.3 (see below) |
+| **Grammar topics** | typical topics up to level A1.3 (see below) |
+| **Spoken language** | limited to the use of personal pronouns |
+| **Exercise types** | group, discussion, fill-in-the-gaps, true-or-false, etc. |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 2/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/9789511354321) – [Adlibris](https://www.adlibris.com/fi/kirja/ahaa-1-9789511354321?gclid=Cj0KCQjwvIT5BRCqARIsAAwwD-RCUwLKXKqWuEb3py5EyhTkR_u89TPWj2kgyMUS2KZf6wuVXM3MT10aAjtEEALw_wcB) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/ahaa-5) |
+| **Additional materials** | – Teacher’s guide: [digital PDF](https://otava.kauppakv.fi/sivu/tuote/9789511429487)\\\\ – Audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789511334286), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511334095), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511440130) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511429463) |
+
+Additional information: Ahaa! 1 - Suomen kielen oppikirja aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.1.2. Ahaa! 2 – Suomen kielen oppikirja aikuisille**
+
+| **Name of book** | Ahaa! 2 – Suomen kielen oppikirja aikuisille |
+| --- | --- |
+| **Author(s)** | Laura Tikkanen, Noora Tähtinen |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2019 |
+| **Type of book** | intermediate course book |
+| **Aesthetics of the book** | colorful, engaging, a little chaotic |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-A2.2 |
+| **Advances** | claims to advance slowly (see below) |
+| **Types of texts** | dialogues, narratives and comic strips |
+| **Topics discussed** | everyday life in Finland (see below) |
+| **Grammar topics** | typical level A2.1-B1.1 topics (see below) |
+| **Spoken language** | spoken language pronouns + bits about regional dialects |
+| **Exercise types** | group, discussion, reading, writing, etc. |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/ahaa-2/2576293) – [Adlibris](https://www.adlibris.com/fi/kirja/ahaa-2-9789511354338) |
+| **Buy the audio** | – Audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789523461017), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511429517), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511429548) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511429531) |
+
+Additional information: Ahaa! 2 - Suomen kielen oppikirja aikuisille
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/spoken-language-grammar/ma-maa-mie-pronouns-in-spoken-language/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/the-relative-pronoun-joka-joka-pronomini/)
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.2.** ***Alku*** **series**<br /></h3>
+
+This series was published in 2024 and 2025.
+
+<h3>**3.2.1. Alku 1 – Suomea aikuisten maahanmuuttajien perusopetukseen**<br /></h3>
+
+| **Name of the book** | Alku 1 – Suomea aikuisten maahanmuuttajien perusopetukseen |
+| --- | --- |
+| **Author(s)** | Réka Aarnos, Anna Nylund-Oravala, Ulla Pajanen, Tuomo Polo |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2024 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | simple, clear, slightly larger format |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2.1 |
+| **Advances** | slowly and steadily |
+| **Types of texts** | a couple of little texts here and there, no spoken Finnish |
+| **Topics discussed** | simple, useful topics (see below) |
+| **Grammar topics** | pretty nice coverage of the basics (see below) |
+| **Spoken language** | none at all |
+| **Exercise types** | lots of engaging, varied exercises (the best part of this book) |
+| **Solutions to the exercises** | for sale separately (PDF) |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/9789511433774) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/alku-2) – [Adlibris](https://www.adlibris.com/fi/kirja/alku-1-9789511433774) |
+| **Additional materials** | – [Exercise book](https://otava.kauppakv.fi/sivu/tuote/9789511480839)\\\\ – Audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789511486930), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511486923), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511486909) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511486916)\\\\ – Audio also for free on the [Otso app](https://play.google.com/store/apps/details?id=fi.otava.otso&hl=fi) if you have the book\\\\ – [Answer key for the exercises + texts of the listening exercises](https://finnlectura.fi/oppimateriaalit/suomi-toisena-kielena/alku/alku-1/) |
+
+Additional information: Alku 1 - Suomea aikuisten maahanmuuttajien perusopetukseen
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<h3>**3.2.2. Alku 2 – Scheduled to be released in June of 2025**<br /></h3>
+
+| **Name of the book** |  |
+| --- | --- |
+| **Author(s)** |  |
+| **Publisher** |  |
+| **Most recent edition** |  |
+| **Type of book** |  |
+| **Aesthetics of the book** |  |
+| **Language(s) used** |  |
+| **Level range** |  |
+| **Advances** |  |
+| **Types of texts** |  |
+| **Topics discussed** |  |
+| **Grammar topics** |  |
+| **Spoken language** |  |
+| **Exercise types** |  |
+| **Solutions to the exercises** |  |
+| **Suitable for self-study** |  |
+| **Suitable for study abroad** |  |
+| **Buy the book** |  |
+| **Additional materials** |  |
+
+Additional information: Alku 2 - Coming soon!
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.3.** ***Avain suomeen*** **series**
+
+### **3.3.1. Avain suomeen 1 – Arkipäivän suomea aikuisille**
+
+| **Name of the book** | Avain suomeen 1 – Arkipäivän suomea aikuisille |
+| --- | --- |
+| **Author(s)** | Ella Saarinen, Mirva Salonen |
+| **Publisher** | Gaudeamus |
+| **Most recent edition** | 2017 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | simple, colorful, big font |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2.1 |
+| **Advances** | pretty slowly, though the length of the texts increases drastically. |
+| **Types of texts** | mainly dialogues, a few narratives |
+| **Topics discussed** | real life situations where an immigrant could use Finnish |
+| **Grammar topics** | very limited, mostly approached through examples |
+| **Spoken language** | present from the start, not overwhelming |
+| **Exercise types** | lots of listening exercises (see below) |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | [Gaudeamus](https://kauppa.gaudeamus.fi/sivu/tuote/avain-suomeen-1/1970695) – [Adlibris](https://www.adlibris.com/fi/kirja/avain-suomeen-1-9789524954518) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/avain-suomeen-1) |
+| **Additional materials** | [Audio: CD with dialogues and listening exercises](https://kauppa.gaudeamus.fi/sivu/tuote/avain-suomeen-1-mp3-cd-/1970698) |
+
+Additional information: Avain suomeen 1 - Arkipäivän suomea aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.3.2 Avain suomeen 2 – Arkipäivän suomea aikuisille**
+
+| **Name of the book** | Avain suomeen 2 – Arkipäivän suomea aikuisille |
+| --- | --- |
+| **Author(s)** | Ella Saarinen, Mirva Salonen |
+| **Publisher** | Gaudeamus |
+| **Most recent edition** | 2018 |
+| **Type of book** | intermediate course book |
+| **Aesthetics of the book** | colorful, not too crowded, easy to follow |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-A2.2 |
+| **Advances** | moderately slowly, chapters don’t contain many new elements at once |
+| **Types of texts** | mainly dialogues, also more authentic texts such as ads |
+| **Topics discussed** | A2 level situations where an immigrant could use Finnish (see below) |
+| **Grammar topics** | not the main focus, limited, approached through examples in tables |
+| **Spoken language** | great for colloquial Finnish |
+| **Exercise types** | lots of listening exercises (see below) |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | [Gaudeamus](https://www.gaudeamus.fi/teos/avain-suomeen-2/) – [Adlibris](https://www.adlibris.com/fi/kirja/avain-suomeen-2-9789524954938) |
+| **Buy the audio** | [CD with dialogues and listening exercises](https://www.gaudeamus.fi/teos/avain-suomeen-2-aanite/) |
+
+Additional information: Avain suomeen 2 - Arkipäivän suomea aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.4.** ***No niin!*** **series**
+
+The book series *No niin!* consists of two books, one of which was released in 2019 and the second in the summer of 2020.
+
+### **3.4.1. No Niin! 1 – Suomea aikuisille**
+
+| **Name of the book** | No Niin! 1 – Suomea aikuisille |
+| --- | --- |
+| **Author(s)** | Susanne Gerstler, Hanna Aho, Hanna Willberg |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2019 |
+| **Type of book** | Finnish beginner course book |
+| **Aesthetics of the book** | colorful, engaging, maybe a little too busy |
+| **Language(s) used** | Finnish only |
+| **Starting level** | zero to A2 |
+| **Advances** | fairly slowly |
+| **Types of texts** | mainly dialogues, mainly written Finnish |
+| **Topics discussed** | typical A1-A2 topics (see below) |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | rather limited use in dialogues, superficial |
+| **Exercise types** | many! traditional + functional + musical |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/9789511334118) – [Adlibris](https://www.adlibris.com/fi/kirja/no-niin-1-9789511334118) |
+| **Additional materials** | – [Browser version of the book](https://otava.kauppakv.fi/sivu/tuote/9789511404583)\\\\ – Audio: [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511334217), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511437437) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511437420)\\\\ – Teacher’s guide: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511334187) or [as physical book](https://otava.kauppakv.fi/sivu/tuote/9789511334163)\\\\ – Solutions to the exercises: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511373018)\\\\ – [Videos and digital exercises](https://otava.kauppakv.fi/sivu/tuote/no-niin-1-digitehtavat-12-kk-onl/2674639) |
+
+Additional information: No niin! 1 - Suomea aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.4.2. No niin! 2**
+
+| **Name of the book** | No Niin! 2 – Suomea aikuisille |
+| --- | --- |
+| **Author(s)** | Susanne Gerstler, Hanna Aho |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2020 |
+| **Type of book** | Finnish intermediate course book |
+| **Aesthetics of the book** | colorful, engaging, maybe a little too busy |
+| **Language(s) used** | Finnish only |
+| **Starting level** | A2 |
+| **Advances** | fairly quickly, but consistently |
+| **Types of texts** | a large collection of colloquial language dialogues, some narratives |
+| **Topics discussed** | Typical topics needed for level B1-B2 (see below) |
+| **Grammar topics** | Typical topics needed for level B1-B2 (see below) |
+| **Spoken language** | present in all the dialogues |
+| **Exercise types** | a lot of variety (see below) |
+| **Solutions to the exercises** | available separately for a fee |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/9789511364559) – [Adlibris](https://www.adlibris.com/fi/kirja/no-niin-2-9789511364559) |
+| **Additional materials** | – [Browser version of the book](https://otava.kauppakv.fi/sivu/tuote/9789511407607)\\\\ – Audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789511364573), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511364580), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511437444) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511437451)\\\\ – Audio is also available through the [Otso app](https://play.google.com/store/apps/details?id=fi.otava.otso&hl=fi)\\\\ – [Finnish-English vocabulary list](https://otava.kauppakv.fi/sivu/tuote/9789511454199)\\\\ – Teacher’s guide: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511364603) or [as physical book](https://otava.kauppakv.fi/sivu/tuote/9789511364566)\\\\ – Solutions to the exercises: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511409830)\\\\ – [Listening exercises and digital exercises](https://otava.kauppakv.fi/sivu/tuote/9789511454175) |
+
+Additional information: No niin! 2
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/the-relative-pronoun-joka-joka-pronomini)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.5.** ***Oma suomi*** **series**
+
+### **3.5.1 Oma suomi 1 – Suomea aikuisille**
+
+| **Name of the book** | Oma suomi 1 – Suomea aikuisille / Uudistettu oma suomi 1 |
+| --- | --- |
+| **Author(s)** | Kristiina Kuparinen, Terhi Tapaninen |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2022 |
+| **Type of book** | Finnish beginner course book |
+| **Aesthetics of the book** | colorful, interesting, but chaotic |
+| **Language(s) used** | Finnish only |
+| **Level range** | from zero to A2 |
+| **Advances** | fairly quickly (lots of grammar in each chapter) |
+| **Types of texts** | dialogues, texts |
+| **Topics discussed** | typical A1-A2 topics (see below) |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | limited to spoken language pronouns in dialogues |
+| **Exercise types** | traditional + functional (+ digital ones for a fee) |
+| **Solutions to the exercises** | available for sale in a separate book |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | Old version: [Otava](https://otava.kauppakv.fi/sivu/tuote/9789511273714) – [Booky](https://www.booky.fi/search.php?search=oma+suomi+1&gclid=CjwKCAjw9vn4BRBaEiwAh0muDHDoknU6sehM-LpW73syFj_WpvWdZenlzEujMCu3CymUSWh-l0Ke-hoC4AUQAvD_BwE) – [Prisma](https://www.prisma.fi/tuotteet/110636229/kuparinen-oma-suomi-1-uudistettu-suomea-aikuisille-110636229)\\\\ New version: [Otava](https://otava.kauppakv.fi/sivu/tuote/oma-suomi-1-uudistettu/4750467) – [Booky](https://www.booky.fi/tuote/kristiina_kuparinen/oma_suomi_1_uudistettu_suomea_aikuisille/9789511448266?gclid=CjwKCAiAzKqdBhAnEiwAePEjkvPeGvUOP23x0zCQNbObiRQzgk8NHxTTazRHYGZB6n_5bTK9_KbfURoC5CcQAvD_BwE) – [Prisma](https://www.prisma.fi/fi/prisma/kuparinen-oma-suomi-1-uudistettu-pehmeakantinen-kirja) |
+| **Additional materials** | – [Browser version of the book (12 months) – “näköisversio”](https://otava.kauppakv.fi/sivu/tuote/9789511390336)\\\\ – Complete audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789511461074), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511307327), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511437512) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511437499)\\\\ – Teacher’s guide: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511277750)\\\\ – Solutions to the exercises: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511366232)\\\\ – [Digital exercises (12 months)](https://otava.kauppakv.fi/sivu/tuote/9789511453871) |
+
+Additional information: Oma suomi 1 - suomea aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.5.2. Oma suomi 2 – Suomea aikuisille**
+
+| **Name of the book** | Oma suomi 2 – Suomea aikuisille / Uudistettu oma suomi 2 |
+| --- | --- |
+| **Author(s)** | Kristiina Kuparinen, Terhi Tapaninen |
+| **Publisher** | Otava |
+| **Most recent edition** | 2022 |
+| **Type of book** | Finnish intermediate course book |
+| **Aesthetics of the book** | colorful, interesting, but chaotic |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1.1-B1.2 |
+| **Advances** | fairly quickly (lots of grammar in each chapter) |
+| **Types of texts** | dialogues, texts, emails |
+| **Topics discussed** | working life, Finnish history, media, problem situations, etc. |
+| **Grammar topics** | plural cases, tenses and moods, pronouns, comparatives, passives, etc. |
+| **Spoken language** | limited to spoken language pronouns in dialogues |
+| **Exercise types** | traditional + functional |
+| **Solutions to the exercises** | available for sale in a separate book |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/9789511283799) – [Adlibris](https://www.adlibris.com/fi/kirja/oma-suomi-2-suomea-aikuisille-9789511283799?gclid=CjwKCAjw9vn4BRBaEiwAh0muDIJrB0mquobEc0sQoRESL9zxdvEEEhA2Sblz2P2T73HopFxMGTQOtBoC7qYQAvD_BwE) |
+| **Additional materials** | – [Browser version of the book (12 months)](https://otava.kauppakv.fi/sivu/tuote/9789511407713)\\\\ – Complete audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789511293996), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511307334), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511437543) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511437536)\\\\ – Teacher’s guide: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511294009)\\\\ – Solutions to the exercises: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511366249) |
+
+Additional information: Oma suomi 2 - suomea aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.6.** ***Suomen mestari*** **series**
+
+Ever since the *Suomen mestari* series came out, it’s been popular with both students and teachers of integration Finnish courses. The four-part series is written completely in Finnish and moves gradually towards level B2. Throughout the series, you get to follow the everyday lives of the main characters as they talk about their family, free time and work. **New!** For Suomen mestari 1, there is now an English translated version of the digital book (so not for the printed copy).
+
+This is a complicated series with many additional materials available, so it would be a good idea to continue reading about this series in my separate article:
+
+<Spacer />
+
+### **3.6.1. Suomen mestari 1**
+
+| **Name of the book** | Suomen mestari 1 – Suomen kielen oppikirja aikuisille |
+| --- | --- |
+| **Author(s)** | Sonja Gehring, Sanni Heinzmann |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2020 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | colorful, pleasant to look at, nice pictures |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero-A1.3 |
+| **Advances** | slow and very steady, no big jumps |
+| **Types of texts** | narratives/dialogues, some of which in spoken language in the new edition |
+| **Topics discussed** | zero to A1.3 topics (see below) |
+| **Grammar topics** | very basic grammar (see below) |
+| **Spoken language** | present in the new edition (2020) |
+| **Exercise types** | listening and talking exercises, fun and engaging grammar exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Finn Lectura](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu/2677104) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/suomen-mestari-1-uud) (newest version) |
+| **Additional materials** | – Browser version of the book: leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-digikirja-6-kk-onl/4108081), [12 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-digikirja-12-kk-onl/4108082) or[ 3 years](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-digikirja-36-kk-onl/4108079)\\\\ – English version of the digital book: leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-in-english-digital-book-6-m-onl/5183383), [12 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-in-english-digital-book-12-m-onl/5183380) or[ 3 years](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-in-english-digital-book-36-m-onl/5183382)\\\\ – Audio: [as mp3s ](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-aanite-mp3/2674635), leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-aanite-6-kk-onl/4065186) or [12 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-aanite-12-kk-onl/4065185)\\\\ – [Audio’s streamed version of the older version of the book for free](https://digi.finnlectura.fi/products/103)\\\\ – Exercise solutions + audio in text form: [as PDF](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-tehtavien-ratkaisut-pdf/2824577)\\\\ – Digital exercises: [leased for 12 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-digitehtavat-12-kk-onl/2674636)\\\\ – Teacher’s guide: [physical copy](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-opettajan-opas-uudistettu/2677237) or [as PDF](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-opettajan-opas-pdf/2677149)\\\\ – Vocabulary list in [English](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-sanasto-suomi-englanti/3905978), [Swedish](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-sanasto-suomi-ruotsi/3905975), [Estonian](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-sanasto-suomi-viro/3905980), [French](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-sanasto-suomi-ranska/3905977), [Somali](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-sanasto-suomi-somali/3905981), [Russian](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-sanasto-suomi-venaja/3905979), [German](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-sanasto-suomi-saksa/3905976) |
+
+Additional information: Suomen mestari 1 - Suomen kielen oppikirja aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.6.2. Suomen mestari 2**
+
+| **Name of book** | Suomen mestari 2 – Suomen kielen oppikirja aikuisille |
+| --- | --- |
+| **Author(s)** | Sonja Gehring, Sanni Heinzmann |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2019 |
+| **Type of book** | intermediate beginner course book |
+| **Aesthetics of the book** | colorful, pleasant, nice drawings, clear tables and sections |
+| **Language(s) used** | Finnish only |
+| **Level range** | A1.3-A2.1 |
+| **Advances** | slow and steady, a bit of a jump ahead near the end of the book |
+| **Types of texts** | most texts are part-narrative and part-dialogue |
+| **Topics discussed** | A2.1-A2.2 topics (see below) |
+| **Grammar topics** | A2.1-A2.2 topics (but also the plural cases) |
+| **Spoken language** | no spoken language |
+| **Exercise types** | listening and talking exercises, various types of engaging grammar exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-2-uudistettu/4108080) – [Adlibris](https://www.adlibris.com/fi/kirja/suomen-mestari-2-9789511355793?gclid=CjwKCAjwx9_4BRAHEiwApAt0zuPEyDMN9gRcRVzbNJ_SHSJg2kas4gIL0JJAUmXOhbLouES1jvsEVhoC4mUQAvD_BwE) |
+| **Additional materials** | – Audio: [on a CD](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-2-uudistettu-aanite-cd/4120617), or [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511426875)\\\\ – [Audio’s streamed version for free!](https://digi.finnlectura.fi/products/104)\\\\ – [Vocabulary lists (English, Russian, German, French, Serbian)](https://otava.kauppakv.fi/sivu/tuote/9789511412793)\\\\ – [Answers to the listening exercises](https://otava.kauppakv.fi/sivu/tuote/9789511426929)\\\\ – Browser version of the book: leased for [6 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-digikirja-6-kk-onl/4108081), [12 months](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-2-nakoisversio-12-kk-onl/3133398) or[ 3 years](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-1-uudistettu-digikirja-36-kk-onl/4108079) |
+
+Additional information: Suomen mestari 2 - Suomen kielen oppikirja aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.6.3. Suomen mestari 3**
+
+| **Name of book** | Suomen mestari 3 – Suomen kielen oppikirja aikuisille |
+| --- | --- |
+| **Author(s)** | Sonja Gehring, Sanni Heinzmann, Sari Päivärinne, Taija Udd |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2019 |
+| **Type of book** | intermediate course book |
+| **Aesthetics of the book** | colorful, pleasant, nice drawings, clear tables and sections |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.2-B1.1 |
+| **Advances** | a clear increase in difficulty from book 2, but advances fairly evenly |
+| **Types of texts** | dialogues, emails, informative texts, both formal and informal |
+| **Topics discussed** | expressing opinions, comparing cultures, knowledge about Finland |
+| **Grammar topics** | A2.2-B1.2 topics, some less important verb forms (see below) |
+| **Spoken language** | plentiful and versatile spoken language throughout the whole book |
+| **Exercise types** | listening and talking exercises, various types of engaging vocabulary and grammar exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/9789511355809) – [Adlibris](https://www.adlibris.com/fi/kirja/suomen-mestari-3-9789511355809?gclid=CjwKCAjw0_T4BRBlEiwAwoEiAQz_BlYOLC9DMa9oh3e0XVbjfS82VLmu9PjmTB5wDB7T_WCp9H5IuBoC0DoQAvD_BwE) |
+| **Additional materials** | – Audio: [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511426905) (previously also on CD, but no longer)\\\\ – [Streamed audio for free!](https://digi.finnlectura.fi/products/105)\\\\ – [Answers to the listening exercises](https://digi.finnlectura.fi/products/401)\\\\ – Teacher’s guide: [as a PDF](https://otava.kauppakv.fi/sivu/tuote/9789511426967) |
+
+Additional information: Suomen mestari 3 - Suomen kielen oppikirja aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.6.4. Suomen mestari 4**
+
+| **Name of book** | Suomen mestari 4 – Suomen kielen oppikirja aikuisille |
+| --- | --- |
+| **Author(s)** | Sonja Gehring, Sanni Heinzmann, Sari Päivärinne, Taija Udd |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2016 |
+| **Type of book** | advanced course book |
+| **Aesthetics of the book** | colorful, nice drawings, clear sections, a little repetitive |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1.1-B2 |
+| **Advances** | logically: first each participle separately, then combined |
+| **Types of texts** | formal informative texts, and informal dialogues |
+| **Topics discussed** | Finnish culture (e.g. architecture) and lifestyle (e.g. getting older) |
+| **Grammar topics** | B1-B2 topics, e.g. participles, lauseenvastikkeet, derivation (see below) |
+| **Spoken language** | plentiful and versatile spoken language in the dialogues |
+| **Exercise types** | listening and talking exercises, phrases and grammar exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Otava](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-4/2887313) – [Adlibris](https://www.adlibris.com/fi/kirja/suomen-mestari-4-9789511410027) |
+| **Additional materials** | – Audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789517927666) or [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511426851)\\\\ – [Streamed audio for free!](https://digi.finnlectura.fi/products/131)\\\\ – [Solutions + text version of audio](https://otava.kauppakv.fi/sivu/tuote/suomen-mestari-4-kuunteluharjoitusten-tekstit-ja-ratkaisut-pdf/4065173%20style=)\\\\ – Teacher’s guide: [as PDF](https://otava.kauppakv.fi/sivu/tuote/9789511426974) |
+
+Additional information: Suomen mestari 4- Suomen kielen oppikirja aikuisille
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/tag/lauseenvastikkeet/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.7.** ***Suomi sujuvaksi*** **series**
+
+I loved this series when I first came to Finland! This series is printed on plain A4-size copy paper, which I think is pleasant. It’s a black-and-white book and suitable for self-study, even if it’s Finnish-only. The *Suomi sujuvaksi* series is the improved version of *Kieli käyttöön*, which is also still for sale (and slightly cheaper). Both versions are nice, many of the exercises and vocabulary pictures are the same.
+
+### **3.7.1. Suomi sujuvaksi 1**
+
+| **Name of the book** | Suomi sujuvaksi 1 |
+| --- | --- |
+| **Author(s)** | Marjukka Kenttälä |
+| **Publisher** | Gaudeamus |
+| **Most recent edition** | 2011 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | A4, black-and-white, pleasant drawings, space to write |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A1.3 (or A2.1) |
+| **Advances** | slow and steady |
+| **Types of texts** | narratives and dialogues |
+| **Topics discussed** | typical A1-A2 topics (see below) |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | overview of features in the back of the book |
+| **Exercise types** | mostly traditional fill-in-the-gaps grammar exercises |
+| **Solutions to the exercises** | available for free online on the Gaudeamus website |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Gaudeamus](https://www.gaudeamus.fi/teos/suomi-sujuvaksi-1/) – [Adlibris](https://www.adlibris.com/fi/kirja/suomi-sujuvaksi-1-9789524950237?gclid=CjwKCAjwsan5BRAOEiwALzomX3qWFl0pED1D0fWnWl3XXicZySOolcejXjA2QDkdqAbA1P8_64S6GBoCbRMQAvD_BwE) – [Booky](https://www.booky.fi/tuote/marjukka_kenttala/suomi_sujuvaksi_1/9789524950237?gclid=CjwKCAjwsan5BRAOEiwALzomXzhVQdTi6F1N1d079IiVVy-FJ4Msa9STLWv27udiWadLWO2OjIUEKxoCuVIQAvD_BwE) |
+| **Additional materials** | *–* [Solutions to the exercises (free)](https://www.gaudeamus.fi/teos/suomi-sujuvaksi-2/)\\\\ – [Audio on a CD](https://www.gaudeamus.fi/teos/suomi-sujuvaksi-1-aanite/)\\\\ – [Older version of this book: Kieli käyttöön 1](https://www.gaudeamus.fi/teos/kieli-kayttoon-suomen-kielen-alkeisoppikirja/) |
+
+Additional information: Suomi sujuvaksi 1
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/the-relative-pronoun-joka-joka-pronomini/)[](https://uusikielemme.fi/finnish-vocabulary/words-ending-in/words-ending-in-ton/)[](https://uusikielemme.fi/finnish-vocabulary/words-ending-in/words-ending-in-tar-kuningatar/)[](https://uusikielemme.fi/finnish-vocabulary/words-ending-in/finnish-words-ending-in-s-s-loppuiset-sanat/)
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.7.2. Suomi sujuvaksi 2**
+
+| **Name of the book** | Suomi sujuvaksi 2 |
+| --- | --- |
+| **Author(s)** | Marjukka Kenttälä |
+| **Publisher** | Gaudeamus |
+| **Most recent edition** | 2015 |
+| **Type of book** | intermediate course book |
+| **Aesthetics of the book** | A4, black-and-white, pleasant drawings, space to write |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.2-B1.1 |
+| **Advances** | one topic at a time, but fairly quickly |
+| **Types of texts** | narratives and dialogues |
+| **Topics discussed** | Finnish culture, nature, history, culture etc. |
+| **Grammar topics** | A2-B1 topics (see below) |
+| **Spoken language** | in each chapter’s dialogues, difficulty level increases gradually |
+| **Exercise types** | grammar exercises: fill-in-the-gaps and sentences |
+| **Solutions to the exercises** | available for free online on the Gaudeamus website |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Adlibris](https://www.adlibris.com/fi/kirja/suomi-sujuvaksi-2-9789524952460?gclid=CjwKCAjwsan5BRAOEiwALzomX1MckxthM0hLpWiZc-kL8MC1ypbJtn1MU0aY3WuAtM6iZ6VyMFOp9RoCYk4QAvD_BwE) – [Booky](https://www.booky.fi/search.php?search=suomi+sujuvaksi#!product_id=9789524952460) |
+| **Additional materials** | – [Solutions to the exercises (free)](https://www.gaudeamus.fi/teos/suomi-sujuvaksi-2/)\\\\ – Reader: Monikulttuurisen maamme kirja (no longer for sale)\\\\ – [Older version of this book: Kieli käyttöön 2](https://www.gaudeamus.fi/teos/kieli-kayttoon-suomen-kielen-jatko-oppikirja/) |
+
+Additional information: Suomi sujuvaksi 2
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.8.** ***Suomea suomeksi*** **series**
+
+### **3.8.1. Suomea suomeksi 1**
+
+| **Name of the book** | Suomea suomeksi 1 |
+| --- | --- |
+| **Author(s)** | Olli Nuutinen |
+| **Publisher** | SKS |
+| **Most recent edition** | 2014 |
+| **Type of book** | beginner book focused on grammar |
+| **Aesthetics of the book** | clear, not very modern, but nice to look at |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2.1 |
+| **Advances** | fairly evenly but quickly |
+| **Types of texts** | mainly dialogues, fairly stiff and inauthentic |
+| **Topics discussed** | random vocabulary phrases for everyday use |
+| **Grammar topics** | typical A1-A2 grammar (see below) |
+| **Spoken language** | none |
+| **Exercise types** | grammar exercises, fill-in-the-blanks, rephrase |
+| **Solutions to the exercises** | not included |
+| **Suitable for self-study** | 3/5 (see below, not super easy but doable) |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [SKS](https://kirjat.finlit.fi/sivu/tuote/suomea-suomeksi-1/143117) – [Adlibris](https://www.adlibris.com/fi/kirja/suomea-suomeksi-1-9789522225702?gclid=Cj0KCQjwpNr4BRDYARIsAADIx9xaCYXUcNY8OKknmSElHhOJL4GLl0xmqUySx_zMXRzagNtDkH473tQaAj2uEALw_wcB) |
+| **Exercise book** | [Exercise book (which comes with 5 CDs)](https://kirjat.finlit.fi/sivu/tuote/suomen-harjoituksia-1-5-cd-/18276) |
+
+Additional information: Suomea suomeksi 1
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+### **3.8.2. Suomen harjoituksia 1**
+
+| **Name of the book** | Suomen harjoituksia 1 |
+| --- | --- |
+| **Author(s)** | Eila Hämäläinen |
+| **Publisher** | SKS |
+| **Most recent edition** | 1993 |
+| **Type of book** | exercise book accompanying Suomea suomeksi 2 (see section 3.8.1) |
+| **Aesthetics of the book** | simple, old-fashioned, no colors, tight line spacing |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-B1.1 |
+| **Advances** | at the same pace as the main book (see section 3.8.1)\\\\ |
+| **Types of texts** | no texts |
+| **Topics discussed** | no topics |
+| **Grammar topics** | same topics as the main book (see section 3.8.1) |
+| **Spoken language** | none |
+| **Exercise types** | grammar exercises: fill-in-the-gaps, rephrase, follow example |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 4/5 (as long as it’s still for sale on Amazon) |
+| **Buy the book** | [Amazon](https://www.amazon.com/Suomen-Harjoituksia-1-Eila-H%C3%A4m%C3%A4l%C3%A4inen/dp/9517171609) – no longer for sale in Finland |
+| **Additional materials** | – Main book: Suomea suomeksi 1\\\\ – Audio: [Suomen harjoituksia 1 (5 CDs)](https://www.suomalainen.com/products/suomen-harjoituksia-1-5-cd) |
+
+Additional information: Suomen harjoituksia 1
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.8.3. Suomea suomeksi 2**
+
+| **Name of the book** | Suomea suomeksi 2 |
+| --- | --- |
+| **Author(s)** | Olli Nuutinen |
+| **Publisher** | SKS |
+| **Most recent edition** | 2008 – Almost out of print |
+| **Type of book** | intermediate/advanced course book |
+| **Aesthetics of the book** | simple, not very modern, but organized clearly |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-B1.1 |
+| **Advances** | at a fairly reasonable pace |
+| **Types of texts** | various dialogues and narratives, not all great (see below) |
+| **Topics discussed** | no specific themes, contains useful everyday life phrases (see below) |
+| **Grammar topics** | some A2 topics, with main focus on B1 topics (see below) |
+| **Spoken language** | present in the chapters about the passive |
+| **Exercise types** | grammar exercises: fill-in-the-gaps, rephrase, also in separate book |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 1/5 (because it’s so close to being out of print) |
+| **Buy the book** | no longer in print |
+| **Additional materials** | – Vocabulary lists available in some languages (see below)\\\\ – Exercise book (not printed anymore) |
+
+Additional information: Suomea suomeksi 2
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/liitepartikkelit/han-han-liitepartikkeli-clitic-minahan-sanoin/)[](https://uusikielemme.fi/finnish-grammar/syntax/liitepartikkelit/kin-kaan-liitepartikkeli-clitic-minakin-minakaan/)[](https://uusikielemme.fi/finnish-grammar/verbs/verb-tenses-and-moods/spoken-language-passive-overview/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.8.4. Suomen harjoituksia 2**
+
+| **Name of the book** | Suomen harjoituksia 2 |
+| --- | --- |
+| **Author(s)** | Eila Hämäläinen |
+| **Publisher** | SKS |
+| **Most recent edition** | 2006 – Out of print |
+| **Type of book** | exercise book accompanying Suomea suomeksi 2 by Olli Nuutinen |
+| **Aesthetics of the book** | simple, old-fashioned, no colors, not always enough space to write |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-B1.1 |
+| **Advances** | at the same pace as the course book *Suomea suomeksi 2* |
+| **Types of texts** | no texts |
+| **Topics discussed** | no topics |
+| **Grammar topics** | same topics as the course book *Suomea suomeksi 2* |
+| **Spoken language** | present in some of the exercises about the passive |
+| **Exercise types** | grammar exercises: fill-in-the-gaps, rephrase |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 1/5 (because it’s not for sale anymore) |
+| **Buy the book** | no longer being printed |
+| **Buy the main book** | No longer being printed |
+
+Additional information: Suomen harjoituksia 2
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.9.** ***Suomen kielen oppikirja*** **series**
+
+### **3.9.1. Suomen kielen alkeisoppikirja**
+
+| **Name of the book** | Suomen kielen alkeisoppikirja |
+| --- | --- |
+| **Author(s)** | Anna-Liisa Lepäsmaa, Leena Silfverberg |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2010 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | black and white, small pictures, spaced out nicely, inviting |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2 |
+| **Advances** | fairly evenly |
+| **Types of texts** | lots of dialogues of different lengths, occasional narrative |
+| **Topics discussed** | (staged) real life situations for immigrants |
+| **Grammar topics** | typical A1-A2 topics (see below) |
+| **Spoken language** | none |
+| **Exercise types** | in a separate book available for purchase |
+| **Solutions to the exercises** | – |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 1/5 (because it’s not for sale anymore) |
+| **Buy the book** | no longer getting printed |
+| **Additional materials** | – Harjoituskirja suomen kielen perusopetusta varten – No longer in print |
+
+Additional information: Suomen kielen alkeisoppikirja
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-vocabulary/words-ending-in/words-ending-in-uus-yys-uus-uude/)[](https://uusikielemme.fi/finnish-vocabulary/words-ending-in/words-ending-in-in-keitin-soitin-puhelin/)
+
+<Spacer />
+
+<Spacer />
+
+### **3.9.2. Harjoituskirja suomen kielen perusopetusta varten**
+
+| **Name of the book** | Harjoituskirja suomen kielen perusopetusta varten |
+| --- | --- |
+| **Author(s)** | Leena Silfverberg |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2009 |
+| **Type of book** | exercise book for Suomen kielen alkeisoppikirja (see section 3.9.1) |
+| **Aesthetics of the book** | black and white, uniform throughout, repetitive exercise types |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to A2 |
+| **Advances** | at the same pace as the textbook (see 3.9.1) |
+| **Types of texts** | no texts |
+| **Topics discussed** | no specific topics |
+| **Grammar topics** | same topics as the textbook (see section 3.9.1) |
+| **Spoken language** | none |
+| **Exercise types** | traditional fill-in-the-gaps and rephrase exercises |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 1/5 |
+| **Buy the book** | no longer in print |
+| **Additional materials** | Accompanying book: *Suomen kielen alkeis-oppikirja* (see section 3.9.1) |
+
+Additional information: Harjoituskirja suomen kielen perusopetusta varten
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.9.3. Suomen kielen jatko-oppikirja**
+
+| **Name of the book** | Suomen kielen jatko-oppikirja |
+| --- | --- |
+| **Author(s)** | Leena Silfverberg |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2010 |
+| **Type of book** | intermediate/advanced course book |
+| **Aesthetics of the book** | black and white, small pictures, spaced out nicely, inviting |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2-B1 |
+| **Advances** | the texts get harder as you advance through the book |
+| **Types of texts** | narratives and dialogues |
+| **Topics discussed** | Finnish literature, random dialogues (see below) |
+| **Grammar topics** | advanced grammar topics (see below) |
+| **Spoken language** | dialects addressed in the last chapter of the book |
+| **Exercise types** | available in a separate book |
+| **Solutions to the exercises** | – |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 1/5 (because it’s not for sale anymore) |
+| **Buy the book** | no longer in print |
+| **Additional materials** | Harjoituskirja suomen kielen jatko-opetusta varten – No longer in print |
+
+Additional information: Suomen kielen jatko-oppikirja
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/liitepartikkelit/kin-kaan-liitepartikkeli-clitic-minakin-minakaan/)[](https://uusikielemme.fi/finnish-grammar/syntax/liitepartikkelit/han-han-liitepartikkeli-clitic-minahan-sanoin/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.9.4. Harjoituskirja suomen kielen jatko-opetusta varten**
+
+| **Name of the book** | Harjoituskirja suomen kielen jatko-opetusta varten |
+| --- | --- |
+| **Author(s)** | Leena Silfverberg |
+| **Publisher** | Finn Lectura |
+| **Most recent edition** | 2017 |
+| **Type of book** | intermediate/advanced exercise book |
+| **Aesthetics of the book** | black and white, uniform throughout, not much space for writing |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2-B1 |
+| **Advances** | the vocabulary gets harder near the end |
+| **Types of texts** | none |
+| **Topics discussed** | none |
+| **Grammar topics** | advanced grammar topics (see below) |
+| **Spoken language** | the last two exercises are related to spoken language |
+| **Exercise types** | fill-in-the-gaps, rephrase |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 3/5 (because the solutions aren’t included) |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | No longer in print |
+| **Additional materials** | Accompanying book: *Suomen kielen jatko-oppikirja* (no longer in print) |
+
+Additional information: Harjoituskirja suomen kielen jatko-opetusta varten
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/liitepartikkelit/kin-kaan-liitepartikkeli-clitic-minakin-minakaan/)[](https://uusikielemme.fi/finnish-grammar/syntax/liitepartikkelit/han-han-liitepartikkeli-clitic-minahan-sanoin/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.10.** ***Suomen kielen tikapuut*** **series**
+
+This series is really nice for self-study, but is unfortunately no longer printed. If you live in Finland, you’re likely to find either the old version (A4 format, green cover) or the more recent edition with a picture of a ladder on the front.
+
+<h3>**3.10.1. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Alkeistaso 1**<br /></h3>
+
+| **Name of the book** | Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Alkeistaso 1 |
+| --- | --- |
+| **Author(s)** | Heikki Kangasniemi |
+| **Publisher** | Tampere university press |
+| **Most recent edition** | 2007 |
+| **Type of book** | beginner text and exercise book |
+| **Aesthetics of the book** | black and white, pleasant to browse through, clear structure |
+| **Language(s) used** | English used in vocabulary lists, some English-Finnish translation exercises\\\\ |
+| **Level range** | zero to A2.2 |
+| **Advances** | giant leaps in grammar covered, reading texts advance gradually |
+| **Types of texts** | dialogues between the main characters |
+| **Topics discussed** | random tidbits of conversational situations in everyday life |
+| **Grammar topics** | each chapter has new grammar, mostly A1 level grammar, some A2 |
+| **Spoken language** | not included |
+| **Exercise types** | grammar exercises, fill-in-the-gap, translation, sentence construction |
+| **Solutions to the exercises** | not included |
+| **Suitable for self-study** | 4/5 (no solutions available though!) |
+| **Suitable for study abroad** | 1/5 (because sold out, if you can find it somewhere 5/5)\\\\ |
+| **Buy the book** | no longer getting printed |
+| **Additional materials** | none |
+
+Additional information: Suomen kielen tikapuut - Alkeistaso 1
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.10.2. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Alkeistaso 2**<br /></h3>
+
+| **Name of the book** | Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Alkeistaso 2 |
+| --- | --- |
+| **Author(s)** | Heikki Kangasniemi |
+| **Publisher** | Tampere university press |
+| **Most recent edition** | 2007 |
+| **Type of book** | intermediate beginner text and exercise book |
+| **Aesthetics of the book** | black and white, pleasant to browse through, clear structure |
+| **Language(s) used** | English used in vocabulary lists, some English-Finnish translation exercises |
+| **Level range** | A2.2-B1.1 |
+| **Advances** | giant leaps in grammar covered, reading texts advance gradually |
+| **Types of texts** | dialogues between the main characters, some narratives |
+| **Topics discussed** | random tidbits of conversational situations in everyday life |
+| **Grammar topics** | each chapter has new grammar, mostly A2 level grammar, some B1 |
+| **Spoken language** | not included |
+| **Exercise types** | grammar exercises, fill-in-the-gap, translation, sentence construction |
+| **Solutions to the exercises** | not included |
+| **Suitable for self-study** | 4/5 (no solutions available though!) |
+| **Suitable for study abroad** | 1/5 (because sold out, if you can find it somewhere 5/5) |
+| **Buy the book** | no longer getting printed |
+| **Additional materials** | none |
+
+Additional information: Suomen kielen tikapuut - Alkeistaso 2
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/the-relative-pronoun-joka-joka-pronomini/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.10.3. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Jatkotaso 1**<br /></h3>
+
+| **Name of the book** | Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Jatkotaso 1 |
+| --- | --- |
+| **Author(s)** | Heikki Kangasniemi |
+| **Publisher** | Tampere university press |
+| **Most recent edition** | 2007 |
+| **Type of book** | beginner advanced text and exercise book |
+| **Aesthetics of the book** | black and white, pleasant to browse through, clear structure |
+| **Language(s) used** | English used in vocabulary lists |
+| **Level range** | B1.1-B1.2 |
+| **Advances** | difficulty level of reading texts increases gradually |
+| **Types of texts** | some dialogues, mainly informational texts (see below) |
+| **Topics discussed** | Finnish history and culture, some everyday conversations (see below) |
+| **Grammar topics** | each chapter has new grammar, mostly B1 topics, also B2 (see below) |
+| **Spoken language** | not included |
+| **Exercise types** | grammar exercises, fill-in-the-gap, sentence construction |
+| **Solutions to the exercises** | not included |
+| **Suitable for self-study** | 4/5 (no solutions available though!) |
+| **Suitable for study abroad** | 1/5 (because sold out, if you can find it somewhere 5/5) |
+| **Buy the book** | no longer getting printed |
+| **Additional materials** | none |
+
+Additional information: Suomen kielen tikapuut - Jatkotaso 1
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.10.4. Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Jatkotaso 2**<br /></h3>
+
+| **Name of the book** | Suomen kielen tikapuut – Kielioppi- ja harjoituskirja – Jatkotaso 2 |
+| --- | --- |
+| **Author(s)** | Heikki Kangasniemi |
+| **Publisher** | Tampereen university press |
+| **Most recent edition** | 2007 |
+| **Type of book** | advanced text and exercise book |
+| **Aesthetics of the book** | black and white, pleasant to browse through, clear structure |
+| **Language(s) used** | English used in vocabulary lists |
+| **Level range** | B1-C1 |
+| **Advances** | fairly even difficulty level in the reading texts |
+| **Types of texts** | dialogues, informational texts, stories (see below) |
+| **Topics discussed** | Finnish history and culture, litarary texts (see below) |
+| **Grammar topics** | each chapter has new grammar, mostly B2 (see below) |
+| **Spoken language** | short overview of features, not present in the dialogues |
+| **Exercise types** | grammar exercises, fill-in-the-gap, sentence construction |
+| **Solutions to the exercises** | not included |
+| **Suitable for self-study** | 4/5 (no solutions available though!) |
+| **Suitable for study abroad** | 1/5 (because sold out, if you can find it somewhere 5/5) |
+| **Buy the book** | no longer getting printed |
+| **Additional materials** | none |
+
+Additional information: Suomen kielen tikapuut - Jatkotaso 2
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.11. Finnish for Foreigners series**
+
+This series was first published in 1963. As far as I could find, the contents of the first book haven’t been updated since 1987. It’s not a bad series, but it’s really ancient. The reason for it still being in print is most likely due to its name, which is very likely to be googled by many students abroad to this day.
+
+<h3>**3.11.1. Finnish for Foreigners 1**<br /></h3>
+
+| **Name of the book** | Finnish for Foreigners 1 |
+| --- | --- |
+| **Author(s)** | Maija-Hellikki Aaltio |
+| **Publisher** | Otava (Mps Multimedia Inc. DBA Selectsoft) |
+| **Most recent edition** | 2007 (content last updated in 1987) |
+| **Type of book** | beginner textbook |
+| **Aesthetics of the book** | black and white with some orange elements, pretty old |
+| **Language(s) used** | dialogues in Finnish and English, explanations in English\\\\ |
+| **Level range** | zero to B1.1 |
+| **Advances** | gradually, vocabulary is added in very small increments |
+| **Types of texts** | dialogues between the main characters, both in Finnish and English |
+| **Topics discussed** | practical, conversational everyday life situations, small amount of vocab (see below) |
+| **Grammar topics** | typical A1-A2 grammar topics, some harder topics but kept simple (see below) |
+| **Spoken language** | hardly any spoken language elements present at all |
+| **Exercise types** | available in a separate book (see section 3.11.2) |
+| **Solutions to the exercises** | none |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5\\\\ |
+| **Buy the book** | [Adlibris](https://www.adlibris.com/fi/kirja/finnish-for-foreigners-1-9780884325413?gclid=EAIaIQobChMI5oLkssvj6wIVGSwYCh2SMwimEAQYASABEgLp5vD_BwE) – [Amazon](https://www.amazon.com/Finnish-Foreigners-1-Text-book/dp/9511081454) |
+| **Additional materials** | Exercise book: Finnish for Foreigners 1 Exercises (see section 3.11.2)\\\\ Audio: no longer available |
+
+Additional information: Finnish for Foreigners 1
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/spoken-language/spoken-language-grammar/taa-toi-se-spoken-language-tama-tuo-se/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.11.2. Finnish for Foreigners 1 Exercises**<br /></h3>
+
+| **Name of the book** | Finnish for Foreigners 1 Exercises |
+| --- | --- |
+| **Author(s)** | Maija-Hellikki Aaltio |
+| **Publisher** | Otava (Mps Multimedia Inc. DBA Selectsoft) |
+| **Most recent edition** | 2009 (content last updated in 1984) |
+| **Type of book** | exercise book accompanying the textbook Finnish for Foreigners 1 |
+| **Aesthetics of the book** | black and white, pretty dense, often no space to write |
+| **Language(s) used** | Finnish and English\\\\ |
+| **Level range** | zero to B1.1 |
+| **Advances** | small number of exercises per chapter |
+| **Types of texts** | one extra reading text in each chapter |
+| **Topics discussed** | follows the content of the textbook (see section 3.11.1) |
+| **Grammar topics** | follows the content of the textbook (see section 3.11.1) |
+| **Spoken language** | not included |
+| **Exercise types** | mostly grammar, rephrase, fill-in-the-gaps, reading and listening exercises |
+| **Solutions to the exercises** | available in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5\\\\ |
+| **Buy the book** | [Adlibris](https://www.adlibris.com/fi/kirja/finnish-for-foreigners-1-exercises-9780884325437) – [Amazon](https://www.amazon.com/Finnish-Foreigners-Exercises-Maija-Hellikki-Aaltio/dp/0884325431) – [Booky](https://www.booky.fi/tuote/aaltio_maija/finnish_for_foreigners_1_exercises/9780884325437) |
+| **Additional materials** | Main book: Finnish for Foreigners 1 Exercises (see section 3.11.1)\\\\ Audio CDs: no longer being sold |
+
+Additional information: Finnish for Foreigners 1 Exercises
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.11.3. Finnish for Foreigners 2**<br /></h3>
+
+| **Name of the book** | Finnish for Foreigners 2 |
+| --- | --- |
+| **Author(s)** | Maija-Hellikki Aaltio |
+| **Publisher** | Otava (Mps Multimedia Inc. DBA Selectsoft) |
+| **Most recent edition** | 1999 (content last updated in 1987) |
+| **Type of book** | intermediate to advanced textbook |
+| **Aesthetics of the book** | black and white with some orange elements, pretty old |
+| **Language(s) used** | Finnish-English wordlists, explanations in English\\\\ |
+| **Level range** | B1.2-C1 |
+| **Advances** | no clear level progression, advanced topics |
+| **Types of texts** | dialogues, fictional narratives and informational texts |
+| **Topics discussed** | fictional + Finnish history, literature, industry, holidays and cities |
+| **Grammar topics** | advanced B1-C1 grammar topics (see below) |
+| **Spoken language** | not included |
+| **Exercise types** | available in a separate book (see section 3.11.4) |
+| **Solutions to the exercises** | none |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Adlibris](https://www.adlibris.com/fi/kirja/finnish-for-foreigners-2-text-9780884325444) *–* [Amazon](https://www.amazon.com/Finnish-Foreigners-2-Text/dp/088432544X) |
+| **Additional materials** | Exercise book: Finnish for Foreigners 2 Exercises (see section 3.11.4)\\\\ Audio: no longer available |
+
+Additional information: Finnish for Foreigners 2
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/partisiipit-the-reference-construction-etta-participle/)[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/expressing-necessity-with-a-participle-on-mentava-on-odotettava/)[](https://uusikielemme.fi/finnish-grammar/morphology/nothing-nowhere-and-never-in-finnish/)[](https://uusikielemme.fi/finnish-grammar/morphology/joku-jokin-jotakuta-jollakin-pronouns/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.11.4. Finnish for Foreigners 2 Exercises**<br /></h3>
+
+| **Name of the book** | Finnish for Foreigners 2 Exercises |
+| --- | --- |
+| **Author(s)** | Maija-Hellikki Aaltio |
+| **Publisher** | Otava (Mps Multimedia Inc. DBA Selectsoft) |
+| **Most recent edition** | 2004 (content last updated in 1987) |
+| **Type of book** | exercise book accompanying the textbook Finnish for Foreigners 2 |
+| **Aesthetics of the book** | black and white, pretty dense, often no space to write |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1.2-C1 |
+| **Advances** | in the same way as the textbook (see section 3.11.3) |
+| **Types of texts** | one extra reading text in each chapter, advanced |
+| **Topics discussed** | follows the contents of the textbook (see section 3.11.3) |
+| **Grammar topics** | follows the contents of the textbook (see section 3.11.3) |
+| **Spoken language** | not included |
+| **Exercise types** | mostly grammar, rephrase, fill-in-the-gaps, reading and listening exercises |
+| **Solutions to the exercises** | available in the back of the book |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Amazon](https://www.amazon.com/Finnish-Foreigners-Exercises-Work-book/dp/9511093290) (no longer for sale in Finnish book stores) |
+| **Additional materials** | Main book: Finnish for Foreigners 2 Exercises (see section 3.11.3)\\\\ Audio CDs: no longer being sold |
+
+Additional information: Finnish for Foreigners 2 Exercises
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.12.** ***Kuulostaa hyvältä*** **series**
+
+### **3.12.1. Kuulostaa hyvältä – Sounds good**
+
+| **Name of the book** | Kuulostaa hyvältä – Sounds good |
+| --- | --- |
+| **Author(s)** | Lili Ahonen |
+| **Publisher** | SKS |
+| **Most recent edition** | 2014 |
+| **Type of book** | beginner course book |
+| **Aesthetics of the book** | black with blue elements, spaced out nicely, inviting |
+| **Language(s) used** | Finnish only |
+| **Level range** | zero to B1.1 |
+| **Advances** | makes giant leaps in the grammar topics |
+| **Types of texts** | mainly dialogues, narrative version of dialogues included |
+| **Topics discussed** | real life situations where an immigrant could use Finnish, as well as cultural information about Finland |
+| **Grammar topics** | each chapter has new grammar, but it’s explained in a separate book, the grammar quickly contains advanced topics (see below) |
+| **Spoken language** | one short reading text at the back, nothing in the dialogues |
+| **Exercise types** | pretty good vocabulary and grammar exercises |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 3/5 (more suitable if you start with a decent basic knowledge already) |
+| **Suitable for study abroad** | 4/5 |
+| **Buy the book** | [SKS](https://kirjat.finlit.fi/sivu/tuote/kuulostaa-hyvalta-sounds-good/120557) – [Amazon](https://www.amazon.com/Kuulostaa-hyv%C3%A4lt%C3%A4-Sounds-Good-Textbook/dp/9517464932) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/kuulostaa-hyvalta-sounds-good) |
+| **Additional materials** | – [VHS with videos of the texts](https://kirjat.finlit.fi/sivu/tuote/kuulostaa-hyvalta-video-/16304)\\\\ – [YouTube videos](https://www.youtube.com/playlist?list=PLUBCEUl-KTrNdmxn9WMWmasf3o9BvsU51)\\\\ – Accompanying book: Sounds good – Kuulostaa hyvältä (see 3.11.) |
+
+Additional information: Kuulostaa hyvältä - Sounds good
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.12.2. Sounds good – Kuulostaa hyvältä**
+
+| **Name of the book** | Sounds good – Kuulostaa hyvältä |
+| --- | --- |
+| **Author(s)** | Lili Ahonen |
+| **Publisher** | SKS |
+| **Most recent edition** | 2014 |
+| **Type of book** | additional grammar and vocabulary book |
+| **Aesthetics of the book** | black and blue, spaced out nicely in grammar section, vocabulary section has a smaller font and is harder to follow |
+| **Language(s) used** | English explanations and translations |
+| **Level range** | A1-B1.1 |
+| **Advances** | according to the pace of the main book |
+| **Types of texts** | none |
+| **Topics discussed** | explanations in English of the grammar in the main book |
+| **Grammar topics** | many more advanced topics, not for beginners |
+| **Spoken language** | one basic section in the last chapter of the book |
+| **Exercise types** | none |
+| **Solutions to the exercises** | none |
+| **Suitable for self-study** | 3/5 (more suitable if you start with a decent basic knowledge already) |
+| **Suitable for study abroad** | 1/5 (I doubt you can find it for sale abroad) |
+| **Buy the book** | [Prisma](https://www.prisma.fi/fi/prisma/kuulostaa-hyvalta-sounds-good-pehmeakantinen-kirja?gclid=CjwKCAjwgdX4BRB_EiwAg8O8HU9FuoQqSOPpTnYL5kpvb7kKECJoqChGIc1HltaxTDw2_0EBuOz44xoCsbsQAvD_BwE&gclsrc=aw.ds) |
+| **Additional materials** | Accompanying book: Kuulostaa hyvältä – Sounds good (see above) |
+
+Additional information: Sounds good - Kuulostaa hyvältä
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.13.** ***Tilanteesta toiseen*** **series**
+
+This series consists of a book with reading texts and grammar explanations, and an exercise book.
+
+<h3>**3.13.1. Tilanteesta toiseen – A Finnish Course**<br /></h3>
+
+| **Name of the book** | Tilanteesta toiseen – A Finnish Course |
+| --- | --- |
+| **Author(s)** | Salli-Marja Bessonoff, Eila Hämäläinen\\\\ |
+| **Publisher** | Suomen kielen ja kotimaisen kirjallisuuden laitos |
+| **Most recent edition** | 2008 |
+| **Type of book** | intermediate course book |
+| **Aesthetics of the book** | analytical, not very well organized, black and white, no pictures |
+| **Language(s) used** | English in vocabulary lists and grammar explanations |
+| **Level range** | A2.1-A2.2 |
+| **Advances** | no clear level progression |
+| **Types of texts** | fictional dialogues and narratives |
+| **Topics discussed** | fairly random, nothing in-depth |
+| **Grammar topics** | both in relation to the text and in more detail in the back |
+| **Spoken language** | more spoken language elements are added as the book progresses |
+| **Exercise types** | available in a separate book |
+| **Solutions to the exercises** | none |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | I could only find it for sale on [Booky](https://www.booky.fi/tuote/salli_marja/tilanteesta_toiseen_a_finnish_course/9789521045066) |
+| **Additional materials** | *–* Exercise book (see below) |
+
+Additional information: Tilanteesta toiseen
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.13.2. Tilanteesta toiseen – Harjoituksia | Exercises**<br /></h3>
+
+| **Name of the book** | Tilanteesta toiseen – Harjoituksia \| Exercises |
+| --- | --- |
+| **Author(s)** | Salli-Marja Bessonoff, Eila Hämäläinen |
+| **Publisher** | Suomen kielen ja kotimaisen kirjallisuuden laitos |
+| **Most recent edition** | 2009 |
+| **Type of book** | exercise book for the *Tilanteesta toiseen* textbook |
+| **Aesthetics of the book** | black and white, no pictures, uninteresting |
+| **Language(s) used** | the explanation of each exercise is in both English and Finnish |
+| **Level range** | A2.1-A2.2 |
+| **Advances** | follows the contents of the textbook\\\\ |
+| **Types of texts** | additional texts with reading comprehension questions |
+| **Topics discussed** | none |
+| **Grammar topics** | follows the contents of the textbook |
+| **Spoken language** | short and simple exercises here and there |
+| **Exercise types** | many meant for classroom use, they help you study\\\\ |
+| **Solutions to the exercises** | *none* |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Amazon](https://www.amazon.co.uk/Tilanteesta-Toiseen-Harjoituksia-Exercises-Language/dp/9521058005) – [Booky](https://www.booky.fi/tuote/salli_marja/tilanteesta_toiseen_harjoituksia/9789521058004) |
+| **Additional materials** | – Textbook (see previous section) |
+
+Additional information: Tilanteesta toiseen - Harjoituksia
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.14.** ***Päivää*** **series**
+
+<h3>**3.14.1. Päivää! – Suomea aikuisille**<br /></h3>
+
+| **Name of the book** | Päivää! – Suomea aikuisille |
+| --- | --- |
+| **Author(s)** | Minna Intke Hernández\\\\ |
+| **Publisher** | Opetushallitus |
+| **Most recent edition** | 2019 |
+| **Type of book** | beginner intermediate course book |
+| **Aesthetics of the book** | inviting, spaced out nicely, colorful, childish pictures\\\\ |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-A2.2 |
+| **Advances** | evenly, slowly |
+| **Types of texts** | many dialogues, also simplified real-life messages and notes |
+| **Topics discussed** | real life situations where an immigrant could use Finnish, as well as cultural information about Finland |
+| **Grammar topics** | no grammar explanations |
+| **Spoken language** | spoken language audio for the texts in the book available online |
+| **Exercise types** | mainly conversation prompts |
+| **Solutions to the exercises** | available online |
+| **Suitable for self-study** | 2/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Opetushallitus](https://verkkokauppa.oph.fi/sivu/tuote/paivaa-/1756890) – [Booky](https://www.booky.fi/tuote/minna_intke/paivaa_suomea_aikuisille/9789521357015) |
+| **Additional materials** | *–* [Additional materials online](https://www.oph.fi/fi/oppimateriaali/paivaa/opettajan-aineistot/1-mina-ja-me)\\\\ – [Free audio: streamed (spoken language + written language)](https://soundcloud.com/opetushallitus/sets/paivaa-suomea-aikuisille-aanitteet) |
+
+Additional information: Päivää! - Suomea aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.14.2. Palataan! – Suomea aikuisille**<br /></h3>
+
+| **Name of the book** | Palataan! – Suomea aikuisille |
+| --- | --- |
+| **Author(s)** | Minna Intke Hernández\\\\ |
+| **Publisher** | Opetushallitus |
+| **Most recent edition** | 2019 |
+| **Type of book** | intermediate course book |
+| **Aesthetics of the book** | inviting, spaced out nicely, colorful, childish pictures\\\\ |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.2-B1.1 |
+| **Advances** | evenly, slowly |
+| **Types of texts** | many dialogues, also simplified news articles and messages |
+| **Topics discussed** | real life situations where an immigrant could use Finnish, as well as cultural information about Finland |
+| **Grammar topics** | A2.1 and A2.2 level grammar (see below) |
+| **Spoken language** | not included |
+| **Exercise types** | mainly conversation prompts, some short grammar exercises |
+| **Solutions to the exercises** | available online |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 2/5 |
+| **Buy the book** | [Opetushallitus](https://verkkokauppa.oph.fi/sivu/tuote/palataan-/2448772) – [Booky](https://www.booky.fi/tuote/minna_intke/palataan_suomea_aikuisille/9789521363252) |
+| **Additional materials** | – [Additional materials online](https://www.oph.fi/fi/oppimateriaali/palataan-suomea-aikuisille-opettajan-opas/kirjan-sisalto-ja-kayttaminen/1-kenen)\\\\ – [Free audio: streamed (spoken language + written language)](https://soundcloud.com/opetushallitus/sets/palataan-oppimateriaalin-aanitteet) |
+
+Additional information: Palataan! - Suomea aikuisille
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.15. Työelämän suomea**<br /></h3>
+
+This series follows the trend of Finnish coursebooks in Finland to be more focused on learning Finnish that relates to studying a profession, finding a job and working in Finland. As such, this series – while teaching Finnish grammar fairly effectively – contains a lot of work-related topics and vocabulary.
+
+<h3>3.15.1. Työelämän suomea 1<br /></h3>
+
+| **Name of the book** | Työelämän somea 1 – Suomeksi ammattiin |
+| --- | --- |
+| **Author(s)** | Mirka Jussila\\\\ |
+| **Publisher** | Finn Lectura\\\\ |
+| **Most recent edition** | 2019 |
+| **Type of book** | intermediate course book with main focus on working life |
+| **Aesthetics of the book** | inviting, colorful, divided into sections\\\\ |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.1-A2.2 |
+| **Advances** | evenly, everything is introduced in a reasonable order |
+| **Types of texts** | narratives, short informational texts, dialogues |
+| **Topics discussed** | working life topics as well as everyday life (see below) |
+| **Grammar topics** | typical A2.1-A2.2 grammar topics (see below) |
+| **Spoken language** | included in the (infrequent) dialogues in the book |
+| **Exercise types** | often focused on your own life, mainly meant for classroom setting |
+| **Solutions to the exercises** | not available |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Finn Lectura](https://finnlectura.fi/oppimateriaalit/tyoelaman-suomea-1) – [Adlibris](https://www.adlibris.com/fi/kirja/tyoelaman-suomea-1-9789511355823) – [Booky](https://www.booky.fi/search.php?search=ty%C3%B6el%C3%A4m%C3%A4n+suomea#!product_id=9789511355823) |
+| **Additional materials** | – Audio: [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511439325), or streamed [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511439301) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511439295) (complete)\\\\ – [Teacher’s guide](https://otava.kauppakv.fi/sivu/tuote/9789511439271) (PDF) |
+
+Additional information: Työelämän suomea 1
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/the-relative-pronoun-joka-joka-pronomini/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>3.15.2. Työelämän suomea 2<br /></h3>
+
+| **Name of the book** | Työelämän suomea 2 – Suomeksi työhön |
+| --- | --- |
+| **Author(s)** | Mirka Jussila\\\\ |
+| **Publisher** | Finn Lectura\\\\ |
+| **Most recent edition** | 2019 |
+| **Type of book** | intermediate course book with main focus on working life |
+| **Aesthetics of the book** | inviting, colorful, divided into sections\\\\ |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.2-B1.2 |
+| **Advances** | evenly and logically |
+| **Types of texts** | fairly long narratives, dialogues and informational texts |
+| **Topics discussed** | mainly working life topics and functional language use (see below) |
+| **Grammar topics** | grammar as a functional tool, A2.2-B1.2 grammar topics (see below) |
+| **Spoken language** | included in the dialogues as well as in some of the exercises\\\\ |
+| **Exercise types** | mainly meant for classroom setting, goal is expressing yourself |
+| **Solutions to the exercises** | in the back of the book\\\\ |
+| **Suitable for self-study** | 3/5 |
+| **Suitable for study abroad** | 3/5 |
+| **Buy the book** | [Finn Lectura](https://finnlectura.fi/oppimateriaalit/tyoelaman-suomea-2) – [Adlibris](https://www.adlibris.com/fi/kirja/tyoelaman-suomea-2-9789511355830) – [Booky](https://www.booky.fi/search.php?search=ty%C3%B6el%C3%A4m%C3%A4n+suomea#!product_id=9789511355823) |
+| **Additional materials** | – Audio: [on CD](https://otava.kauppakv.fi/sivu/tuote/9789517928793), [as mp3s](https://otava.kauppakv.fi/sivu/tuote/9789511439363), streamed [6 months](https://otava.kauppakv.fi/sivu/tuote/9789511439387) or [12 months](https://otava.kauppakv.fi/sivu/tuote/9789511439370) (complete)\\\\ – [Teacher’s guide](https://otava.kauppakv.fi/sivu/tuote/9789511439349) (PDF) |
+
+Additional information: Työelämän suomea 2
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.16. Harjoitus tekee mestarin**
+
+This series of grammar and vocabulary exercises is meant to prepare students for the YKI-test. It is suitable for self-study, even though it’s definitely challenging.
+
+### **3.16.1. Harjoitus tekee mestarin 1**
+
+| **Name of the book** | Harjoitus tekee mestarin 1:\\\\ Suomen kielen perusharjoituksia maahanmuuttajille |
+| --- | --- |
+| **Author(s)** | Marja-Liisa Saunela |
+| **Publisher** | Art House |
+| **Most recent edition** | 2019 |
+| **Type of book** | intermediate grammar exercises |
+| **Aesthetics of the book** | pleasant, space to write answers |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.2-B1.1 |
+| **Advances** | explanations not suitable for beginners |
+| **Types of texts** | no texts |
+| **Topics discussed** | no themed vocabulary content |
+| **Grammar topics** | detailed morphology of verbs and nouns |
+| **Spoken language** | not included |
+| **Exercise types** | fill-in-the-gaps exercises |
+| **Solutions to the exercises** | available online |
+| **Suitable for self-study** | 5/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Art House](https://arthouse.fi/sivu/tuote/harjoitus-tekee-mestarin-1/32892) – [Adlibris](https://www.adlibris.com/fi/kirja/harjoitus-tekee-mestarin-1-9789518844764) – [Booky](https://www.booky.fi/tuote/marja_liisa/harjoitus_tekee_mestarin_1_suomen_kielen/9789518844764) |
+| **Additional materials** | [Solutions to book 1-3](https://docplayer.fi/1157587-Harjoitus-tekee-mestarin-ratkaisut-osiin-1-3-art-house.html) |
+
+Additional information: Harjoitus tekee mestarin 1
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.16.2. Harjoitus tekee mestarin 2**
+
+| **Name of the book** | Harjoitus tekee mestarin 2:\\\\ Suomen kielen keskitason harjoituksia maahanmuuttajille |
+| --- | --- |
+| **Author(s)** | Marja-Liisa Saunela |
+| **Publisher** | Art House |
+| **Most recent edition** | 2016 |
+| **Type of book** | grammar exercises |
+| **Aesthetics of the book** | pleasant, space to write answers |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1.1-B2 |
+| **Advances** | explanations not suitable for beginners |
+| **Types of texts** | no texts |
+| **Topics discussed** | no themed vocabulary content |
+| **Grammar topics** | advanced cases and sentence constructions |
+| **Spoken language** | not included |
+| **Exercise types** | fill-in-the-gaps exercises |
+| **Solutions to the exercises** | available online |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Art House](https://arthouse.fi/sivu/tuote/harjoitus-tekee-mestarin-2/72820) – [Adlibris](https://www.adlibris.com/fi/kirja/harjoitus-tekee-mestarin-2-9789518844702?gclid=Cj0KCQjw0rr4BRCtARIsAB0_48NvOMTuP5A2YJ_2yWqHXTGw6CkXlIg0bDZH-wAn2pmYqS1FFvsgCM0aArxbEALw_wcB) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/harjoitus-tekee-mestarin-2) |
+| **Additional materials** | [Solutions to book 1-3](https://docplayer.fi/1157587-Harjoitus-tekee-mestarin-ratkaisut-osiin-1-3-art-house.html) |
+
+Additional information: Harjoitus tekee mestarin 2
+
+[](https://uusikielemme.fi/finnish-grammar/syntax/constructions/temporal-substitute-construction-temporaalinen-lauseenvastike/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.16.3. Harjoitus tekee mestarin 3**
+
+| **Name of the book** | Harjoitus tekee mestarin 3:\\\\ Suomen kielen syventäviä harjoituksia maahanmuuttajille |
+| --- | --- |
+| **Author(s)** | Marja-Liisa Saunela |
+| **Publisher** | Art House |
+| **Most recent edition** | 2018 |
+| **Type of book** | vocabulary exercises (some grammar) |
+| **Aesthetics of the book** | pleasant, space to write answers |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1.1-B2 |
+| **Advances** | rather quickly, requires a good knowledge base |
+| **Types of texts** | no texts |
+| **Topics discussed** | no topics as such, just word types |
+| **Grammar topics** | derivation of nouns and adjectives |
+| **Spoken language** | not included |
+| **Exercise types** | fill-in-the-gaps exercises |
+| **Solutions to the exercises** | available online |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Art House](https://arthouse.fi/sivu/tuote/harjoitus-tekee-mestarin-3/32893) – [Adlibris](https://www.adlibris.com/fi/kirja/harjoitus-tekee-mestarin-3-9789518844788) – [Suomalainen kirjakauppa](https://www.suomalainen.com/products/harjoitus-tekee-mestarin-3) |
+| **Additional materials** | [Solutions to book 1-3](https://docplayer.fi/1157587-Harjoitus-tekee-mestarin-ratkaisut-osiin-1-3-art-house.html) |
+
+Additional information: Harjoitus tekee mestarin 3
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.16.4. Harjoitus tekee mestarin 4**
+
+| **Name of the book** | Harjoitus tekee mestarin 4:\\\\ Lisäharjoituksia yleiseen kielituntkintoon valmistautumista varten |
+| --- | --- |
+| **Author(s)** | Marja-Liisa Saunela |
+| **Publisher** | Art House |
+| **Most recent edition** | 2018 |
+| **Type of book** | reading comprehension, grammar/vocab exercises, writing prompts |
+| **Aesthetics of the book** | no colors, but spaced out nicely, space to write |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1.1-B2 |
+| **Advances** | there’s no progression of difficulty in this book |
+| **Types of texts** | fictional narratives, news reports, about level B1 |
+| **Topics discussed** | texts and exercises are not organized by any topic |
+| **Grammar topics** | location cases, rections, infinitives (no explanations) |
+| **Spoken language** | not included |
+| **Exercise types** | true-or-false, fill-in-the-gaps, open questions |
+| **Solutions to the exercises** | in the back of the book |
+| **Suitable for self-study** | 4/5 |
+| **Suitable for study abroad** | 5/5 |
+| **Buy the book** | [Art House](https://arthouse.fi/sivu/tuote/harjoitus-tekee-mestarin-4/72804) – [Adlibris](https://www.adlibris.com/fi/kirja/harjoitus-tekee-mestarin-4-9789518844344?gclid=Cj0KCQjw0rr4BRCtARIsAB0_48PA1KCreFsQ5d26XHYY194Hf-EZN1b1tpTY0Ex3zO9AX61TwIOscYIaAr5-EALw_wcB) – [Booky](https://www.booky.fi/tuote/marja_liisa/harjoitus_tekee_mestarin_4_lisaharjoituksia_yleiseen/9789518844344) |
+| **Additional materials** | none |
+
+Additional information: Harjoitus tekee mestarin 4
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.17. Suomen kieli kuntoon**
+
+I’m very sad that the *Suomen kieli kuntoon* series is no longer getting printed. I hope your local Finnish libraries still have it. It’s a book I would definitely suggest for any student serious about self-study.
+
+### **3.17.1. Suomen kieli kuntoon 1**
+
+| **Name of the book** | Suomen kieli kuntoon 1 – S2-harjoituskirja lukioon ja ammatilliseen koulutukseen |
+| --- | --- |
+| **Author(s)** | Ulla Lehtonen, Tarja Ruohonen |
+| **Publisher** | WSOY |
+| **Most recent edition** | 2005 |
+| **Type of book** | intermediate grammar and vocabulary exercise book |
+| **Aesthetics of the book** | great if you like fill-in-the-gaps exercises! |
+| **Language(s) used** | Finnish only |
+| **Level range** | A2.2-B1.2 |
+| **Advances** | from easier to harder grammar topics |
+| **Types of texts** | none |
+| **Topics discussed** | no themed vocabulary |
+| **Grammar topics** | revision of simpler grammar plus advanced grammar (see below) |
+| **Spoken language** | none |
+| **Exercise types** | vocabulary and grammar exercises, generally fill-in-the-gaps |
+| **Solutions to the exercises** | used to be available online (not anymore) |
+| **Suitable for self-study** | 3/5 (if only the solutions were still online!) |
+| **Suitable for study abroad** | 1/5 (because no longer for sale, but if you find it 5/5) |
+| **Buy the book** | no longer in print |
+| **Additional materials** | none |
+
+Additional information: Suomen kieli kuntoon 2 - S2-harjoituskirja lukioon ja ammatilliseen koulutukseen
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+### **3.17.2. Suomen kieli kuntoon 2**
+
+| **Name of the book** | Suomen kieli kuntoon 2 – S2-harjoituskirja lukioon ja ammatilliseen koulutukseen |
+| --- | --- |
+| **Author(s)** | Ulla Lehtonen, Tarja Ruohonen |
+| **Publisher** | WSOY |
+| **Most recent edition** | 2005 |
+| **Type of book** | advanced grammar and vocabulary exercise book |
+| **Aesthetics of the book** | great if you like fill-in-the-gap exercises and tables! |
+| **Language(s) used** | Finnish only |
+| **Level range** | B1.1-C1.1 |
+| **Advances** | no clear level progression, not meant as a course book |
+| **Types of texts** | none |
+| **Topics discussed** | no themed vocabulary |
+| **Grammar topics** | revision of simpler grammar plus advanced grammar (see below) |
+| **Spoken language** | a small amount of spoken language vocabulary exercises |
+| **Exercise types** | vocabulary and grammar exercises, generally fill-in-the-gaps |
+| **Solutions to the exercises** | used to be available online (not anymore) |
+| **Suitable for self-study** | 3/5 (if only the solutions were still online!) |
+| **Suitable for study abroad** | 1/5 (because no longer for sale, but if you find it 5/5) |
+| **Buy the book** | no longer in print |
+| **Additional materials** | none |
+
+Additional information: Suomen kieli kuntoon 2 - S2-harjoituskirja lukioon ja ammatilliseen koulutukseen
+
+<Spacer />
+
+<Spacer />
+
+[](https://uusikielemme.fi/finnish-vocabulary/vocabulary-lists/missa-phrases-menossa-tukossa-pystyssa-jaassa/)[](https://uusikielemme.fi/finnish-vocabulary/word-types/levallaan-ammollaan-sukkasillaan-finnish-adessive-phrases/)
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<Spacer />
+
+<p class="text-right indent-0">Back to top</p>
+
+<h3>**3.18. Middle school student book series**<br /></h3>
+
+This book series is no longer for sale, but used to be quite extensive. You can probably still find it in most Finnish libraries. The series was originally designed for middle school classes consisting of multicultural students whose native language wasn’t Finnish. The series has three levels and was meant to prepare these students for Finnish high school:
+
+- *Juttuja ja tuttuja* is meant for seventh graders (13 year olds)
+- *Yhteistä ja omaa* is meant for eighth graders (14 year olds)
+- *Täällä ja toisaalla* is meant for ninth graders (15 year olds)
+
+Each book of this series used to consist of one book with texts and another one with exercises. I have only been able to get hold of the exercise book for *juttuja ja* *tuttuja*, so I can’t say anything about the exercise books for the other two. In addition, there is a complementary publication to *juttuja ja tuttuja,* written in simplified Finnish (see section 4.1)

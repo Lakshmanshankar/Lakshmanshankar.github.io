@@ -1,0 +1,189 @@
+---
+datePublished: 2026-10-11T18:30:00.000Z
+pageStatus: published
+metaKeywords:
+  - HyperLogLog
+  - Count distinct problem
+date: 2026-10-11T18:30:00.000Z
+description: Count distinct values at scale
+tags:
+  - databases
+  - software-sytems
+title: Count distinct at scale
+slug: blog/2026/count-distinct-at-scale
+id: 59c91e64-5097-4d83-bcdd-1a2203615ddd
+---
+
+Sets and HashMaps are the standard data structures for getting a distinct count or checking if an element exists, largely due to their constant $O(1) $ lookup property. However, at massive scale, this exactness becomes a bottleneck.
+
+When applications need to count distinct daily active users or unique IP addresses across distributed systems, traditional approaches require storing every single unique identifier in memory. Storing 1 billion unique UUIDs requires gigabytes of RAM just to keep a tally. If the goal is simply to get the total count rather than retrieve the items themselves, we can trade a tiny amount of accuracy for extreme efficiency.
+
+This is where the **HyperLogLog (HLL)** algorithm comes in, allowing us to find the approximate cardinality (number of distinct elements) with a fraction of the memory.
+
+## How HyperLogLog Works
+
+In a uniform random set of values, HLL hashes each value to produce a binary string. It uses the **first few bits** of this binary string to determine which "register" (or bucket) the value belongs to.
+
+For each register, the algorithm then looks at the remaining bits to find the rarest element—which it determines by counting the maximum number of **leading zeros** seen so far. Because a hash with many leading zeros is statistically rare, finding one implies a very large dataset. By keeping track of the maximum number of leading zeros across all registers, HLL can estimate the total cardinality of the entire dataset.
+
+If you wanted to learn more about the HLL Algorithm, then there is a great [video](https://www.youtube.com/watch?v=UGfACoy5bbQ) check this [out](https://www.youtube.com/watch?v=UGfACoy5bbQ "HLL Algortihm explained").
+
+### Why HLL is a game changer
+
+Beyond just basic counting, HyperLogLog provides significant advantages for distributed architecture:
+
+- **Fixed Memory Footprint:** Whether tracking ten thousand or ten billion unique items, a standard HyperLogLog (HLL) structure maintains a constant, highly predictable memory footprint.
+- **Mergeability:** A critical advantage for distributed architectures. HLL sketches can be computed independently across separate nodes (e.g., Server A and Server B) and seamlessly combined later to determine the total distinct count across the entire cluster—without double-counting overlapping entries.
+- **Incremental Updates:** New elements are processed on the fly without needing to check for prior existence. Simply hash the incoming item and update the register if it reveals a rarer pattern than the current value.
+- **Tunable Precision:** You can finely balance memory usage against accuracy by adjusting the number of registers. A typical configuration yields a standard error of under 2%.
+
+## Challenges and Constraints
+
+While highly efficient, HLL relies on two strict mathematical conditions to remain accurate:
+
+1. **Uniform Randomness:** The algorithm assumes the hashed binary strings are uniformly distributed (each bit has an exact 50% chance of being 1 or 0). If you use a poor hash function that clusters values, the leading zero counts will be artificially high or low, ruining the estimate.
+2. **Sufficient Register Count:** You cannot rely on a small set of registers. If you only use one or two registers, a single statistical outlier (e.g., a hash that coincidentally starts with 20 zeros early on) will drastically skew the entire estimate. HLL solves this by dividing the data across hundreds or thousands of registers and averaging them using a harmonic mean to dampen outliers.
+
+### HLL In postgres
+
+The `postgresql-hll` extension exposes parameters to tune the accuracy, memory usage, and cardinality range of HLL sketches.
+
+- `log2m` **(default: 11, range: 4–31):** Controls the number of registers, calculated as $(m = 2^{\text{log2m}}).$ The default creates 2,048 registers, yielding an approximate relative standard error of 2.3%. Increasing `log2m` improves estimation accuracy but increases memory usage.
+- `regwidth` **(default: 5 bits, range: 1–8):** Controls the number of bits allocated per register, determining the maximum rank each register can represent. Increasing it allows the sketch to support higher cardinalities, at the cost of additional memory.
+- **Memory efficiency:** The extension supports adaptive representations (`EXPLICIT`, `SPARSE`, and `FULL`) to reduce storage overhead, particularly for small cardinalities. Actual storage depends on the representation used.
+
+---
+
+<Expand title="Installing HLL Extension" open="false">
+Install postgres-hll
+
+```shellscript
+sudo apt install postgresql-18-hll
+```
+
+Then
+
+```sql
+CREATE EXTENSION IF NOT EXISTS hll;
+```
+
+To verify the installation
+
+```sql
+SELECT extname, extversion
+FROM pg_extension
+WHERE extname = 'hll';
+```
+</Expand>
+
+### Basic example
+
+```sql
+lakshman=# SELECT hll_cardinality(
+    hll_add_agg(hll_hash_integer(id))
+) AS estimated_unique_orders
+FROM orders;
+ estimated_unique_orders
+-------------------------
+      216.00057034664988
+(1 row)
+
+lakshman=# select count(distinct id) from orders;
+ count
+-------
+   211
+(1 row)
+```
+
+To demonstrate this with a practical example, consider an `orders` table containing 211 distinct records.
+
+```sql
+lakshman=# \d+ orders;
+                                                                   Table "public.orders"
+    Column    |           Type           | Collation | Nullable |              Default               | Storage  | Compression | Stats target | Description
+--------------+--------------------------+-----------+----------+------------------------------------+----------+-------------+--------------+-------------
+ id           | integer                  |           | not null | nextval('orders_id_seq'::regclass) | plain    |             |              |
+ user_id      | integer                  |           |          |                                    | plain    |             |              |
+ amount       | numeric(10,2)            |           | not null |                                    | main     |             |              |
+ status       | character varying(50)    |           | not null |                                    | extended |             |              |
+ ordered_at   | timestamp with time zone |           | not null |                                    | plain    |             |              |
+ delivered_at | timestamp with time zone |           |          |                                    | plain    |             |              |
+```
+
+We will create materialized views aggregated at the monthly level and leverage HyperLogLog (HLL) to calculate cardinality.
+
+```sql
+CREATE MATERIALIZED VIEW monthly_order_hll AS
+SELECT
+    date_trunc(
+        'month',
+        ordered_at AT TIME ZONE 'UTC'
+    )::date AS month,
+
+    hll_add_agg(
+        hll_hash_integer(id)
+    ) AS orders_hll,
+
+    hll_add_agg(
+        hll_hash_integer(user_id)
+    ) FILTER (WHERE user_id IS NOT NULL) AS users_hll
+
+FROM orders
+GROUP BY 1;
+```
+
+This creates a single row for each month, generating two HyperLogLog (HLL) sketches per row to track distinct users and orders. We can now query these sketches to determine the estimated number of unique users and orders for each month:
+
+```sql
+lakshman=# SELECT
+    month,
+    hll_cardinality(orders_hll) AS estimated_orders,
+    hll_cardinality(users_hll) AS estimated_users
+FROM monthly_order_hll
+ORDER BY month;
+   month    | estimated_orders | estimated_users
+------------+------------------+-----------------
+ 2025-12-01 |                5 |               1
+ 2026-01-01 |               91 |               5
+ 2026-02-01 |               56 |               5
+ 2026-03-01 |               59 |               5
+```
+
+<Expand title="Actual unique count by month" open="false">
+```sql
+
+lakshman=# SELECT
+    date_trunc('month', ordered_at) AS month,
+    COUNT(DISTINCT id) AS distinct_orders,
+    COUNT(DISTINCT user_id) AS distinct_users
+FROM orders
+GROUP BY date_trunc('month', ordered_at)
+ORDER BY month;
+           month           | distinct_orders | distinct_users
+---------------------------+-----------------+----------------
+ 2025-12-01 00:00:00+05:30 |               2 |              1
+ 2026-01-01 00:00:00+05:30 |              91 |              5
+ 2026-02-01 00:00:00+05:30 |              55 |              5
+ 2026-03-01 00:00:00+05:30 |              61 |              5
+ 2026-04-01 00:00:00+05:30 |               2 |              2
+
+```
+</Expand>
+
+To determine the overall count of unique users and orders across multiple months—without double-counting—aggregate the monthly HLL sketches:
+
+```javascript
+lakshman=# SELECT
+    hll_cardinality(
+        hll_union_agg(orders_hll)
+    ) AS estimated_total_orders,
+    hll_cardinality(
+        hll_union_agg(users_hll)
+    ) AS estimated_total_users
+FROM monthly_order_hll;
+ estimated_total_orders | estimated_total_users
+------------------------+-----------------------
+     216.00057034664988 |                     5
+```
+
+<Spacer />

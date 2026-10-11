@@ -5,7 +5,7 @@ interface Props {
     image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 const { title, description, image = "/nano.png" } = Astro.props;
 ---
 

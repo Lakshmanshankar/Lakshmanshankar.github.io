@@ -1,0 +1,55 @@
+---
+pageStatus: published
+date: 2026-09-28T18:30:00.000Z
+description: dsd
+title: Latex
+slug: blog/latex/latex
+id: 5a0c2b84-8c80-461b-9ff7-46d38542e75d
+---
+
+Ah, you mean install `mathdesign` **/** `garamondx` **using** `getnonfreefonts`, similar to how you installed Day Roman.
+
+First, see what `getnonfreefonts` supports:
+
+```bash
+getnonfreefonts --list | grep -Ei 'garamond|mathdesign'
+```
+
+Then, if `garamondx` is listed:
+
+```bash
+getnonfreefonts --user garamondx
+```
+
+For `mathdesign`, try:
+
+```bash
+getnonfreefonts --user mathdesign
+```
+
+Then refresh the filename database:
+
+```bash
+mktexlsr ~/texmf
+```
+
+Verify:
+
+```bash
+kpsewhich garamondx.sty
+kpsewhich mathdesign.sty
+```
+
+However, `fontenc` **is not a** `nonfree font` and should not be installed via `getnonfreefonts`. It is part of the standard LaTeX base:
+
+```bash
+kpsewhich fontenc.sty
+```
+
+If that returns nothing, install:
+
+```bash
+sudo apt install texlive-latex-base
+```
+
+If `garamondx` or `mathdesign` do **not** appear in `getnonfreefonts --list`, then they cannot be installed through that tool; `getnonfreefonts` only installs the specific font packages in its own catalogue.

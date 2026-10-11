@@ -7,21 +7,24 @@ import BackToTop from "@/components/ui/BackToTop.astro";
 import BackToPrev from "@/components/ui/BackToPrev.astro";
 import { readingTime } from "@/lib/utils";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
-import { Schema } from "astro-seo-schema";
 import ContentCard from "@/components/ui/ContentCard.astro";
-import Code from "@/components/mdx/Code.astro";
+import { Spacer, Image } from "pagewrite-ui/mdx";
 import Chip from "@/components/mdx/Chip.astro";
-import Spacer from "@/components/mdx/Spacer.astro";
-import Image from "@/components/mdx/Image.astro";
-
 import { SITE } from "@/consts";
+
+import { resolveSlugParam } from "@/lib/utils";
+
 export async function getStaticPaths() {
     const allPosts = await getCollection("blog");
     const posts = allPosts.filter((item) => item.data?.draft !== true);
-    return posts.map((post: { id: any }) => ({
-        params: { slug: post.id },
-        props: { post },
-    }));
+    return posts.map((post: any) => {
+        const rawSlug = post.data?.slug || post.slug || post.id;
+        const slugParam = resolveSlugParam(rawSlug, "blog");
+        return {
+            params: { slug: slugParam },
+            props: { post },
+        };
+    });
 }
 interface Props {
     post: CollectionEntry<"blog">;
@@ -59,36 +62,18 @@ const relatedPosts = otherPosts
 ---
 
 <Layout title={entry.data.title} description={entry.data.description}>
-    <Fragment slot="head">
-        <Schema
-            item={{
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                mainEntityOfPage: {
-                    "@type": "WebPage",
-                    "@id": `${import.meta.env.SITE}/blog/${post.id}`,
-                },
-                headline: entry.data.title,
-                description: entry.data.description,
-                datePublished: entry.data.date.toISOString(),
-                dateModified: entry.data.date.toISOString(),
-                author: {
-                    "@type": "Person",
-                    name: "Lakshmanshankar",
-                },
-                url: url,
-            }}
-        />
-    </Fragment>
-
     <Toc headings={headings} />
     <article>
         <h1 class="mt-10 text-center">{entry.data.title}</h1>
         <div class="flex gap-2 text-sm justify-center items-center">
             <!-- <BackToPrev href="/blog">Back to Blog</BackToPrev> -->
             <div class="my-2 text-sm text-stone-500 dark:text-neutral-400">
-                <FormattedDate date={entry.data.date} includeYear class="text-[var(--brand-pink)]" />
-                <span class="text-[var(--brand-pink)] mx-1">•</span>
+                <FormattedDate
+                    date={entry.data.date}
+                    includeYear
+                    class="text-[var(--brand-color)]"
+                />
+                <span class="text-[var(--brand-color)] mx-1">•</span>
                 <span>{entry.body && readingTime(entry.body)}</span>
             </div>
         </div>
@@ -102,25 +87,29 @@ const relatedPosts = otherPosts
             )
         }
 
-        <Content components={{ Code, Chip, Spacer, Image }} />
+        <Content components={{Chip, Spacer, Image }} />
 
         {
             relatedPosts.length > 0 && (
-                <div class="not-prose my-10">
+                <div class="my-10">
                     <hr class="border-colors mb-8" />
                     <h3 class="text-lg font-semibold mb-4 text-stone-950 dark:text-neutral-100">
                         Related Articles
                     </h3>
                     <div class="flex flex-col gap-2">
-                        {relatedPosts.map((p) => (
-                            <ContentCard
-                                title={p.data.title}
-                                description={p.data.description}
-                                date={new Date(p.data.date)}
-                                url={`/blog/${p.id}`}
-                                tags={p.data.tags}
-                            />
-                        ))}
+                        {relatedPosts.map((p: any) => {
+                            const rawSlug = p.data?.slug || p.slug || p.id;
+                            const slugParam = resolveSlugParam(rawSlug, "blog");
+                            return (
+                                <ContentCard
+                                    title={p.data.title}
+                                    description={p.data.description}
+                                    date={new Date(p.data.date)}
+                                    url={`/blog/${slugParam}`}
+                                    tags={p.data.tags}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
             )
@@ -190,7 +179,7 @@ const relatedPosts = otherPosts
     }
 
     const throttledHighlight = throttle(highlightTocActiveItem, 200);
-    let isInitialRender = false;
+
     function setupTocScroll() {
         window.removeEventListener("scroll", throttledHighlight);
         window.addEventListener("scroll", throttledHighlight);
@@ -252,11 +241,11 @@ const relatedPosts = otherPosts
             // Copy link on click
             const copyLink = async () => {
                 const url = `${window.location.origin}${window.location.pathname}#${headingId}`;
-                
+
                 try {
                     // Update URL hash without jumping (since we do smooth scrolling)
                     window.history.pushState(null, "", `#${headingId}`);
-                    
+
                     if (navigator.clipboard) {
                         await navigator.clipboard.writeText(url);
                     }
@@ -288,12 +277,12 @@ const relatedPosts = otherPosts
                 }, 1500);
             };
 
-            heading.addEventListener("click", (e) => {
+            heading.addEventListener("click", () => {
                 // Don't copy if the user is selecting text
                 if (window.getSelection()?.toString()) return;
                 copyLink();
             });
-            
+
             linkIcon.addEventListener("click", (e) => {
                 e.stopPropagation();
                 copyLink();

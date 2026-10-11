@@ -16,27 +16,25 @@ const { title, description, date, url, endDate, role, showArrow = true } = Astro
 
 <a
     href={url}
-    class="post-item block my-0 py-5 no-underline hover:transition-all muted-hover relative group px-4 md:px-8 rounded-md"
+    class="post-item block my-0 py-5 no-underline hover:transition-all muted-hover relative group px-4 md:px-5 rounded-xl border border-transparent hover:border-stone-200 dark:hover:border-neutral-800"
 >
-    <div>
-        <div class="flex gap-2 items-center justify-between">
-            <h4 class="my-0 mt-2 flex flex-col gap-3">
-                <span>
-                    <span class="text-black dark:text-white font-semibold">
-                        {title}
-                    </span>
-                    <span class="text-amber-500">•</span>
-                    <span class="gradient-text">{role}</span>
-                </span>
-
-                <span>
-                    {date} - {endDate}
-                </span>
-            </h4>
-            {showArrow && <ArrowIcon class="mt-2 hidden md:block" />}
+    <div class="flex flex-col h-full">
+        <div class="flex items-start justify-between gap-4">
+            <div>
+                <h4 class="my-0 text-lg md:text-xl font-bold text-stone-900 dark:text-stone-100 group-hover:text-[var(--brand-color)] transition-colors duration-200">
+                    {title}
+                </h4>
+                <div class="flex items-center gap-2 mt-1 mb-3 text-sm font-medium text-stone-500 dark:text-neutral-400">
+                    <span>{role}</span>
+                    <span class="text-stone-300 dark:text-neutral-600">•</span>
+                    <span>{date} - {endDate}</span>
+                </div>
+            </div>
+            {showArrow && <ArrowIcon class="mt-1 text-stone-400 group-hover:text-[var(--brand-color)] transition-all duration-300 group-hover:translate-x-1 hidden md:block" />}
         </div>
+        
+        <p class="mt-0! mb-2 text-stone-600 dark:text-neutral-300 leading-relaxed line-clamp-2 md:line-clamp-3">
+            {description}
+        </p>
     </div>
-    <p class="text-[16px] my-1 mt-4 mb-3">
-        {description}
-    </p>
 </a>

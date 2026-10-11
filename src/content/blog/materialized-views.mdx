@@ -1,0 +1,97 @@
+---
+pageStatus: published
+date: 2026-09-28T18:30:00.000Z
+description: dssdsd
+tags:
+  - Systems software
+  - Databases
+title: Materialized views
+slug: blog/materialized-views
+id: 1f092ae6-1b11-4d9f-8348-7a491d14cf11
+---
+
+Materialized views store the result of a query physically on disk, unlike regular views which just re-run the query every time. Here's how to set them up and think about partitioning — I'll focus on PostgreSQL since it's the most common context, with notes on how Oracle differs since partitioning support varies significantly.
+
+What are the benefits of using OLAP.
+
+ROLAP - Relational Online Analytical Processing.
+
+## Creating a materialized view (PostgreSQL)
+
+```sql
+CREATE MATERIALIZED VIEW sales_summary AS
+SELECT
+    region,
+    date_trunc('day', sale_date) AS sale_day,
+    SUM(amount) AS total_sales,
+    COUNT(*) AS num_transactions
+FROM sales
+GROUP BY region, date_trunc('day', sale_date)
+WITH DATA;  -- populates it immediately; use WITH NO DATA to defer
+```
+
+A few things worth doing right away:
+
+**Add an index** — materialized views don't get indexes automatically:
+
+```sql
+CREATE UNIQUE INDEX idx_sales_summary_region_day
+    ON sales_summary (region, sale_day);
+```
+
+A unique index is required if you want to use `REFRESH ... CONCURRENTLY` (see below).
+
+**Refreshing it** — the data is a snapshot, not live:
+
+```sql
+REFRESH MATERIALIZED VIEW sales_summary;               -- locks the view during refresh
+REFRESH MATERIALIZED VIEW CONCURRENTLY sales_summary;   -- allows reads during refresh, needs unique index
+```
+
+You'd typically schedule this with `pg_cron`, a cron job calling `psql`, or an application-level scheduler, depending on how fresh you need the data.
+
+/tab
+
+| Time At UTC | US/Eastern | Moscow, Europe | IST |
+| --- | --- | --- | --- |
+| 01-01-2026 00:00:00 | 01-01-2026 23:59:59 | 31-01-2026 23:59:59 | 01-01-2026 23:59:59 |
+| 31-01-2026 23:59:59 | 31-01-2026 23:59:59 | 31-01-2026 23:59:59 | 31-01-2026 23:59:59 |
+
+### About partitioning
+
+This is the part where the answer really depends on the database engine:
+
+**In PostgreSQL**, materialized views themselves *cannot* be partitioned — there's no `PARTITION BY` clause for `CREATE MATERIALIZED VIEW`. What people actually do instead is one of:
+
+1. **Partition the underlying source table(s)**, so the query populating the MV runs faster and only touches relevant partitions.
+2. **Build several materialized views**, one per partition/segment (e.g. `sales_summary_2025`, `sales_summary_2026`), and union them with a regular view if you need a unified interface.
+3. **Use a partitioned table + triggers/incremental refresh logic** to simulate a "partitioned materialized view" — essentially building it yourself with an actual partitioned table that you populate incrementally instead of using `CREATE MATERIALIZED VIEW` at all.
+
+**In Oracle**, materialized views *do* support real partitioning — you can create a partitioned MV directly, and Oracle also supports partition-aware "fast refresh" so only affected partitions get updated:
+
+By default, there is no provision in postgres to define materialised views.
+
+In this blog, I will explain - This is abo
+
+```sql
+CREATE MATERIALIZED VIEW sales_summary
+PARTITION BY RANGE (sale_day)
+(
+    PARTITION p2025 VALUES LESS THAN (TO_DATE('2026-01-01','YYYY-MM-DD')),
+    PARTITION p2026 VALUES LESS THAN (TO_DATE('2027-01-01','YYYY-MM-DD'))
+)
+BUILD IMMEDIATE
+REFRESH FAST ON COMMIT
+AS
+SELECT region, sale_day, SUM(amount) AS total_sales
+FROM sales
+GROUP BY region, sale_day;
+```
+
+<blockquote>**SQL Server** doesn't have materialized views at all in the Postgres/Oracle sense — the closest equivalent is an "indexed view," which has its own restrictions and isn't partitionable in the same way.</blockquote>
+
+Hello,
+
+I am lakshman, founder of pagewrite. My work is everything for me. It gave me the identity that i have today. I am currently working as a software engineer at salesloft. Where I am working on their analytics platform.
+
+Which database are you working with? I can give you a more precise, working example — including how to structure refresh and partitioning together for your actual use case (e.g. time-series data, multi-tenant data, etc.).

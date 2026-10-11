@@ -2,7 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 ---
 
-<link rel="preload" href="/geist-regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/inter-italic-variable.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -10,7 +10,7 @@ import { ClientRouter } from "astro:transitions";
     rel="stylesheet"
 />
 
-<style>
+<style is:global>
     @keyframes slide {
         from {
             opacity: 0;
@@ -23,6 +23,26 @@ import { ClientRouter } from "astro:transitions";
     }
     .slide {
         animation: slide 0.5s ease-in-out;
+    }
+    
+    .image-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--background);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .large-image {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+        cursor: pointer;
     }
 </style>
 
@@ -134,15 +154,7 @@ import { ClientRouter } from "astro:transitions";
         applyTheme(getStoredTheme());
     }
 
-    function animate() {
-        const animateElements = document.querySelectorAll(".animate");
 
-        animateElements.forEach((element, index) => {
-            setTimeout(() => {
-                element.classList.add("show");
-            }, index * 150);
-        });
-    }
 
     function onScroll() {
         if (window.scrollY > 0) {
@@ -207,13 +219,13 @@ import { ClientRouter } from "astro:transitions";
             .writeText(text)
             .then(() => {
                 button.textContent = "Copied!";
-                button.classList.remove("code-normal");
-                button.classList.add("code-copied");
+                button.classList.remove("text-stone-600", "dark:text-stone-100");
+                button.classList.add("text-stone-400", "dark:text-stone-500");
 
                 setTimeout(() => {
                     button.textContent = "Copy";
-                    button.classList.remove("code-copied");
-                    button.classList.add("code-normal");
+                    button.classList.remove("text-stone-400", "dark:text-stone-500");
+                    button.classList.add("text-stone-600", "dark:text-stone-100");
                 }, 2000);
             })
             .catch((err) => {
@@ -231,9 +243,10 @@ import { ClientRouter } from "astro:transitions";
 
             const codeText = pre.textContent || "";
             const copyButton = document.createElement("button");
+            
             copyButton.textContent = "Copy";
             copyButton.className =
-                "copy-code-button absolute -top-8 right-1 p-2 rounded text-xs transition-colors";
+                "copy-btn absolute top-1 right-1 p-1 px-2 rounded text-xs! transition-colors bg-stone-200 dark:bg-neutral-900 text-stone-600 dark:text-stone-100 opacity-100 z-10";
             copyButton.setAttribute("data-copy-text", codeText);
 
             copyButton.addEventListener("click", (event) => {
@@ -262,35 +275,4 @@ import { ClientRouter } from "astro:transitions";
   });
 </script> -->
 
-<!-- Cloudflare Web Analytics with Partytown -->
 
-<script type="text/partytown" data-astro-reload>
-    document.addEventListener("astro:page-load", () => {
-        // Check if analytics is already loaded to prevent duplicate requests
-        if (window._cfBeaconLoadAttempted) return;
-        window._cfBeaconLoadAttempted = true;
-
-        const existingScript = document.querySelector("script[data-cf-beacon]");
-        if (existingScript) {
-            existingScript.remove();
-        }
-
-        const script = document.createElement("script");
-        script.defer = true;
-        script.src = "https://static.cloudflareinsights.com/beacon.min.js";
-        script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
-        document.head.appendChild(script);
-    });
-</script>
-
-<script is:inline>
-    // Only load on initial page load and set flag
-    if (!window._cfBeaconLoadAttempted) {
-        window._cfBeaconLoadAttempted = true;
-        const script = document.createElement("script");
-        script.defer = true;
-        script.src = "https://static.cloudflareinsights.com/beacon.min.js";
-        script.dataset.cfBeacon = '{"token": "74da525dc58f4f22ae1922e8e7ca4936"}';
-        document.head.appendChild(script);
-    }
-</script>

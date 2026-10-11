@@ -1,0 +1,171 @@
+---
+title: "The Cube Timezone Trap in Pre-Aggregation Builds"
+slug: "the-cube-timezone-trap-in-pre-aggregation-builds"
+id: "ec4d08ba-c5be-454d-9839-394abed26023"
+---
+
+Pre-aggregations are how Cube gets fast. Roll data up ahead of time, store the rollup, and serve queries from it instead of scanning raw fact tables. It works beautifully — until timezones enter the picture, and then a surprising number of teams find their "fast" dashboard quietly returning wrong numbers.
+
+<Callout icon="💡" variant="warning">
+If your pre-aggregations are correct in one timezone but silently wrong in another, you're not imagining it — this is one of the most common Cube production issues.
+</Callout>
+
+## Why timezone even matters here
+
+A pre-aggregation buckets rows into time granularities — day, week, month — ahead of query time. To do that, Cube has to decide *where midnight is*. If your users are spread across timezones, "today" means something different to each of them, but the pre-aggregation table was built with one timezone's boundaries baked in.
+
+Let's check this font with cryillic letters, How it performs on that case.
+
+<Tabs activeTab="tab-1789976407699">
+<TabItem title="The symptom" value="tab-1">
+A dashboard shows the right totals for UTC users but numbers shift by a day (or an hour, around DST changes) for users in other timezones. Rollups look "off by one" near midnight boundaries. Refresh jobs seem to skip or duplicate a day
+
+This supports fully functional markdown and mdx nodes.
+
+1. Awesome node editing experience.
+2. Super Markdown nodes.
+3. jello
+
+<Spacer />
+
+| English | Russian | Finnish |
+| --- | --- | --- |
+| Helo | здесь | Moi |
+| Good morning | вообще часовые | Hvyaa Huomenta |
+| Where | важны | Missa |
+
+<Spacer />
+</TabItem>
+
+<TabItem title="The root cause" value="tab-2">
+Cube builds separate physical pre-aggregation partitions per timezone it's told to support. If a query's timezone isn't one Cube has pre-built for, it either falls back to a slow raw query or, in older versions, silently mismatches partition boundaries.
+
+Именно благодаря предварительным агрегациям Cube работает быстро. Данные заранее сворачиваются (агрегируются), результат сохраняется, и запросы обрабатываются на основе этих готовых данных, а не путем сканирования исходных таблиц фактов. Эта схема отлично работает — пока в дело не вступают часовые пояса: тогда многие команды с удивлением обнаруживают, что их «быстрые» дашборды незаметно для всех начинают выдавать неверные цифры.
+
+<blockquote>Если ваши предварительные агрегации корректны в одном часовом поясе, но дают неверные результаты в другом (причем без каких-либо явных ошибок), — вам это не кажется: это одна из самых распространенных проблем при эксплуатации Cube.</blockquote>
+
+### Почему здесь вообще важны часовые пояса?
+
+Предварительная агрегация группирует строки по временным интервалам (день, неделя, месяц) еще до выполнения запроса. Для этого Cube должен определить, когда именно наступает полночь. Если пользователи находятся в разных часовых поясах, понятие «сегодня» для каждого из них означает разное, однако таблица предварительной агрегации была сформирована с учетом границ конкретного часового пояса.
+
+Давайте проверим этот шрифт с поддержкой кириллицы: как он поведет себя в данном случае.
+</TabItem>
+
+<TabItem title="Consequences" value="tab-1789976407699">
+1. **Undeclared query timezones.** Cube documentation is explicit that queries running against timezones you haven't registered won't hit the pre-aggregation at all — you have to define every timezone your queries will use, either via the scheduled-refresh-timezones environment variable or in the schema config, or those queries won't use pre-aggregations. Miss one, and that user's dashboard falls back to a full scan.
+2. **DST discontinuities on timezone-naive databases.** Cube maintainers shipped a fix specifically to use local dates for pre-aggregations to avoid timezone-shift discrepancies around daylight saving time changes on timezone-unaware databases like MySQL — a reminder that "timezone-aware" isn't a property of your query, it's a property of your entire storage and compute chain, database included.
+3. **Non-UTC build ranges.** Even the internals aren't immune: a 2025 fix addressed improper pre-aggregation buildRange construction for non-UTC timezones in scheduled refresh, meaning the *range Cube decides to build* could be wrong before a single row is aggregated.
+4. **Date-only partition columns.** If your source is partitioned by a date-only column (common in Athena/S3-style setups), adding timezone conversion to the query breaks partition pruning — Cube can no longer push a clean `WHERE dt = '...'` down to the partition, and scans blow up in cost and time.
+5. **Driver gaps.** Not every connector implements timezone conversion the same way — Elasticsearch-backed pre-aggregations, for instance, have had open gaps where the time dimension isn't converted to the requested timezone at all, so "day" boundaries reflect the source system's implicit timezone, not the user's.
+</TabItem>
+
+<TabItem title="Tablet Ire" value="tab-1789978768112">
+<Spacer />
+</TabItem>
+</Tabs>
+
+## Where it actually breaks
+
+1. **Undeclared query timezones.** Cube documentation is explicit that queries running against timezones you haven't registered won't hit the pre-aggregation at all — you have to define every timezone your queries will use, either via the scheduled-refresh-timezones environment variable or in the schema config, or those queries won't use pre-aggregations. Miss one, and that user's dashboard falls back to a full scan.
+2. **DST discontinuities on timezone-naive databases.** Cube maintainers shipped a fix specifically to use local dates for pre-aggregations to avoid timezone-shift discrepancies around daylight saving time changes on timezone-unaware databases like MySQL — a reminder that "timezone-aware" isn't a property of your query, it's a property of your entire storage and compute chain, database included.
+3. **Non-UTC build ranges.** Even the internals aren't immune: a 2025 fix addressed improper pre-aggregation buildRange construction for non-UTC timezones in scheduled refresh, meaning the *range Cube decides to build* could be wrong before a single row is aggregated.
+4. **Date-only partition columns.** If your source is partitioned by a date-only column (common in Athena/S3-style setups), adding timezone conversion to the query breaks partition pruning — Cube can no longer push a clean `WHERE dt = '...'` down to the partition, and scans blow up in cost and time.
+5. **Driver gaps.** Not every connector implements timezone conversion the same way — Elasticsearch-backed pre-aggregations, for instance, have had open gaps where the time dimension isn't converted to the requested timezone at all, so "day" boundaries reflect the source system's implicit timezone, not the user's.
+
+<Expand title="A concrete example" open="false">
+A SaaS company pre-aggregates daily signups. The pre-agg is built once, scheduled for `UTC`. A customer in `America/Los_Angeles` looks at "yesterday" at 9am local time. Because their timezone was never added to the scheduled refresh list, Cube can't serve the query from the rollup — it silently falls back to a live query, which is slower and, if the live query and the pre-agg use different timezone conversion logic, can disagree with the cached number shown minutes earlier.
+
+| Problem | Fix |
+| --- | --- |
+| Query timezone not covered | List every timezone your app actually queries in, in scheduled refresh config |
+| DST discrepancies | Use local-date partitioning, keep driver/db versions current |
+| Broken partition pruning | Keep a raw date-only filter alongside the timezone-shifted one (queryRewrite) |
+| Driver-specific gaps | Check your specific connector's timezone support before relying on it |
+
+<Spacer />
+</Expand>
+
+## What actually fixes it
+
+| Problem | Fix |
+| --- | --- |
+| Query timezone not covered | List every timezone your app actually queries in, in scheduled refresh config |
+| DST discrepancies | Use local-date partitioning, keep driver/db versions current |
+| Broken partition pruning | Keep a raw date-only filter alongside the timezone-shifted one (queryRewrite) |
+| Driver-specific gaps | Check your specific connector's timezone support before relying on it |
+
+```typescript
+// Example: explicitly registering the timezones your pre-aggregations must serve
+cube(`Orders`, {
+  preAggregations: {
+    daily: {
+      type: `rollup`,
+      timeDimension: CUBE.createdAt,
+      granularity: `day`,
+      scheduledRefreshTimezones: [`UTC`, `America/Los_Angeles`, `Europe/London`],
+    },
+  },
+});
+```
+
+<blockquote>Treat pre-aggregation timezone configuration as a first-class part of your schema, not an afterthought bolted on when a customer complains their numbers look wrong.</blockquote>
+
+The underlying lesson is a familiar one in data engineering: timezone bugs are rarely caught by unit tests because they only show up at boundaries — midnight, month-end, DST transitions — and boundaries are exactly what pre-aggregation partitioning is built around. Get explicit about which timezones you support, and audit that list every time you add users in a new region.
+
+<Tabs activeTab="tab-1789976407699">
+<TabItem title="The symptom" value="tab-1">
+A dashboard shows the right totals for UTC users but numbers shift by a day (or an hour, around DST changes) for users in other timezones. Rollups look "off by one" near midnight boundaries. Refresh jobs seem to skip or duplicate a day
+
+This supports fully functional markdown and mdx nodes.
+
+1. Awesome node editing experience.
+2. Super Markdown nodes.
+3. jello
+
+<Spacer />
+
+| English | Russian | Finnish |
+| --- | --- | --- |
+| Helo | здесь | Moi |
+| Good morning | вообще часовые | Hvyaa Huomenta |
+| Where | важны | Missa |
+
+<Spacer />
+</TabItem>
+
+<TabItem title="The root cause" value="tab-2">
+Cube builds separate physical pre-aggregation partitions per timezone it's told to support. If a query's timezone isn't one Cube has pre-built for, it either falls back to a slow raw query or, in older versions, silently mismatches partition boundaries.
+
+Именно благодаря предварительным агрегациям Cube работает быстро. Данные заранее сворачиваются (агрегируются), результат сохраняется, и запросы обрабатываются на основе этих готовых данных, а не путем сканирования исходных таблиц фактов. Эта схема отлично работает — пока в дело не вступают часовые пояса: тогда многие команды с удивлением обнаруживают, что их «быстрые» дашборды незаметно для всех начинают выдавать неверные цифры.
+
+<blockquote>Если ваши предварительные агрегации корректны в одном часовом поясе, но дают неверные результаты в другом (причем без каких-либо явных ошибок), — вам это не кажется: это одна из самых распространенных проблем при эксплуатации Cube.</blockquote>
+
+### Почему здесь вообще важны часовые пояса?
+
+Предварительная агрегация группирует строки по временным интервалам (день, неделя, месяц) еще до выполнения запроса. Для этого Cube должен определить, когда именно наступает полночь. Если пользователи находятся в разных часовых поясах, понятие «сегодня» для каждого из них означает разное, однако таблица предварительной агрегации была сформирована с учетом границ конкретного часового пояса.
+
+Давайте проверим этот шрифт с поддержкой кириллицы: как он поведет себя в данном случае.
+</TabItem>
+
+<TabItem title="Tab 3" value="tab-1789976407699">
+1. **Undeclared query timezones.** Cube documentation is explicit that queries running against timezones you haven't registered won't hit the pre-aggregation at all — you have to define every timezone your queries will use, either via the scheduled-refresh-timezones environment variable or in the schema config, or those queries won't use pre-aggregations. Miss one, and that user's dashboard falls back to a full scan.
+2. **DST discontinuities on timezone-naive databases.** Cube maintainers shipped a fix specifically to use local dates for pre-aggregations to avoid timezone-shift discrepancies around daylight saving time changes on timezone-unaware databases like MySQL — a reminder that "timezone-aware" isn't a property of your query, it's a property of your entire storage and compute chain, database included.
+3. **Non-UTC build ranges.** Even the internals aren't immune: a 2025 fix addressed improper pre-aggregation buildRange construction for non-UTC timezones in scheduled refresh, meaning the *range Cube decides to build* could be wrong before a single row is aggregated.
+4. **Date-only partition columns.** If your source is partitioned by a date-only column (common in Athena/S3-style setups), adding timezone conversion to the query breaks partition pruning — Cube can no longer push a clean `WHERE dt = '...'` down to the partition, and scans blow up in cost and time.
+5. **Driver gaps.** Not every connector implements timezone conversion the same way — Elasticsearch-backed pre-aggregations, for instance, have had open gaps where the time dimension isn't converted to the requested timezone at all, so "day" boundaries reflect the source system's implicit timezone, not the user's.
+</TabItem>
+</Tabs>
+
+---
+
+Esiaggregointi on Cuben nopeustapa. Kerää dataa etukäteen, tallenna kooste ja suorita kyselyitä sen perusteella sen sijaan, että skannaisit raakatietotaulukoita. Se toimii loistavasti – kunnes aikavyöhykkeet tulevat kuvaan, ja sitten yllättävän moni tiimi huomaa "nopean" kojelaudan palauttavan hiljaa vääriä lukuja.
+
+<blockquote>Jos esiaggregointisi ovat oikein yhdessä aikavyöhykkeessä, mutta hiljaa väärin toisessa, et kuvittele sitä – tämä on yksi yleisimmistä Cuben tuotanto-ongelmista.</blockquote>
+
+### Miksi aikavyöhykkeellä on edes merkitystä tässä
+
+Esiaggregointi ryhmittelee rivit aikatarkkuuksiin – päivä, viikko, kuukausi – ennen kyselyaikaa. Tätä varten Cuben on päätettävä, missä keskiyö on. Jos käyttäjäsi ovat hajallaan eri aikavyöhykkeillä, "tänään" tarkoittaa heille jokaiselle eri asiaa, mutta esiaggregointitaulukko on rakennettu yhden aikavyöhykkeen rajoilla.
+
+Katsotaanpa, miten tämä kriyllic-kirjaimilla varustettu fontti toimii tässä tapauksessa.
+
+<Spacer />

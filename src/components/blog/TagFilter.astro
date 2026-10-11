@@ -1,19 +1,31 @@
 ---
 interface Props {
     tags: string[];
+    activeTag?: string;
 }
 
-let { tags } = Astro.props;
-tags.unshift("all");
+let { tags, activeTag = "all" } = Astro.props;
+// Display "all" first, then other tags
+const displayTags = ["all", ...tags.filter((t) => t !== "all")];
 ---
 
 <div id="filter-container" class="mb-4">
-    <h4 class="mb-1">Filter by tag</h4>
-    {
-        tags.map((tag) => (
-            <button data-filter-tag={tag} class="tag-btn capitalize muted-background">
-                {tag}
-            </button>
-        ))
-    }
+    <h4 class="mb-1 mt-4 underline decoration-double">Filter by tag</h4>
+    <div class="flex flex-wrap mt-2">
+        {
+            displayTags.map((tag) => {
+                const isActive = activeTag === tag;
+                const href = tag === "all" ? "/blog" : `/tags/${tag}`;
+                return (
+                    <a
+                        href={href}
+                        class={`tag-btn capitalize muted-background no-underline ${isActive ? "active" : ""}`}
+                        data-tag-current={isActive ? "true" : "false"}
+                    >
+                        {tag}
+                    </a>
+                );
+            })
+        }
+    </div>
 </div>

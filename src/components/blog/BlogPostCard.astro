@@ -7,19 +7,25 @@ interface Props {
 const { post } = Astro.props;
 const tags = post.data.tags ?? [];
 
+import { resolveSlugParam } from "@/lib/utils";
+
 const postDate = new Date(post.data.date);
 const day = postDate.toLocaleDateString("en-US", { day: "2-digit" });
 const month = postDate.toLocaleDateString("en-US", { month: "short" });
 const yearStr = postDate.toLocaleDateString("en-US", { year: "numeric" });
 const formattedDateString = `${month} ${day}, ${yearStr}`;
+
+// Use explicit frontmatter slug, or native Astro slug, or fallback to file ID
+const rawSlug = (post.data as any).slug || post.slug || post.id;
+const slugParam = resolveSlugParam(rawSlug, "blog");
 ---
 
-<li data-post-item data-filter-tags={tags.join(",")} class="my-2">
-    <a href={`/blog/${post.id}`} class="post-item group block no-underline">
+<li data-post-item data-filter-tags={tags.join(",")} class="my-2 list-none">
+    <a href={`/blog/${slugParam}`} class="post-item group block no-underline">
         <div class="flex items-baseline justify-start gap-4">
             <time
                 datetime={postDate.toISOString()}
-                class="code-font text-xs w-24 shrink-0 text-[var(--brand-pink)]"
+                class="text-xs w-24 shrink-0 text-[var(--brand-color)] font-mono"
             >
                 {formattedDateString}
             </time>

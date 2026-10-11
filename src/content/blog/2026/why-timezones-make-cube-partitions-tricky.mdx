@@ -1,12 +1,13 @@
 ---
-title: "The Hidden Complexity of Time Zone Partitioning in Cube"
-description: ""
-date: "Aug 22 2026"
-tags: ["OLAP","Systems"]
-slug: "timezone-partitions-in-cube"
-image: "https://images.unsplash.com/photo-1738959869838-13760941f301?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-draft: false
+pageStatus: published
+date: 2026-09-28T18:30:00.000Z
+description: sdsd
+title: Why Timezones Make Cube Partitions Tricky
+slug: blog/2026/why-timezones-make-cube-partitions-tricky
+id: fd5db5f2-810c-4b82-9e08-aeb553bb3fcb
 ---
+
+<p><Image altText="" caption="" height="405" maxWidth="1024" src="https://cdn-images-1.medium.com/max/1600/0*MfqVNskWawaFIRes" darkModeSrc="https://cdn-images-1.medium.com/max/1600/0*MfqVNskWawaFIRes" width="720" alignment="center"></Image></p>
 
 Modern analytics platforms are rarely built directly on top of raw PostgreSQL tables. Instead, they typically use an OLAP database, a semantic layer, or pre-aggregated data to make analytical queries faster and more scalable.
 
@@ -16,7 +17,7 @@ In this blog, I’ll explain how timezone boundaries can cause unexpected result
 
 I’ll use **Cube pre-aggregations** throughout the examples, but the concepts apply more broadly to partitions created on materialized views and other pre-aggregated datasets.
 
-<Callout variant="note">
+<Callout icon="💡" variant="note">
 All the code for this blog is in this [repository](https://github.com/Lakshmanshankar/cube-examples "Github repo link").
 </Callout>
 
@@ -229,9 +230,5 @@ If you don't want to build separate partitions for each timezone, you might cons
 - Even when using an hourly granularity, the boundaries of the query timezone can cut across the buckets created using the pre-aggregation timezone.
 - If the pre-aggregation timezone observes Daylight Saving Time while the query timezone does not, the timezone boundaries may shift over time, making it difficult to correctly map and combine the results.
 - Non-additive measures, such as `countDistinct` and `avg`, introduce additional complexity. Combining partially aggregated results across incorrect timezone boundaries can produce incorrect results. Cube can handle pre-computation for measures such as averages and distinct counts, but these calculations become more difficult when the underlying timezone buckets do not align. [Cube's guide to non-additive measures](https://docs.cube.dev/recipes/pre-aggregations/non-additivity?utm_source=chatgpt.com)
-
----
-
-<Spacer />
 
 <Spacer />

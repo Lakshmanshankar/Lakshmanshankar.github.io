@@ -1,0 +1,30 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import BlogCards from "@/components/blog/blog-cards.astro";
+import { getCollection } from "astro:content";
+import { SITE } from "@/consts";
+
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await getCollection("blog");
+    const posts = allPosts.filter((item) => item.data?.draft !== true);
+    const sortedPosts = posts.sort(
+        (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+    );
+    const uniqueTags = Array.from(new Set(sortedPosts.flatMap((post) => post.data.tags ?? [])));
+
+    return uniqueTags.flatMap((tag) => {
+        const filteredPosts = sortedPosts.filter((post) => post.data.tags?.includes(tag));
+        return paginate(filteredPosts, {
+            params: { tag },
+            pageSize: SITE.PAGE_SIZE,
+        });
+    });
+}
+
+const { page } = Astro.props;
+const { tag } = Astro.params;
+---
+
+<Layout title={`Posts tagged with ${tag}`} description={`Explore all articles related to ${tag}.`}>
+    <BlogCards activeTag={tag} page={page} />
+</Layout>

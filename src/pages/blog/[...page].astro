@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { BLOG, SITE } from "@/consts";
+import BlogCards from "@/components/blog/blog-cards.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await getCollection("blog");
+    const posts = allPosts.filter((item) => item.data?.draft !== true);
+    const sortedPosts = posts.sort(
+        (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+    );
+
+    return paginate(sortedPosts, { pageSize: SITE.PAGE_SIZE });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+    <BlogCards page={page} />
+</Layout>

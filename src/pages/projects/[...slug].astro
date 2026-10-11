@@ -1,17 +1,21 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
-import Code from "@/components/mdx/Code.astro";
+import { Spacer, Image } from "pagewrite-ui/mdx";
 import Chip from "@/components/mdx/Chip.astro";
-import Spacer from "@/components/mdx/Spacer.astro";
-import Image from "@/components/mdx/Image.astro";
+
+import { resolveSlugParam } from "@/lib/utils";
 
 export async function getStaticPaths() {
     const posts = await getCollection("project");
-    return posts.map((post: { id: any }) => ({
-        params: { slug: post.id },
-        props: { post },
-    }));
+    return posts.map((post: any) => {
+        const rawSlug = post.data?.slug || post.slug || post.id;
+        const slugParam = resolveSlugParam(rawSlug, "projects");
+        return {
+            params: { slug: slugParam },
+            props: { post },
+        };
+    });
 }
 interface Props {
     post: CollectionEntry<"project">;
@@ -39,5 +43,5 @@ const { Content } = await render(entry);
             </a>
         )
     }
-    <Content components={{ Code, Chip, Spacer, Image }} />
+    <Content components={{ Chip, Spacer, Image }} />
 </Layout>

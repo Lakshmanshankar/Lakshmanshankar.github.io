@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { SITE } from "@/consts";
 import WorkCard from "@/components/ui/WorkCard.astro";
+import { resolveSlugParam } from "@/lib/utils";
 
 const works = await getCollection("work");
 let countWorks = 0;
@@ -22,15 +23,23 @@ const renderWorks = obeyCount ? newWorks : works;
 <div class="works-container mb-0" id="works-container">
     <h3 class="mb-5">Work Experience</h3>
     {
-        renderWorks.map((work) => (
-            <WorkCard
-                title={work.data.company}
-                description={work.data.description}
-                date={work.data.dateStart}
-                url={`/work/${work.id}`}
-                endDate={work.data.dateEnd}
-                role={work.data.role}
-            />
-        ))
+        renderWorks.map((work: any) => {
+            const formatDate = (d: string | Date) => 
+                d instanceof Date ? d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : d;
+            
+            const rawSlug = work.data?.slug || work.slug || work.id;
+            const slugParam = resolveSlugParam(rawSlug, "work");
+
+            return (
+                <WorkCard
+                    title={work.data.company}
+                    description={work.data.description}
+                    date={formatDate(work.data.dateStart)}
+                    url={`/work/${slugParam}`}
+                    endDate={formatDate(work.data.dateEnd)}
+                    role={work.data.role}
+                />
+            );
+        })
     }
 </div>

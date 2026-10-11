@@ -3,74 +3,60 @@ import { getCollection } from "astro:content";
 import TagFilter from "@/components/blog/TagFilter.astro";
 import BlogPostCard from "@/components/blog/BlogPostCard.astro";
 
+interface Props {
+    activeTag?: string;
+    page: any;
+}
+
+const { activeTag = "all", page } = Astro.props;
+
+// We still need allTags for the filter component
 const allPosts = await getCollection("blog");
 const posts = allPosts.filter((item) => item.data?.draft !== true);
-
 const sortedPosts = posts.sort(
     (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
-
-// Get all unique tags
 const allTags = Array.from(new Set(sortedPosts.flatMap((post) => post.data.tags ?? [])));
+
+const displayedPosts = page ? page.data : [];
+const baseUrl = activeTag === "all" ? "/blog" : `/tags/${activeTag}`;
 ---
 
-<div class="min-h-[81vh]">
+<div class="min-h-[81vh] flex flex-col">
     <p class="mb-2 text-stone-700 dark:text-neutral-300">
         I write blogs about the interesting things I've stumbled upon. The domain is changing
         because my work is evolving. It started as frontend and React, but now I am working with
         semantic data layers. My blog reflects this evolution.
     </p>
-    <div class="">
-        <div class="list-none pl-0">
-            <TagFilter tags={allTags as string[]} />
-            <ul id="posts-container" class="list-none m-0 p-0 flex flex-col gap-0 mt-6">
-                {sortedPosts.map((post) => <BlogPostCard post={post} />)}
+    <div class="flex flex-col flex-1">
+        <div class="list-none pl-0 flex flex-col flex-1">
+            <TagFilter tags={allTags as string[]} activeTag={activeTag} />
+            <ul id="posts-container" class="list-none m-0 p-0! flex flex-col gap-0 mt-6">
+                {displayedPosts.map((post: any) => <BlogPostCard post={post} />)}
             </ul>
+
+            {
+                page && page.lastPage > 1 && (
+                    <div class="flex gap-2 justify-center mt-auto pt-10">
+                        {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => {
+                            const href = pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`;
+                            const isActive = pageNum === page.currentPage;
+                            return (
+                                <a
+                                    href={href}
+                                    class={`px-3 py-1 border rounded-md no-underline ${
+                                        isActive
+                                            ? "bg-stone-200 dark:bg-neutral-800 text-stone-900 dark:text-neutral-100 border-stone-300 dark:border-neutral-700 font-medium"
+                                            : "hover:bg-stone-100 dark:hover:bg-neutral-900 border-transparent"
+                                    }`}
+                                >
+                                    {pageNum}
+                                </a>
+                            );
+                        })}
+                    </div>
+                )
+            }
         </div>
     </div>
 </div>
-
-<script>
-    const filterFn = () => {
-        const filterContainer = document.getElementById("filter-container");
-        const postsContainer = document.getElementById("posts-container");
-        if (!filterContainer || !postsContainer) return;
-
-        const filterButtons = filterContainer.querySelectorAll("button");
-        Array.from(filterButtons).forEach((tagBtn) => {
-            tagBtn.addEventListener("click", (event) => {
-                const selectedButton = event.target as HTMLButtonElement;
-                filterButtons.forEach((button) => {
-                    button.classList.remove("active");
-                    button.setAttribute("data-tag-current", "false");
-                });
-                selectedButton.classList.add("active");
-                selectedButton.setAttribute("data-tag-current", "true");
-                if (!selectedButton) return;
-                const selectedTag = selectedButton.getAttribute("data-filter-tag");
-
-                if (selectedTag === "all") {
-                    postsContainer.querySelectorAll("[data-post-item]").forEach((post) => {
-                        post.classList.remove("hidden");
-                    });
-                    return;
-                }
-
-                postsContainer.querySelectorAll("[data-post-item]").forEach((post) => {
-                    const postTags = post.getAttribute("data-filter-tags");
-                    if (!postTags) return;
-                    const postTagsArray = postTags.split(",");
-                    const isSelected = postTagsArray.includes(selectedTag ?? "");
-                    if (isSelected) {
-                        post.classList.remove("hidden");
-                    } else {
-                        post.classList.add("hidden");
-                    }
-                });
-            });
-        });
-    };
-    document.addEventListener("DOMContentLoaded", filterFn);
-    document.addEventListener("astro:after-swap", filterFn);
-    filterFn();
-</script>

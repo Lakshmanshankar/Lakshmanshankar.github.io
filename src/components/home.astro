@@ -29,8 +29,8 @@ import WorkItems from "./work/work-cards.astro";
 
         <p>
             I'm a Software Engineer at
-            <a href="https://bounteous.com" target="_blank"><strong> Bounteous </strong></a>, building
-            features for an enterprise analytics platform. I work with <strong
+            <a href="https://bounteous.com" target="_blank"><strong> Bounteous </strong></a>,
+            building features for an enterprise analytics platform. I work with <strong
                 >PostgreSQL, Kafka</strong
             >, and semantic data layers, contributing to technical design, proof-of-concepts, and
             data-intensive workflows. I enjoy investigating data discrepancies and building reliable
@@ -38,21 +38,21 @@ import WorkItems from "./work/work-cards.astro";
         </p>
 
         <p>
-            Outside work, I build developer tools and content systems. My current project is 
-            {' '}<a href="https://pagewrite.lakshmanshankar.com" target="_blank">
+            Outside work, I build developer tools and content systems. My current project is
+            {" "}<a href="https://pagewrite.lakshmanshankar.com" target="_blank">
                 <strong>Pagewrite</strong>
-            </a> , a content authoring platform focused on writing, reading, and publishing. It
-            powers this website and includes a custom editor, typography controls, keyboard-first
-            workflows, MDX publishing, and an Astro integration for static documentation sites.
+            </a> , a content authoring platform focused on writing, reading, and publishing. It powers
+            this website and includes a custom editor, typography controls, keyboard-first workflows,
+            MDX publishing, and an Astro integration for static documentation sites.
         </p>
 
         <ul>
             <li>
-                Contributed to {' '}
+                Contributed to {" "}
                 <a href="https://github.com/facebook/lexical" target="_blank">
                     <strong>Lexical</strong>
-                </a> 
-                 {' '} and actively build open-source tooling.
+                </a>
+                {" "} and actively build open-source tooling.
             </li>
 
             <li>
@@ -61,9 +61,9 @@ import WorkItems from "./work/work-cards.astro";
             </li>
 
             <li>
-                Linux user since 2022, GNOME enthusiast, and long-time Vim user. Check out my
+                Linux user since 2022, GNOME enthusiast, and long-time Vim user. Check out my {' '}
                 <a href="https://github.com/lakshmanshankar/dotfiles" target="_blank">
-                    dotfiles
+                  dotfiles
                 </a>.
             </li>
             <li>
@@ -75,61 +75,66 @@ import WorkItems from "./work/work-cards.astro";
         </ul>
     </article>
 
-    <section id="projects" class="pt-5 transition-all px-4 md:px-10 full-width pb-10 rounded-md">
+    <section id="projects" class="mt-12">
         <ProjectItems obeyCount={true} />
     </section>
 
-    <section id="work" class="pt-5 transition-all px-4 md:px-10 full-width pb-10 rounded-md">
+    <section id="work" class="mt-12">
         <WorkItems obeyCount={true} />
     </section>
-    <h3 class="mt-4 mb-7">Skills</h3>
-    <section class="flex justify-between flex-col lg:flex-row">
-        <div>
-            <h4 class="mt-0 ml-8">Languages</h4>
-            <ul>
-                <li>Typescript</li>
-                <li>Python</li>
-                <li>Go</li>
-            </ul>
-        </div>
 
-        <div>
-            <h4 class="mt-0 ml-8">Frameworks & Tools</h4>
-            <ul>
-                <li>React, Next.js and Astro</li>
-                <li>Cube</li>
-                <li>Kafka</li>
-                <li>Docker, Linux</li>
-            </ul>
-        </div>
+    <section id="skills" class="mt-12">
+        <h3 class="mb-6">Skills</h3>
+        <div class="flex flex-col lg:flex-row justify-between gap-6">
+            <div>
+                <h4 class="mt-0 lg:ml-4">Languages</h4>
+                <ul class="mt-3">
+                    <li>Typescript</li>
+                    <li>Python</li>
+                    <li>Go</li>
+                </ul>
+            </div>
 
-        <div>
-            <h4 class="mt-0 ml-8">Databases</h4>
-            <ul>
-                <li>Postgres</li>
-                <li>Firestore</li>
-            </ul>
+            <div>
+                <h4 class="mt-0 lg:ml-4">Frameworks & Tools</h4>
+                <ul class="mt-3">
+                    <li>React, Next.js and Astro</li>
+                    <li>Cube</li>
+                    <li>Kafka</li>
+                    <li>Docker, Linux</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="mt-0 lg:ml-4">Databases</h4>
+                <ul class="mt-3">
+                    <li>Postgres</li>
+                    <li>Firestore</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <section class="pt-5 mt-5 border-colors px-4 md:px-10 full-width pb-10">
-        <h3>Contact</h3>
+    <section class="mt-16 pt-8 border-t border-stone-200 dark:border-neutral-800">
+        <h3 class="mt-0">Contact</h3>
         <p>
             You can contact me directly @<a href="mailto:lakshmanshankarc@gmail.com"
                 >lakshmanshankarc@gmail.com</a
             > or you can reach me on any of the following platforms:
         </p>
-        <div class="text-white dark:text-white flex justify-center ">
+        <div class="mt-6 text-white dark:text-white flex justify-center">
             <ContactFooter />
         </div>
     </section>
-    <h3>Colophon</h3>
-    <p>
-        This Site is generated using astro(v5) with <a href="https://astro-nano.vercel.app"
-            >Astro-nano</a
-        >, and tailwindcss, All the code for this website is available <a
-            href="https://github.com/Lakshmanshankar/lakshmanshankar.github.io">here</a
-        > under <code>MIT License</code> and all the content is under creative commons license.
-    </p>
-    <hr />
+
+    <section class="mt-16 mb-8">
+        <h3 class="mt-0">Colophon</h3>
+        <p>
+            This Site is generated using Astro (v5) with <a href="https://astro-nano.vercel.app"
+                >Astro-nano</a
+            > and TailwindCSS. All the code for this website is available <a
+                href="https://github.com/Lakshmanshankar/lakshmanshankar.github.io">here</a
+            > under the <code>MIT License</code>, and all content is licensed under Creative Commons.
+        </p>
+    </section>
 </div>

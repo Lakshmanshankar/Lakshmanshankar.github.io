@@ -1,0 +1,87 @@
+---
+pageStatus: published
+date: 2026-09-28T18:30:00.000Z
+description: dssd
+title: Commands
+slug: blog/commands
+id: 7e227cf2-b25d-4624-9765-527877e8741c
+---
+
+## Running Cube
+
+Up
+
+```bash
+docker compose up -d # up, down, restart, status
+```
+
+Checking Logs
+
+```bash
+docker compose logs -f --no-log-prefix cube
+```
+
+---
+
+## Check Mysql Paritions
+
+### Pre-requisites
+
+1. Ensure mysql is installed
+2. Ensure that cube container is running
+
+```bash
+mysql -h 127.0.0.1 -P 13306
+```
+
+2. View the partitions
+
+```sql
+SELECT * FROM information_schema.tables;
+```
+
+## Pre-aggregations
+
+```bash
+curl -X POST \
+      http://localhost:4000/cubejs-api/v1/pre-aggregations/jobs \
+      -H "Authorization: my-hardcoded-secret" \
+      -H "Content-Type: application/json" \
+      -d '{
+      "action": "post",
+      "selector": {
+        "contexts": [{ "securityContext": {} }],
+        "timezones": ["Europe/London","Asia/Kolkata","Australia/Darwin"],
+        "preAggregations": ["orders.orders_by_user"]
+      }
+    }' | jq | wl-copy
+```
+
+Triggering pre-aggregations
+
+```bash
+curl -X POST \
+      http://localhost:4000/cubejs-api/v1/pre-aggregations/jobs \
+      -H "Authorization: my-hardcoded-secret" \
+      -H "Content-Type: application/json" \
+      -d '{
+      "action":"get",
+      "tokens":[
+         "6bdc836d8dcece67607f4a68ea5ce1e4",
+         "7a7c55e1736c9000b6287158c98cd2a3",
+         "04d62a572ef4341d6230044cb8c5c04a",
+         "ca8beef5b233d9e972aadc9e1350f7fa",
+         "49f84d499492c683d31b922a01172476",
+         "01cffabdec3842273c1a4840a066788e",
+         "33875682b8e32f0217f6ad20664ca5be",
+         "0a19fdea36166f9f906aacdc6b753780",
+         "1245aca41cd36b5f2d455e482c3cab32",
+         "0fc88fb032fd45c07f20f92925ecd2e0",
+         "ecd85af33741625ba183eeaa1752a850",
+         "39e486a89a17b04d148ad91b845e0886",
+         "dca33b95f78692a153579cab5c74a476"
+        ]
+      }' | jq '.[] | "\(.table) -> \(.selector.timezones[0])"'
+```
+
+<Spacer />

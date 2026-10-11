@@ -9,6 +9,7 @@ const blogSchema = z.object({
     draft: z.boolean().optional(),
     tags: z.string().array().optional(),
     image: z.string().optional(),
+    updatedDate: z.coerce.date().optional(),
 });
 
 const projectSchema = z.object({
@@ -23,10 +24,10 @@ const projectSchema = z.object({
 const workSchema = z.object({
     company: z.string(),
     role: z.string(),
-    dateStart: z.string(),
+    dateStart: z.coerce.date(),
     tech: z.string(),
     description: z.string(),
-    dateEnd: z.string(),
+    dateEnd: z.union([z.coerce.date(), z.string()]),
     draft: z.boolean().optional(),
 });
 

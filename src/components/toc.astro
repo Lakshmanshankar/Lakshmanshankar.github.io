@@ -35,13 +35,13 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
                 ))}
             </div>
 
-            <div class="toc-panel pointer-events-none absolute right-0 top-1/2 max-h-[70vh] w-80 -translate-y-1/2 translate-x-2 overflow-y-auto rounded-md border border-colors bg-[var(--main-bg)] p-3 opacity-0 shadow-sm transition-all duration-200 ease-out group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-x-0 group-focus-within:opacity-100">
-                <ul class="toc-container animate show m-0 flex list-none flex-col gap-0.5 overflow-visible p-0">
+            <div class="toc-panel pointer-events-none absolute right-0 top-1/2 max-h-[70vh] w-80 -translate-y-1/2 translate-x-2 overflow-y-auto rounded-md border border-colors bg-[var(--background)] p-3 opacity-0 shadow-sm transition-all duration-200 ease-out group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-x-0 group-focus-within:opacity-100">
+                <ul class="toc-container animate show m-0 flex list-none flex-col gap-0.5 overflow-visible p-0!">
                     {filteredHeadings.map((heading) => (
-                        <li class="m-0 p-0">
+                        <li class="m-0! p-0!">
                             <a
                                 href={`#${heading.slug}`}
-                                class="toc-link block rounded px-2 py-1 text-base leading-snug text-stone-600 no-underline underline-offset-4 transition-colors duration-150 hover:text-stone-950 hover:underline focus-visible:text-stone-950 focus-visible:underline focus-visible:outline-none dark:text-neutral-400 dark:hover:text-neutral-100 dark:focus-visible:text-neutral-100"
+                                class="toc-link block rounded px-2! py-1 text-base leading-snug text-stone-600 no-underline underline-offset-4 transition-colors duration-150 hover:text-stone-950 hover:underline focus-visible:text-stone-950 focus-visible:underline focus-visible:outline-none dark:text-neutral-400 dark:hover:text-neutral-100 dark:focus-visible:text-neutral-100"
                                 data-depth={heading.depth}
                                 data-scroll-target
                                 data-target-id={heading.slug}
@@ -146,7 +146,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 
                 if (targetElement) {
                     const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = window.pageYOffset + elementPosition - offset;
+                    const offsetPosition = window.scrollY + elementPosition - offset;
 
                     window.scrollTo({
                         top: offsetPosition,

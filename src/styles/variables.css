@@ -1,0 +1,38 @@
+:root {
+  --color-background: #fafafa;
+  --color-text: #171717;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* --font-sans: "Korkai", ui-sans-serif, system-ui, sans-serif; */
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --background: #fafafa;
+  --border-line: #e5e5e5;
+  --code-border: #e5e5e5;
+  --brand-color: #ff2557;
+  --shiki-dark: #24292e;
+  --shiki-dark-bg: #f6f8fa;
+  --shiki-dark-font-style: normal;
+  --shiki-dark-font-weight: normal;
+  --shiki-dark-text-decoration: none;
+}
+
+.dark {
+  --color-background: #0a0a0a;
+  --color-text: #ededed;
+  --background: #0a0a0a;
+  --border-line: #262626;
+  --code-border: #262626;
+  --brand-color: #fb7084;
+  --shiki-dark: #e1e4e8;
+  --shiki-dark-bg: #24292e;
+  --shiki-dark-font-style: normal;
+  --shiki-dark-font-weight: normal;
+  --shiki-dark-text-decoration: none;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+  }
+}

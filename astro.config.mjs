@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
 
 import cloudflare from "@astrojs/cloudflare";
@@ -29,17 +29,17 @@ export default defineConfig({
     AutoImport({
       imports: [
         "./src/components/mdx/Chip.astro",
-        "./src/components/mdx/Code.astro",
-        "./src/components/mdx/Spacer.astro",
-        "./src/components/mdx/Image.astro",
-        "./src/components/mdx/Callout.astro",
+        "./src/components/mdx/FolderList.astro",
+        {
+          'pagewrite-ui/mdx': ['Callout', 'Spacer', 'Image', 'Columns', 'ColumnItem', 'ContactForm', 'Expand', 'Tabs', 'TabItem']
+        }
       ],
     }),
     mdx(),
-    tailwind(),
   ],
-
-
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     rehypePlugins: [rehypeSlug, rehypeKatex],
     remarkPlugins: [remarkMath],

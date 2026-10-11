@@ -1,11 +1,15 @@
 ---
-title: "Simplify rebasing in stacked branches using updateRefs"
-description: "Learn how git updateRefs simplify rebasing in stacked branches"
-date: "Nov 21 2025"
-tags: ["Systems"]
-slug: "git-stacked-branches-using-updateRefs"
-image: ""
-draft: false
+pageStatus: published
+date: 2026-09-14T18:30:00.000Z
+description: dssd
+tags:
+  - software-sytems
+  - databases
+  - software-engineer
+dingo: ez1dgp
+title: Simplify rebasing in stacked branches using updateRefs
+slug: blog/2026/simplify-rebasing-in-stacked-branches-using-updaterefs
+id: f44a6b10-6e92-463a-8d91-7fcd34f9c4f5
 ---
 
 ### Working with Stacked PRs
@@ -14,7 +18,7 @@ Whether you are a developer at a small startup or a large enterprise, we all use
 
 For a single feature, you might raise multiple PRs sequentially, like this:
 
-```
+```javascript
 master -> ..c..c.. (feature A)
 master -> ..c..c.. (feature A) -> ..c..c.. (feature B)
 master -> ..c..c.. (feature A) -> ..c..c.. (feature B) -> ..c.. (feature C)
@@ -56,16 +60,13 @@ Example we have three feature branches `feat-a`,`feat-b` and `feat-c` as follows
 
 Say now we raised three PRs and got some review comments that require us to add changes to `feat-a`. In the ordinary way, we would checkout the `feat-a` branch and make modifications there, then rebase the other two branches to include the latest commit we added.
 
-But with updateRefs, we can make modifications by staying in the latest branch (feat-c).
-In `feat-c` branch make changes and create a fixup commit for second commit of the `feat-a` **8199983**.
+But with updateRefs, we can make modifications by staying in the latest branch (feat-c). In `feat-c` branch make changes and create a fixup commit for second commit of the `feat-a` **8199983**.
 
 ```sh
 git add . && git commit --fixup=8199983
 ```
 
-Now rebase the fixup commit with `master` or the parent of `feat-a`. This is to include all
-the commits of `feat-a` onwards in the interactive rebase. So that we can squash or correcty place
-the fixup commit to it's target.
+Now rebase the fixup commit with `master` or the parent of `feat-a`. This is to include all the commits of `feat-a` onwards in the interactive rebase. So that we can squash or correcty place the fixup commit to it's target.
 
 ```sh
 git rebase --interactive --autostash master
@@ -95,11 +96,12 @@ Updated the following refs with --update-refs:
 	refs/heads/feat-b
 ```
 
-### NOTE:
-
-This will update the commit history of `feat-b` and `feat-c` so you have to force push the
-changes to Github.
+<Expand title="Note" open="false">
+This will update the commit history of `feat-b` and `feat-c` so you have to force push the changes to Github.
+</Expand>
 
 ### History
 
-![Git history image](https://invk935vtx.ufs.sh/f/WLuidxolfrXglI6hHbCAi6Qlh71xgZCSqj8DpWPKnIfLJ2TV)
+<p><Image altText="" caption="" height="541" maxWidth="1024" src="https://invk935vtx.ufs.sh/f/WLuidxolfrXglI6hHbCAi6Qlh71xgZCSqj8DpWPKnIfLJ2TV" darkModeSrc="https://invk935vtx.ufs.sh/f/WLuidxolfrXglI6hHbCAi6Qlh71xgZCSqj8DpWPKnIfLJ2TV" width="680" alignment="center"></Image></p>
+
+<Spacer />

@@ -107,6 +107,11 @@
         "id": "64aa2085-f768-448a-882a-ebf26c86f481",
         "title": "Page write",
         "slug": "projects/pagewrite"
+      },
+      {
+        "id": "a0171456-9085-4af7-8f44-4b6c35af7501",
+        "title": "Excalidraw app with cloud storage",
+        "slug": "projects/excalidraw-app-with-cloud-storage"
       }
     ]
   },

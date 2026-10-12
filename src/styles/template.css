@@ -1,54 +1,59 @@
 @utility border-colors {
-  @apply border-stone-300/70 dark:border-neutral-800;
+    @apply border-stone-300/70 dark:border-neutral-800;
 }
 
 @utility subtle-hover {
-  @apply transition-all hover:bg-stone-200 dark:hover:bg-neutral-900;
+    @apply transition-all hover:bg-stone-200 dark:hover:bg-neutral-900;
 }
 
 .muted-background {
-  @apply bg-stone-200/70 dark:bg-neutral-800/50 border-y border-colors;
+    @apply bg-stone-200/70 dark:bg-neutral-800/50 border-y border-colors;
 }
 
 .muted-hover {
-  @apply hover:bg-stone-200/70 hover:dark:bg-neutral-800/50;
+    @apply hover:bg-stone-200/70 hover:dark:bg-neutral-800/50;
 }
 
 .tag-btn {
-  @apply p-1 px-2 border-colors border m-0 text-sm;
+    @apply p-1 px-2 border-colors border m-0 text-sm;
 }
 
 .tag-btn:hover,
 .tag-btn.active {
-  @apply text-black transition-colors dark:text-white border-neutral-600 dark:border-neutral-500;
+    @apply text-black transition-colors dark:text-white border-neutral-600 dark:border-neutral-500;
 }
 
-.gradient-red {
-  background: -webkit-linear-gradient(0deg,
-      #ff8922 20%,
-      #ff279c 50%,
-      #d9113f 80%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.gradient-text {
+    background: linear-gradient(0deg, #000000 20%, #808080 50%, #d9d9d9 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.dark {
+    .gradient-text {
+        background: linear-gradient(0deg, #ffffff 20%, #a0a0a0 50%, #404040 80%);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
 }
 
 ::-webkit-scrollbar {
-  @apply h-2 w-2;
+    @apply h-2 w-2;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-transparent;
+    @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded bg-neutral-300 dark:bg-neutral-700;
+    @apply rounded bg-neutral-300 dark:bg-neutral-700;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-neutral-400 dark:bg-neutral-600;
+    @apply bg-neutral-400 dark:bg-neutral-600;
 }
 
 main {
-  @apply leading-normal border-l border-r border-stone-400 dark:border-neutral-800 tracking-normal;
+    @apply leading-normal border-l border-r border-stone-400 dark:border-neutral-800 tracking-normal;
 }

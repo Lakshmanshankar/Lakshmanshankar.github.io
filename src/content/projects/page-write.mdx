@@ -1,90 +1,58 @@
 ---
-metaDescription: dssdsd
+metaDescription: PageWrite is a CMS + static site builder built on Lexical,
+  designed around structured editing with deterministic output
 pageStatus: published
 slug: projects/pagewrite
-metaTitle: dssd
+metaKeywords:
+  - Lexical
+  - CMS_Builder
+metaTitle: PageWrite is a CMS + static site builder
 demoURL: https:/docs.pagewrite.cc
 repoURL: https://github.com/lakshmanshankar/pagewrite-sdk
 date: 2026-09-06T18:30:00.000Z
-description: dsds
+description: PageWrite is a CMS + static site builder built on Lexical, designed
+  around structured editing with deterministic output
 title: Page write
 id: 64aa2085-f768-448a-882a-ebf26c86f481
 ---
 
-That's also a common experience, and it comes down to how your meal is balanced.
+## PageWrite
 
-A bowl of oatmeal by itself is often **high in carbohydrates but relatively low in protein and fat**. It digests fairly quickly, so you may feel hungry again after 2–3 hours.
+PageWrite is a structured CMS + publishing platform built on [Lexical](https://lexical.dev/) with MDX as the canonical content layer.
 
-For example:
+### Platform
 
-- 50 g oats + milk:
-   - ~250–350 kcal (depending on the milk)
-   - ~10–15 g protein
-   - Low fat (unless whole milk or nuts are added)
+- Designed a bidirectional AST serializer (Lexical JSON ⇄ MDX)
+- Ensures lossless round-trip editing and deterministic output
+- Separates editing layer (Lexical) from storage + rendering (MDX)
+- Implemented custom nodes: callouts, code block, theme-aware images
+- Designed a bidirectional AST serializer (Lexical JSON ⇄ MDX)
+- Ensures lossless round-trip editing and deterministic output
+- Separates editing layer (Lexical) from storage + rendering (MDX)
+- Implemented custom nodes: callouts, code block, theme-aware images
 
-Compare that with:
+<p><Image altText="" caption="" height="844" maxWidth="1024" src="https://firebasestorage.googleapis.com/v0/b/sanity-freeform.firebasestorage.app/o/sBgEdGvoBLfCXtZnSyYwM7rtSgf1%2Fimages%2F183f9857-c281-422d-89d6-c35d1969d4d6.png?alt=media&amp;token=b6c0676b-9358-4f74-9dfc-82c86bfb2426" darkModeSrc="https://firebasestorage.googleapis.com/v0/b/sanity-freeform.firebasestorage.app/o/sBgEdGvoBLfCXtZnSyYwM7rtSgf1%2Fimages%2F183f9857-c281-422d-89d6-c35d1969d4d6.png?alt=media&amp;token=b6c0676b-9358-4f74-9dfc-82c86bfb2426" width="720" alignment="center"></Image></p>
 
-- 3 eggs + 2 slices of whole-grain bread:
-   - Similar calories
-   - 20–25 g protein
-   - More fat
-   - Often keeps people full longer.
+### Publishing Pipeline
 
-### Satiety is influenced by three main factors
+- Authoring → `MDX` → static site generation using Astro
+- Deployed via Cloudflare Pages
+- Produces fast, SEO-friendly documentation/blog sites
 
-1. **Protein** (the biggest contributor)
-   - Eggs
-   - Greek yogurt
-   - Cottage cheese
-   - Tofu
-   - Lean meat
-2. **Fat**
-   - Nuts
-   - Peanut butter
-   - Seeds
-   - Butter
-   - Avocado
-3. **Fiber**
-   - Oats
-   - Whole grains
-   - Vegetables
-   - Fruit
+### Features
 
-Oatmeal has plenty of fiber, but if it's missing enough protein and fat, it may not keep you full for long.
+- Rich text editing with Lexical
+- Image with light/dark mode support
+- Custom nodes: callouts, code blocks, etc.
+- Publish to web using Astro
+- Custom components with Astro
 
-### If you wanted oatmeal to be more filling
+### Tech Stack:
 
-Instead of:
+[Lexical ](https://lexical.dev/)[MDX ](https://mdxjs.com/)[Astro ](https://astro.build/)[Shiki ](https://shiki.matsu.io/)[Firebase ](https://firebase.google.com/)[Cloudflare Pages](https://pages.cloudflare.com/)
 
-- Oats + milk
+### Demo:
 
-Try:
+<p><Image altText="Demo" caption="" height="365" maxWidth="1024" src="https://invk935vtx.ufs.sh/f/WLuidxolfrXgA3wQc3uLwigBqx0NIXEyn7FstKbv3uzo8ZlJ" darkModeSrc="https://invk935vtx.ufs.sh/f/WLuidxolfrXgA3wQc3uLwigBqx0NIXEyn7FstKbv3uzo8ZlJ" width="720" alignment="center"></Image><Image altText="Dark mode demo" caption="" height="365" maxWidth="1024" src="https://invk935vtx.ufs.sh/f/WLuidxolfrXgjIEeAgfLnrFRwbYL3qJAGu2f9gzZ8yWhk1ex" darkModeSrc="https://invk935vtx.ufs.sh/f/WLuidxolfrXgjIEeAgfLnrFRwbYL3qJAGu2f9gzZ8yWhk1ex" width="720" alignment="center"></Image></p>
 
-- Oats + milk + 2 boiled eggs on the side
-- Oats + Greek yogurt + nuts
-- Oats + peanut butter + chia or flax seeds
-- Savory oats with eggs and vegetables
-
-Adding protein and healthy fats can make a noticeable difference in how long you stay satisfied.
-
-### But you don't have to eat oats
-
-There's a common misconception that oatmeal is the "ideal" breakfast for everyone. In reality, the best breakfast is one that:
-
-- You enjoy.
-- Keeps you full until lunch.
-- Fits your nutritional needs.
-
-Many people simply don't feel satisfied after oatmeal, while others can go 5–6 hours without feeling hungry.
-
-Given what you've described—**bloating and hunger again by around 11 AM**—oatmeal with milk may just not be the best breakfast for you.
-
-If your goal is to build muscle, stay focused at work, or lose fat while staying full, a **higher-protein breakfast** is often more effective. For example:
-
-- Eggs with whole-grain toast
-- Idli or dosa with a protein-rich sambar
-- Vegetable omelette with toast
-- Greek yogurt with fruit and nuts (if you tolerate dairy)
-- Leftover rice with dal and vegetables
-
-In fact, a traditional South Indian breakfast like **idli with sambar** or **dosa with sambar** can be surprisingly balanced: the fermented batter is generally easy to digest, and the lentils in the sambar add protein and fiber, often making it more satisfying than a plain bowl of oatmeal.
+<Spacer />

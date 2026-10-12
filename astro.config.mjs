@@ -6,15 +6,24 @@ import AutoImport from "astro-auto-import";
 import cloudflare from "@astrojs/cloudflare";
 import mermaid from 'astro-mermaid';
 import rehypeSlug from 'rehype-slug';
-
+import pagewriteAstro from "pagewrite-astro"
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+
+import { loadEnv } from "vite";
+const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 
 export default defineConfig({
   compressHTML: false,
   site: "https://lakshmanshankar.com",
 
   integrations: [
+    pagewriteAstro({
+      siteId: env.PAGEWRITE_SITE_ID || "c2da931d-dbe9-41c8-87e1-3e7cf21e0ea7",
+      token: env.PAGEWRITE_BUILD_TOKEN,
+      outputDir: "src/content",
+      disabled: true
+    }),
     mermaid({ autoTheme: true }),
     {
       name: 'fix-auto-import',
@@ -44,7 +53,7 @@ export default defineConfig({
     rehypePlugins: [rehypeSlug, rehypeKatex],
     remarkPlugins: [remarkMath],
     shikiConfig: {
-      themes: { light: "github-light", dark: "github-dark" },
+      themes: { light: "github-light", dark: "github-dark-high-contrast" },
     },
   },
   adapter: cloudflare()

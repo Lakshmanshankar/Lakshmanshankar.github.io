@@ -10,7 +10,8 @@
     "astro": "astro",
     "format": "prettier --write .",
     "deploy": "pnpm run build && wrangler deploy",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "content:sync": "pagewrite-astro fetch --site-id \"c2da931d-dbe9-41c8-87e1-3e7cf21e0ea7\""
   },
   "dependencies": {
     "@astrojs/cloudflare": "12",

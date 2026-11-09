@@ -10,11 +10,13 @@ import { loadEnv } from "vite";
 
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import cloudflare from "@astrojs/cloudflare";
+
 
 const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 
 export default defineConfig({
-
+  adapter: cloudflare(),
   integrations: [
     pagewriteAstro({
       siteId: env.PAGEWRITE_SITE_ID || "c2da931d-dbe9-41c8-87e1-3e7cf21e0ea7",

@@ -1,7 +1,90 @@
 ---
+import { getCollection, getEntry } from "astro:content";
+import { filterPages, type PageTreeNode } from "@/lib/folderList";
 
-const props = Astro.props;
+interface Props {
+  folderId: string;
+  schemaId?: string;
+  fieldId?: string;
+  values?: string;
+  match?: "any" | "all";
+  recursive?: boolean;
+  class?: string;
+}
+
+const {
+  folderId,
+  schemaId,
+  fieldId,
+  values,
+  match = "any",
+  recursive = true,
+  class: className = "",
+} = Astro.props;
+
+const [treeEntries, linkEntries, pageDataEntries, schemaEntry] = await Promise.all([
+  getCollection("pageTree").catch(() => []),
+  getCollection("pageLinks").catch(() => getCollection("links")).catch(() => []),
+  getCollection("pageData").catch(() => []),
+  schemaId
+    ? getEntry("siteSchema", schemaId)
+        .catch(() => getEntry("schemas", schemaId))
+        .catch(() => undefined)
+    : Promise.resolve(undefined),
+]);
+
+const roots: PageTreeNode[] = (treeEntries ?? []).map((e: any) => e.data ?? e);
+const slugById = new Map<string, string>(
+  (linkEntries ?? []).map((l: any) => [l.id ?? l.data?.id, l.data?.slug ?? l.slug])
+);
+const metaById = new Map<string, any>(
+  (pageDataEntries ?? []).map((e: any) => [e.id ?? e.data?.id, e.data ?? e])
+);
+const schema = schemaEntry?.data ?? schemaEntry;
+
+const items = filterPages({
+  roots,
+  slugById,
+  metaById,
+  folderId,
+  schema,
+  fieldId,
+  values,
+  match,
+  recursive,
+  });
 ---
-<div class="flex flex-col gap-2 items-center">
-  ## TODO: Add Folder Icon
-</div>
+
+{
+  items.length > 0 ? (
+    <ul class={`folder-list not-prose my-4 flex flex-col gap-1.5 p-0 list-none ${className}`}>
+      {items.map((i) => (
+        <li class="list-none m-0 p-0">
+          <a
+            href={i.url}
+            class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-stone-800 dark:text-stone-200 hover:text-[var(--brand-color)] dark:hover:text-[var(--brand-color)] hover:bg-stone-100 dark:hover:bg-neutral-800/60 transition-colors no-underline group"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4 shrink-0 text-stone-400 group-hover:text-[var(--brand-color)] transition-colors"
+            >
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+            </svg>
+            <span class="font-medium group-hover:underline underline-offset-4">{i.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="folder-list-empty text-sm text-stone-500 dark:text-neutral-400 italic my-2">
+      No pages match.
+    </p>
+  )
+}

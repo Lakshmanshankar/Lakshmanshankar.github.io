@@ -61,13 +61,6 @@ code span {
   line-height: 1rem;
 }
 
-.astro-code,
-.code-block {
-  border-radius: 0.375rem;
-  border: 1px solid var(--code-border);
-  overflow-x: auto;
-}
-
 .dark .astro-code,
 .dark .astro-code span {
   color: var(--shiki-dark) !important;

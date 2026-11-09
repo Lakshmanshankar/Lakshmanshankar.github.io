@@ -133,25 +133,20 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 
 <script>
     import type { HTMLTag } from "astro/types";
+    import { scrollToTarget } from "@/lib/animations";
 
     function smoothScroll() {
         const scrollTargets = document.querySelectorAll("[data-scroll-target]");
-        const offset = 100;
+        const offset = 80;
 
         scrollTargets.forEach((target) => {
             target.addEventListener("click", (e) => {
                 e.preventDefault();
                 const targetId = target.getAttribute("href") as unknown as HTMLTag;
-                const targetElement = document.querySelector(targetId);
+                const targetElement = document.querySelector(targetId) as HTMLElement | null;
 
                 if (targetElement) {
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = window.scrollY + elementPosition - offset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth",
-                    });
+                    scrollToTarget(targetElement, { offset: -offset, duration: 0.9 });
                 }
             });
         });

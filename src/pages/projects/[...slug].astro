@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import { Spacer, Image } from "pagewrite-ui/mdx";
 import Chip from "@/components/mdx/Chip.astro";
+import FolderList from "@/components/mdx/FolderList.astro";
 
 import { resolveSlugParam } from "@/lib/utils";
 
@@ -43,5 +44,5 @@ const { Content } = await render(entry);
             </a>
         )
     }
-    <Content components={{ Chip, Spacer, Image }} />
+    <Content components={{ Chip, FolderList, Spacer, Image }} />
 </Layout>

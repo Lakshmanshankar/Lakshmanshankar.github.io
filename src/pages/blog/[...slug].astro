@@ -10,6 +10,7 @@ import FormattedDate from "@/components/ui/FormattedDate.astro";
 import ContentCard from "@/components/ui/ContentCard.astro";
 import { Spacer, Image } from "pagewrite-ui/mdx";
 import Chip from "@/components/mdx/Chip.astro";
+import FolderList from "@/components/mdx/FolderList.astro";
 import { SITE } from "@/consts";
 
 import { resolveSlugParam } from "@/lib/utils";
@@ -87,7 +88,7 @@ const relatedPosts = otherPosts
             )
         }
 
-        <Content components={{Chip, Spacer, Image }} />
+        <Content components={{ Chip, FolderList, Spacer, Image }} />
 
         {
             relatedPosts.length > 0 && (
@@ -193,6 +194,8 @@ const relatedPosts = otherPosts
 </script>
 
 <script>
+    import { scrollToTarget } from "@/lib/animations";
+
     function addCopyLinkToHeadings() {
         const headings = document.querySelectorAll(
             "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]",
@@ -253,14 +256,8 @@ const relatedPosts = otherPosts
                     console.error("Failed to copy link", err);
                 }
 
-                // Scroll to heading with offset
-                const elementPosition = heading.getBoundingClientRect().top;
-                const offsetPosition = window.scrollY + elementPosition - 30;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth",
-                });
+                // Scroll to heading with offset using smooth scroll utility
+                scrollToTarget(heading, { offset: -30, duration: 0.9 });
 
                 // Show copied feedback
                 const originalHTML = linkIcon.innerHTML;

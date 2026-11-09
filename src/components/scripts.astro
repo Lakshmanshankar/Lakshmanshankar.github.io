@@ -262,6 +262,48 @@ import { ClientRouter } from "astro:transitions";
     addCopyBtn();
 </script>
 
+<script>
+    import { initAnimations, cleanupAnimations, scrollToTarget } from "@/lib/animations";
+
+    let hasRun = false;
+
+    function runAnimations() {
+        initAnimations();
+        hasRun = true;
+    }
+
+    // Connect back-to-top button to Lenis smooth scroll
+    function setupBackToTop() {
+        const backToTop = document.getElementById("back-to-top");
+        if (backToTop && !backToTop.dataset.lenisBound) {
+            backToTop.dataset.lenisBound = "true";
+            backToTop.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                scrollToTarget(0, { duration: 1.0 });
+            });
+        }
+    }
+
+    // Clean up instances before view transitions swap
+    document.addEventListener("astro:before-swap", () => {
+        cleanupAnimations();
+        hasRun = false;
+    });
+
+    // Initialize on page load and view transition page swap
+    document.addEventListener("astro:page-load", () => {
+        runAnimations();
+        setupBackToTop();
+    });
+
+    // Safety fallback for initial page load
+    if ((document.readyState === "complete" || document.readyState === "interactive") && !hasRun) {
+        runAnimations();
+        setupBackToTop();
+    }
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- <script>

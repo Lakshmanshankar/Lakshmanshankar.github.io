@@ -31,7 +31,7 @@ const baseUrl = activeTag === "all" ? "/blog" : `/tags/${activeTag}`;
     <div class="flex flex-col flex-1">
         <div class="list-none pl-0 flex flex-col flex-1">
             <TagFilter tags={allTags as string[]} activeTag={activeTag} />
-            <ul id="posts-container" class="list-none m-0 p-0! flex flex-col gap-0 mt-6">
+            <ul id="posts-container" class="list-none m-0 p-0! flex flex-col gap-0 mt-2!">
                 {displayedPosts.map((post: any) => <BlogPostCard post={post} />)}
             </ul>
 

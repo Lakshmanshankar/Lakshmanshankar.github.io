@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 /* pagewrite-ui setup */
 @import "pagewrite-ui/styles/theme.css";
@@ -13,7 +14,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --text-base: 18px;
+  --text-base: 17px;
   --color-text: #000000;
 }
 
@@ -36,6 +37,18 @@
   font-style: italic;
   font-display: swap;
 }
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "cv03", "cv04", "cv09";
+}
+
 /* @font-face { */
 /*   font-family: "Korkai"; */
 /*   src: url("./Korkai-Regular.ttf") format("truetype"); */

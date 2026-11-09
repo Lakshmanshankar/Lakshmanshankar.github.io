@@ -1,16 +1,16 @@
 ---
 datePublished: 2026-10-11T18:30:00.000Z
 pageStatus: published
+slug: blog/2026/count-distinct-at-scale
 metaKeywords:
   - HyperLogLog
   - Count distinct problem
 date: 2026-10-11T18:30:00.000Z
 description: Count distinct values at scale
 tags:
-  - databases
-  - software-sytems
+  - Databases
+  - OLAP Systems
 title: Count distinct at scale
-slug: blog/2026/count-distinct-at-scale
 id: 59c91e64-5097-4d83-bcdd-1a2203615ddd
 ---
 
@@ -79,7 +79,7 @@ WHERE extname = 'hll';
 ### Basic example
 
 ```sql
-lakshman=# SELECT hll_cardinality(
+SELECT hll_cardinality(
     hll_add_agg(hll_hash_integer(id))
 ) AS estimated_unique_orders
 FROM orders;
@@ -135,7 +135,7 @@ GROUP BY 1;
 This creates a single row for each month, generating two HyperLogLog (HLL) sketches per row to track distinct users and orders. We can now query these sketches to determine the estimated number of unique users and orders for each month:
 
 ```sql
-lakshman=# SELECT
+SELECT
     month,
     hll_cardinality(orders_hll) AS estimated_orders,
     hll_cardinality(users_hll) AS estimated_users
@@ -152,7 +152,7 @@ ORDER BY month;
 <Expand title="Actual unique count by month" open="false">
 ```sql
 
-lakshman=# SELECT
+SELECT
     date_trunc('month', ordered_at) AS month,
     COUNT(DISTINCT id) AS distinct_orders,
     COUNT(DISTINCT user_id) AS distinct_users
@@ -172,8 +172,8 @@ ORDER BY month;
 
 To determine the overall count of unique users and orders across multiple months—without double-counting—aggregate the monthly HLL sketches:
 
-```javascript
-lakshman=# SELECT
+```sql
+SELECT
     hll_cardinality(
         hll_union_agg(orders_hll)
     ) AS estimated_total_orders,

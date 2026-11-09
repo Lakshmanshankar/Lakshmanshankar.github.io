@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import { Spacer, Image } from "pagewrite-ui/mdx";
 import Chip from "@/components/mdx/Chip.astro";
+import FolderList from "@/components/mdx/FolderList.astro";
 
 import { resolveSlugParam } from "@/lib/utils";
 
@@ -51,15 +52,14 @@ const { Content } = await render(entry);
     </div>
     <p class="mt-2">{entry.data.description}</p>
     <span>
-        Tech Stack:
+    Tech Stack:
         <div class="flex flex-wrap">
             {
-                entry.data.tech
-                    ?.split(",")
-                    ?.map((tech) => <span class="tag-btn muted-background">{tech}</span>)
+                entry.data.tech?.map((tech: string) => (
+                    <span class="tag-btn muted-background">{tech}</span>
+                ))
             }
         </div>
     </span>
-    <br />
-    <Content components={{ Chip, Spacer, Image }} />
+    <Content components={{ Chip, FolderList, Spacer, Image }} />
 </Layout>

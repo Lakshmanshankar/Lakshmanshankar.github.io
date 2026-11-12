@@ -1,0 +1,97 @@
+---
+interface Props {
+  variant?:
+    | "default"
+    | "primary"
+    | "cta"
+    | "secondary"
+    | "outline"
+    | "ghost"
+    | "destructive"
+    | "link";
+  link?: string;
+  url?: string;
+  href?: string;
+  newtab?: boolean | string;
+  newTab?: boolean | string;
+  target?: string;
+  title?: string;
+  btnTitle?: string;
+  buttonTitle?: string;
+  "btn-title"?: string;
+  btn_title?: string;
+  label?: string;
+  text?: string;
+  rel?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  variant = "default",
+  link,
+  url,
+  href,
+  newtab,
+  newTab,
+  target: propTarget,
+  title,
+  btnTitle,
+  buttonTitle,
+  "btn-title": dashBtnTitle,
+  btn_title: underscoreBtnTitle,
+  label,
+  text,
+  rel,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const linkUrl = link || url || href || "#";
+
+const isNewTab =
+  newtab === true ||
+  newtab === "true" ||
+  newTab === true ||
+  newTab === "true" ||
+  propTarget === "_blank";
+
+const target = isNewTab ? "_blank" : propTarget || "_self";
+const effectiveRel = rel || (target === "_blank" ? "noopener noreferrer" : undefined);
+
+const buttonText =
+  title ||
+  btnTitle ||
+  buttonTitle ||
+  dashBtnTitle ||
+  underscoreBtnTitle ||
+  label ||
+  text ||
+  "Button";
+
+const variantClasses: Record<string, string> = {
+  default:
+    "bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200 shadow-sm",
+  primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-sm",
+  cta: "bg-blue-600 text-white hover:bg-blue-700 shadow-md font-semibold tracking-wide",
+  secondary:
+    "bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700",
+  outline:
+    "border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800",
+  destructive: "bg-red-600 text-white hover:bg-red-700 shadow-sm",
+  ghost: "bg-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800",
+  link: "bg-transparent text-blue-600 dark:text-blue-400 hover:underline px-0 py-0 h-auto shadow-none rounded-none",
+};
+
+const buttonStyle = variantClasses[variant] || variantClasses.default;
+---
+
+<a
+  href={linkUrl}
+  target={target}
+  rel={effectiveRel}
+  class={`inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-md text-sm font-medium transition-colors no-underline cursor-pointer ${buttonStyle} ${className}`.trim()}
+  {...rest}
+>
+  <slot>{buttonText}</slot>
+</a>

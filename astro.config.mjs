@@ -7,15 +7,14 @@ import mermaid from "astro-mermaid";
 import rehypeSlug from "rehype-slug";
 import { pagewriteAstro } from "pagewrite-astro";
 import { loadEnv } from "vite";
-
+import sitemap from '@astrojs/sitemap'
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import cloudflare from "@astrojs/cloudflare";
-
-
 const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 
 export default defineConfig({
+  site: "https://lakshmanshankar.com",
   adapter: cloudflare(),
   integrations: [
     pagewriteAstro({
@@ -61,6 +60,38 @@ export default defineConfig({
       ],
     }),
     mdx(),
+    sitemap({
+      filter: (page) => !page.includes("/drafts/"),
+      serialize(item) {
+        if (item.url.includes("/blog/")) {
+          item.changefreq = "monthly";
+          item.priority = 0.6;
+        } else {
+          item.changefreq = "weekly";
+          item.priority = 0.8;
+        }
+        return item;
+      },
+    }),
+    {
+      name: "sitemap-xml-alias",
+      hooks: {
+        "astro:build:done": async ({ dir, logger }) => {
+          const fs = await import("node:fs/promises");
+          const path = await import("node:path");
+          const { fileURLToPath } = await import("node:url");
+          const clientDir = fileURLToPath(dir);
+          const indexPath = path.join(clientDir, "sitemap-index.xml");
+          const sitemapPath = path.join(clientDir, "sitemap.xml");
+          try {
+            await fs.copyFile(indexPath, sitemapPath);
+            logger.info("Copied sitemap-index.xml to sitemap.xml");
+          } catch (err) {
+            logger.error(`Failed to copy sitemap: ${err}`);
+          }
+        },
+      },
+    },
   ],
 
   vite: {

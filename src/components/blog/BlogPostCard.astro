@@ -15,8 +15,8 @@ const month = postDate.toLocaleDateString("en-US", { month: "short" });
 const yearStr = postDate.toLocaleDateString("en-US", { year: "numeric" });
 const formattedDateString = `${month} ${day}, ${yearStr}`;
 
-// Use explicit frontmatter slug, or native Astro slug, or fallback to file ID
-const rawSlug = (post.data as any).slug || post.slug || post.id;
+// Use explicit frontmatter slug, or fallback to file ID
+const rawSlug = (post.data as any)?.slug || post.id;
 const slugParam = resolveSlugParam(rawSlug, "blog");
 ---
 

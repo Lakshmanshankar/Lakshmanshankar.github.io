@@ -14,18 +14,8 @@ export async function getStaticPaths({ paginate }: any) {
 }
 
 const { page } = Astro.props;
-const currentPageId = page.data?.[page.currentPage]?.data?.id;
-const pageDataEntry = await getEntry("pageData", currentPageId);
-const pageDataLink = await getEntry("links", currentPageId);
-const metadata = pageDataEntry?.data;
 ---
 
 <Layout title={`${BLOG.TITLE} - Page ${page.currentPage}`} description={BLOG.DESCRIPTION}>
     <BlogCards page={page} />
-
-    <nav>
-        {page.url.prev && <a href={page.url.prev}>← Previous</a>}
-        <span>Page {page.currentPage} of {page.lastPage}</span>
-        {page.url.next && <a href={page.url.next}>Next →</a>}
-    </nav>
 </Layout>

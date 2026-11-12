@@ -4,7 +4,8 @@ import { z } from "astro/zod";
 import { collections as pagewriteCollections } from "pagewrite-astro/collections";
 
 const blogSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
+  slug: z.string().optional(),
   title: z.string(),
   description: z.string(),
   date: z.coerce.date(),
@@ -15,6 +16,7 @@ const blogSchema = z.object({
 });
 
 const projectSchema = z.object({
+  slug: z.string().optional(),
   title: z.string(),
   description: z.string(),
   date: z.coerce.date(),
@@ -24,6 +26,7 @@ const projectSchema = z.object({
 });
 
 const workSchema = z.object({
+  slug: z.string().optional(),
   company: z.string(),
   role: z.string(),
   dateStart: z.coerce.date(),

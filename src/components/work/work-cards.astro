@@ -27,7 +27,7 @@ const renderWorks = obeyCount ? newWorks : works;
             const formatDate = (d: string | Date) => 
                 d instanceof Date ? d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : d;
             
-            const rawSlug = work.data?.slug || work.slug || work.id;
+            const rawSlug = work.data?.slug || work.id;
             const slugParam = resolveSlugParam(rawSlug, "work");
 
             return (

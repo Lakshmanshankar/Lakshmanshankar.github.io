@@ -35,7 +35,7 @@ const [treeEntries, linkEntries, pageDataEntries, schemaEntry] = await Promise.a
 
 const roots: PageTreeNode[] = (treeEntries ?? []).map((e: any) => e.data ?? e);
 const slugById = new Map<string, string>(
-  (linkEntries ?? []).map((l: any) => [l.id ?? l.data?.id, l.data?.slug ?? l.slug])
+  (linkEntries ?? []).map((l: any) => [l.id ?? l.data?.id, l.data?.slug ?? l.data?.url ?? l.id])
 );
 const metaById = new Map<string, any>(
   (pageDataEntries ?? []).map((e: any) => [e.id ?? e.data?.id, e.data ?? e])

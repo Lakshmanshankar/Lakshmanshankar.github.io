@@ -19,7 +19,7 @@ const renderProjects = obeyCount ? allProjects.slice(0, SITE.NUM_WORKS_ON_HOMEPA
     <div class="flex flex-col gap-2">
         {
             renderProjects.map((post: any) => {
-                const rawSlug = post.data?.slug || post.slug || post.id;
+                const rawSlug = post.data?.slug || post.id;
                 const slugParam = resolveSlugParam(rawSlug, "projects");
                 return (
                     <ContentCard

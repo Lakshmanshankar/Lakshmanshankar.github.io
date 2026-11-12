@@ -10,7 +10,7 @@ import { resolveSlugParam } from "@/lib/utils";
 export async function getStaticPaths() {
     const workPosts = await getCollection("work");
     return workPosts.map((post: any) => {
-        const rawSlug = post.data?.slug || post.slug || post.id;
+        const rawSlug = post.data?.slug || post.id;
         const slugParam = resolveSlugParam(rawSlug, "work");
         return {
             params: { slug: slugParam },

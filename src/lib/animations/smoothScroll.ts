@@ -8,6 +8,15 @@ let lenisInstance: Lenis | null = null;
 let tickerCallback: ((time: number) => void) | null = null;
 let anchorClickHandler: ((e: MouseEvent) => void) | null = null;
 
+export function isReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  const stored = localStorage.getItem("reduce-animations");
+  if (stored !== null) {
+    return stored === "true";
+  }
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function getLenis(): Lenis | null {
   return lenisInstance;
 }
@@ -15,9 +24,8 @@ export function getLenis(): Lenis | null {
 export function initSmoothScroll(): Lenis | null {
   if (typeof window === "undefined") return null;
 
-  // Respect prefers-reduced-motion
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReducedMotion) {
+  // Respect prefers-reduced-motion and user preference
+  if (isReducedMotion()) {
     if (lenisInstance) {
       cleanupSmoothScroll();
     }
@@ -90,19 +98,20 @@ export function initSmoothScroll(): Lenis | null {
 }
 
 export function scrollToTarget(target: string | HTMLElement | number, options: { offset?: number; duration?: number } = {}) {
-  if (lenisInstance) {
+  if (lenisInstance && !isReducedMotion()) {
     lenisInstance.scrollTo(target as any, {
       offset: options.offset ?? -28,
       duration: options.duration ?? 0.9,
     });
   } else {
+    const behavior = isReducedMotion() ? "auto" : "smooth";
     if (typeof target === "number") {
-      window.scrollTo({ top: target, behavior: "smooth" });
+      window.scrollTo({ top: target, behavior });
     } else if (typeof target === "string") {
       const el = document.querySelector(target);
-      el?.scrollIntoView({ behavior: "smooth" });
+      el?.scrollIntoView({ behavior });
     } else if (target instanceof HTMLElement) {
-      target.scrollIntoView({ behavior: "smooth" });
+      target.scrollIntoView({ behavior });
     }
   }
 }

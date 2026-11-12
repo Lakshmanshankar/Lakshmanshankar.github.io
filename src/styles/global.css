@@ -49,6 +49,15 @@ body {
   font-feature-settings: "cv03", "cv04", "cv09";
 }
 
+html.reduce-animations *,
+html.reduce-animations *::before,
+html.reduce-animations *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
 /* @font-face { */
 /*   font-family: "Korkai"; */
 /*   src: url("./Korkai-Regular.ttf") format("truetype"); */

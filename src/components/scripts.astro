@@ -154,6 +154,20 @@ import { ClientRouter } from "astro:transitions";
         applyTheme(getStoredTheme());
     }
 
+    function preloadReducedMotion() {
+        const stored = localStorage.getItem("reduce-animations");
+        const isReduced = stored !== null
+            ? stored === "true"
+            : window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (isReduced) {
+            document.documentElement.classList.add("reduce-animations");
+            document.documentElement.setAttribute("data-reduce-animations", "true");
+        } else {
+            document.documentElement.classList.remove("reduce-animations");
+            document.documentElement.removeAttribute("data-reduce-animations");
+        }
+    }
+
 
 
     function onScroll() {
@@ -201,16 +215,18 @@ import { ClientRouter } from "astro:transitions";
     function init() {
         initTheme();
         preloadTheme();
+        preloadReducedMotion();
         // animate();
         scrollAnimations();
         previewImages();
 
         document.addEventListener("scroll", onScroll);
     }
-    // Preload theme
+    // Preload theme and motion preferences
     document.addEventListener("DOMContentLoaded", () => init());
     document.addEventListener("astro:after-swap", () => init());
     preloadTheme();
+    preloadReducedMotion();
 </script>
 
 <script>
@@ -263,7 +279,12 @@ import { ClientRouter } from "astro:transitions";
 </script>
 
 <script>
-    import { initAnimations, cleanupAnimations, scrollToTarget } from "@/lib/animations";
+    import {
+        initAnimations,
+        cleanupAnimations,
+        scrollToTarget,
+        setupReduceAnimationsButton,
+    } from "@/lib/animations";
 
     let hasRun = false;
 
@@ -295,12 +316,14 @@ import { ClientRouter } from "astro:transitions";
     document.addEventListener("astro:page-load", () => {
         runAnimations();
         setupBackToTop();
+        setupReduceAnimationsButton();
     });
 
     // Safety fallback for initial page load
     if ((document.readyState === "complete" || document.readyState === "interactive") && !hasRun) {
         runAnimations();
         setupBackToTop();
+        setupReduceAnimationsButton();
     }
 </script>
 

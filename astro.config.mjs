@@ -54,8 +54,9 @@ export default defineConfig({
       imports: [
         "./src/components/mdx/Chip.astro",
         "./src/components/mdx/FolderList.astro",
+        "./src/components/mdx/ContactForm.astro",
         {
-          'pagewrite-ui/mdx': ['Callout', 'Spacer', 'Image', 'Columns', 'ColumnItem', 'ContactForm', 'Expand', 'Tabs', 'TabItem']
+          'pagewrite-ui/mdx': ['Callout', 'Spacer', 'Image', 'Columns', 'ColumnItem', 'Expand', 'Tabs', 'TabItem']
         }
       ],
     }),
@@ -102,7 +103,7 @@ export default defineConfig({
     rehypePlugins: [rehypeSlug, rehypeKatex],
     remarkPlugins: [remarkMath],
     shikiConfig: {
-      themes: { light: "github-light", dark: "github-dark" },
+      themes: { light: "github-light", dark: "vesper" },
     },
   },
 })

@@ -14,7 +14,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --text-base: 17px;
+  --text-base: 16px;
   --color-text: #000000;
 }
 

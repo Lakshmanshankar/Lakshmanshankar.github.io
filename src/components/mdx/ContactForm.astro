@@ -1,0 +1,81 @@
+---
+import GITHUB from "../../assets/github.svg";
+import LINKEDIN from "../../assets/linkedin.svg";
+import TWITTER from "../../assets/twitter_x.svg";
+import MEDIUM from "../../assets/medium.svg";
+import LEETCODE from "../../assets/leetcode.svg";
+import BLUESKY from "../../assets/bluesky.svg";
+import MAIL from "../icons/Mail.astro";
+import FIGMA from "../icons/Figma.astro";
+import FACEBOOK from "../icons/Facebook.astro";
+import INSTAGRAM from "../icons/Instagram.astro";
+import REDDIT from "../icons/Reddit.astro";
+import { getContactItems } from "./contact-utils.ts";
+
+export interface Props {
+  visibleLinks?: string;
+  class?: string;
+}
+
+const { visibleLinks = "", class: className = "" } = Astro.props;
+
+const ICON_MAP: Record<string, any> = {
+  github: GITHUB,
+  linkedin: LINKEDIN,
+  twitter: TWITTER,
+  x: TWITTER,
+  medium: MEDIUM,
+  leetcode: LEETCODE,
+  bluesky: BLUESKY,
+  mail: MAIL,
+  email: MAIL,
+  figma: FIGMA,
+  facebook: FACEBOOK,
+  instagram: INSTAGRAM,
+  reddit: REDDIT,
+};
+
+const contacts = await getContactItems({
+  visibleLinks,
+  supportedKeys: Object.keys(ICON_MAP),
+});
+
+const items = contacts.map((c) => ({ ...c, IconComponent: ICON_MAP[c.key] }));
+---
+
+<div class={`flex gap-5 justify-center mt-5 ${className}`.trim()}>
+  {
+    items.map(({ key, href, IconComponent }) => {
+      const icon = (
+        <IconComponent
+          class="w-7 h-7"
+          width={100}
+          height={100}
+          aria-hidden="true"
+          aria-label={key}
+        />
+      );
+
+      if (href) {
+        const isMail = href.startsWith("mailto:");
+        return (
+          <a
+            href={href}
+            target={isMail ? undefined : "_blank"}
+            rel={isMail ? undefined : "noopener noreferrer"}
+            class="no-underline"
+            aria-label={key}
+          >
+            {icon}
+          </a>
+        );
+      }
+
+      return (
+        <div class="no-underline" aria-label={key}>
+          {icon}
+        </div>
+      );
+    })
+  }
+</div>

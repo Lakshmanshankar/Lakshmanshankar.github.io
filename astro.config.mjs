@@ -55,9 +55,10 @@ export default defineConfig({
         "./src/components/mdx/Chip.astro",
         "./src/components/mdx/FolderList.astro",
         "./src/components/mdx/ContactForm.astro",
+        "./src/components/mdx/Callout.astro",
         "./src/components/mdx/Button.astro",
         {
-          'pagewrite-ui/mdx': ['Callout', 'Spacer', 'Image', 'Columns', 'ColumnItem', 'Expand', 'Tabs', 'TabItem']
+          'pagewrite-ui/mdx': ['Spacer', 'Image', 'Columns', 'ColumnItem', 'Expand', 'Tabs', 'TabItem']
         }
       ],
     }),

@@ -5,6 +5,7 @@ import { Spacer, Image } from "pagewrite-ui/mdx";
 import Chip from "@/components/mdx/Chip.astro";
 import FolderList from "@/components/mdx/FolderList.astro";
 import Button from "@/components/mdx/Button.astro";
+import Callout from "@/components/mdx/Callout.astro";
 
 import { resolveSlugParam } from "@/lib/utils";
 
@@ -45,5 +46,5 @@ const { Content } = await render(entry);
             </a>
         )
     }
-    <Content components={{ Chip, FolderList, Button, Spacer, Image }} />
+    <Content components={{ Chip, FolderList, Button, Callout, Spacer, Image }} />
 </Layout>

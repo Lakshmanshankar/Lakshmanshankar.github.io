@@ -9,12 +9,13 @@ interface Props {
     | "ghost"
     | "destructive"
     | "link";
+  size?: "sm" | "md" | "lg";
   link?: string;
   url?: string;
   href?: string;
+  target?: string;
   newtab?: boolean | string;
   newTab?: boolean | string;
-  target?: string;
   title?: string;
   btnTitle?: string;
   buttonTitle?: string;
@@ -29,12 +30,13 @@ interface Props {
 
 const {
   variant = "default",
+  size = "md",
   link,
   url,
   href,
+  target: propTarget,
   newtab,
   newTab,
-  target: propTarget,
   title,
   btnTitle,
   buttonTitle,
@@ -47,17 +49,16 @@ const {
   ...rest
 } = Astro.props;
 
-const linkUrl = link || url || href || "#";
+const linkUrl = link || url || href;
+const isNewTab = [
+  newtab,
+  newTab,
+  propTarget === "_blank",
+  rest.target === "_blank",
+].some((v) => v === true || v === "true");
 
-const isNewTab =
-  newtab === true ||
-  newtab === "true" ||
-  newTab === true ||
-  newTab === "true" ||
-  propTarget === "_blank";
-
-const target = isNewTab ? "_blank" : propTarget || "_self";
-const effectiveRel = rel || (target === "_blank" ? "noopener noreferrer" : undefined);
+const target = isNewTab ? "_blank" : propTarget || rest.target;
+const effectiveRel = isNewTab ? "noopener noreferrer" : rel || rest.rel;
 
 const buttonText =
   title ||
@@ -69,29 +70,57 @@ const buttonText =
   text ||
   "Button";
 
-const variantClasses: Record<string, string> = {
-  default:
-    "bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200 shadow-sm",
-  primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-sm",
-  cta: "bg-blue-600 text-white hover:bg-blue-700 shadow-md font-semibold tracking-wide",
+const variants: Record<string, string> = {
+  default: "tag-btn",
+  primary:
+    "bg-black text-white border-black hover:bg-white hover:text-black dark:bg-white dark:text-black dark:border-white dark:hover:bg-black dark:hover:text-white",
+  cta:
+    "bg-black text-white border-2 border-black font-semibold uppercase tracking-widest hover:bg-white hover:text-black dark:bg-white dark:text-black dark:border-white dark:hover:bg-black dark:hover:text-white",
   secondary:
-    "bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700",
+    "bg-white text-black border-black hover:bg-black hover:text-white dark:bg-black dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-black",
   outline:
-    "border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800",
-  destructive: "bg-red-600 text-white hover:bg-red-700 shadow-sm",
-  ghost: "bg-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800",
-  link: "bg-transparent text-blue-600 dark:text-blue-400 hover:underline px-0 py-0 h-auto shadow-none rounded-none",
+    "bg-transparent text-stone-900 border-stone-400 hover:border-black hover:bg-stone-100 dark:text-stone-100 dark:border-neutral-600 dark:hover:border-white dark:hover:bg-neutral-900",
+  ghost:
+    "bg-transparent text-stone-700 border-stone-300/70 hover:border-neutral-600 hover:bg-stone-200/50 hover:text-black dark:text-stone-300 dark:border-neutral-800 dark:hover:border-neutral-500 dark:hover:bg-neutral-800/50 dark:hover:text-white",
+  destructive:
+    "bg-red-500/10 text-red-600 border-red-400/50 hover:bg-red-600 hover:text-white hover:border-red-600 dark:bg-red-950/40 dark:text-red-400 dark:border-red-800/80 dark:hover:bg-red-600 dark:hover:text-white dark:hover:border-red-600",
+  link:
+    "bg-transparent text-stone-900 border border-stone-300 hover:border-stone-900 dark:text-stone-100 dark:border-neutral-700 dark:hover:border-stone-100 underline underline-offset-4",
 };
 
-const buttonStyle = variantClasses[variant] || variantClasses.default;
+const sizes: Record<string, string> = {
+  sm: "px-2 py-0.5 text-xs",
+  md: "px-2.5 py-1 text-sm",
+  lg: "px-4 py-2 text-base",
+};
+
+const isDefault = variant === "default";
+const sizeClass = isDefault && !Astro.props.size ? "" : (sizes[size] ?? sizes.md);
+
+const classes = [
+  "inline-flex items-center justify-center font-medium transition-colors no-underline rounded-none cursor-pointer border",
+  sizeClass,
+  variants[variant] ?? variants.default,
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<a
-  href={linkUrl}
-  target={target}
-  rel={effectiveRel}
-  class={`inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-md text-sm font-medium transition-colors no-underline cursor-pointer ${buttonStyle} ${className}`.trim()}
-  {...rest}
->
-  <slot>{buttonText}</slot>
-</a>
+{
+  linkUrl ? (
+    <a
+      href={linkUrl}
+      target={target}
+      rel={effectiveRel}
+      class={classes}
+      {...rest}
+    >
+      <slot>{buttonText}</slot>
+    </a>
+  ) : (
+    <button type={rest.type || "button"} class={classes} {...rest}>
+      <slot>{buttonText}</slot>
+    </button>
+  )
+}

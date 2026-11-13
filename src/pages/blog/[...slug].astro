@@ -12,6 +12,7 @@ import { Spacer, Image } from "pagewrite-ui/mdx";
 import Chip from "@/components/mdx/Chip.astro";
 import FolderList from "@/components/mdx/FolderList.astro";
 import Button from "@/components/mdx/Button.astro";
+import Callout from "@/components/mdx/Callout.astro";
 import { SITE } from "@/consts";
 
 import { resolveSlugParam } from "@/lib/utils";
@@ -89,7 +90,7 @@ const relatedPosts = otherPosts
             )
         }
 
-        <Content components={{ Chip, FolderList, Button, Spacer, Image }} />
+        <Content components={{ Chip, FolderList, Button, Callout, Spacer, Image }} />
 
         {
             relatedPosts.length > 0 && (

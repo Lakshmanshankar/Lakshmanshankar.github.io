@@ -1,0 +1,168 @@
+---
+import {
+  Info,
+  AlertCircle,
+  CheckCircle2,
+  AlertTriangle,
+  CircleX,
+  Lightbulb,
+  MessageSquareText,
+} from "@lucide/astro";
+
+type CalloutVariant =
+  | "info"
+  | "note"
+  | "success"
+  | "warning"
+  | "error"
+  | "tip"
+  | "custom";
+
+const VARIANTS: Record<
+  CalloutVariant,
+  {
+    classes: string;
+    iconClasses: string;
+    icon: any;
+  }
+> = {
+  note: {
+    classes:
+      "border-stone-300/80 bg-stone-100/60 text-stone-800 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-200",
+    iconClasses: "text-stone-700 dark:text-neutral-300",
+    icon: MessageSquareText,
+  },
+  info: {
+    classes:
+      "border-blue-500/30 bg-blue-500/5 text-stone-800 dark:border-blue-500/25 dark:bg-blue-500/10 dark:text-neutral-200",
+    iconClasses: "text-blue-600 dark:text-blue-400",
+    icon: Info,
+  },
+  tip: {
+    classes:
+      "border-purple-500/30 bg-purple-500/5 text-stone-800 dark:border-purple-500/25 dark:bg-purple-500/10 dark:text-neutral-200",
+    iconClasses: "text-purple-600 dark:text-purple-400",
+    icon: Lightbulb,
+  },
+  success: {
+    classes:
+      "border-emerald-500/30 bg-emerald-500/5 text-stone-800 dark:border-emerald-500/25 dark:bg-emerald-500/10 dark:text-neutral-200",
+    iconClasses: "text-emerald-600 dark:text-emerald-400",
+    icon: CheckCircle2,
+  },
+  warning: {
+    classes:
+      "border-amber-500/35 bg-amber-500/5 text-stone-800 dark:border-amber-500/25 dark:bg-amber-500/10 dark:text-neutral-200",
+    iconClasses: "text-amber-600 dark:text-amber-400",
+    icon: AlertTriangle,
+  },
+  error: {
+    classes:
+      "border-red-500/30 bg-red-500/5 text-stone-800 dark:border-red-500/25 dark:bg-red-500/10 dark:text-neutral-200",
+    iconClasses: "text-red-600 dark:text-red-400",
+    icon: CircleX,
+  },
+  custom: {
+    classes:
+      "border-stone-300/80 bg-stone-100/60 text-stone-800 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-200",
+    iconClasses: "text-stone-700 dark:text-neutral-300",
+    icon: AlertCircle,
+  },
+};
+
+interface Props {
+  variant?: CalloutVariant;
+  color?: string;
+  icon?: any;
+  title?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  variant = "info",
+  color,
+  icon: customIcon,
+  title,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const currentVariant = VARIANTS[variant] ?? VARIANTS.info;
+const Icon = typeof customIcon === "function" ? customIcon : currentVariant.icon;
+
+const customStyle = color
+  ? `border-color: color-mix(in srgb, ${color} 35%, transparent); background-color: color-mix(in srgb, ${color} 6%, transparent);`
+  : undefined;
+
+const customIconStyle = color ? `color: ${color};` : undefined;
+---
+
+<aside
+  class={`callout not-prose my-6 flex gap-3 p-4 rounded-none text-sm md:text-base leading-relaxed ${currentVariant.classes} ${className}`.trim()}
+  style={customStyle}
+  {...rest}
+>
+  <div
+    class={`callout-icon-wrap shrink-0 mt-0.5 flex items-start justify-center ${currentVariant.iconClasses}`}
+    style={customIconStyle}
+    aria-hidden="true"
+  >
+    <Icon size={18} class="callout-icon mt-1" />
+  </div>
+
+  <div class="callout-content min-w-0 flex-1">
+    {title && (
+      <p class="callout-title font-semibold text-stone-900 dark:text-stone-100 text-sm md:text-base leading-snug mb-1">
+        {title}
+      </p>
+    )}
+    <div class="callout-body text-stone-700 dark:text-neutral-300">
+      <slot />
+    </div>
+  </div>
+</aside>
+
+<style>
+  .callout-body :global(p) {
+    margin: 0.35rem 0;
+  }
+
+  .callout-body :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .callout-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .callout-body :global(strong) {
+    color: var(--color-text, #171717);
+    font-weight: 600;
+  }
+
+  :global(.dark) .callout-body :global(strong) {
+    color: #ededed;
+  }
+
+  .callout-body :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: currentColor;
+    color: inherit;
+    transition: opacity 0.15s ease;
+  }
+
+  .callout-body :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .callout-body :global(code) {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85em;
+    padding: 0.15rem 0.35rem;
+    border-radius: 0;
+    border: 1px solid rgba(120, 113, 108, 0.2);
+    background-color: rgba(120, 113, 108, 0.1);
+  }
+</style>

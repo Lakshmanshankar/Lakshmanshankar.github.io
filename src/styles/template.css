@@ -15,11 +15,19 @@
 }
 
 .tag-btn {
-  @apply p-1 px-2 border-colors border m-0 text-sm;
+  @apply p-1 px-2 border-colors border m-0 text-sm rounded-none;
 }
 
 .tag-btn:hover,
 .tag-btn.active {
+  @apply text-black transition-colors dark:text-white border-neutral-600 dark:border-neutral-500;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center font-medium transition-colors no-underline rounded-none border border-colors text-sm cursor-pointer;
+}
+
+.btn:hover {
   @apply text-black transition-colors dark:text-white border-neutral-600 dark:border-neutral-500;
 }
 

@@ -313,30 +313,38 @@ details code {
 
 /* TABLES */
 table {
-  @apply w-max max-w-full block overflow-x-auto border-collapse border border-stone-200 dark:border-neutral-800 rounded-md my-6;
+  @apply w-max max-w-full block overflow-x-auto border-collapse border border-stone-200 dark:border-neutral-800 my-6;
+}
+
+table:has(colgroup),
+table[data-col-widths] {
+  table-layout: fixed;
+}
+
+table:has(colgroup) thead th,
+table:has(colgroup) tbody td,
+table[data-col-widths] thead th,
+table[data-col-widths] tbody td {
+  min-width: unset;
 }
 
 thead th {
-  @apply px-3 py-2 text-left whitespace-nowrap min-w-[120px] bg-stone-200 dark:bg-neutral-800 border-b border-stone-200 dark:border-neutral-800 font-semibold;
+  @apply px-3 py-2 text-left whitespace-nowrap min-w-[120px] bg-stone-100 dark:bg-neutral-800 border-b border-r border-stone-200 dark:border-neutral-800 font-semibold;
 }
 
 tbody td {
-  @apply px-3 py-2 text-left whitespace-nowrap min-w-[120px] border-b border-stone-200 dark:border-neutral-800 bg-[var(--background)];
+  @apply px-3 py-2 text-left whitespace-nowrap min-w-[120px] border-b border-r border-stone-200 dark:border-neutral-800 bg-[var(--background)];
+}
+
+thead th:last-child,
+tbody td:last-child {
+  @apply border-r-0;
 }
 
 tbody tr:last-child td {
   @apply border-b-0;
 }
 
-tbody tr:nth-child(even) td {
-  @apply bg-stone-100 dark:bg-neutral-900;
-}
-
 tbody tr:hover td {
-  @apply bg-stone-200 dark:bg-neutral-800 transition-colors;
-}
-
-thead th:first-child,
-tbody td:first-child {
-  @apply border-r border-stone-200 dark:border-neutral-800;
+  @apply bg-stone-100 dark:bg-neutral-900 transition-colors;
 }

@@ -11,6 +11,7 @@ import sitemap from '@astrojs/sitemap'
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import cloudflare from "@astrojs/cloudflare";
+import { rehypeTableWidths, remarkTableWidths } from "pagewrite-ui/unified";
 const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 
 export default defineConfig({
@@ -102,8 +103,8 @@ export default defineConfig({
   },
 
   markdown: {
-    rehypePlugins: [rehypeSlug, rehypeKatex],
-    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeSlug, rehypeKatex, rehypeTableWidths],
+    remarkPlugins: [remarkMath, ...remarkTableWidths],
     shikiConfig: {
       themes: { light: "github-light", dark: "vesper" },
     },
